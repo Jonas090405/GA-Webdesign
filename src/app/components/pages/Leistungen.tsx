@@ -57,7 +57,7 @@ const blocks = [
     lead: "So, wie du dir das vorstellst.",
     points: [
       "Individuelles Design – kein vorgefertigtes Template",
-      "Übersichtlich & schön auf Handy und PC",
+      "Gut bedienbar & schön auf allen Geräten",
       "Deine Marke, dein Stil, dein Auftritt",
       "Leicht verständlich für deine Kunden",
     ],
@@ -67,10 +67,11 @@ const blocks = [
     title: "Entwicklung",
     lead: "Schnell, stabil & zukunftssicher.",
     points: [
-      "Moderne Technik im Hintergrund",
+      "Modernste Technik im Hintergrund",
       "Schnelle Ladezeiten",
       "Gut bei Google auffindbar",
       "Wartbar & erweiterbar",
+      "Funktionen, auf deine Bedürfnisse angepasst",
     ],
   },
   {

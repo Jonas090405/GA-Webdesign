@@ -54,12 +54,26 @@ export function Impressum() {
               Kontakt
             </div>
             <div className="text-slate-200 text-[15px] leading-[1.9] break-all">
-              E-Mail: jonas@gissler-web.de
+              E-Mail: deine@business-mail.de {/* TODO: Business-Mail eintragen */}
+              <br />
+              Telefon: +49 151 2079 7408
             </div>
           </Card>
         </FadeIn>
 
         <FadeIn delay={0.2}>
+          <Card>
+            <div className="text-sky-400 text-[12px] tracking-[0.25em] uppercase mb-4">
+              Steuernummer
+            </div>
+            <div className="text-slate-200 text-[15px] leading-[1.9]">
+              {/* TODO: Steuernummer eintragen */}
+              Steuernummer: wird nachgereicht
+            </div>
+          </Card>
+        </FadeIn>
+
+        <FadeIn delay={0.25}>
           <Card>
             <div className="text-sky-400 text-[12px] tracking-[0.25em] uppercase mb-4">
               Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV
@@ -74,7 +88,7 @@ export function Impressum() {
           </Card>
         </FadeIn>
 
-        <FadeIn delay={0.25}>
+        <FadeIn delay={0.3}>
           <Card>
             <div className="text-sky-400 text-[12px] tracking-[0.25em] uppercase mb-4">
               Haftungsausschluss

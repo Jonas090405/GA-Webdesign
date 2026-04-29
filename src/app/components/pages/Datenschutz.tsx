@@ -30,7 +30,7 @@ export function Datenschutz() {
               <br />
               78098 Triberg, Deutschland
               <br />
-              E-Mail: jonas@gissler-web.de
+              E-Mail: deine@business-mail.de {/* TODO: Business-Mail eintragen */}
             </div>
           </Card>
         </FadeIn>
@@ -114,13 +114,68 @@ export function Datenschutz() {
         <FadeIn delay={0.35}>
           <Card>
             <div className="text-sky-400 text-[12px] tracking-[0.25em] uppercase mb-4">
-              7. Hosting
+              7. Hosting – GitHub Pages
             </div>
             <p className="text-slate-300 text-[14px] leading-relaxed">
-              Die Website wird bei einem externen Dienstleister gehostet.
-              Personenbezogene Daten, die auf dieser Website erfasst werden,
-              werden auf den Servern des Hosters gespeichert. Die Verarbeitung
-              erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO.
+              Diese Website wird über <strong className="text-slate-200">GitHub Pages</strong> gehostet,
+              einem Dienst der GitHub, Inc., 88 Colin P Kelly Jr St, San Francisco,
+              CA 94107, USA. Beim Aufruf der Website werden technische Daten
+              (insb. IP-Adresse) automatisch an Server von GitHub übertragen und
+              dort verarbeitet. GitHub ist unter dem EU-US Data Privacy Framework
+              zertifiziert, sodass ein angemessenes Datenschutzniveau gewährleistet
+              ist. Weitere Informationen findest du in der{" "}
+              <a
+                href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sky-400 underline hover:text-sky-300 transition-colors"
+              >
+                Datenschutzerklärung von GitHub
+              </a>
+              . Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO.
+            </p>
+          </Card>
+        </FadeIn>
+
+        <FadeIn delay={0.4}>
+          <Card>
+            <div className="text-sky-400 text-[12px] tracking-[0.25em] uppercase mb-4">
+              8. Kontaktformular – EmailJS
+            </div>
+            <p className="text-slate-300 text-[14px] leading-relaxed">
+              Das Kontaktformular dieser Website nutzt den Dienst{" "}
+              <strong className="text-slate-200">EmailJS</strong> (EmailJS Ltd., UK),
+              um eingehende Nachrichten per E-Mail an mich weiterzuleiten.
+              Dabei werden die von dir eingegebenen Daten (Name, E-Mail-Adresse,
+              Nachricht) an die Server von EmailJS übertragen und von dort
+              zugestellt. Die Daten werden nicht dauerhaft bei EmailJS gespeichert
+              und ausschließlich zur Übermittlung deiner Anfrage verwendet.
+              Weitere Informationen:{" "}
+              <a
+                href="https://www.emailjs.com/legal/privacy-policy/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sky-400 underline hover:text-sky-300 transition-colors"
+              >
+                Datenschutzerklärung von EmailJS
+              </a>
+              . Rechtsgrundlage: Art. 6 Abs. 1 lit. b und f DSGVO.
+            </p>
+          </Card>
+        </FadeIn>
+
+        <FadeIn delay={0.45}>
+          <Card>
+            <div className="text-sky-400 text-[12px] tracking-[0.25em] uppercase mb-4">
+              9. Speicherdauer
+            </div>
+            <p className="text-slate-300 text-[14px] leading-relaxed">
+              Personenbezogene Daten werden nur so lange gespeichert, wie es
+              für den jeweiligen Zweck erforderlich ist oder gesetzliche
+              Aufbewahrungsfristen bestehen. Kontaktanfragen werden nach
+              abschließender Bearbeitung gelöscht, sofern keine gesetzlichen
+              Pflichten zur Aufbewahrung entgegenstehen. Server-Logfiles werden
+              in der Regel nach 7 Tagen automatisch gelöscht.
             </p>
           </Card>
         </FadeIn>

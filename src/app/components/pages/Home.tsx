@@ -5,7 +5,8 @@ import { Card } from "../Card";
 import { FadeIn } from "../FadeIn";
 import { PortfolioSlider } from "../PortfolioSlider";
 import { useNavigate } from "react-router-dom";
-import { Palette, Code2, Rocket, ExternalLink } from "lucide-react";
+import { Palette, Code2, Rocket, ExternalLink, Phone } from "lucide-react";
+import emailjs from "@emailjs/browser";
 import profilbild from "../../../imports/Profilbild.jpg";
 import designerImg from "../../../imports/undraw_designer_efwz.svg";
 import gcnImg from "../../../imports/gcn-fahrzeughandel.png";
@@ -104,7 +105,7 @@ function PortfolioPreview() {
             Projekte, die ich umgesetzt habe
           </h2>
           <p className="mt-4 xl:mt-6 max-w-2xl text-[15px] sm:text-[17px] xl:text-[19px] leading-relaxed" style={{ color: "rgba(180,210,230,0.65)" }}>
-            Echte Projekte, reale Kunden – von der Konzeption bis zur fertigen, live geschalteten Website.
+            Ein Auszug meiner Arbeiten für diverse Kundenwebsiten – von der Konzeption bis zur fertigen, live geschalteten Website.
           </p>
         </div>
       </FadeIn>
@@ -240,7 +241,7 @@ function AboutPreview() {
             className="text-[14px] sm:text-[15px] xl:text-[17px] leading-relaxed mb-8 xl:mb-10"
             style={{ color: "rgba(180, 210, 230, 0.6)" }}
           >
-            Und ich bin persönlich für dich da – du schreibst immer direkt mit mir, nicht mit einem Callcenter.
+            Und ich bin persönlich für dich da – du schreibst immer direkt mit mir.
           </p>
           <GhostButton onClick={() => navigate("/ueber-mich")}>
             Mehr über mich
@@ -270,8 +271,65 @@ function AboutPreview() {
   );
 }
 
+// ─── EmailJS (Werte aus .env – nie in Git pushen!) ────────────────────────────
+const EMAILJS_SERVICE_ID  = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+const EMAILJS_PUBLIC_KEY  = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+const PHONE_NUMBER = "+49 151 2079 7408"; // ← deine Nummer
+const EMAIL_ADDRESS = "gissler.jonas@gmail.com";
+
+type HomeFormData = { name: string; email: string; phone: string; message: string };
+type HomeFormErrors = Partial<Record<keyof HomeFormData, string>>;
+
+function validateHome(d: HomeFormData): HomeFormErrors {
+  const e: HomeFormErrors = {};
+  if (!d.name.trim()) e.name = "Name ist erforderlich.";
+  else if (d.name.trim().length < 2) e.name = "Name muss mind. 2 Zeichen haben.";
+  if (!d.email.trim()) e.email = "E-Mail ist erforderlich.";
+  else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(d.email.trim()))
+    e.email = "Bitte gültige E-Mail eingeben.";
+  if (d.phone.trim() && !/^[\+\d\s\-\(\)\/]{6,20}$/.test(d.phone.trim()))
+    e.phone = "Bitte gültige Telefonnummer eingeben.";
+  if (!d.message.trim()) e.message = "Nachricht ist erforderlich.";
+  else if (d.message.trim().length < 20) e.message = "Bitte etwas ausführlicher (mind. 20 Zeichen).";
+  return e;
+}
+
 function Contact() {
-  const [sent, setSent] = useState(false);
+  const [mode, setMode] = useState<"form" | "call">("form");
+  const [status, setStatus] = useState<"idle" | "loading" | "sent" | "error">("idle");
+  const [formData, setFormData] = useState<HomeFormData>({ name: "", email: "", phone: "", message: "" });
+  const [errors, setErrors] = useState<HomeFormErrors>({});
+
+  function handleChange(field: keyof HomeFormData, value: string) {
+    setFormData(prev => ({ ...prev, [field]: value }));
+    if (errors[field]) setErrors(prev => ({ ...prev, [field]: undefined }));
+  }
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const errs = validateHome(formData);
+    if (Object.keys(errs).length > 0) { setErrors(errs); return; }
+    setStatus("loading");
+    try {
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        {
+          from_name: formData.name,
+          from_email: formData.email,
+          phone: formData.phone.trim() || "–",
+          subject: "Anfrage über Startseite",
+          message: formData.message,
+        },
+        EMAILJS_PUBLIC_KEY,
+      );
+      setStatus("sent");
+    } catch {
+      setStatus("error");
+    }
+  }
+
   return (
     <section id="kontakt" className="py-16 sm:py-20 lg:py-28 xl:py-36">
       <FadeIn>
@@ -292,7 +350,18 @@ function Contact() {
           <div className="space-y-3 text-[14px] xl:text-[16px]">
             <div>
               <div className="mb-1" style={{ color: "rgba(150, 180, 200, 0.5)" }}>E-Mail</div>
-              <div className="text-white break-all">jonas-gissler@gmx.de</div>
+              <a href={`mailto:${EMAIL_ADDRESS}`} className="text-white hover:text-sky-300 transition-colors break-all">
+                {EMAIL_ADDRESS}
+              </a>
+            </div>
+            <div>
+              <div className="mb-1" style={{ color: "rgba(150, 180, 200, 0.5)" }}>Telefon</div>
+              <a
+                href={`tel:${PHONE_NUMBER.replace(/[\s\-\(\)]/g, "")}`}
+                className="text-white hover:text-sky-300 transition-colors"
+              >
+                {PHONE_NUMBER}
+              </a>
             </div>
             <div>
               <div className="mb-1" style={{ color: "rgba(150, 180, 200, 0.5)" }}>Standort</div>
@@ -302,41 +371,141 @@ function Contact() {
         </FadeIn>
 
         <FadeIn delay={0.15}>
-          <Card>
-            {sent ? (
-              <div className="py-12 text-center">
+          {/* Tab-Toggle */}
+          <div
+            className="flex mb-4 p-1 rounded-xl gap-1"
+            style={{
+              background: "rgba(10,19,30,0.7)",
+              border: "1px solid rgba(77,190,243,0.12)",
+            }}
+          >
+            <HomeTabBtn active={mode === "form"} onClick={() => setMode("form")}>
+              Anfrage senden
+            </HomeTabBtn>
+            <HomeTabBtn active={mode === "call"} onClick={() => setMode("call")}>
+              Direkt anrufen
+            </HomeTabBtn>
+          </div>
+
+          {mode === "call" ? (
+            <Card>
+              <div className="py-8 flex flex-col items-center text-center gap-5">
                 <div
-                  className="text-[12px] tracking-[0.25em] uppercase mb-3"
-                  style={{ color: "#4dbef3" }}
+                  className="h-16 w-16 rounded-full flex items-center justify-center"
+                  style={{
+                    background: "linear-gradient(135deg, rgba(0,105,153,0.3) 0%, rgba(77,190,243,0.15) 100%)",
+                    border: "1px solid rgba(77,190,243,0.3)",
+                  }}
                 >
-                  Gesendet
+                  <Phone size={26} style={{ color: "#4dbef3" }} />
                 </div>
-                <h3 className="text-white text-[22px] mb-2">Danke!</h3>
-                <p
-                  className="text-[14px]"
-                  style={{ color: "rgba(180, 210, 230, 0.6)" }}
-                >
-                  Ich melde mich so schnell wie möglich bei dir.
+                <div>
+                  <p className="text-[13px] mb-1" style={{ color: "rgba(150,190,220,0.6)" }}>
+                    Ruf mich einfach direkt an:
+                  </p>
+                  <a
+                    href={`tel:${PHONE_NUMBER.replace(/[\s\-\(\)]/g, "")}`}
+                    className="text-white text-[24px] font-semibold tracking-tight hover:text-sky-300 transition-colors"
+                  >
+                    {PHONE_NUMBER}
+                  </a>
+                </div>
+                <p className="text-[13px] max-w-xs leading-relaxed" style={{ color: "rgba(150,190,220,0.5)" }}>
+                  Falls du mich nicht erreichen solltest, werde ich dich schnellstmöglich zurückrufen.
                 </p>
+                <a
+                  href={`tel:${PHONE_NUMBER.replace(/[\s\-\(\)]/g, "")}`}
+                  className="inline-flex items-center gap-2 rounded-full px-6 py-3 text-white font-medium transition-all duration-200 hover:brightness-110"
+                  style={{ background: "linear-gradient(135deg, #006999 0%, #4dbef3 100%)" }}
+                >
+                  <Phone size={15} />
+                  Jetzt anrufen
+                </a>
               </div>
-            ) : (
-              <form
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  setSent(true);
-                }}
-                className="space-y-5"
-              >
-                <Field label="Name" name="name" />
-                <Field label="E-Mail" name="email" type="email" />
-                <Field label="Nachricht" name="message" textarea />
-                <PrimaryButton type="submit">Projekt anfragen</PrimaryButton>
-              </form>
-            )}
-          </Card>
+            </Card>
+          ) : (
+            <Card>
+              {status === "sent" ? (
+                <div className="py-12 text-center">
+                  <div
+                    className="text-[12px] tracking-[0.25em] uppercase mb-3"
+                    style={{ color: "#4dbef3" }}
+                  >
+                    Gesendet
+                  </div>
+                  <h3 className="text-white text-[22px] mb-2">Danke!</h3>
+                  <p className="text-[14px]" style={{ color: "rgba(180, 210, 230, 0.6)" }}>
+                    Ich melde mich so schnell wie möglich bei dir.
+                  </p>
+                </div>
+              ) : (
+                <form onSubmit={handleSubmit} noValidate className="space-y-5">
+                  <div className="grid gap-5 sm:grid-cols-2">
+                    <Field
+                      label="Name *" name="name" value={formData.name}
+                      onChange={v => handleChange("name", v)} error={errors.name}
+                      placeholder="Max Mustermann"
+                    />
+                    <Field
+                      label="E-Mail *" name="email" type="email" value={formData.email}
+                      onChange={v => handleChange("email", v)} error={errors.email}
+                      placeholder="max@beispiel.de"
+                    />
+                  </div>
+                  <Field
+                    label="Telefon (optional)" name="phone" type="tel" value={formData.phone}
+                    onChange={v => handleChange("phone", v)} error={errors.phone}
+                    placeholder="+49 123 456789"
+                  />
+                  <Field
+                    label="Nachricht *" name="message" textarea value={formData.message}
+                    onChange={v => handleChange("message", v)} error={errors.message}
+                    placeholder="Erzähl mir kurz, was du brauchst…"
+                  />
+                  {status === "error" && (
+                    <p className="text-red-400 text-[13px]">
+                      Fehler beim Senden. Bitte direkt an{" "}
+                      <a href={`mailto:${EMAIL_ADDRESS}`} className="underline">
+                        {EMAIL_ADDRESS}
+                      </a>{" "}
+                      schreiben.
+                    </p>
+                  )}
+                  <PrimaryButton type="submit" disabled={status === "loading"}>
+                    {status === "loading" ? "Wird gesendet…" : "Projekt anfragen"}
+                  </PrimaryButton>
+                </form>
+              )}
+            </Card>
+          )}
         </FadeIn>
       </div>
     </section>
+  );
+}
+
+function HomeTabBtn({
+  active,
+  onClick,
+  children,
+}: {
+  active: boolean;
+  onClick: () => void;
+  children: React.ReactNode;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className="flex-1 rounded-lg px-4 py-2 text-[13px] font-medium tracking-wide transition-all duration-200"
+      style={
+        active
+          ? { background: "linear-gradient(135deg, #006999 0%, #4dbef3 100%)", color: "#fff" }
+          : { background: "transparent", color: "rgba(150,190,220,0.6)" }
+      }
+    >
+      {children}
+    </button>
   );
 }
 
@@ -345,17 +514,40 @@ function Field({
   name,
   type = "text",
   textarea = false,
+  placeholder,
+  value,
+  onChange,
+  error,
 }: {
   label: string;
   name: string;
   type?: string;
   textarea?: boolean;
+  placeholder?: string;
+  value: string;
+  onChange: (v: string) => void;
+  error?: string;
 }) {
-  const cls =
-    "w-full rounded-xl px-4 py-3 text-white placeholder:text-slate-500 outline-none transition-all";
-  const style = {
-    background: "rgba(10, 17, 25, 0.8)",
-    border: "1px solid rgba(77, 190, 243, 0.12)",
+  const baseCls =
+    "w-full rounded-xl px-4 py-3 text-white placeholder:text-slate-600 outline-none transition-all text-[14px]";
+
+  const sharedProps = {
+    name,
+    value,
+    placeholder,
+    className: baseCls,
+    style: {
+      background: "rgba(10, 17, 25, 0.8)",
+      border: error ? "1px solid rgba(248,113,113,0.6)" : "1px solid rgba(77, 190, 243, 0.12)",
+    } as React.CSSProperties,
+    onFocus: (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      e.currentTarget.style.borderColor = error ? "rgba(248,113,113,0.8)" : "rgba(77, 190, 243, 0.45)";
+      e.currentTarget.style.boxShadow = error ? "0 0 0 3px rgba(248,113,113,0.1)" : "0 0 0 3px rgba(77,190,243,0.1)";
+    },
+    onBlur: (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      e.currentTarget.style.borderColor = error ? "rgba(248,113,113,0.6)" : "rgba(77, 190, 243, 0.12)";
+      e.currentTarget.style.boxShadow = "none";
+    },
   };
 
   return (
@@ -367,38 +559,11 @@ function Field({
         {label}
       </span>
       {textarea ? (
-        <textarea
-          name={name}
-          rows={5}
-          className={cls}
-          style={style}
-          onFocus={(e) => {
-            e.currentTarget.style.borderColor = "rgba(77, 190, 243, 0.45)";
-            e.currentTarget.style.boxShadow = "0 0 0 3px rgba(77,190,243,0.1)";
-          }}
-          onBlur={(e) => {
-            e.currentTarget.style.borderColor = "rgba(77, 190, 243, 0.12)";
-            e.currentTarget.style.boxShadow = "none";
-          }}
-          required
-        />
+        <textarea {...sharedProps} rows={5} onChange={e => onChange(e.target.value)} />
       ) : (
-        <input
-          name={name}
-          type={type}
-          className={cls}
-          style={style}
-          onFocus={(e) => {
-            e.currentTarget.style.borderColor = "rgba(77, 190, 243, 0.45)";
-            e.currentTarget.style.boxShadow = "0 0 0 3px rgba(77,190,243,0.1)";
-          }}
-          onBlur={(e) => {
-            e.currentTarget.style.borderColor = "rgba(77, 190, 243, 0.12)";
-            e.currentTarget.style.boxShadow = "none";
-          }}
-          required
-        />
+        <input {...sharedProps} type={type} onChange={e => onChange(e.target.value)} />
       )}
+      {error && <span className="block mt-1.5 text-[12px] text-red-400">{error}</span>}
     </label>
   );
 }

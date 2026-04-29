@@ -1,6 +1,8 @@
 import { Linkedin, Mail, MapPin } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
+const EMAIL_ADDRESS = "gissler.jonas@gmail.com";
+
 export function Footer() {
   const navigate = useNavigate();
 
@@ -58,7 +60,7 @@ export function Footer() {
               Kontakt
             </div>
             <a
-              href="mailto:jonas-gissler@gmx.de"
+              href={`mailto:${EMAIL_ADDRESS}`}
               aria-label="E-Mail an Jonas Gissler senden"
               className="flex items-center gap-2 text-[14px] break-all transition-colors duration-200 cursor-pointer"
               style={{ color: "rgba(200, 225, 240, 0.7)" }}
@@ -71,7 +73,7 @@ export function Footer() {
               }
             >
               <Mail size={14} className="shrink-0" style={{ color: "rgba(77,190,243,0.7)" }} />
-              jonas-gissler@gmx.de
+              {EMAIL_ADDRESS}
             </a>
             <a
               href="https://www.linkedin.com/in/jonas-gissler-37b1482b0/"
