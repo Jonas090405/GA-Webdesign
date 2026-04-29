@@ -12,8 +12,7 @@ import emailjs from "@emailjs/browser";
 const EMAILJS_SERVICE_ID  = import.meta.env.VITE_EMAILJS_SERVICE_ID  as string;
 const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID as string;
 const EMAILJS_PUBLIC_KEY  = import.meta.env.VITE_EMAILJS_PUBLIC_KEY  as string;
-
-// ← deine Telefonnummer eintragen:
+const EMAIL_ADDRESS = "gissler.jonas@gmail.com";
 const PHONE_NUMBER = "+49 151 2079 7408";
 // Empfänger direkt im EmailJS-Template-Dashboard einstellen (To Email-Feld)
 

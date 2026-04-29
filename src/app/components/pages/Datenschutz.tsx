@@ -30,7 +30,7 @@ export function Datenschutz() {
               <br />
               78098 Triberg, Deutschland
               <br />
-              E-Mail: deine@business-mail.de {/* TODO: Business-Mail eintragen */}
+              E-Mail: gissler.jonas@gmail.com
             </div>
           </Card>
         </FadeIn>

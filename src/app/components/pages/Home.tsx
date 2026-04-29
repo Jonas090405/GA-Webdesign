@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { Palette, Code2, Rocket, ExternalLink, Phone } from "lucide-react";
 import emailjs from "@emailjs/browser";
 import profilbild from "../../../imports/Profilbild.jpg";
-import designerImg from "../../../imports/undraw_designer_efwz.svg";
+import { DesignerSVG } from "../DesignerSVG";
 import gcnImg from "../../../imports/gcn-fahrzeughandel.png";
 
 const PROJECTS = [
@@ -83,11 +83,7 @@ function Hero() {
         </div>
 
         <FadeIn delay={0.4} className="hidden lg:flex justify-center lg:justify-end">
-          <img
-            src={designerImg}
-            alt="Webdesign Illustration"
-            className="w-full max-w-[500px] xl:max-w-[700px] 2xl:max-w-[800px] h-auto drop-shadow-[0_0_60px_rgba(77,190,243,0.15)]"
-          />
+          <DesignerSVG className="w-full max-w-[500px] xl:max-w-[700px] 2xl:max-w-[800px] h-auto drop-shadow-[0_0_60px_rgba(77,190,243,0.15)]" />
         </FadeIn>
       </div>
     </section>
@@ -234,7 +230,7 @@ function AboutPreview() {
             className="text-[14px] sm:text-[15px] xl:text-[17px] leading-relaxed mb-4"
             style={{ color: "rgba(180, 210, 230, 0.6)" }}
           >
-            Mein Ziel ist eine Website, mit der deine Kunden sofort verstehen, was du anbietest –
+            Mein Ziel ist eine ansprechende Website, mit der deine Kunden sofort verstehen, was du anbietest –
             und dich gerne kontaktieren.
           </p>
           <p
@@ -272,9 +268,9 @@ function AboutPreview() {
 }
 
 // ─── EmailJS (Werte aus .env – nie in Git pushen!) ────────────────────────────
-const EMAILJS_SERVICE_ID  = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
 const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
-const EMAILJS_PUBLIC_KEY  = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 const PHONE_NUMBER = "+49 151 2079 7408"; // ← deine Nummer
 const EMAIL_ADDRESS = "gissler.jonas@gmail.com";
 
