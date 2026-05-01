@@ -72,11 +72,11 @@ export function About() {
       </div>
 
       {/* Info cards */}
-      <div className="mt-16 grid gap-4 md:grid-cols-2">
-        <FadeIn>
-          <Card>
+      <div className="mt-16 grid gap-4 md:grid-cols-2 items-stretch">
+        <FadeIn className="h-full">
+          <Card className="h-full">
             <div
-              className="text-[12px] tracking-[0.25em] uppercase mb-3"
+              className="text-[12px] tracking-[0.25em] uppercase mb-5"
               style={{ color: "#4dbef3" }}
             >
               Hintergrund
@@ -92,10 +92,10 @@ export function About() {
             </ul>
           </Card>
         </FadeIn>
-        <FadeIn delay={0.08}>
-          <Card>
+        <FadeIn delay={0.08} className="h-full">
+          <Card className="h-full">
             <div
-              className="text-[12px] tracking-[0.25em] uppercase mb-3"
+              className="text-[12px] tracking-[0.25em] uppercase mb-5"
               style={{ color: "#4dbef3" }}
             >
               Womit ich arbeite

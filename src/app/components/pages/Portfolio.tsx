@@ -25,7 +25,7 @@ export function Portfolio() {
   return (
     <main className="mx-auto max-w-6xl px-5 sm:px-6 pt-36 sm:pt-44 pb-12">
       <FadeIn>
-        <SectionLabel>Portfolio</SectionLabel>
+        <SectionLabel>Projekte</SectionLabel>
         <h1 className="text-white text-[clamp(32px,6vw,72px)] tracking-tight leading-[1.05] max-w-3xl">
           Projekte, die für sich sprechen.
         </h1>
@@ -40,30 +40,24 @@ export function Portfolio() {
       </FadeIn>
 
       <FadeIn delay={0.2}>
-        <div className="mt-16 sm:mt-20 rounded-2xl border border-white/5 bg-gradient-to-br from-[#0f2440] to-[#0b1322] p-6 sm:p-10">
+        <div className="mt-16 sm:mt-20">
           <SectionLabel>Persönliches Portfolio</SectionLabel>
-          <div className="grid gap-6 md:grid-cols-2 items-center">
-            <div>
-              <h2 className="text-white text-[22px] sm:text-[28px] mb-3">
-                Hochschulprojekte &amp; Eigenarbeiten
-              </h2>
-              <p className="text-slate-400 text-[14px] leading-relaxed">
-                Über meine Studienzeit und Nebenprojekte sind zahlreiche
-                UX/UI-Arbeiten entstanden. Diese findest du gebündelt in
-                meinem persönlichen Portfolio.
-              </p>
-            </div>
-            <div className="md:text-right">
-              <a
-                href="https://gissler-webdesign/portfolio.de"
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center gap-2 rounded-full border border-sky-400/40 bg-sky-400/10 px-6 py-3 text-sky-300 hover:bg-sky-400/20 transition-all"
-              >
-                Persönliches Portfolio öffnen <ExternalLink size={16} />
-              </a>
-            </div>
-          </div>
+          <h2 className="text-white text-[22px] sm:text-[28px] mb-3">
+            Hochschulprojekte &amp; Eigenarbeiten
+          </h2>
+          <p className="text-slate-400 text-[14px] leading-relaxed max-w-xl mb-7">
+            Über meine Studienzeit und Nebenprojekte sind zahlreiche
+            UX/UI-Arbeiten entstanden. Diese findest du gebündelt in
+            meinem persönlichen Portfolio.
+          </p>
+          <a
+            href="https://gissler-webdesign/portfolio.de"
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-2 rounded-full border border-sky-400/40 bg-sky-400/10 px-6 py-3 text-sky-300 hover:bg-sky-400/20 transition-all"
+          >
+            Persönliches Portfolio öffnen <ExternalLink size={16} />
+          </a>
         </div>
       </FadeIn>
     </main>
