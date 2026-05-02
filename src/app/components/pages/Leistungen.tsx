@@ -65,7 +65,7 @@ const blocks = [
     points: [
       "Individuelles Design – kein vorgefertigtes Template",
       "Gut bedienbar & schön auf allen Geräten",
-      "Deine Marke, dein Stil, dein Auftritt",
+      "Auf deine Marke angepasst",
       "Leicht verständlich für deine Kunden",
     ],
   },

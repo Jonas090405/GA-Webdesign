@@ -16,7 +16,7 @@ const PROJECTS = [
     image: null,
     tag: "Demnächst verfügbar",
     title: "Nächstes Projekt",
-    desc: "Mein nächstes Projekt ist gerade in Umsetzung. Melde dich gerne, wenn du Interesse an einer Zusammenarbeit hast.",
+    desc: "Mein nächstes Projekt ist gerade in Umsetzung.",
     comingSoon: true,
   },
 ];

@@ -147,7 +147,7 @@ function Services() {
     {
       Icon: Code2,
       title: "Technische Umsetzung",
-      desc: "Alles sauber und modern gebaut. Schnelle Ladezeiten, gut bei Google auffindbar und auf Handy wie PC perfekt nutzbar.",
+      desc: "Alle Funktionen sauber mit modernster Technik umgesetzt. Schnell geladen, für Google optimiert und auf jedem Gerät perfekt nutzbar.",
     },
     {
       Icon: Rocket,
@@ -170,29 +170,33 @@ function Services() {
         </div>
       </FadeIn>
 
-      <div className="grid gap-5 sm:gap-6 xl:gap-8 sm:grid-cols-2 md:grid-cols-3">
+      <div className="grid gap-5 sm:gap-6 xl:gap-8 sm:grid-cols-2 md:grid-cols-3 items-stretch">
         {services.map(({ Icon, title, desc }, i) => (
-          <FadeIn key={title} delay={i * 0.08}>
-            <Card>
-              <div
-                className="mb-5 xl:mb-7 inline-flex h-12 w-12 xl:h-16 xl:w-16 items-center justify-center rounded-xl"
-                style={{
-                  background:
-                    "linear-gradient(135deg, rgba(0,105,153,0.25) 0%, rgba(77,190,243,0.12) 100%)",
-                  border: "1px solid rgba(77, 190, 243, 0.2)",
-                }}
-              >
-                <Icon size={22} className="xl:!h-7 xl:!w-7" style={{ color: "#4dbef3" }} />
+          <FadeIn key={title} delay={i * 0.08} className="h-full">
+            <Card className="h-full">
+              <div className="flex flex-col h-full">
+                <div className="mb-5 xl:mb-7 self-start">
+                  <div
+                    className="inline-flex h-12 w-12 xl:h-16 xl:w-16 items-center justify-center rounded-xl"
+                    style={{
+                      background:
+                        "linear-gradient(135deg, rgba(0,105,153,0.25) 0%, rgba(77,190,243,0.12) 100%)",
+                      border: "1px solid rgba(77, 190, 243, 0.2)",
+                    }}
+                  >
+                    <Icon size={22} className="xl:!h-7 xl:!w-7" style={{ color: "#4dbef3" }} />
+                  </div>
+                </div>
+                <h3 className="text-white text-[18px] sm:text-[20px] xl:text-[22px] mb-2 xl:mb-3">
+                  {title}
+                </h3>
+                <p
+                  className="text-[14px] xl:text-[16px] leading-relaxed flex-1"
+                  style={{ color: "rgba(180, 210, 230, 0.6)" }}
+                >
+                  {desc}
+                </p>
               </div>
-              <h3 className="text-white text-[18px] sm:text-[20px] xl:text-[22px] mb-2 xl:mb-3">
-                {title}
-              </h3>
-              <p
-                className="text-[14px] xl:text-[16px] leading-relaxed"
-                style={{ color: "rgba(180, 210, 230, 0.6)" }}
-              >
-                {desc}
-              </p>
             </Card>
           </FadeIn>
         ))}
