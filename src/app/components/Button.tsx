@@ -16,7 +16,7 @@ export function PrimaryButton({
       type={type}
       onClick={onClick}
       disabled={disabled}
-      className="group inline-flex cursor-pointer items-center gap-2 rounded-full px-6 py-3 text-white font-medium transition-all duration-200 hover:brightness-110 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:brightness-100"
+      className="group inline-flex cursor-pointer items-center gap-2 rounded-full px-6 py-3 xl:px-7 xl:py-3.5 2xl:px-9 2xl:py-4 text-[15px] 2xl:text-[17px] text-white font-medium transition-all duration-200 hover:brightness-110 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:brightness-100"
       style={{
         background: "linear-gradient(135deg, #006999 0%, #4dbef3 100%)",
       }}
@@ -37,7 +37,7 @@ export function GhostButton({
   return (
     <button
       onClick={onClick}
-      className="inline-flex cursor-pointer items-center gap-2 rounded-full px-6 py-3 font-medium transition-all duration-200"
+      className="inline-flex cursor-pointer items-center gap-2 rounded-full px-6 py-3 xl:px-7 xl:py-3.5 2xl:px-9 2xl:py-4 text-[15px] 2xl:text-[17px] font-medium transition-all duration-200"
       style={{
         background: "rgba(77, 190, 243, 0.07)",
         border: "1px solid rgba(77, 190, 243, 0.2)",

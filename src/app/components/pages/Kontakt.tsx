@@ -96,22 +96,22 @@ export function Kontakt() {
   }
 
   return (
-    <main className="mx-auto max-w-5xl px-5 sm:px-6 pt-36 sm:pt-44 pb-24">
+    <main className="mx-auto max-w-5xl xl:max-w-6xl 2xl:max-w-7xl px-5 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 pt-36 sm:pt-44 lg:pt-52 xl:pt-60 2xl:pt-72 pb-24 2xl:pb-32">
       <FadeIn>
         <SectionLabel>Kontakt</SectionLabel>
-        <h1 className="text-white text-[clamp(32px,6vw,64px)] leading-[1.05] tracking-tight max-w-2xl mb-5">
+        <h1 className="text-white text-[clamp(32px,6vw,76px)] leading-[1.05] tracking-tight max-w-2xl 2xl:max-w-3xl mb-5">
           Erzähl mir von{" "}
           <span className="bg-gradient-to-r from-sky-300 to-sky-500 bg-clip-text text-transparent">
             deinem Projekt.
           </span>
         </h1>
-        <p className="text-slate-400 text-[15px] sm:text-[16px] leading-relaxed max-w-xl mb-14">
+        <p className="text-slate-400 text-[15px] sm:text-[16px] 2xl:text-[18px] leading-relaxed max-w-xl 2xl:max-w-2xl mb-14 2xl:mb-20">
           Ich melde mich innerhalb von 24 Stunden
           mit einer ersten Einschätzung und einem unverbindlichen Termin.
         </p>
       </FadeIn>
 
-      <div className="grid gap-10 md:gap-14 md:grid-cols-5 items-start">
+      <div className="grid gap-10 md:gap-14 2xl:gap-20 md:grid-cols-5 items-start">
         {/* Info-Spalte */}
         <FadeIn className="md:col-span-2 space-y-8">
           <InfoItem

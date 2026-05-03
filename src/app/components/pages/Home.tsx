@@ -31,7 +31,7 @@ const PROJECTS = [
 
 export function Home() {
   return (
-    <main className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-12 xl:px-16">
+    <main className="mx-auto max-w-7xl 2xl:max-w-[1600px] px-5 sm:px-8 lg:px-12 xl:px-16 2xl:px-24">
       <Hero />
       <PortfolioPreview />
       <Services />
@@ -44,8 +44,8 @@ export function Home() {
 function Hero() {
   const navigate = useNavigate();
   return (
-    <section className="pt-36 sm:pt-44 lg:pt-52 xl:pt-60 pb-20 sm:pb-32 lg:pb-40 xl:pb-48 relative">
-      <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 xl:gap-16 items-center">
+    <section className="pt-36 sm:pt-44 lg:pt-52 xl:pt-60 2xl:pt-80 pb-20 sm:pb-32 lg:pb-40 xl:pb-48 2xl:pb-60 relative">
+      <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 xl:gap-16 2xl:gap-24 items-center">
         <div>
           <FadeIn>
             <SectionLabel>Webdesign · Entwicklung · Deployment</SectionLabel>
@@ -66,7 +66,7 @@ function Hero() {
           </FadeIn>
           <FadeIn delay={0.2}>
             <p
-              className="mt-6 sm:mt-8 max-w-2xl lg:max-w-xl xl:max-w-2xl text-[17px] sm:text-[19px] lg:text-[21px] xl:text-[23px] leading-relaxed"
+              className="mt-6 sm:mt-8 max-w-2xl lg:max-w-xl xl:max-w-2xl 2xl:max-w-3xl text-[17px] sm:text-[19px] lg:text-[21px] xl:text-[23px] 2xl:text-[26px] leading-relaxed"
               style={{ color: "rgba(200, 225, 240, 0.75)" }}
             >
               Ich entwerfe und baue deine Website. Von der ersten Idee bis sie live ist.
@@ -83,7 +83,7 @@ function Hero() {
         </div>
 
         <FadeIn delay={0.4} className="hidden lg:flex justify-center lg:justify-end">
-          <DesignerSVG className="w-full max-w-[500px] xl:max-w-[700px] 2xl:max-w-[800px] h-auto drop-shadow-[0_0_60px_rgba(77,190,243,0.15)]" />
+          <DesignerSVG className="w-full max-w-[500px] xl:max-w-[700px] 2xl:max-w-[950px] h-auto drop-shadow-[0_0_60px_rgba(77,190,243,0.15)]" />
         </FadeIn>
       </div>
     </section>
@@ -93,14 +93,14 @@ function Hero() {
 function PortfolioPreview() {
   const navigate = useNavigate();
   return (
-    <section className="py-16 sm:py-20 lg:py-28 xl:py-36">
+    <section className="py-16 sm:py-20 lg:py-28 xl:py-36 2xl:py-48">
       <FadeIn>
         <SectionLabel>Projekte</SectionLabel>
-        <div className="mb-8 sm:mb-10 xl:mb-14">
-          <h2 className="text-white text-[clamp(28px,4.5vw,64px)] tracking-tight max-w-4xl">
+        <div className="mb-8 sm:mb-10 xl:mb-14 2xl:mb-20">
+          <h2 className="text-white text-[clamp(28px,4.5vw,72px)] tracking-tight max-w-4xl 2xl:max-w-5xl">
             Projekte, die ich umgesetzt habe
           </h2>
-          <p className="mt-4 xl:mt-6 max-w-2xl text-[15px] sm:text-[17px] xl:text-[19px] leading-relaxed" style={{ color: "rgba(180,210,230,0.65)" }}>
+          <p className="mt-4 xl:mt-6 max-w-2xl 2xl:max-w-3xl text-[15px] sm:text-[17px] xl:text-[19px] 2xl:text-[21px] leading-relaxed" style={{ color: "rgba(180,210,230,0.65)" }}>
             Eine Auswahl aktueller Kundenarbeiten.
           </p>
         </div>
@@ -157,41 +157,41 @@ function Services() {
   ];
 
   return (
-    <section id="leistungen" className="py-16 sm:py-20 lg:py-28 xl:py-36">
+    <section id="leistungen" className="py-16 sm:py-20 lg:py-28 xl:py-36 2xl:py-48">
       <FadeIn>
         <SectionLabel>Leistungen</SectionLabel>
-        <div className="mb-10 sm:mb-12 xl:mb-16">
-          <h2 className="text-white text-[clamp(28px,4.5vw,64px)] tracking-tight max-w-4xl">
+        <div className="mb-10 sm:mb-12 xl:mb-16 2xl:mb-20">
+          <h2 className="text-white text-[clamp(28px,4.5vw,72px)] tracking-tight max-w-4xl 2xl:max-w-5xl">
             Alles, was du für deine Website brauchst.
           </h2>
-          <p className="mt-4 xl:mt-6 max-w-2xl text-[15px] sm:text-[17px] xl:text-[19px] leading-relaxed" style={{ color: "rgba(180,210,230,0.65)" }}>
+          <p className="mt-4 xl:mt-6 max-w-2xl 2xl:max-w-3xl text-[15px] sm:text-[17px] xl:text-[19px] 2xl:text-[21px] leading-relaxed" style={{ color: "rgba(180,210,230,0.65)" }}>
             Ich übernehme alles: Design, Entwicklung und Hosting.<br />Du musst dich um nichts kümmern.
           </p>
         </div>
       </FadeIn>
 
-      <div className="grid gap-5 sm:gap-6 xl:gap-8 sm:grid-cols-2 md:grid-cols-3 items-stretch">
+      <div className="grid gap-5 sm:gap-6 xl:gap-8 2xl:gap-10 sm:grid-cols-2 md:grid-cols-3 items-stretch">
         {services.map(({ Icon, title, desc }, i) => (
           <FadeIn key={title} delay={i * 0.08} className="h-full">
             <Card className="h-full">
               <div className="flex flex-col h-full">
                 <div className="mb-5 xl:mb-7 self-start">
                   <div
-                    className="inline-flex h-12 w-12 xl:h-16 xl:w-16 items-center justify-center rounded-xl"
+                    className="inline-flex h-12 w-12 xl:h-16 xl:w-16 2xl:h-20 2xl:w-20 items-center justify-center rounded-xl"
                     style={{
                       background:
                         "linear-gradient(135deg, rgba(0,105,153,0.25) 0%, rgba(77,190,243,0.12) 100%)",
                       border: "1px solid rgba(77, 190, 243, 0.2)",
                     }}
                   >
-                    <Icon size={22} className="xl:!h-7 xl:!w-7" style={{ color: "#4dbef3" }} />
+                    <Icon size={22} className="xl:!h-7 xl:!w-7 2xl:!h-8 2xl:!w-8" style={{ color: "#4dbef3" }} />
                   </div>
                 </div>
-                <h3 className="text-white text-[18px] sm:text-[20px] xl:text-[22px] mb-2 xl:mb-3">
+                <h3 className="text-white text-[18px] sm:text-[20px] xl:text-[22px] 2xl:text-[25px] mb-2 xl:mb-3">
                   {title}
                 </h3>
                 <p
-                  className="text-[14px] xl:text-[16px] leading-relaxed flex-1"
+                  className="text-[14px] xl:text-[16px] 2xl:text-[18px] leading-relaxed flex-1"
                   style={{ color: "rgba(180, 210, 230, 0.6)" }}
                 >
                   {desc}
@@ -203,7 +203,7 @@ function Services() {
       </div>
 
       <FadeIn delay={0.2}>
-        <div className="mt-10 xl:mt-14">
+        <div className="mt-10 xl:mt-14 2xl:mt-16">
           <GhostButton onClick={() => navigate("/leistungen")}>
             Mehr über meine Leistungen
           </GhostButton>
@@ -216,31 +216,31 @@ function Services() {
 function AboutPreview() {
   const navigate = useNavigate();
   return (
-    <section className="py-16 sm:py-20 lg:py-28 xl:py-36">
+    <section className="py-16 sm:py-20 lg:py-28 xl:py-36 2xl:py-48">
       <FadeIn>
         <SectionLabel>Über mich</SectionLabel>
       </FadeIn>
-      <div className="grid gap-10 md:gap-12 xl:gap-20 md:grid-cols-5 items-center">
+      <div className="grid gap-10 md:gap-12 xl:gap-20 2xl:gap-28 md:grid-cols-5 items-center">
         <FadeIn className="md:col-span-3">
-          <h2 className="text-white text-[clamp(26px,4vw,54px)] tracking-tight mb-6 xl:mb-8">
+          <h2 className="text-white text-[clamp(26px,4vw,64px)] tracking-tight mb-6 xl:mb-8">
             Hi, ich bin Jonas.
           </h2>
           <p
-            className="text-[15px] sm:text-[16px] xl:text-[18px] leading-relaxed mb-4 xl:mb-6"
+            className="text-[15px] sm:text-[16px] xl:text-[18px] 2xl:text-[21px] leading-relaxed mb-4 xl:mb-6"
             style={{ color: "rgba(200, 225, 240, 0.8)" }}
           >
             Webdesigner und Entwickler aus Triberg im Schwarzwald.
             Ich kümmere mich komplett um deine Website: Design, Technik, Hosting und alles, was dazugehört.
           </p>
           <p
-            className="text-[14px] sm:text-[15px] xl:text-[17px] leading-relaxed mb-4"
+            className="text-[14px] sm:text-[15px] xl:text-[17px] 2xl:text-[19px] leading-relaxed mb-4"
             style={{ color: "rgba(180, 210, 230, 0.6)" }}
           >
             Mein Ziel ist eine Website, bei der deine Kunden sofort verstehen, was du anbietest
             und dich gerne kontaktieren.
           </p>
           <p
-            className="text-[14px] sm:text-[15px] xl:text-[17px] leading-relaxed mb-8 xl:mb-10"
+            className="text-[14px] sm:text-[15px] xl:text-[17px] 2xl:text-[19px] leading-relaxed mb-8 xl:mb-10"
             style={{ color: "rgba(180, 210, 230, 0.6)" }}
           >
             Ich bin persönlich für dich da. Du schreibst immer direkt mit mir.
@@ -257,7 +257,7 @@ function AboutPreview() {
               style={{ border: "1px solid rgba(77, 190, 243, 0.15)" }}
             />
             <div
-              className="relative h-56 w-56 sm:h-64 sm:w-64 xl:h-80 xl:w-80 rounded-full overflow-hidden"
+              className="relative h-56 w-56 sm:h-64 sm:w-64 xl:h-80 xl:w-80 2xl:h-[26rem] 2xl:w-[26rem] rounded-full overflow-hidden"
               style={{ border: "2px solid rgba(77, 190, 243, 0.4)" }}
             >
               <img
@@ -333,17 +333,17 @@ function Contact() {
   }
 
   return (
-    <section id="kontakt" className="py-16 sm:py-20 lg:py-28 xl:py-36">
+    <section id="kontakt" className="py-16 sm:py-20 lg:py-28 xl:py-36 2xl:py-48">
       <FadeIn>
         <SectionLabel>Kontakt</SectionLabel>
       </FadeIn>
-      <div className="grid gap-10 md:gap-12 xl:gap-20 md:grid-cols-2 items-start">
+      <div className="grid gap-10 md:gap-12 xl:gap-20 2xl:gap-28 md:grid-cols-2 items-start">
         <FadeIn>
-          <h2 className="text-white text-[clamp(26px,4vw,54px)] tracking-tight mb-6 xl:mb-8">
+          <h2 className="text-white text-[clamp(26px,4vw,64px)] tracking-tight mb-6 xl:mb-8">
             Erzähl mir von deinem Projekt.
           </h2>
           <p
-            className="text-[14px] sm:text-[15px] xl:text-[17px] leading-relaxed mb-8 max-w-md xl:max-w-lg"
+            className="text-[14px] sm:text-[15px] xl:text-[17px] 2xl:text-[19px] leading-relaxed mb-8 max-w-md xl:max-w-lg 2xl:max-w-xl"
             style={{ color: "rgba(180, 210, 230, 0.6)" }}
           >
             Ich melde mich innerhalb von 24 Stunden
