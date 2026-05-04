@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
+import { ScrollProgress } from "./components/ScrollProgress";
 import { Home } from "./components/pages/Home";
 import { Portfolio } from "./components/pages/Portfolio";
 import { Leistungen } from "./components/pages/Leistungen";
@@ -35,6 +36,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen text-white relative overflow-x-hidden" style={{ background: "linear-gradient(160deg, rgb(13,17,21) 0%, rgb(16,24,28) 60%, rgb(13,17,21) 100%)" }}>
+      <ScrollProgress />
       <Navbar />
 
       <AnimatePresence mode="wait">

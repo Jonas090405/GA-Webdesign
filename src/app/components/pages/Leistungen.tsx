@@ -161,7 +161,7 @@ export function Leistungen() {
             ].map((item) => (
               <span
                 key={item}
-                className="rounded-full px-4 py-1.5 xl:px-5 2xl:px-6 2xl:py-2 text-[13px] 2xl:text-[15px] text-sky-300"
+                className="tag-pill rounded-full px-4 py-1.5 xl:px-5 2xl:px-6 2xl:py-2 text-[13px] 2xl:text-[15px] text-sky-300"
                 style={{
                   background: "rgba(77, 190, 243, 0.07)",
                   border: "1px solid rgba(77, 190, 243, 0.18)",

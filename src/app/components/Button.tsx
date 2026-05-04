@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import { ArrowUpRight } from "lucide-react";
 
 export function PrimaryButton({
@@ -11,18 +12,49 @@ export function PrimaryButton({
   type?: "button" | "submit";
   disabled?: boolean;
 }) {
+  const ref = useRef<HTMLButtonElement>(null);
+
+  function handleMove(e: React.MouseEvent<HTMLButtonElement>) {
+    const el = ref.current;
+    if (!el || disabled) return;
+    const rect = el.getBoundingClientRect();
+    el.style.setProperty("--mx", `${e.clientX - rect.left}px`);
+    el.style.setProperty("--my", `${e.clientY - rect.top}px`);
+  }
+
   return (
     <button
+      ref={ref}
       type={type}
       onClick={onClick}
       disabled={disabled}
-      className="group inline-flex cursor-pointer items-center gap-2 rounded-full px-6 py-3 xl:px-7 xl:py-3.5 2xl:px-9 2xl:py-4 text-[15px] 2xl:text-[17px] text-white font-medium transition-all duration-200 hover:brightness-110 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:brightness-100"
+      onMouseMove={handleMove}
+      className="group/btn relative inline-flex cursor-pointer items-center gap-2 overflow-hidden rounded-full px-6 py-3 xl:px-7 xl:py-3.5 2xl:px-9 2xl:py-4 text-[15px] 2xl:text-[17px] text-white font-medium transition-[filter] duration-300 ease-out hover:brightness-110 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:brightness-100"
       style={{
         background: "linear-gradient(135deg, #006999 0%, #4dbef3 100%)",
       }}
     >
-      {children}
-      <ArrowUpRight size={16} />
+      {/* Cursor-Spotlight */}
+      <span
+        aria-hidden
+        className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover/btn:opacity-100"
+        style={{
+          background:
+            "radial-gradient(140px circle at var(--mx,50%) var(--my,50%), rgba(255,255,255,0.25), transparent 55%)",
+        }}
+      />
+      {/* Sweep-Shine */}
+      <span
+        aria-hidden
+        className="pointer-events-none absolute -inset-y-2 -left-1/2 w-1/3 -skew-x-[18deg] bg-gradient-to-r from-transparent via-white/30 to-transparent transition-all duration-700 ease-out group-hover/btn:left-[120%]"
+      />
+      <span className="relative z-10 inline-flex items-center gap-2">
+        {children}
+        <ArrowUpRight
+          size={16}
+          className="transition-transform duration-300 ease-out group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5"
+        />
+      </span>
     </button>
   );
 }
@@ -37,26 +69,31 @@ export function GhostButton({
   return (
     <button
       onClick={onClick}
-      className="inline-flex cursor-pointer items-center gap-2 rounded-full px-6 py-3 xl:px-7 xl:py-3.5 2xl:px-9 2xl:py-4 text-[15px] 2xl:text-[17px] font-medium transition-all duration-200"
+      className="group/btn inline-flex cursor-pointer items-center gap-2 rounded-full px-6 py-3 xl:px-7 xl:py-3.5 2xl:px-9 2xl:py-4 text-[15px] 2xl:text-[17px] font-medium transition-all duration-300"
       style={{
         background: "rgba(77, 190, 243, 0.07)",
         border: "1px solid rgba(77, 190, 243, 0.2)",
         color: "rgba(200, 235, 255, 0.85)",
       }}
       onMouseEnter={(e) => {
-        (e.currentTarget as HTMLButtonElement).style.background =
-          "rgba(77, 190, 243, 0.13)";
-        (e.currentTarget as HTMLButtonElement).style.borderColor =
-          "rgba(77, 190, 243, 0.35)";
+        const el = e.currentTarget;
+        el.style.background = "rgba(77, 190, 243, 0.13)";
+        el.style.borderColor = "rgba(77, 190, 243, 0.4)";
       }}
       onMouseLeave={(e) => {
-        (e.currentTarget as HTMLButtonElement).style.background =
-          "rgba(77, 190, 243, 0.07)";
-        (e.currentTarget as HTMLButtonElement).style.borderColor =
-          "rgba(77, 190, 243, 0.2)";
+        const el = e.currentTarget;
+        el.style.background = "rgba(77, 190, 243, 0.07)";
+        el.style.borderColor = "rgba(77, 190, 243, 0.2)";
       }}
     >
-      {children}
+      <span className="relative z-10 inline-flex items-center gap-2">
+        {children}
+        <ArrowUpRight
+          size={16}
+          className="transition-transform duration-300 ease-out group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5"
+          aria-hidden
+        />
+      </span>
     </button>
   );
 }

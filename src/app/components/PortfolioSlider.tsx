@@ -52,7 +52,7 @@ export function PortfolioSlider({ projects }: { projects: Project[] }) {
       )}
 
       <div
-        className="relative overflow-hidden rounded-2xl"
+        className="relative overflow-hidden rounded-[28px] sm:rounded-[32px] md:rounded-[36px] 2xl:rounded-[44px]"
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
       >
@@ -65,7 +65,10 @@ export function PortfolioSlider({ projects }: { projects: Project[] }) {
             exit={{ opacity: 0, x: direction * -60 }}
             transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
           >
-            <Card className="p-3 sm:p-4 md:p-5 xl:p-6 2xl:p-8 rounded-[28px] sm:rounded-[32px] md:rounded-[36px] 2xl:rounded-[44px] overflow-hidden">
+            <Card
+              className="rounded-[28px] sm:rounded-[32px] md:rounded-[36px] 2xl:rounded-[44px]"
+              innerClassName="p-3 sm:p-4 md:p-5 xl:p-6 2xl:p-8 overflow-hidden"
+            >
               <div className="grid md:grid-cols-2 gap-6 md:gap-8 xl:gap-10 md:h-[420px] xl:h-[500px] 2xl:h-[600px]">
                 {/* Image or Coming Soon placeholder */}
                 <div className="h-[220px] md:h-full overflow-hidden">
@@ -113,9 +116,13 @@ export function PortfolioSlider({ projects }: { projects: Project[] }) {
                       href={project.url}
                       target="_blank"
                       rel="noreferrer"
-                      className="mt-6 xl:mt-8 inline-flex w-fit cursor-pointer items-center gap-2 rounded-full border border-sky-400/30 bg-sky-400/10 px-4 xl:px-5 2xl:px-6 py-2 2xl:py-3 text-[13px] xl:text-[14px] 2xl:text-[16px] text-sky-300 transition-all hover:bg-sky-400/20"
+                      className="group/btn mt-6 xl:mt-8 inline-flex w-fit cursor-pointer items-center gap-2 rounded-full border border-sky-400/30 bg-sky-400/10 px-4 xl:px-5 2xl:px-6 py-2 2xl:py-3 text-[13px] xl:text-[14px] 2xl:text-[16px] text-sky-300 transition-all hover:bg-sky-400/20"
                     >
-                      Website öffnen <ExternalLink size={13} className="xl:!h-4 xl:!w-4" />
+                      Website öffnen
+                      <ExternalLink
+                        size={13}
+                        className="xl:!h-4 xl:!w-4 transition-transform duration-200 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5"
+                      />
                     </a>
                   )}
                 </div>
@@ -159,7 +166,7 @@ function SliderBtn({
     <button
       onClick={onClick}
       aria-label={aria}
-      className="inline-flex h-12 w-12 sm:h-10 sm:w-10 xl:h-12 xl:w-12 2xl:h-14 2xl:w-14 cursor-pointer items-center justify-center rounded-full border border-white/10 bg-white/5 text-slate-200 transition-all hover:bg-white/10 hover:border-sky-400/40 hover:text-sky-300 active:scale-95"
+      className="inline-flex h-12 w-12 sm:h-10 sm:w-10 xl:h-12 xl:w-12 2xl:h-14 2xl:w-14 cursor-pointer items-center justify-center rounded-full border border-white/10 bg-white/5 text-slate-200 transition-all duration-300 hover:border-sky-400/40 hover:text-sky-300 active:scale-95"
     >
       {children}
     </button>

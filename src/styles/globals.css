@@ -221,3 +221,50 @@ button *,
     background: var(--accent-light);
     color: var(--primary-color);
 }
+
+/* ============================================================
+   GLOBALE MICROINTERACTIONS
+   ============================================================ */
+
+/* Reduced-Motion: animierte Effekte deutlich abschwächen */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* Sanftes globales Smooth-Scroll für Anchor-Sprünge */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Fokus-Stil für Tastaturnutzer (Accessibility) */
+:focus-visible {
+    outline: 2px solid var(--accent-light);
+    outline-offset: 3px;
+    border-radius: 6px;
+}
+
+/* Nahtloser Hero-Ticker Loop */
+@keyframes hero-ticker {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-25%); }
+}
+
+/* Tag-Pill Hover-Glow (für Skill-/Leistungs-Tags) */
+.tag-pill {
+    transition: transform 0.25s ease,
+                box-shadow 0.25s ease,
+                background 0.25s ease,
+                border-color 0.25s ease;
+}
+
+.tag-pill:hover {
+    border-color: rgba(77, 190, 243, 0.45) !important;
+    background: rgba(77, 190, 243, 0.14) !important;
+}

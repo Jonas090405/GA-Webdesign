@@ -1,9 +1,11 @@
 import { useState } from "react";
+import { motion } from "motion/react";
 import { SectionLabel } from "../SectionLabel";
 import { PrimaryButton, GhostButton } from "../Button";
 import { Card } from "../Card";
 import { FadeIn } from "../FadeIn";
 import { PortfolioSlider } from "../PortfolioSlider";
+import { Aurora } from "../Aurora";
 import { useNavigate } from "react-router-dom";
 import { Palette, Code2, Rocket, ExternalLink, Phone } from "lucide-react";
 import emailjs from "@emailjs/browser";
@@ -44,14 +46,17 @@ export function Home() {
 function Hero() {
   const navigate = useNavigate();
   return (
-    <section className="pt-36 sm:pt-44 lg:pt-52 xl:pt-60 2xl:pt-80 pb-20 sm:pb-32 lg:pb-40 xl:pb-48 2xl:pb-60 relative">
-      <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 xl:gap-16 2xl:gap-24 items-center">
+    <section className="relative pt-28 sm:pt-36 lg:pt-48 xl:pt-56 2xl:pt-72 pb-16 sm:pb-24 lg:pb-36 xl:pb-44 2xl:pb-56">
+      <Aurora />
+
+      <div className="relative z-10 grid lg:grid-cols-2 gap-10 lg:gap-8 xl:gap-16 2xl:gap-24 items-center">
         <div>
           <FadeIn>
             <SectionLabel>Webdesign · Entwicklung · Deployment</SectionLabel>
           </FadeIn>
+
           <FadeIn delay={0.1}>
-            <h1 className="text-white text-[clamp(38px,7vw,108px)] leading-[1.05] tracking-tight max-w-5xl lg:max-w-none">
+            <h1 className="text-white text-[clamp(34px,6.5vw,108px)] leading-[1.05] tracking-tight">
               Webseiten,{" "}
               <span
                 className="bg-clip-text text-transparent"
@@ -64,17 +69,19 @@ function Hero() {
               </span>
             </h1>
           </FadeIn>
+
           <FadeIn delay={0.2}>
             <p
-              className="mt-6 sm:mt-8 max-w-2xl lg:max-w-xl xl:max-w-2xl 2xl:max-w-3xl text-[17px] sm:text-[19px] lg:text-[21px] xl:text-[23px] 2xl:text-[26px] leading-relaxed"
+              className="mt-5 sm:mt-7 text-[16px] sm:text-[18px] lg:text-[19px] xl:text-[21px] 2xl:text-[24px] leading-relaxed"
               style={{ color: "rgba(200, 225, 240, 0.75)" }}
             >
               Ich entwerfe und baue deine Website. Von der ersten Idee bis sie live ist.
               Du musst dich um nichts kümmern.
             </p>
           </FadeIn>
+
           <FadeIn delay={0.3}>
-            <div className="mt-8 sm:mt-10 xl:mt-12 flex flex-wrap gap-3">
+            <div className="mt-8 sm:mt-10 xl:mt-12">
               <PrimaryButton onClick={() => navigate("/kontakt")}>
                 Projekt anfragen
               </PrimaryButton>
@@ -83,7 +90,13 @@ function Hero() {
         </div>
 
         <FadeIn delay={0.4} className="hidden lg:flex justify-center lg:justify-end">
-          <DesignerSVG className="w-full max-w-[500px] xl:max-w-[700px] 2xl:max-w-[950px] h-auto drop-shadow-[0_0_60px_rgba(77,190,243,0.15)]" />
+          <motion.div
+            animate={{ y: [0, -10, 0] }}
+            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+            className="will-change-transform"
+          >
+            <DesignerSVG className="w-full max-w-[500px] xl:max-w-[700px] 2xl:max-w-[950px] h-auto" />
+          </motion.div>
         </FadeIn>
       </div>
     </section>
@@ -184,7 +197,11 @@ function Services() {
                       border: "1px solid rgba(77, 190, 243, 0.2)",
                     }}
                   >
-                    <Icon size={22} className="xl:!h-7 xl:!w-7 2xl:!h-8 2xl:!w-8" style={{ color: "#4dbef3" }} />
+                    <Icon
+                      size={22}
+                      className="xl:!h-7 xl:!w-7 2xl:!h-8 2xl:!w-8"
+                      style={{ color: "#4dbef3" }}
+                    />
                   </div>
                 </div>
                 <h3 className="text-white text-[18px] sm:text-[20px] xl:text-[22px] 2xl:text-[25px] mb-2 xl:mb-3">
@@ -251,19 +268,35 @@ function AboutPreview() {
         </FadeIn>
 
         <FadeIn delay={0.15} className="md:col-span-2 flex justify-center">
-          <div className="relative">
+          <div className="group relative">
+            {/* Statischer Außenring */}
             <div
-              className="absolute inset-0 rounded-full scale-[1.08]"
+              className="absolute inset-0 rounded-full scale-[1.10]"
               style={{ border: "1px solid rgba(77, 190, 243, 0.15)" }}
             />
+            {/* Rotierender Akzent-Ring */}
+            <motion.div
+              aria-hidden
+              className="absolute inset-0 rounded-full scale-[1.16] pointer-events-none"
+              style={{
+                background:
+                  "conic-gradient(from 0deg, transparent 0deg, rgba(77,190,243,0.45) 80deg, transparent 160deg, transparent 360deg)",
+                WebkitMask:
+                  "radial-gradient(circle, transparent 49%, #000 50%, #000 51%, transparent 52%)",
+                mask: "radial-gradient(circle, transparent 49%, #000 50%, #000 51%, transparent 52%)",
+                filter: "blur(0.5px)",
+              }}
+              animate={{ rotate: 360 }}
+              transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
+            />
             <div
-              className="relative h-56 w-56 sm:h-64 sm:w-64 xl:h-80 xl:w-80 2xl:h-[26rem] 2xl:w-[26rem] rounded-full overflow-hidden"
+              className="relative h-56 w-56 sm:h-64 sm:w-64 xl:h-80 xl:w-80 2xl:h-[26rem] 2xl:w-[26rem] rounded-full overflow-hidden transition-transform duration-500 ease-out group-hover:scale-[1.02]"
               style={{ border: "2px solid rgba(77, 190, 243, 0.4)" }}
             >
               <img
                 src={profilbild}
                 alt="Jonas Gissler"
-                className="h-full w-full object-cover object-top"
+                className="h-full w-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-110"
               />
             </div>
           </div>
@@ -499,7 +532,7 @@ function HomeTabBtn({
     <button
       type="button"
       onClick={onClick}
-      className="flex-1 rounded-lg px-4 py-2 text-[13px] font-medium tracking-wide transition-all duration-200"
+      className="flex-1 rounded-lg px-4 py-2.5 text-[13px] font-medium tracking-wide transition-all duration-200"
       style={
         active
           ? { background: "linear-gradient(135deg, #006999 0%, #4dbef3 100%)", color: "#fff" }

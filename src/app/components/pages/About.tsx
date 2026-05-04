@@ -1,3 +1,4 @@
+import { motion } from "motion/react";
 import { SectionLabel } from "../SectionLabel";
 import { Card } from "../Card";
 import { PrimaryButton } from "../Button";
@@ -47,32 +48,40 @@ export function About() {
         </FadeIn>
 
         <FadeIn delay={0.15} className="md:col-span-2 flex justify-center md:justify-end">
-          <div className="relative">
+          <div className="group relative">
             {/* Outer decorative ring */}
             <div
               className="absolute inset-0 rounded-full scale-[1.10]"
-              style={{
-                border: "1px solid rgba(77, 190, 243, 0.15)",
-              }}
+              style={{ border: "1px solid rgba(77, 190, 243, 0.15)" }}
             />
             {/* Inner decorative ring */}
             <div
               className="absolute inset-0 rounded-full scale-[1.04]"
+              style={{ border: "1px solid rgba(77, 190, 243, 0.08)" }}
+            />
+            {/* Rotierender Akzent-Ring */}
+            <motion.div
+              aria-hidden
+              className="absolute inset-0 rounded-full scale-[1.18] pointer-events-none"
               style={{
-                border: "1px solid rgba(77, 190, 243, 0.08)",
+                background:
+                  "conic-gradient(from 0deg, transparent 0deg, rgba(77,190,243,0.50) 80deg, transparent 160deg, transparent 360deg)",
+                WebkitMask:
+                  "radial-gradient(circle, transparent 49%, #000 50%, #000 51%, transparent 52%)",
+                mask: "radial-gradient(circle, transparent 49%, #000 50%, #000 51%, transparent 52%)",
               }}
+              animate={{ rotate: 360 }}
+              transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
             />
             {/* Profile image circle */}
             <div
-              className="relative h-60 w-60 sm:h-72 sm:w-72 xl:h-80 xl:w-80 2xl:h-96 2xl:w-96 rounded-full overflow-hidden"
-              style={{
-                border: "2px solid rgba(77, 190, 243, 0.45)",
-              }}
+              className="relative h-60 w-60 sm:h-72 sm:w-72 xl:h-80 xl:w-80 2xl:h-96 2xl:w-96 rounded-full overflow-hidden transition-transform duration-500 ease-out group-hover:scale-[1.02]"
+              style={{ border: "2px solid rgba(77, 190, 243, 0.45)" }}
             >
               <img
                 src={profilbild}
                 alt="Jonas Gissler"
-                className="h-full w-full object-cover object-top"
+                className="h-full w-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-110"
               />
             </div>
           </div>
@@ -125,7 +134,7 @@ export function About() {
               ].map((t) => (
                 <span
                   key={t}
-                  className="rounded-full px-3 py-1 2xl:px-4 2xl:py-1.5 text-[12px] 2xl:text-[14px]"
+                  className="tag-pill rounded-full px-3 py-1 2xl:px-4 2xl:py-1.5 text-[12px] 2xl:text-[14px]"
                   style={{
                     background: "rgba(77, 190, 243, 0.08)",
                     border: "1px solid rgba(77, 190, 243, 0.18)",
