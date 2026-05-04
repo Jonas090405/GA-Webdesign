@@ -23,10 +23,10 @@ const PROJECTS = [
 
 export function Portfolio() {
   return (
-    <main className="mx-auto max-w-6xl px-5 sm:px-6 pt-36 sm:pt-44 pb-12">
+    <main className="mx-auto max-w-6xl xl:max-w-7xl 2xl:max-w-[1440px] px-5 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 pt-36 sm:pt-44 lg:pt-52 xl:pt-60 2xl:pt-72 pb-12 xl:pb-20 2xl:pb-28">
       <FadeIn>
         <SectionLabel>Projekte</SectionLabel>
-        <h1 className="text-white text-[clamp(32px,6vw,72px)] tracking-tight leading-[1.05] max-w-4xl">
+        <h1 className="text-white text-[clamp(32px,6vw,84px)] tracking-tight leading-[1.05] max-w-4xl 2xl:max-w-5xl">
           Projekte, die{" "}
           <span
             className="bg-clip-text text-transparent"
@@ -38,7 +38,7 @@ export function Portfolio() {
             für sich sprechen.
           </span>
         </h1>
-        <p className="mt-5 sm:mt-6 max-w-2xl text-[15px] sm:text-[16px] text-slate-400 leading-relaxed">
+        <p className="mt-5 sm:mt-6 max-w-2xl 2xl:max-w-3xl text-[15px] sm:text-[16px] 2xl:text-[18px] text-slate-400 leading-relaxed">
           Eine Auswahl aktueller Kundenarbeiten.
         </p>
       </FadeIn>
@@ -48,12 +48,12 @@ export function Portfolio() {
       </FadeIn>
 
       <FadeIn delay={0.2}>
-        <div className="mt-16 sm:mt-20">
+        <div className="mt-16 sm:mt-20 2xl:mt-28">
           <SectionLabel>Persönliches Portfolio</SectionLabel>
-          <h2 className="text-white text-[22px] sm:text-[28px] mb-3">
+          <h2 className="text-white text-[22px] sm:text-[28px] 2xl:text-[36px] mb-3">
             Hochschulprojekte &amp; Eigenarbeiten
           </h2>
-          <p className="text-slate-400 text-[14px] leading-relaxed max-w-xl mb-7">
+          <p className="text-slate-400 text-[14px] 2xl:text-[16px] leading-relaxed max-w-xl 2xl:max-w-2xl mb-7">
             Im Laufe meines Studiums und durch private Nebenprojekte sind zahlreiche Arbeiten entstanden. Diese findest du gebündelt in meinem persönlichen Portfolio.
           </p>
           <a

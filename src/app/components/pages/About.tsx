@@ -9,15 +9,15 @@ import { Zap, Layers, UserCheck, type LucideIcon } from "lucide-react";
 export function About() {
   const navigate = useNavigate();
   return (
-    <main className="mx-auto max-w-6xl px-5 sm:px-6 pt-36 sm:pt-44 pb-12">
+    <main className="mx-auto max-w-6xl xl:max-w-7xl 2xl:max-w-[1440px] px-5 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 pt-36 sm:pt-44 lg:pt-52 xl:pt-60 2xl:pt-72 pb-12 xl:pb-20 2xl:pb-28">
       <FadeIn>
         <SectionLabel>Über mich</SectionLabel>
       </FadeIn>
 
       {/* Hero with profile picture */}
-      <div className="mt-4 grid gap-10 md:gap-16 md:grid-cols-5 items-center">
+      <div className="mt-4 grid gap-10 md:gap-16 2xl:gap-24 md:grid-cols-5 items-center">
         <FadeIn className="md:col-span-3">
-          <h1 className="text-white text-[clamp(36px,6vw,72px)] tracking-tight leading-[1.05]">
+          <h1 className="text-white text-[clamp(36px,6vw,80px)] tracking-tight leading-[1.05]">
             Hi, ich bin{" "}
             <span
               className="bg-clip-text text-transparent"
@@ -30,7 +30,7 @@ export function About() {
             </span>
           </h1>
           <p
-            className="mt-6 text-[16px] sm:text-[17px] leading-relaxed"
+            className="mt-6 text-[16px] sm:text-[17px] xl:text-[19px] 2xl:text-[21px] leading-relaxed"
             style={{ color: "rgba(200, 225, 240, 0.8)" }}
           >
             Ich bin 21 Jahre alt und komme aus Triberg im Schwarzwald.
@@ -38,7 +38,7 @@ export function About() {
             Von der ersten Idee bis sie live sind.
           </p>
           <p
-            className="mt-4 text-[15px] leading-relaxed"
+            className="mt-4 text-[15px] xl:text-[17px] 2xl:text-[18px] leading-relaxed"
             style={{ color: "rgba(180, 210, 230, 0.6)" }}
           >
             Aktuell studiere ich Medienkonzeption an der Hochschule Furtwangen
@@ -64,7 +64,7 @@ export function About() {
             />
             {/* Profile image circle */}
             <div
-              className="relative h-60 w-60 sm:h-72 sm:w-72 rounded-full overflow-hidden"
+              className="relative h-60 w-60 sm:h-72 sm:w-72 xl:h-80 xl:w-80 2xl:h-96 2xl:w-96 rounded-full overflow-hidden"
               style={{
                 border: "2px solid rgba(77, 190, 243, 0.45)",
               }}
@@ -80,7 +80,7 @@ export function About() {
       </div>
 
       {/* Info cards */}
-      <div className="mt-16 grid gap-4 md:grid-cols-2 items-stretch">
+      <div className="mt-16 2xl:mt-24 grid gap-4 2xl:gap-6 md:grid-cols-2 items-stretch">
         <FadeIn className="h-full">
           <Card className="h-full">
             <div
@@ -125,7 +125,7 @@ export function About() {
               ].map((t) => (
                 <span
                   key={t}
-                  className="rounded-full px-3 py-1 text-[12px]"
+                  className="rounded-full px-3 py-1 2xl:px-4 2xl:py-1.5 text-[12px] 2xl:text-[14px]"
                   style={{
                     background: "rgba(77, 190, 243, 0.08)",
                     border: "1px solid rgba(77, 190, 243, 0.18)",
@@ -141,14 +141,14 @@ export function About() {
       </div>
 
       {/* Philosophy */}
-      <div className="mt-20">
+      <div className="mt-20 2xl:mt-28">
         <FadeIn>
           <SectionLabel>Mein Ansatz</SectionLabel>
-          <h2 className="text-white text-[clamp(26px,4vw,40px)] tracking-tight max-w-2xl mb-10">
+          <h2 className="text-white text-[clamp(26px,4vw,52px)] tracking-tight max-w-2xl 2xl:max-w-3xl mb-10 2xl:mb-14">
             Was mir bei jeder Website wichtig ist.
           </h2>
         </FadeIn>
-        <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 items-stretch">
+        <div className="grid gap-6 2xl:gap-8 sm:grid-cols-2 md:grid-cols-3 items-stretch">
           {([
             {
               Icon: Zap,
@@ -177,11 +177,11 @@ export function About() {
                 >
                   <Icon size={22} color="#4dbef3" strokeWidth={1.8} />
                 </div>
-                <h3 className="text-white text-[18px] sm:text-[20px] mb-2">
+                <h3 className="text-white text-[18px] sm:text-[20px] 2xl:text-[23px] mb-2">
                   {t}
                 </h3>
                 <p
-                  className="text-[14px] leading-relaxed"
+                  className="text-[14px] 2xl:text-[16px] leading-relaxed"
                   style={{ color: "rgba(180, 210, 230, 0.6)" }}
                 >
                   {d}
@@ -194,12 +194,12 @@ export function About() {
 
       {/* CTA */}
       <FadeIn>
-        <div className="mt-20 text-center">
-          <h2 className="text-white text-[28px] mb-3">
+        <div className="mt-20 2xl:mt-28 text-center">
+          <h2 className="text-white text-[28px] 2xl:text-[36px] mb-3">
             Lass uns miteinander reden.
           </h2>
           <p
-            className="text-[15px] mb-8"
+            className="text-[15px] xl:text-[16px] 2xl:text-[18px] mb-8"
             style={{ color: "rgba(180, 210, 230, 0.6)" }}
           >
             Unverbindlich, entspannt und auf Augenhöhe.

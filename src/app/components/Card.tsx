@@ -1,3 +1,5 @@
+import { twMerge } from "tailwind-merge";
+
 export function Card({
   children,
   className = "",
@@ -7,7 +9,7 @@ export function Card({
 }) {
   return (
     <div
-      className={`rounded-2xl p-6 transition-all duration-300 ${className}`}
+      className={twMerge("rounded-2xl p-6 xl:p-8 2xl:p-10 transition-all duration-300", className)}
       style={{
         background:
           "linear-gradient(135deg, rgba(16,24,27,0.95) 0%, rgba(10,17,22,0.98) 100%)",
