@@ -76,7 +76,7 @@ export function Footer() {
               {EMAIL_ADDRESS}
             </a>
             <a
-              href="https://www.linkedin.com/in/jonas-gissler-37b1482b0/"
+              href="linkedin.com/in/jonas-gissler-37b1482b0"
               target="_blank"
               rel="noreferrer"
               aria-label="LinkedIn Profil von Jonas Gissler"
