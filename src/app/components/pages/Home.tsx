@@ -111,7 +111,7 @@ function PortfolioPreview() {
         <SectionLabel>Projekte</SectionLabel>
         <div className="mb-8 sm:mb-10 xl:mb-14 2xl:mb-20">
           <h2 className="text-white text-[clamp(28px,4.5vw,72px)] tracking-tight max-w-4xl 2xl:max-w-5xl">
-            Projekte, die ich umgesetzt habe
+            Projekte, die ich umgesetzt habe.
           </h2>
           <p className="mt-4 xl:mt-6 max-w-2xl 2xl:max-w-3xl text-[15px] sm:text-[17px] xl:text-[19px] 2xl:text-[21px] leading-relaxed" style={{ color: "rgba(180,210,230,0.65)" }}>
             Eine Auswahl aktueller Kundenarbeiten.
