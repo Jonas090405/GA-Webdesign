@@ -116,7 +116,20 @@ export function PortfolioSlider({ projects }: { projects: Project[] }) {
                       href={project.url}
                       target="_blank"
                       rel="noreferrer"
-                      className="group/btn mt-6 xl:mt-8 inline-flex w-fit cursor-pointer items-center gap-2 rounded-full border border-sky-400/30 bg-sky-400/10 px-4 xl:px-5 2xl:px-6 py-2 2xl:py-3 text-[13px] xl:text-[14px] 2xl:text-[16px] text-sky-300 transition-all hover:bg-sky-400/20"
+                      className="group/btn mt-6 xl:mt-8 inline-flex w-fit cursor-pointer items-center gap-2 rounded-full px-4 xl:px-5 2xl:px-6 py-2 2xl:py-3 text-[13px] xl:text-[14px] 2xl:text-[16px] font-medium transition-all duration-300"
+                      style={{
+                        background: "rgba(77, 190, 243, 0.07)",
+                        border: "1px solid rgba(77, 190, 243, 0.2)",
+                        color: "rgba(200, 235, 255, 0.85)",
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.background = "rgba(77, 190, 243, 0.13)";
+                        e.currentTarget.style.borderColor = "rgba(77, 190, 243, 0.4)";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.background = "rgba(77, 190, 243, 0.07)";
+                        e.currentTarget.style.borderColor = "rgba(77, 190, 243, 0.2)";
+                      }}
                     >
                       Website öffnen
                       <ExternalLink

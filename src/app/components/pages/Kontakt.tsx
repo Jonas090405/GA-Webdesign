@@ -101,7 +101,10 @@ export function Kontakt() {
         <SectionLabel>Kontakt</SectionLabel>
         <h1 className="text-white text-[clamp(32px,6vw,76px)] leading-[1.05] tracking-tight max-w-2xl 2xl:max-w-3xl mb-5">
           Erzähl mir von{" "}
-          <span className="bg-gradient-to-r from-sky-300 to-sky-500 bg-clip-text text-transparent">
+          <span
+            className="bg-clip-text text-transparent"
+            style={{ backgroundImage: "linear-gradient(135deg, #4dbef3 0%, #006999 100%)" }}
+          >
             deinem Projekt.
           </span>
         </h1>
@@ -321,7 +324,10 @@ function InfoItem({
 }) {
   return (
     <div className="flex items-start gap-4">
-      <div className="shrink-0 h-10 w-10 rounded-xl bg-sky-400/10 border border-sky-400/20 flex items-center justify-center">
+      <div
+        className="shrink-0 h-10 w-10 rounded-xl flex items-center justify-center"
+        style={{ background: "rgba(77, 190, 243, 0.10)", border: "1px solid rgba(77, 190, 243, 0.20)" }}
+      >
         <Icon size={18} className="text-sky-400" />
       </div>
       <div>

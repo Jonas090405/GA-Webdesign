@@ -121,7 +121,10 @@ export function Leistungen() {
           <FadeIn key={title} delay={i * 0.08} className="h-full">
             <Card className="h-full">
               <div className="flex flex-col h-full">
-                <div className="mb-5 inline-flex h-12 w-12 2xl:h-16 2xl:w-16 items-center justify-center rounded-xl bg-gradient-to-br from-sky-400/20 to-sky-600/10 border border-sky-400/20">
+                <div
+                  className="mb-5 inline-flex h-12 w-12 2xl:h-16 2xl:w-16 items-center justify-center rounded-xl"
+                  style={{ background: "linear-gradient(135deg, rgba(0,105,153,0.25) 0%, rgba(77,190,243,0.12) 100%)", border: "1px solid rgba(77, 190, 243, 0.20)" }}
+                >
                   <Icon size={22} className="text-sky-400 2xl:!h-7 2xl:!w-7" />
                 </div>
                 <h3 className="text-white text-[22px] 2xl:text-[26px] mb-1">{title}</h3>
