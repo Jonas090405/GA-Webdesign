@@ -12,8 +12,9 @@ import emailjs from "@emailjs/browser";
 //   VITE_EMAILJS_SERVICE_ID, VITE_EMAILJS_TEMPLATE_ID, VITE_EMAILJS_PUBLIC_KEY
 const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID as string;
 const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID as string;
+const EMAILJS_AUTOREPLY_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_AUTOREPLY_TEMPLATE_ID as string;
 const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY as string;
-const EMAIL_ADDRESS = "gissler.jonas@gmail.com";
+const EMAIL_ADDRESS = "Jonas@gissler-webdesign.de";
 const PHONE_NUMBER = "+49 151 2079 7408";
 // Empfänger direkt im EmailJS-Template-Dashboard einstellen (To Email-Feld)
 
@@ -97,6 +98,17 @@ export function Kontakt() {
         },
         EMAILJS_PUBLIC_KEY,
       );
+      // Eingangsbestätigung an Absender (best-effort, kein Fehler bei Misserfolg)
+      emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_AUTOREPLY_TEMPLATE_ID,
+        {
+          to_name: formData.name,
+          to_email: formData.email,
+          original_message: formData.message,
+        },
+        EMAILJS_PUBLIC_KEY,
+      ).catch(() => {});
       setStatus("sent");
     } catch {
       setStatus("error");
@@ -128,8 +140,8 @@ export function Kontakt() {
           <InfoItem
             Icon={Mail}
             label="E-Mail"
-            value="gissler.jonas@gmail.com"
-            href="mailto:gissler.jonas@gmail.com"
+            value="Jonas@gissler-webdesign.de"
+            href="mailto:Jonas@gissler-webdesign.de"
           />
           <InfoItem
             Icon={Phone}
@@ -220,10 +232,10 @@ export function Kontakt() {
                             Beim Senden ist ein Fehler aufgetreten. Bitte versuche es erneut
                             oder schreib mir direkt an{" "}
                             <a
-                              href="mailto:gissler.jonas@gmail.com"
+                              href="mailto:Jonas@gissler-webdesign.de"
                               className="underline hover:text-red-300 transition-colors"
                             >
-                              gissler.jonas@gmail.com
+                              Jonas@gissler-webdesign.de
                             </a>
                             .
                           </p>

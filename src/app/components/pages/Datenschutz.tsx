@@ -30,7 +30,7 @@ export function Datenschutz() {
               <br />
               78098 Triberg, Deutschland
               <br />
-              E-Mail: gissler.jonas@gmail.com
+              E-Mail: Jonas@gissler-webdesign.de
             </div>
             <p className="text-slate-400 text-[13px] leading-relaxed mt-3">
               Ein Datenschutzbeauftragter ist nicht bestellt, da die gesetzlichen

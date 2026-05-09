@@ -2,7 +2,7 @@ import { Linkedin, Mail, MapPin } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import logoUrl from "../../imports/Logo-Gissler-webdesign.svg";
 
-const EMAIL_ADDRESS = "gissler.jonas@gmail.com";
+const EMAIL_ADDRESS = "Jonas@gissler-webdesign.de";
 
 export function Footer() {
   const navigate = useNavigate();

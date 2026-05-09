@@ -307,9 +307,10 @@ function AboutPreview() {
 // ─── EmailJS (Werte aus .env – nie in Git pushen!) ────────────────────────────
 const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
 const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+const EMAILJS_AUTOREPLY_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_AUTOREPLY_TEMPLATE_ID;
 const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 const PHONE_NUMBER = "+49 151 2079 7408"; // ← deine Nummer
-const EMAIL_ADDRESS = "gissler.jonas@gmail.com";
+const EMAIL_ADDRESS = "Jonas@gissler-webdesign.de";
 
 type HomeFormData = { name: string; email: string; phone: string; message: string };
 type HomeFormErrors = Partial<Record<keyof HomeFormData, string>>;
@@ -364,6 +365,17 @@ function Contact() {
         },
         EMAILJS_PUBLIC_KEY,
       );
+      // Eingangsbestätigung an Absender (best-effort)
+      emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_AUTOREPLY_TEMPLATE_ID,
+        {
+          to_name: formData.name,
+          to_email: formData.email,
+          original_message: formData.message,
+        },
+        EMAILJS_PUBLIC_KEY,
+      ).catch(() => {});
       setStatus("sent");
     } catch {
       setStatus("error");
