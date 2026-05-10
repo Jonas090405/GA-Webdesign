@@ -45,7 +45,7 @@ const PROJECTS = [
 export function Home() {
   usePageMeta({
     title: "Gissler Webdesign | Moderne Webseiten für lokale Unternehmen",
-    description: "Professionelles Webdesign für lokale Unternehmen. Von der ersten Idee bis zur fertigen Website – individuelles Design, schnelle Ladezeiten, inkl. Hosting & SEO.",
+    description: "Ich entwerfe und entwickle moderne, professionelle Webseiten für lokale Unternehmen. Komplett fertig eingerichtet inkl. Hosting & SEO.",
     path: "/",
   });
   return (
