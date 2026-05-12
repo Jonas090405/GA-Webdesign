@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Briefcase, Layers, User, Mail, Menu, X } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import logoUrl from "../../imports/Logo-Gissler-webdesign.svg";
 
 const items = [
@@ -15,7 +15,6 @@ export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
-  const navigate = useNavigate();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 30);
@@ -60,9 +59,8 @@ export function Navbar() {
           >
             {/* Logo – always pinned to viewport top-left */}
             <div className="absolute inset-y-0 left-6 lg:left-8 flex items-center">
-              <button
-                type="button"
-                onClick={() => navigate("/")}
+              <Link
+                to="/"
                 aria-label="Zur Startseite"
                 className="cursor-pointer hover:opacity-75 transition-opacity duration-200 shrink-0"
               >
@@ -71,30 +69,29 @@ export function Navbar() {
                   alt="Gissler Webdesign Logo"
                   style={{ height: scrolled ? "36px" : "44px", transition: "height 0.3s ease", width: "auto" }}
                 />
-              </button>
+              </Link>
             </div>
 
             {/* Nav items – centered to full viewport */}
-            <nav className="absolute inset-0 hidden xl:flex items-center justify-center gap-10 pointer-events-none">
+            <nav aria-label="Hauptnavigation" className="absolute inset-0 hidden xl:flex items-center justify-center gap-10 pointer-events-none">
               {items.map(({ id, label, Icon }) => {
                 const active =
                   location.pathname === id ||
                   (id !== "/" && location.pathname.startsWith(id));
                 return (
-                  <button
+                  <Link
                     key={id}
-                    onClick={() => navigate(id)}
-                    className="nav-item group flex items-center gap-2.5 font-medium cursor-pointer relative py-1.5 whitespace-nowrap pointer-events-auto"
-                    style={{ color: active ? "#ffffff" : "rgba(200,220,235,0.65)", fontSize: scrolled ? "15px" : "17px", transition: "color 0.2s, font-size 0.35s ease" }}
-
+                    to={id}
+                    className="nav-item group flex items-center gap-2.5 font-medium cursor-pointer relative py-1.5 whitespace-nowrap pointer-events-auto no-underline"
+                    style={{ color: active ? "#ffffff" : "rgba(200,220,235,0.65)", fontSize: scrolled ? "15px" : "17px", transition: "color 0.2s, font-size 0.35s ease", textDecoration: "none" }}
                     onMouseEnter={(e) => {
-                      (e.currentTarget as HTMLButtonElement).style.color = "#ffffff";
+                      (e.currentTarget as HTMLAnchorElement).style.color = "#ffffff";
                       const bar = e.currentTarget.querySelector(".underline-bar") as HTMLElement | null;
                       if (bar) bar.style.width = "100%";
                     }}
                     onMouseLeave={(e) => {
                       if (!active) {
-                        (e.currentTarget as HTMLButtonElement).style.color = "rgba(200,220,235,0.65)";
+                        (e.currentTarget as HTMLAnchorElement).style.color = "rgba(200,220,235,0.65)";
                         const bar = e.currentTarget.querySelector(".underline-bar") as HTMLElement | null;
                         if (bar) bar.style.width = "0%";
                       }
@@ -114,7 +111,7 @@ export function Navbar() {
                         }}
                       />
                     </span>
-                  </button>
+                  </Link>
                 );
               })}
             </nav>
@@ -134,14 +131,13 @@ export function Navbar() {
           boxShadow: scrolled ? "0 4px 30px rgba(0,0,0,0.35)" : "none",
         }}
       >
-        <button
-          type="button"
-          onClick={() => navigate("/")}
+        <Link
+          to="/"
           aria-label="Zur Startseite"
           className="cursor-pointer hover:opacity-75 transition-opacity duration-200"
         >
           <img src={logoUrl} alt="Gissler Webdesign Logo" className="h-9 w-auto" />
-        </button>
+        </Link>
 
         <button
           onClick={() => setIsOpen(true)}
@@ -176,14 +172,14 @@ export function Navbar() {
               }}
             >
               <div className="flex items-center justify-between px-6 pt-6 pb-4">
-                <button
-                  type="button"
-                  onClick={() => { navigate("/"); setIsOpen(false); }}
+                <Link
+                  to="/"
+                  onClick={() => setIsOpen(false)}
                   aria-label="Zur Startseite"
                   className="cursor-pointer hover:opacity-70 transition-opacity duration-200"
                 >
                   <img src={logoUrl} alt="Gissler Webdesign Logo" className="h-9 w-auto" />
-                </button>
+                </Link>
                 <button
                   onClick={() => setIsOpen(false)}
                   aria-label="Hauptmenü schließen"
@@ -198,35 +194,39 @@ export function Navbar() {
                 style={{ height: "1px", background: "rgba(77,190,243,0.08)" }}
               />
 
-              <div className="flex flex-col gap-1.5 px-4 py-2">
-                {items.map(({ id, label, Icon }) => {
-                  const active =
-                    location.pathname === id ||
-                    (id !== "/" && location.pathname.startsWith(id));
-                  return (
-                    <button
-                      key={id}
-                      onClick={() => { navigate(id); setIsOpen(false); }}
-                      className="flex items-center gap-4 rounded-2xl px-5 py-4 text-[17px] font-medium transition-colors cursor-pointer"
-                      style={
-                        active
-                          ? {
-                              background: "rgba(77,190,243,0.1)",
-                              color: "#4dbef3",
-                              border: "1px solid rgba(77,190,243,0.2)",
-                            }
-                          : {
-                              color: "rgba(210,230,245,0.75)",
-                              border: "1px solid transparent",
-                            }
-                      }
-                    >
-                      <Icon size={22} style={{ color: active ? "#4dbef3" : "rgba(200,220,235,0.55)" }} />
-                      <span>{label}</span>
-                    </button>
-                  );
-                })}
-              </div>
+              <nav aria-label="Mobilnavigation">
+                <div className="flex flex-col gap-1.5 px-4 py-2">
+                  {items.map(({ id, label, Icon }) => {
+                    const active =
+                      location.pathname === id ||
+                      (id !== "/" && location.pathname.startsWith(id));
+                    return (
+                      <Link
+                        key={id}
+                        to={id}
+                        onClick={() => setIsOpen(false)}
+                        className="flex items-center gap-4 rounded-2xl px-5 py-4 text-[17px] font-medium transition-colors cursor-pointer"
+                        style={{
+                          textDecoration: "none",
+                          ...(active
+                            ? {
+                                background: "rgba(77,190,243,0.1)",
+                                color: "#4dbef3",
+                                border: "1px solid rgba(77,190,243,0.2)",
+                              }
+                            : {
+                                color: "rgba(210,230,245,0.75)",
+                                border: "1px solid transparent",
+                              }),
+                        }}
+                      >
+                        <Icon size={22} style={{ color: active ? "#4dbef3" : "rgba(200,220,235,0.55)" }} />
+                        <span>{label}</span>
+                      </Link>
+                    );
+                  })}
+                </div>
+              </nav>
             </motion.div>
           </>
         )}
