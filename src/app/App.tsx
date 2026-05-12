@@ -47,7 +47,7 @@ export default function App() {
               <Home />
             </motion.div>
           } />
-          <Route path="/portfolio" element={
+          <Route path="/projekte" element={
             <motion.div initial="initial" animate="animate" exit="exit" variants={pageVariants} transition={pageTransition}>
               <Portfolio />
             </motion.div>

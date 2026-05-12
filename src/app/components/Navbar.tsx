@@ -5,7 +5,7 @@ import { useLocation, Link } from "react-router-dom";
 import logoUrl from "../../imports/Logo-Gissler-webdesign.svg";
 
 const items = [
-  { id: "/portfolio", label: "Projekte", Icon: Briefcase },
+  { id: "/projekte", label: "Projekte", Icon: Briefcase },
   { id: "/leistungen", label: "Leistungen", Icon: Layers },
   { id: "/ueber-mich", label: "Über uns", Icon: User },
   { id: "/kontakt", label: "Kontakt", Icon: Mail },

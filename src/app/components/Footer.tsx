@@ -108,7 +108,7 @@ export function Footer() {
               {(
                 [
                   ["/", "Startseite"],
-                  ["/portfolio", "Portfolio"],
+                  ["/projekte", "Projekte"],
                   ["/leistungen", "Leistungen"],
                   ["/ueber-mich", "Über uns"],
                   ["/kontakt", "Kontakt"],

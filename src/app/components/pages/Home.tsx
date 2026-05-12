@@ -38,7 +38,7 @@ const PROJECTS = [
     tag: "Weitere Projekte",
     title: "Persönliches Portfolio",
     desc: "Hier sind nur ausgewählte Projekte zu sehen. Auf meiner Portfolio-Seite findest du alle Arbeiten – von Webdesign bis zur vollständigen Web-Plattform.",
-    url: "/portfolio",
+    url: "/projekte",
     urlLabel: "Alle Projekte",
   },
 ];
@@ -142,7 +142,7 @@ function PortfolioPreview() {
 
       <FadeIn delay={0.2}>
         <div className="mt-10 flex items-center gap-5 sm:gap-7">
-          <GhostButton onClick={() => navigate("/portfolio")}>
+          <GhostButton onClick={() => navigate("/projekte")}>
             Alle Projekte
           </GhostButton>
           <TertiaryButton href="https://portfolio.gissler-webdesign.de" external={true}>
