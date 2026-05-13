@@ -37,7 +37,7 @@ const PROJECTS = [
     image: null,
     tag: "Weitere Projekte",
     title: "Persönliches Portfolio",
-    desc: "Hier sind nur ausgewählte Projekte zu sehen. Auf meiner Portfolio-Seite findest du alle Arbeiten – von Webdesign bis zur vollständigen Web-Plattform.",
+    desc: "Hier sind nur ausgewählte Projekte zu sehen. Auf meiner Portfolio-Seite findest du alle meine Arbeiten.",
     url: "/projekte",
     urlLabel: "Alle Projekte",
   },
