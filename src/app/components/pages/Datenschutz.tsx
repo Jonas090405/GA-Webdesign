@@ -71,7 +71,7 @@ export function Datenschutz() {
               verschlüsselte Verbindung erkennst du daran, dass die Adresszeile des
               Browsers von „http://" auf „https://" wechselt und an dem Schloss-Symbol
               in deiner Browserzeile. Wenn die Verschlüsselung aktiviert ist, können
-              die Daten, die du an mich übermittelst, nicht von Dritten mitgelesen werden.
+              die Daten, die du an uns übermittelst, nicht von Dritten mitgelesen werden.
             </p>
           </Card>
         </FadeIn>
@@ -117,7 +117,7 @@ export function Datenschutz() {
             </div>
             <p className="text-slate-300 text-[14px] leading-relaxed">
               Diese Website verwendet technisch notwendige Cookies, die für den
-              Betrieb der Seite erforderlich sind. Darüber hinaus setze ich mit
+              Betrieb der Seite erforderlich sind. Darüber hinaus setzen wir mit
               deiner ausdrücklichen Einwilligung{" "}
               <strong className="text-slate-200">Google Analytics</strong> ein,
               das Analyse-Cookies verwendet, um die Nutzung der Website anonymisiert
@@ -134,7 +134,7 @@ export function Datenschutz() {
               7. Google Analytics
             </div>
             <p className="text-slate-300 text-[14px] leading-relaxed">
-              Mit deiner Einwilligung nutze ich{" "}
+              Mit deiner Einwilligung nutzen wir{" "}
               <strong className="text-slate-200">Google Analytics</strong> (Google
               LLC, 1600 Amphitheatre Parkway, Mountain View, CA 94043, USA). Dabei
               werden Nutzungsdaten (u. a. IP-Adresse in gekürzter Form, besuchte
@@ -231,7 +231,7 @@ export function Datenschutz() {
             <p className="text-slate-300 text-[14px] leading-relaxed">
               Das Kontaktformular dieser Website nutzt den Dienst{" "}
               <strong className="text-slate-200">EmailJS</strong> (EmailJS Ltd., UK),
-              um eingehende Nachrichten per E-Mail an mich weiterzuleiten.
+              um eingehende Nachrichten per E-Mail an uns weiterzuleiten.
               Dabei werden die von dir eingegebenen Daten (Name, E-Mail-Adresse,
               Nachricht) an die Server von EmailJS übertragen und von dort
               zugestellt. Die Daten werden nicht dauerhaft bei EmailJS gespeichert

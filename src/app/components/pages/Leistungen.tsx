@@ -3,57 +3,64 @@ import { SectionLabel } from "../SectionLabel";
 import { Card } from "../Card";
 import { PrimaryButton } from "../Button";
 import { FadeIn } from "../FadeIn";
-import { Palette, Code2, Rocket, CheckCircle2, MessageCircle, PenTool, RefreshCw, Globe } from "lucide-react";
+import { Palette, Code2, Rocket, CheckCircle2, MessageCircle, PenTool, RefreshCw, Globe, ClipboardList } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 const timelineSteps = [
   {
     icon: MessageCircle,
     step: "1",
-    title: "Erstgespräch",
-    desc: "Wir reden unverbindlich über dein Projekt. Was brauchst du? Was soll die Website können? Wie soll sie aussehen? Du musst kein Experte sein – ich erkläre alles verständlich und höre erst mal zu.",
+    title: "Kennenlerngespräch",
+    desc: "Wir lernen uns kennen. Du erzählst uns, wer du bist, was du machst und was du dir für deine Website vorstellst. Kein Fachwissen nötig – wir stellen die richtigen Fragen und hören erst mal zu.",
+    tag: "kostenlos & unverbindlich",
+  },
+  {
+    icon: ClipboardList,
+    step: "2",
+    title: "Anforderungsanalyse",
+    desc: "Wir gehen gemeinsam ins Detail. Welche Seiten braucht die Website? Welche Funktionen, welche Inhalte? Wir definieren den genauen Umfang – damit am Ende keine Überraschungen entstehen.",
     tag: "kostenlos & unverbindlich",
   },
   {
     icon: PenTool,
-    step: "2",
+    step: "3",
     title: "Design & Konzept",
-    desc: "Sobald die Rahmenbedingungen geklärt sind, entwickle ich ein individuelles Designkonzept nach deinen Anforderungen. In diesem Schritt liegt die visuelle Gestaltung im Vordergrund und wir definieren, wie dein Unternehmen nach außen wirkt.",
+    desc: "Nachdem alle vertraglichen Details geklärt sind, entwickeln wir auf Basis der Anforderungen ein individuelles Designkonzept. In diesem Schritt liegt die visuelle Gestaltung im Vordergrund – wir definieren, wie dein Unternehmen nach außen wirkt.",
     tag: "individuelles Design",
   },
   {
     icon: MessageCircle,
-    step: "3",
-    title: "2. Gespräch – Dein Feedback",
-    desc: "Ich zeige dir, wie deine Seite aussehen wird und wie sie strukturiert ist. Du sagst mir direkt, was dir gefällt und was du gerne anders hättest. Hier zählt dein Gefühl.",
+    step: "4",
+    title: "1. Feedbackrunde",
+    desc: "Wir zeigen dir, wie deine Seite aussehen wird und wie sie strukturiert ist. Du sagst uns direkt, was dir gefällt und was du gerne anders hättest. Hier zählt dein Gefühl.",
     tag: "deine Meinung ist wichtig",
   },
   {
     icon: Code2,
-    step: "4",
+    step: "5",
     title: "Technische Umsetzung",
-    desc: "Ich setze dein Feedback direkt um und integriere alle gewünschten Funktionen. In diesem Schritt liegt der Fokus auf der Funktionalität, Schnelligkeit und Sichtbarkeit deiner Website.",
+    desc: "Wir setzen dein Feedback direkt um und integrieren alle gewünschten Funktionen. In diesem Schritt liegt der Fokus auf der Funktionalität, Schnelligkeit und Sichtbarkeit deiner Website.",
     tag: "sauber & modern",
   },
   {
     icon: MessageCircle,
-    step: "5",
-    title: "3. Gespräch – Letzter Check",
+    step: "6",
+    title: "2. Feedbackrunde",
     desc: "Wir gehen gemeinsam die fertige Website durch. Wir testen alle Funktionen, prüfen die Texte auf dem Handy und am PC und schauen uns das Gesamtergebnis im Detail an.",
     tag: "alles unter Kontrolle",
   },
   {
     icon: RefreshCw,
-    step: "6",
+    step: "7",
     title: "Feinschliff & Korrekturen",
-    desc: "Hier kümmere ich mich um den letzten Feinschliff. Deine finalen Wünsche aus dem letzten Check werden punktgenau umgesetzt, damit alles bereit für den Start ist.",
-    tag: "der letzte feinschliff",
+    desc: "Hier kümmern wir uns um den letzten Feinschliff. Deine finalen Wünsche aus dem letzten Check werden punktgenau umgesetzt, damit alles bereit für den Start ist.",
+    tag: "der letzte Feinschliff",
   },
   {
     icon: Globe,
-    step: "7",
+    step: "8",
     title: "Fertig – deine Website ist live",
-    desc: "Deine Website geht online – fertig eingerichtet, auf deiner Domain, direkt nutzbar. Ich kümmere mich um Hosting, Domain und alles Technische. Du bekommst ein fertiges Ergebnis.",
+    desc: "Deine Website geht online – fertig eingerichtet, auf deiner Domain, direkt nutzbar. Wir kümmern uns um Hosting, Domain und alles Technische. Du bekommst ein fertiges Ergebnis.",
     tag: "komplett fertig & gehostet",
   },
 ];
@@ -89,7 +96,7 @@ const blocks = [
       "Domain-Setup & Hosting inklusive",
       "DSGVO-konform eingerichtet",
       "Fertig live auf deiner Wunsch-Domain",
-      "Ich bin auch nach dem Launch da",
+      "Wir sind auch nach dem Launch da",
     ],
   },
 ];
@@ -118,7 +125,7 @@ export function Leistungen() {
           – fertig, ohne Stress.
         </h1>
         <p className="mt-6 max-w-2xl 2xl:max-w-3xl text-[16px] xl:text-[18px] 2xl:text-[20px] text-slate-400 leading-relaxed">
-          Du bekommst alles aus einer Hand: von der Gestaltung über die technische Umsetzung bis hin zur Veröffentlichung. Ich kümmere mich um den gesamten Ablauf für dich.</p>
+          Du bekommst alles aus einer Hand: von der Gestaltung über die technische Umsetzung bis hin zur Veröffentlichung. Wir kümmern uns um den gesamten Ablauf für dich.</p>
       </FadeIn>
 
       {/* Service cards */}
@@ -156,7 +163,7 @@ export function Leistungen() {
             Du brauchst noch etwas anderes?
           </h2>
           <p className="text-slate-400 text-[15px] 2xl:text-[17px] leading-relaxed max-w-xl 2xl:max-w-2xl mb-7">
-            Kein Problem – sag mir, was du brauchst, und wir finden gemeinsam eine Lösung.
+            Kein Problem – sag uns, was du brauchst, und wir finden gemeinsam eine Lösung.
           </p>
           <div className="flex flex-wrap gap-2.5">
             {[
@@ -250,7 +257,7 @@ export function Leistungen() {
             Bereit loszulegen?
           </h2>
           <p className="text-slate-400 text-[15px] xl:text-[16px] 2xl:text-[18px] mb-8 max-w-xl 2xl:max-w-2xl mx-auto">
-            Erzähl mir kurz von deinem Projekt – das Erstgespräch ist kostenlos und unverbindlich.
+            Erzähl uns kurz von deinem Projekt – das Erstgespräch ist kostenlos und unverbindlich.
           </p>
           <PrimaryButton onClick={() => navigate("/kontakt")}>
             Projekt anfragen

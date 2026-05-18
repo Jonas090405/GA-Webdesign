@@ -124,7 +124,7 @@ export function About() {
         <FadeIn delay={0.08} className="h-full">
           <Card className="h-full">
             <div className="text-[12px] tracking-[0.25em] uppercase mb-5" style={{ color: "#4dbef3" }}>
-              Womit ich arbeite
+              Womit wir arbeiten
             </div>
             <div className="flex flex-wrap gap-2">
               {["Figma", "React", "KI", "TypeScript", "TailwindCSS", "Motiondesign", "Vercel", "EmailJS", "Google Analytics", "GitHub", "Strapi", "Supabase"].map((t) => (

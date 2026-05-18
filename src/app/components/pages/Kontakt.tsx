@@ -247,7 +247,7 @@ export function Kontakt() {
                           value={formData.message}
                           onChange={v => handleChange("message", v)}
                           error={errors.message}
-                          placeholder="Erzähl mir kurz, was du brauchst. Branche, Ziel, Wünsche…"
+                          placeholder="Erzähl uns kurz, was du brauchst. Branche, Ziel, Wünsche…"
                         />
                         {status === "error" && (
                           <p className="text-red-400 text-[13px] leading-relaxed">

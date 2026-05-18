@@ -26,7 +26,7 @@ const PROJECTS = [
     image: null,
     tag: "In Umsetzung",
     title: "Nächstes Projekt",
-    desc: "Mein nächstes Projekt ist gerade in Arbeit. Melde dich gerne, wenn du Interesse an einer Zusammenarbeit hast.",
+    desc: "Unser nächstes Projekt ist gerade in Arbeit. Melde dich gerne, wenn du Interesse an einer Zusammenarbeit hast.",
   },
 ];
 

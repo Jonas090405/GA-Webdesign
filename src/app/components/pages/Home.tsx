@@ -46,7 +46,7 @@ const PROJECTS = [
 export function Home() {
   usePageMeta({
     title: "GA Webdesign | Moderne Webseiten für lokale Unternehmen",
-    description: "Ich entwerfe und entwickle moderne, professionelle Webseiten für lokale Unternehmen. Komplett fertig eingerichtet inkl. Hosting & SEO.",
+    description: "Wir entwerfen und entwickeln moderne, professionelle Webseiten für lokale Unternehmen. Komplett fertig eingerichtet inkl. Hosting & SEO.",
     path: "/",
   });
   return (
@@ -170,7 +170,7 @@ function Services() {
     {
       Icon: Rocket,
       title: "Fertig live, sofort nutzbar",
-      desc: "Domain, Hosting, Einrichtung. Ich kümmere mich um alles. Du bekommst eine fertige Website und kannst sofort loslegen.",
+      desc: "Domain, Hosting, Einrichtung. Wir kümmern uns um alles. Du bekommst eine fertige Website und kannst sofort loslegen.",
     },
   ];
 
@@ -577,7 +577,7 @@ function Contact() {
                   <Field
                     label="Nachricht *" name="message" textarea value={formData.message}
                     onChange={v => handleChange("message", v)} error={errors.message}
-                    placeholder="Erzähl mir kurz, was du brauchst…"
+                    placeholder="Erzähl uns kurz, was du brauchst…"
                   />
                   {status === "error" && (
                     <p className="text-red-400 text-[13px]">
