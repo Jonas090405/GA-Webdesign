@@ -34,9 +34,6 @@
   <!-- Tagline -->
   <text x="600" y="443" text-anchor="middle" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="28" fill="#5db8e8">Moderne Webseiten für lokale Unternehmen</text>
 
-  <!-- Domain -->
-  <text x="600" y="498" text-anchor="middle" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="20" fill="white" fill-opacity="0.35" letter-spacing="1">gissler-webdesign.de</text>
-
   <!-- Bottom bar -->
   <rect x="0" y="615" width="1200" height="6" fill="#006999"/>
   <rect x="0" y="621" width="1200" height="9" fill="#006999" fill-opacity="0.25"/>
