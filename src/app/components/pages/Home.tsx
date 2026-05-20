@@ -227,7 +227,7 @@ function Services() {
       <FadeIn delay={0.2}>
         <div className="mt-10 xl:mt-14 2xl:mt-16">
           <GhostButton onClick={() => navigate("/leistungen")}>
-            Mehr über meine Leistungen
+            Mehr über unsere Leistungen
           </GhostButton>
         </div>
       </FadeIn>
