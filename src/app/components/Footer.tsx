@@ -83,7 +83,7 @@ export function Footer() {
               </a>
             ))}
             <a
-              href="https://www.linkedin.com/company/gissler-webdesign/"
+              href="https://www.linkedin.com/company/g%26a-webdesign/"
               target="_blank"
               rel="noreferrer"
               aria-label="LinkedIn Profil von GA Webdesign"

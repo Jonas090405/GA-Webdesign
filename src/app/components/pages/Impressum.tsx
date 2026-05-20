@@ -32,8 +32,9 @@ export function Impressum() {
               <br /><br />
               Berkant Agyar
               <br />
-              {/* TODO: Berkants Adresse eintragen */}
-              [Straße, PLZ Ort], Deutschland
+              Bergstraße 54
+              <br />
+              78098 Triberg, Deutschland
             </div>
           </Card>
         </FadeIn>
