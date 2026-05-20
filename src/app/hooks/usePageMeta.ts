@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-const BASE_URL = "https://gissler-webdesign.de";
+const BASE_URL = "https://ga-webdesign.de";
 
 export function usePageMeta({
   title,

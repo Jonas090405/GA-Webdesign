@@ -57,7 +57,7 @@ export function Impressum() {
               Kontakt
             </div>
             <div className="text-slate-200 text-[15px] leading-[1.9] break-all">
-              E-Mail: Jonas@gissler-webdesign.de
+              E-Mail: Jonas@ga-webdesign.de
               <br />
               Telefon: +49 151 2079 7408
             </div>

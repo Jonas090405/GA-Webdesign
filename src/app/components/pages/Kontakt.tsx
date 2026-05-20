@@ -16,7 +16,7 @@ const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID as string;
 const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID as string;
 const EMAILJS_AUTOREPLY_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_AUTOREPLY_TEMPLATE_ID as string;
 const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY as string;
-const BERKANT_EMAIL = "Berkant@gissler-webdesign.de";
+const BERKANT_EMAIL = "Berkant@ga-webdesign.de";
 const BERKANT_PHONE = "+49 176 3464 9177";
 // Empfänger direkt im EmailJS-Template-Dashboard einstellen (To Email-Feld)
 

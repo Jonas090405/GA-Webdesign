@@ -71,7 +71,7 @@ export function Portfolio() {
             Im Laufe meines Studiums und durch private Nebenprojekte sind zahlreiche Arbeiten entstanden. Diese findest du gebündelt in meinem persönlichen Portfolio.
           </p>
           <a
-            href="https://portfolio.gissler-webdesign.de"
+            href="https://portfolio.ga-webdesign.de"
             target="_blank"
             rel="noreferrer"
             className="group inline-flex items-center gap-2 rounded-full border border-sky-400/40 bg-sky-400/10 px-6 py-3 text-sky-300 hover:bg-sky-400/20 transition-all"

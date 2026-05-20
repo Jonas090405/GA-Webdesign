@@ -2,8 +2,8 @@ import { Linkedin, Mail, MapPin } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import logoUrl from "../../imports/Logo_GA_Webdesign.svg";
 
-const BERKANT_EMAIL = "Berkant@gissler-webdesign.de";
-const JONAS_EMAIL = "Jonas@gissler-webdesign.de";
+const BERKANT_EMAIL = "Berkant@ga-webdesign.de";
+const JONAS_EMAIL = "Jonas@ga-webdesign.de";
 
 export function Footer() {
   const navigate = useNavigate();

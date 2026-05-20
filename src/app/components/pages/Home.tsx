@@ -145,7 +145,7 @@ function PortfolioPreview() {
           <GhostButton onClick={() => navigate("/projekte")}>
             Alle Projekte
           </GhostButton>
-          <TertiaryButton href="https://portfolio.gissler-webdesign.de" external={true}>
+          <TertiaryButton href="https://portfolio.ga-webdesign.de" external={true}>
             Persönliches Portfolio
           </TertiaryButton>
         </div>
@@ -348,7 +348,7 @@ const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
 const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
 const EMAILJS_AUTOREPLY_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_AUTOREPLY_TEMPLATE_ID;
 const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
-const BERKANT_EMAIL = "Berkant@gissler-webdesign.de";
+const BERKANT_EMAIL = "Berkant@ga-webdesign.de";
 const BERKANT_PHONE = "+49 176 3464 9177";
 
 type HomeFormData = { name: string; email: string; phone: string; message: string };
