@@ -16,7 +16,7 @@ const PROJECTS = [
     testimonial: {
       show: true, // ← false = Testimonial ausblenden
       quote: "Die Zusammenarbeit war von Anfang bis Ende reibungslos. Unsere Vorstellungen wurden genau verstanden und eine Website gebaut, die wirklich zu uns passt. Wir bekommen regelmäßig positives Feedback von unseren Kunden.",
-      name: "Name Nachname",
+      name: "Giosue Canobbio",
       role: "Geschäftsführer",
       company: "GCN-Fahrzeughandel",
       avatar: gcnAvatar,
@@ -33,7 +33,7 @@ const PROJECTS = [
 export function Portfolio() {
   usePageMeta({
     title: "Portfolio | GA Webdesign",
-    description: "Ausgewählte Webdesign-Projekte von Jonas Gissler. Moderne Websites für lokale Unternehmen aus dem Schwarzwald.",
+    description: "Ausgewählte Webdesign-Projekte von G&A Webdesign. Moderne Websites für lokale Unternehmen aus dem Schwarzwald.",
     path: "/projekte",
   });
   return (

@@ -22,15 +22,18 @@ export function Impressum() {
               Anbieter
             </div>
             <div className="text-slate-200 text-[15px] leading-[1.9]">
-              GA Webdesign
-              <br />
+              G&amp;A Webdesign GbR
+              <br /><br />
               Jonas Gissler
               <br />
               Altenbergweg 12
               <br />
-              78098 Triberg
+              78098 Triberg, Deutschland
+              <br /><br />
+              Berkant Agyar
               <br />
-              Deutschland
+              {/* TODO: Berkants Adresse eintragen */}
+              [Straße, PLZ Ort], Deutschland
             </div>
           </Card>
         </FadeIn>
@@ -41,13 +44,10 @@ export function Impressum() {
               Unternehmensform
             </div>
             <div className="text-slate-200 text-[15px] leading-[1.9]">
-              Einzelunternehmen
+              Gesellschaft bürgerlichen Rechts (GbR)
               <br />
               Gewerbliche Tätigkeit: Webdesign und Webentwicklung
             </div>
-            <p className="text-slate-400 text-[13px] leading-relaxed mt-3">
-              Berkant Agyar ist selbstständiger externer Partner für Kundenkommunikation und Projektmanagement und nicht Mitinhaber des Unternehmens.
-            </p>
           </Card>
         </FadeIn>
 

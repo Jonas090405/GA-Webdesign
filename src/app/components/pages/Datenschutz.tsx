@@ -22,9 +22,9 @@ export function Datenschutz() {
               1. Verantwortlicher
             </div>
             <div className="text-slate-200 text-[15px] leading-[1.9]">
-              GA Webdesign
+              G&amp;A Webdesign GbR
               <br />
-              Jonas Gissler
+              Jonas Gissler &amp; Berkant Agyar
               <br />
               Altenbergweg 12
               <br />
@@ -35,11 +35,6 @@ export function Datenschutz() {
             <p className="text-slate-400 text-[13px] leading-relaxed mt-3">
               Ein Datenschutzbeauftragter ist nicht bestellt, da die gesetzlichen
               Voraussetzungen hierfür nicht vorliegen.
-            </p>
-            <p className="text-slate-400 text-[13px] leading-relaxed mt-3">
-              Berkant Agyar ist selbstständiger externer Partner für Kundenkommunikation und Projektmanagement.
-              Er kann im Rahmen seiner Tätigkeit Kontaktdaten von Interessenten erhalten, handelt dabei
-              jedoch als eigenständig Verantwortlicher im Sinne der DSGVO.
             </p>
           </Card>
         </FadeIn>
