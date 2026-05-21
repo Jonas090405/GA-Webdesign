@@ -10,7 +10,7 @@ import { Aurora } from "../Aurora";
 import { useNavigate } from "react-router-dom";
 import { Palette, Code2, Rocket, Phone, Linkedin } from "lucide-react";
 import emailjs from "@emailjs/browser";
-import profilbild from "../../../imports/Profilbild.png";
+import profilbild from "../../../imports/Jonas_Gissler.png";
 import berkantImg from "../../../imports/Berkant_agyar.jpeg";
 import { DesignerSVG } from "../DesignerSVG";
 import gcnImg from "../../../imports/gcn-fahrzeughandel.png";

@@ -5,7 +5,7 @@ import { Card } from "../Card";
 import { PrimaryButton } from "../Button";
 import { FadeIn } from "../FadeIn";
 import { useNavigate } from "react-router-dom";
-import profilbild from "../../../imports/Profilbild.png";
+import profilbild from "../../../imports/Jonas_Gissler.png";
 import berkantImg from "../../../imports/Berkant_agyar.jpeg";
 import { Zap, Layers, Users, Linkedin, type LucideIcon } from "lucide-react";
 
