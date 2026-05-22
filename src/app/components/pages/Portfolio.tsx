@@ -2,7 +2,9 @@ import { usePageMeta } from "../../hooks/usePageMeta";
 import { SectionLabel } from "../SectionLabel";
 import { FadeIn } from "../FadeIn";
 import { PortfolioSlider } from "../PortfolioSlider";
+import { PrimaryButton } from "../Button";
 import { ExternalLink } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import gcnImg from "../../../imports/gcn-fahrzeughandel.png";
 import gcnAvatar from "../../../imports/gcn-avatar.jpeg";
 
@@ -31,6 +33,7 @@ const PROJECTS = [
 ];
 
 export function Portfolio() {
+  const navigate = useNavigate();
   usePageMeta({
     title: "Portfolio | GA Webdesign",
     description: "Ausgewählte Webdesign-Projekte von G&A Webdesign. Moderne Websites für lokale Unternehmen aus dem Schwarzwald.",
@@ -79,6 +82,21 @@ export function Portfolio() {
             Persönliches Portfolio öffnen
             <ExternalLink size={16} className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </a>
+        </div>
+      </FadeIn>
+
+      {/* CTA */}
+      <FadeIn>
+        <div className="mt-20 2xl:mt-28 text-center">
+          <h2 className="text-white text-[28px] xl:text-[34px] 2xl:text-[42px] mb-3">
+            Dein Projekt soll das nächste sein.
+          </h2>
+          <p className="text-slate-400 text-[15px] xl:text-[16px] 2xl:text-[18px] mb-8 max-w-xl 2xl:max-w-2xl mx-auto">
+            Sag uns, was du dir vorstellst – das erste Gespräch ist kostenlos und unverbindlich.
+          </p>
+          <PrimaryButton onClick={() => navigate("/kontakt")}>
+            Projekt anfragen
+          </PrimaryButton>
         </div>
       </FadeIn>
     </main>

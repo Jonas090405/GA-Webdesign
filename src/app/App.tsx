@@ -7,6 +7,7 @@ import { ScrollProgress } from "./components/ScrollProgress";
 import { Home } from "./components/pages/Home";
 import { Portfolio } from "./components/pages/Portfolio";
 import { Leistungen } from "./components/pages/Leistungen";
+import { Ablauf } from "./components/pages/Ablauf";
 import { About } from "./components/pages/About";
 import { Impressum } from "./components/pages/Impressum";
 import { Datenschutz } from "./components/pages/Datenschutz";
@@ -55,6 +56,11 @@ export default function App() {
           <Route path="/leistungen" element={
             <motion.div initial="initial" animate="animate" exit="exit" variants={pageVariants} transition={pageTransition}>
               <Leistungen />
+            </motion.div>
+          } />
+          <Route path="/ablauf" element={
+            <motion.div initial="initial" animate="animate" exit="exit" variants={pageVariants} transition={pageTransition}>
+              <Ablauf />
             </motion.div>
           } />
           <Route path="/ueber-mich" element={

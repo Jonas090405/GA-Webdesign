@@ -1,73 +1,17 @@
+import { useState } from "react";
 import { usePageMeta } from "../../hooks/usePageMeta";
 import { SectionLabel } from "../SectionLabel";
 import { Card } from "../Card";
 import { PrimaryButton } from "../Button";
 import { FadeIn } from "../FadeIn";
-import { Palette, Code2, Rocket, CheckCircle2, MessageCircle, PenTool, RefreshCw, Globe, ClipboardList } from "lucide-react";
+import { Palette, Code2, Rocket, CheckCircle2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { ServiceCardBg, type BgKey } from "../ServiceCardBg";
 
-const timelineSteps = [
-  {
-    icon: MessageCircle,
-    step: "1",
-    title: "Kennenlerngespräch",
-    desc: "Wir lernen uns kennen. Du erzählst uns, wer du bist, was du machst und was du dir für deine Website vorstellst. Kein Fachwissen nötig – wir stellen die richtigen Fragen und hören erst mal zu.",
-    tag: "kostenlos & unverbindlich",
-  },
-  {
-    icon: ClipboardList,
-    step: "2",
-    title: "Anforderungsanalyse",
-    desc: "Wir gehen gemeinsam ins Detail. Welche Seiten braucht die Website? Welche Funktionen, welche Inhalte? Wir definieren den genauen Umfang – damit am Ende keine Überraschungen entstehen.",
-    tag: "kostenlos & unverbindlich",
-  },
-  {
-    icon: PenTool,
-    step: "3",
-    title: "Design & Konzept",
-    desc: "Nachdem alle vertraglichen Details geklärt sind, entwickeln wir auf Basis der Anforderungen ein individuelles Designkonzept. In diesem Schritt liegt die visuelle Gestaltung im Vordergrund – wir definieren, wie dein Unternehmen nach außen wirkt.",
-    tag: "individuelles Design",
-  },
-  {
-    icon: MessageCircle,
-    step: "4",
-    title: "1. Feedbackrunde",
-    desc: "Wir zeigen dir, wie deine Seite aussehen wird und wie sie strukturiert ist. Du sagst uns direkt, was dir gefällt und was du gerne anders hättest. Hier zählt dein Gefühl.",
-    tag: "deine Meinung ist wichtig",
-  },
-  {
-    icon: Code2,
-    step: "5",
-    title: "Technische Umsetzung",
-    desc: "Wir setzen dein Feedback direkt um und integrieren alle gewünschten Funktionen. In diesem Schritt liegt der Fokus auf der Funktionalität, Schnelligkeit und Sichtbarkeit deiner Website.",
-    tag: "sauber & modern",
-  },
-  {
-    icon: MessageCircle,
-    step: "6",
-    title: "2. Feedbackrunde",
-    desc: "Wir gehen gemeinsam die fertige Website durch. Wir testen alle Funktionen, prüfen die Texte auf dem Handy und am PC und schauen uns das Gesamtergebnis im Detail an.",
-    tag: "alles unter Kontrolle",
-  },
-  {
-    icon: RefreshCw,
-    step: "7",
-    title: "Feinschliff & Korrekturen",
-    desc: "Hier kümmern wir uns um den letzten Feinschliff. Deine finalen Wünsche aus dem letzten Check werden punktgenau umgesetzt, damit alles bereit für den Start ist.",
-    tag: "der letzte Feinschliff",
-  },
-  {
-    icon: Globe,
-    step: "8",
-    title: "Fertig – deine Website ist live",
-    desc: "Deine Website geht online – fertig eingerichtet, auf deiner Domain, direkt nutzbar. Wir kümmern uns um Hosting, Domain und alles Technische. Du bekommst ein fertiges Ergebnis.",
-    tag: "komplett fertig & gehostet",
-  },
-];
-
-const blocks = [
+const blocks: { Icon: React.ElementType; title: string; lead: string; points: string[]; bgKey: BgKey }[] = [
   {
     Icon: Palette,
+    bgKey: "design",
     title: "Design",
     lead: "So, wie du dir das vorstellst.",
     points: [
@@ -79,6 +23,7 @@ const blocks = [
   },
   {
     Icon: Code2,
+    bgKey: "code",
     title: "Entwicklung",
     lead: "Schnell, stabil & zukunftssicher.",
     points: [
@@ -90,6 +35,7 @@ const blocks = [
   },
   {
     Icon: Rocket,
+    bgKey: "rocket",
     title: "Deployment",
     lead: "Du musst dich um nichts kümmern.",
     points: [
@@ -100,6 +46,48 @@ const blocks = [
     ],
   },
 ];
+
+function LeistungenCard({
+  Icon, title, lead, points, bgKey, i,
+}: {
+  Icon: React.ElementType; title: string; lead: string;
+  points: string[]; bgKey: BgKey; i: number;
+}) {
+  const [hovered, setHovered] = useState(false);
+  return (
+    <FadeIn delay={i * 0.08} className="h-full">
+      <div
+        className="h-full"
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+      >
+        <Card className="h-full">
+          <div className="flex flex-col h-full">
+            <ServiceCardBg bgKey={bgKey} hovered={hovered} />
+            <div className="relative z-10 flex flex-col h-full">
+              <div
+                className="mb-5 inline-flex h-12 w-12 2xl:h-16 2xl:w-16 items-center justify-center rounded-xl"
+                style={{ background: "linear-gradient(135deg, rgba(0,105,153,0.25) 0%, rgba(77,190,243,0.12) 100%)", border: "1px solid rgba(77,190,243,0.20)" }}
+              >
+                <Icon size={22} className="text-sky-400 2xl:!h-7 2xl:!w-7" />
+              </div>
+              <h3 className="text-white text-[22px] 2xl:text-[26px] mb-1">{title}</h3>
+              <p className="text-slate-400 text-[14px] 2xl:text-[16px] mb-5">{lead}</p>
+              <ul className="space-y-2.5">
+                {points.map((p) => (
+                  <li key={p} className="flex items-start gap-2 text-slate-300 text-[14px] 2xl:text-[16px]">
+                    <CheckCircle2 size={16} className="mt-0.5 shrink-0 text-sky-400" />
+                    <span>{p}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </Card>
+      </div>
+    </FadeIn>
+  );
+}
 
 export function Leistungen() {
   usePageMeta({
@@ -130,29 +118,8 @@ export function Leistungen() {
 
       {/* Service cards */}
       <div className="mt-16 2xl:mt-20 grid gap-6 2xl:gap-8 md:grid-cols-3 items-stretch">
-        {blocks.map(({ Icon, title, lead, points }, i) => (
-          <FadeIn key={title} delay={i * 0.08} className="h-full">
-            <Card className="h-full">
-              <div className="flex flex-col h-full">
-                <div
-                  className="mb-5 inline-flex h-12 w-12 2xl:h-16 2xl:w-16 items-center justify-center rounded-xl"
-                  style={{ background: "linear-gradient(135deg, rgba(0,105,153,0.25) 0%, rgba(77,190,243,0.12) 100%)", border: "1px solid rgba(77, 190, 243, 0.20)" }}
-                >
-                  <Icon size={22} className="text-sky-400 2xl:!h-7 2xl:!w-7" />
-                </div>
-                <h3 className="text-white text-[22px] 2xl:text-[26px] mb-1">{title}</h3>
-                <p className="text-slate-400 text-[14px] 2xl:text-[16px] mb-5">{lead}</p>
-                <ul className="space-y-2.5">
-                  {points.map((p) => (
-                    <li key={p} className="flex items-start gap-2 text-slate-300 text-[14px] 2xl:text-[16px]">
-                      <CheckCircle2 size={16} className="mt-0.5 shrink-0 text-sky-400" />
-                      <span>{p}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </Card>
-          </FadeIn>
+        {blocks.map(({ Icon, title, lead, points, bgKey }, i) => (
+          <LeistungenCard key={title} Icon={Icon} title={title} lead={lead} points={points} bgKey={bgKey} i={i} />
         ))}
       </div>
 
@@ -199,68 +166,17 @@ export function Leistungen() {
         </div>
       </FadeIn>
 
-      {/* Timeline */}
-      <div className="mt-24 2xl:mt-32">
-        <FadeIn>
-          <SectionLabel>So läuft es ab</SectionLabel>
-          <h2 className="text-white text-[clamp(28px,4vw,56px)] tracking-tight max-w-2xl 2xl:max-w-3xl mb-4">
-            Von der ersten Idee bis zur fertigen Website.
-          </h2>
-          <p className="text-slate-400 text-[15px] 2xl:text-[17px] leading-relaxed max-w-xl 2xl:max-w-2xl mb-14">
-            Du weißt jederzeit, wo wir stehen. Regelmäßige Feedbackschleifen stellen sicher,
-            dass wir am Ende genau das Ergebnis haben, das du dir vorstellst.
-          </p>
-        </FadeIn>
-
-        <div className="relative">
-          <div className="space-y-0">
-            {timelineSteps.map(({ icon: Icon, step, title, desc, tag }, i) => (
-              <FadeIn key={step} delay={i * 0.07}>
-                <div className="relative flex gap-8 sm:gap-14 2xl:gap-20 pb-32 sm:pb-48 2xl:pb-56 last:pb-0">
-                  {/* Circle */}
-                  <div className="relative z-10 shrink-0 flex flex-col items-center">
-                    {i < timelineSteps.length - 1 && (
-                      <div className="absolute top-0 bottom-0 left-1/2 w-px -translate-x-1/2 bg-sky-400/15" />
-                    )}
-                    <div className="relative h-12 w-12 2xl:h-16 2xl:w-16 rounded-full bg-[#0f2440] border border-sky-400/40 flex items-center justify-center">
-                      <Icon size={20} className="text-sky-400 2xl:!h-6 2xl:!w-6" />
-                    </div>
-                  </div>
-
-                  {/* Content */}
-                  <div className="flex-1 pt-1 pb-6">
-                    <div className="flex flex-wrap items-center gap-3 mb-4">
-                      <span className="text-sky-400 text-[11px] 2xl:text-[13px] tracking-[0.2em] uppercase">
-                        Schritt {step}
-                      </span>
-                      <span className="rounded-full bg-sky-400/10 border border-sky-400/20 px-2.5 py-0.5 text-[11px] 2xl:text-[13px] text-sky-300">
-                        {tag}
-                      </span>
-                    </div>
-                    <h3 className="text-white text-[22px] sm:text-[26px] 2xl:text-[30px] mb-4">{title}</h3>
-                    <p className="text-slate-400 text-[15px] sm:text-[16px] 2xl:text-[18px] leading-[1.85] max-w-2xl 2xl:max-w-3xl">
-                      {desc}
-                    </p>
-                  </div>
-                </div>
-              </FadeIn>
-            ))}
-          </div>
-        </div>
-      </div>
-
-
-      {/* CTA */}
+      {/* CTA → Ablauf */}
       <FadeIn>
         <div className="mt-16 2xl:mt-24 text-center">
           <h2 className="text-white text-[28px] xl:text-[34px] 2xl:text-[42px] mb-3">
-            Bereit loszulegen?
+            Wie läuft die Zusammenarbeit ab?
           </h2>
           <p className="text-slate-400 text-[15px] xl:text-[16px] 2xl:text-[18px] mb-8 max-w-xl 2xl:max-w-2xl mx-auto">
-            Erzähl uns kurz von deinem Projekt – das Erstgespräch ist kostenlos und unverbindlich.
+            Von der ersten Anfrage bis zur fertigen Website – in 8 transparenten Schritten.
           </p>
-          <PrimaryButton onClick={() => navigate("/kontakt")}>
-            Projekt anfragen
+          <PrimaryButton onClick={() => navigate("/ablauf")}>
+            Ablauf ansehen
           </PrimaryButton>
         </div>
       </FadeIn>

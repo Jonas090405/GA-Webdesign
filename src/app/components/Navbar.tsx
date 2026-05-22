@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Briefcase, Layers, User, Mail, Menu, X } from "lucide-react";
+import { Briefcase, Layers, User, Mail, Menu, X, Route } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import { useLocation, Link } from "react-router-dom";
 import logoUrl from "../../imports/Logo_GA_Webdesign.svg";
@@ -7,6 +7,7 @@ import logoUrl from "../../imports/Logo_GA_Webdesign.svg";
 const items = [
   { id: "/projekte", label: "Projekte", Icon: Briefcase },
   { id: "/leistungen", label: "Leistungen", Icon: Layers },
+  { id: "/ablauf", label: "Ablauf", Icon: Route },
   { id: "/ueber-mich", label: "Über uns", Icon: User },
   { id: "/kontakt", label: "Kontakt", Icon: Mail },
 ];
