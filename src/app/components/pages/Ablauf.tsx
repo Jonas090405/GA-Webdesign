@@ -164,13 +164,17 @@ function TimelineStep({
   tag: string; index: number; isLast: boolean;
   scrollYProgress: MotionValue<number>; threshold: number;
 }) {
-  // Stroke startet wenn die Linie den Dot trifft (threshold),
-  // und füllt sich in den nächsten ~6% des Scroll-Fortschritts
-  const strokeStart = Math.max(0, threshold - 0.005);
-  const strokeEnd   = Math.min(1, threshold + 0.065);
+  // strokeEnd = wenn die Linie den Dot erreicht (leicht dahinter),
+  // strokeStart = immer 7% davor → konstante Animationsdauer für alle Dots,
+  // auch den letzten (der sonst auf [0.995, 1.0] = 0.5% zusammengestaucht wäre)
+  const strokeEnd   = Math.min(1, threshold + 0.02);
+  const strokeStart = Math.max(0, strokeEnd - 0.07);
 
   const pathLength  = useTransform(scrollYProgress, [strokeStart, strokeEnd], [0, 1], { clamp: true });
-  const activated   = useTransform(scrollYProgress, [Math.min(1, strokeEnd - 0.01), Math.min(1, strokeEnd + 0.03)], [0, 1], { clamp: true });
+
+  const activatedEnd   = Math.min(1, strokeEnd + 0.03);
+  const activatedStart = Math.max(0, activatedEnd - 0.04);
+  const activated      = useTransform(scrollYProgress, [activatedStart, activatedEnd], [0, 1], { clamp: true });
 
   return (
     <div className={isLast ? "" : "pb-14 sm:pb-20 xl:pb-24 2xl:pb-28"}>
