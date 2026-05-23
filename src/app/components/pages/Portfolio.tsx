@@ -35,7 +35,7 @@ const PROJECTS = [
 export function Portfolio() {
   const navigate = useNavigate();
   usePageMeta({
-    title: "Portfolio | GA Webdesign",
+    title: "Portfolio | G&A Webdesign",
     description: "Ausgewählte Webdesign-Projekte von G&A Webdesign. Moderne Websites für lokale Unternehmen aus dem Schwarzwald.",
     path: "/projekte",
   });

@@ -87,6 +87,9 @@ function TimelineDot({
   // Linke Hälfte: pathOffset startet bei 1.0 (= 12 Uhr) und sinkt mit halfPath
   // → Stroke wächst von 12 Uhr nach links (gegen Uhrzeigersinn)
   const leftOffset = useTransform(halfPath, (v) => 1 - v);
+  // Minimale Überlappung bei 12 Uhr (oben) — verhindert Sub-Pixel-Lücke
+  // zwischen dem Ende der linken und dem Start der rechten Hälfte
+  const leftLength = useTransform(halfPath, (v) => v <= 0.001 ? 0 : v + 0.008);
 
   return (
     <div className="relative shrink-0 h-12 w-12 xl:h-14 xl:w-14">
@@ -106,7 +109,7 @@ function TimelineDot({
         {/* Linke Hälfte — 12 Uhr → gegen Uhrzeigersinn → 6 Uhr */}
         <motion.circle cx="24" cy="24" r={r} fill="none" stroke="#4dbef3"
           strokeWidth="1.5" strokeLinecap="butt"
-          style={{ pathLength: halfPath, pathOffset: leftOffset }} />
+          style={{ pathLength: leftLength, pathOffset: leftOffset }} />
       </svg>
 
       {/* Hintergrund */}
@@ -261,7 +264,7 @@ function ProcessTimeline() {
 // ─── Page ─────────────────────────────────────────────────────────────────────
 export function Ablauf() {
   usePageMeta({
-    title: "Ablauf | GA Webdesign",
+    title: "Ablauf | G&A Webdesign",
     description: "So läuft die Zusammenarbeit ab – von der ersten Idee bis zur fertigen Website. 8 klare Schritte, transparenter Prozess.",
     path: "/ablauf",
   });

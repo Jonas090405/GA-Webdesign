@@ -91,7 +91,7 @@ function LeistungenCard({
 
 export function Leistungen() {
   usePageMeta({
-    title: "Leistungen | GA Webdesign",
+    title: "Leistungen | G&A Webdesign",
     description: "Webdesign, Entwicklung & Deployment aus einer Hand. Individuelles Design, schnelle Ladezeiten und alles fertig live – inkl. Hosting & SEO.",
     path: "/leistungen",
   });

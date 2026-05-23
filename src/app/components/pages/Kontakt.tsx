@@ -67,7 +67,7 @@ const slideVariants = {
 
 export function Kontakt() {
   usePageMeta({
-    title: "Kontakt | GA Webdesign",
+    title: "Kontakt | G&A Webdesign",
     description: "Starte dein Webprojekt. Schreib uns oder ruf uns direkt an – das Erstgespräch ist kostenlos und unverbindlich.",
     path: "/kontakt",
   });

@@ -46,7 +46,7 @@ const PROJECTS = [
 
 export function Home() {
   usePageMeta({
-    title: "GA Webdesign | Moderne Webseiten für lokale Unternehmen",
+    title: "G&A Webdesign | Moderne Webseiten für lokale Unternehmen",
     description: "Wir entwerfen und entwickeln moderne, professionelle Webseiten für lokale Unternehmen. Komplett fertig eingerichtet inkl. Hosting & SEO.",
     path: "/",
   });
