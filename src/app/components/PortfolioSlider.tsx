@@ -146,7 +146,7 @@ export function PortfolioSlider({ projects }: { projects: Project[] }) {
                           e.currentTarget.style.borderColor = "rgba(77, 190, 243, 0.2)";
                         }}
                       >
-                        {project.urlLabel ?? "Website öffnen"}
+                        {project.urlLabel ?? "Webseite öffnen"}
                         <ExternalLink
                           size={13}
                           className="xl:!h-4 xl:!w-4 transition-transform duration-200 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5"

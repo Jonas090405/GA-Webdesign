@@ -50,7 +50,7 @@ export function Datenschutz() {
               Grundlage der gesetzlichen Bestimmungen (DSGVO, TDDDG). In
               dieser Datenschutzerklärung informieren wir dich über die
               wichtigsten Aspekte der Datenverarbeitung im Rahmen unserer
-              Website.
+              Webseite.
             </p>
           </Card>
         </FadeIn>
@@ -77,7 +77,7 @@ export function Datenschutz() {
               4. Server-Logfiles
             </div>
             <p className="text-slate-300 text-[14px] leading-relaxed">
-              Beim Aufruf der Website werden automatisch technisch notwendige
+              Beim Aufruf der Webseite werden automatisch technisch notwendige
               Daten (z. B. IP-Adresse, Datum und Uhrzeit, Browsertyp,
               Betriebssystem, Referrer-URL) in Server-Logfiles gespeichert.
               Diese Daten dienen ausschließlich der Sicherstellung eines
@@ -111,11 +111,11 @@ export function Datenschutz() {
               6. Cookies &amp; Tracking
             </div>
             <p className="text-slate-300 text-[14px] leading-relaxed">
-              Diese Website verwendet technisch notwendige Cookies, die für den
+              Diese Webseite verwendet technisch notwendige Cookies, die für den
               Betrieb der Seite erforderlich sind. Darüber hinaus setzen wir mit
               deiner ausdrücklichen Einwilligung{" "}
               <strong className="text-slate-200">Google Analytics</strong> ein,
-              das Analyse-Cookies verwendet, um die Nutzung der Website anonymisiert
+              das Analyse-Cookies verwendet, um die Nutzung der Webseite anonymisiert
               auszuwerten. Du kannst deine Einwilligung jederzeit über den
               Cookie-Banner widerrufen. Ohne deine Einwilligung werden keine
               Analyse-Cookies gesetzt.
@@ -198,9 +198,9 @@ export function Datenschutz() {
               9. Hosting – GitHub Pages
             </div>
             <p className="text-slate-300 text-[14px] leading-relaxed">
-              Diese Website wird über <strong className="text-slate-200">GitHub Pages</strong> gehostet,
+              Diese Webseite wird über <strong className="text-slate-200">GitHub Pages</strong> gehostet,
               einem Dienst der GitHub, Inc., 88 Colin P Kelly Jr St, San Francisco,
-              CA 94107, USA. Beim Aufruf der Website werden technische Daten
+              CA 94107, USA. Beim Aufruf der Webseite werden technische Daten
               (insb. IP-Adresse) automatisch an Server von GitHub übertragen und
               dort verarbeitet. GitHub ist unter dem EU-US Data Privacy Framework
               zertifiziert, sodass ein angemessenes Datenschutzniveau gewährleistet
@@ -224,7 +224,7 @@ export function Datenschutz() {
               10. Kontaktformular – EmailJS
             </div>
             <p className="text-slate-300 text-[14px] leading-relaxed">
-              Das Kontaktformular dieser Website nutzt den Dienst{" "}
+              Das Kontaktformular dieser Webseite nutzt den Dienst{" "}
               <strong className="text-slate-200">EmailJS</strong> (EmailJS Ltd., UK),
               um eingehende Nachrichten per E-Mail an uns weiterzuleiten.
               Dabei werden die von dir eingegebenen Daten (Name, E-Mail-Adresse,

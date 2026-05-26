@@ -45,7 +45,7 @@ export function About() {
             style={{ color: "rgba(200, 225, 240, 0.8)" }}
           >
             Ich bin 21 Jahre alt und komme aus Triberg im Schwarzwald.
-            Ich designe und entwickle Websites für lokale Unternehmen –
+            Ich designe und entwickle Webseiten für lokale Unternehmen –
             von der ersten Idee bis sie live sind.
           </p>
           <p
@@ -124,7 +124,7 @@ export function About() {
         <FadeIn delay={0.08} className="h-full">
           <Card className="h-full">
             <div className="text-[12px] tracking-[0.25em] uppercase mb-5" style={{ color: "#4dbef3" }}>
-              Womit wir arbeiten
+              Womit ich arbeite
             </div>
             <div className="flex flex-wrap gap-2">
               {["Figma", "React", "KI", "TypeScript", "TailwindCSS", "Motiondesign", "Vercel", "EmailJS", "Google Analytics", "GitHub", "Strapi", "Supabase"].map((t) => (
@@ -270,7 +270,7 @@ export function About() {
         <FadeIn>
           <SectionLabel>Unser Ansatz</SectionLabel>
           <h2 className="text-white text-[clamp(26px,4vw,52px)] tracking-tight max-w-2xl 2xl:max-w-3xl mb-10 2xl:mb-14">
-            Was uns bei jeder Website wichtig ist.
+            Was uns bei jeder Webseite wichtig ist.
           </h2>
         </FadeIn>
         <div className="grid gap-6 2xl:gap-8 sm:grid-cols-2 md:grid-cols-3 items-stretch">

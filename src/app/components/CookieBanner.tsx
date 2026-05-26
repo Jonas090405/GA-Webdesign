@@ -41,7 +41,7 @@ export function CookieBanner() {
             style={{ background: "rgb(16, 22, 28)" }}
           >
             <p className="text-slate-300 text-[13px] leading-relaxed mb-4">
-              Diese Website verwendet{" "}
+              Diese Webseite verwendet{" "}
               <strong className="text-slate-100">Cookies</strong>, um die
               Nutzung anonym auszuwerten und das Angebot zu verbessern. Deine
               Einwilligung ist freiwillig und jederzeit widerrufbar.{" "}

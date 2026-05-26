@@ -13,14 +13,14 @@ const timelineSteps = [
     icon: MessageCircle,
     step: "1",
     title: "Kennenlerngespräch",
-    desc: "Wir lernen uns kennen. Du erzählst uns, wer du bist, was du machst und was du dir für deine Website vorstellst. Kein Fachwissen nötig – wir stellen die richtigen Fragen und hören erst mal zu.",
+    desc: "Wir lernen uns kennen. Du erzählst uns, wer du bist, was du machst und was du dir für deine Webseite vorstellst. Kein Fachwissen nötig – wir stellen die richtigen Fragen und hören erst mal zu.",
     tag: "kostenlos & unverbindlich",
   },
   {
     icon: ClipboardList,
     step: "2",
     title: "Anforderungsanalyse",
-    desc: "Wir gehen gemeinsam ins Detail. Welche Seiten braucht die Website? Welche Funktionen, welche Inhalte? Wir definieren den genauen Umfang – damit am Ende keine Überraschungen entstehen.",
+    desc: "Wir gehen gemeinsam ins Detail. Welche Seiten braucht die Webseite? Welche Funktionen, welche Inhalte? Wir definieren den genauen Umfang – damit am Ende keine Überraschungen entstehen.",
     tag: "kostenlos & unverbindlich",
   },
   {
@@ -41,14 +41,14 @@ const timelineSteps = [
     icon: Code2,
     step: "5",
     title: "Technische Umsetzung",
-    desc: "Wir setzen dein Feedback direkt um und integrieren alle gewünschten Funktionen. In diesem Schritt liegt der Fokus auf der Funktionalität, Schnelligkeit und Sichtbarkeit deiner Website.",
+    desc: "Wir setzen dein Feedback direkt um und integrieren alle gewünschten Funktionen. In diesem Schritt liegt der Fokus auf der Funktionalität, Schnelligkeit und Sichtbarkeit deiner Webseite.",
     tag: "sauber & modern",
   },
   {
     icon: MessageCircle,
     step: "6",
     title: "2. Feedbackrunde",
-    desc: "Wir gehen gemeinsam die fertige Website durch. Wir testen alle Funktionen, prüfen die Texte auf dem Handy und am PC und schauen uns das Gesamtergebnis im Detail an.",
+    desc: "Wir gehen gemeinsam die fertige Webseite durch. Wir testen alle Funktionen, prüfen die Texte auf dem Handy und am PC und schauen uns das Gesamtergebnis im Detail an.",
     tag: "alles unter Kontrolle",
   },
   {
@@ -61,8 +61,8 @@ const timelineSteps = [
   {
     icon: Globe,
     step: "8",
-    title: "Fertig – deine Website ist live",
-    desc: "Deine Website geht online – fertig eingerichtet, auf deiner Domain, direkt nutzbar. Wir kümmern uns um Hosting, Domain und alles Technische. Du bekommst ein fertiges Ergebnis.",
+    title: "Fertig – deine Webseite ist live",
+    desc: "Deine Webseite geht online – fertig eingerichtet, auf deiner Domain, direkt nutzbar. Wir kümmern uns um Hosting, Domain und alles Technische. Du bekommst ein fertiges Ergebnis.",
     tag: "komplett fertig & gehostet",
   },
 ];
@@ -265,7 +265,7 @@ function ProcessTimeline() {
 export function Ablauf() {
   usePageMeta({
     title: "Ablauf | G&A Webdesign",
-    description: "So läuft die Zusammenarbeit ab – von der ersten Idee bis zur fertigen Website. 8 klare Schritte, transparenter Prozess.",
+    description: "So läuft die Zusammenarbeit ab – von der ersten Idee bis zur fertigen Webseite. 8 klare Schritte, transparenter Prozess.",
     path: "/ablauf",
   });
   const navigate = useNavigate();
@@ -280,7 +280,7 @@ export function Ablauf() {
             className="bg-clip-text text-transparent"
             style={{ backgroundImage: "linear-gradient(135deg, #4dbef3 0%, #006999 100%)" }}
           >
-            fertigen Website.
+            fertigen Webseite.
           </span>
         </h1>
         <p className="mt-6 max-w-2xl 2xl:max-w-3xl text-[16px] xl:text-[18px] 2xl:text-[20px] text-slate-400 leading-relaxed">

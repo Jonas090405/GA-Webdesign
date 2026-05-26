@@ -143,7 +143,7 @@ function InfoTooltip({ text }: { text: string }) {
   );
 }
 
-// ─── Website-Preiskarte (dunkel, groß) ────────────────────────────────────────
+// ─── Webseite-Preiskarte (dunkel, groß) ────────────────────────────────────────
 const websiteFeatureGroups: { label: string; points: string[] }[] = [
   {
     label: "Design",
@@ -174,7 +174,7 @@ const websiteFeatureGroups: { label: string; points: string[] }[] = [
   },
 ];
 
-function WebsitePreisCard({ onContact }: { onContact: () => void }) {
+function WebseitePreisCard({ onContact }: { onContact: () => void }) {
   const outerRef = useRef<HTMLDivElement>(null);
   const spotRef = useRef<HTMLDivElement>(null);
 
@@ -225,10 +225,10 @@ function WebsitePreisCard({ onContact }: { onContact: () => void }) {
           {/* Header */}
           <div className="mb-6">
             <p className="text-[11px] tracking-[0.2em] uppercase font-medium mb-2" style={{ color: "#4dbef3" }}>
-              Website
+              Webseite
             </p>
             <h3 className="text-white text-[26px] xl:text-[30px] 2xl:text-[34px] tracking-tight leading-tight mb-1">
-              Ihre Website
+              Ihre Webseite
             </h3>
             <p className="text-slate-400 text-[14px] 2xl:text-[15px]">Komplett. Fertig. Persönlich.</p>
           </div>
@@ -345,7 +345,7 @@ const wartungTiers: {
     name: "Basis",
     price: "5 €/Monat",
     features: [
-      { label: "Sicherheitsupdates der Website" },
+      { label: "Sicherheitsupdates der Webseite" },
       { label: "Technische Fehlerbehebungen" },
       { label: "Überwachung" },
     ],
@@ -358,7 +358,7 @@ const wartungTiers: {
       {
         label: (
           <>
-            1 Inhaltsanpassung<InfoTooltip text="Texte, Bilder oder kleine Inhalte auf deiner Website werden auf Wunsch aktualisiert oder angepasst." /> pro Monat
+            1 Inhaltsanpassung<InfoTooltip text="Texte, Bilder oder kleine Inhalte auf deiner Webseite werden auf Wunsch aktualisiert oder angepasst." /> pro Monat
           </>
         ),
       },
@@ -372,14 +372,14 @@ const wartungTiers: {
       {
         label: (
           <>
-            2 Inhaltsanpassungen<InfoTooltip text="Texte, Bilder oder kleine Inhalte auf deiner Website werden auf Wunsch aktualisiert oder angepasst." /> pro Monat
+            2 Inhaltsanpassungen<InfoTooltip text="Texte, Bilder oder kleine Inhalte auf deiner Webseite werden auf Wunsch aktualisiert oder angepasst." /> pro Monat
           </>
         ),
       },
       {
         label: (
           <>
-            1 Inhaltserweiterung<InfoTooltip text="Eine komplett neue Sektion oder ein neues Element wird deiner Website hinzugefügt – z. B. eine neue Unterseite, ein neues Formular oder ein Galerie-Bereich." /> pro Monat
+            1 Inhaltserweiterung<InfoTooltip text="Eine komplett neue Sektion oder ein neues Element wird deiner Webseite hinzugefügt – z. B. eine neue Unterseite, ein neues Formular oder ein Galerie-Bereich." /> pro Monat
           </>
         ),
       },
@@ -464,9 +464,9 @@ function PreiseSection({ onContact }: { onContact: () => void }) {
       </FadeIn>
 
       <div className="mt-10 2xl:mt-14 grid grid-cols-1 lg:grid-cols-2 gap-6 2xl:gap-8 items-start">
-        {/* Website Card (links, groß) */}
+        {/* Webseite Card (links, groß) */}
         <FadeIn delay={0} className="h-full">
-          <WebsitePreisCard onContact={onContact} />
+          <WebseitePreisCard onContact={onContact} />
         </FadeIn>
 
         {/* Rechte Spalte: Hosting + Wartung */}
@@ -502,7 +502,7 @@ export function Leistungen() {
                 "linear-gradient(135deg, #4dbef3 0%, #006999 100%)",
             }}
           >
-            Deine Website
+            Deine Webseite
           </span>{" "}
           – fertig, ohne Stress.
         </h1>
@@ -570,7 +570,7 @@ export function Leistungen() {
             Wie läuft die Zusammenarbeit ab?
           </h2>
           <p className="text-slate-400 text-[15px] xl:text-[16px] 2xl:text-[18px] mb-8 max-w-xl 2xl:max-w-2xl mx-auto">
-            Von der ersten Anfrage bis zur fertigen Website – in 8 transparenten Schritten.
+            Von der ersten Anfrage bis zur fertigen Webseite – in 8 transparenten Schritten.
           </p>
           <PrimaryButton onClick={() => navigate("/ablauf")}>
             Ablauf ansehen

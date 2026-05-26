@@ -17,7 +17,7 @@ const PROJECTS = [
     url: "https://gcn-fahrzeughandel.de/",
     testimonial: {
       show: true, // ← false = Testimonial ausblenden
-      quote: "Die Zusammenarbeit war von Anfang bis Ende reibungslos. Unsere Vorstellungen wurden genau verstanden und eine Website gebaut, die wirklich zu uns passt. Wir bekommen regelmäßig positives Feedback von unseren Kunden.",
+      quote: "Die Zusammenarbeit war von Anfang bis Ende reibungslos. Unsere Vorstellungen wurden genau verstanden und eine Webseite gebaut, die wirklich zu uns passt. Wir bekommen regelmäßig positives Feedback von unseren Kunden.",
       name: "Giosue Canobbio",
       role: "Geschäftsführer",
       company: "GCN-Fahrzeughandel",
@@ -36,7 +36,7 @@ export function Portfolio() {
   const navigate = useNavigate();
   usePageMeta({
     title: "Portfolio | G&A Webdesign",
-    description: "Ausgewählte Webdesign-Projekte von G&A Webdesign. Moderne Websites für lokale Unternehmen aus dem Schwarzwald.",
+    description: "Ausgewählte Webdesign-Projekte von G&A Webdesign. Moderne Webseiten für lokale Unternehmen aus dem Schwarzwald.",
     path: "/projekte",
   });
   return (

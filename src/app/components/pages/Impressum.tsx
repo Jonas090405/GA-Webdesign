@@ -126,7 +126,7 @@ export function Impressum() {
               Haftungsausschluss
             </div>
             <p className="text-slate-300 text-[14px] leading-relaxed">
-              Die Inhalte dieser Website wurden mit größtmöglicher Sorgfalt
+              Die Inhalte dieser Webseite wurden mit größtmöglicher Sorgfalt
               erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität
               der Inhalte kann jedoch keine Gewähr übernommen werden. Für
               Inhalte externer Links wird keine Haftung übernommen; für deren

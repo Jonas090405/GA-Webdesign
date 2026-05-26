@@ -27,7 +27,7 @@ const PROJECTS = [
     features: ["React", "Dashboard", "Fahrzeugsuche", "E-Mail-System", "Deployment"],
     testimonial: {
       show: true, // ← false = Testimonial ausblenden
-      quote: "Die Zusammenarbeit war von Anfang bis Ende reibungslos. Unsere Vorstellungen wurden genau verstanden und eine Website gebaut, die wirklich zu uns passt. Außerdem erleichtert unser neues Admin-Panel die Verwaltung unserer Kunden erheblich.",
+      quote: "Die Zusammenarbeit war von Anfang bis Ende reibungslos. Unsere Vorstellungen wurden genau verstanden und eine Webseite gebaut, die wirklich zu uns passt. Außerdem erleichtert unser neues Admin-Panel die Verwaltung unserer Kunden erheblich.",
       name: "Giosue Canobbio",
       role: "Geschäftsführer",
       company: "GCN-Fahrzeughandel",
@@ -93,7 +93,7 @@ function Hero() {
               className="mt-5 sm:mt-7 text-[16px] sm:text-[18px] lg:text-[19px] xl:text-[21px] 2xl:text-[24px] leading-relaxed"
               style={{ color: "rgba(200, 225, 240, 0.75)" }}
             >
-              Wir entwerfen und bauen deine Website. Von der ersten Idee bis sie live ist.
+              Wir entwerfen und bauen deine Webseite. Von der ersten Idee bis sie live ist.
               Du musst dich um nichts kümmern.
             </p>
           </FadeIn>
@@ -227,7 +227,7 @@ function Services() {
     {
       Icon: Palette,
       title: "Individuelles Design",
-      desc: "Deine Website sieht genau so aus, wie du es dir vorstellst. Kein vorgefertigtes Template, sondern ein eigenes Design für dich.",
+      desc: "Deine Webseite sieht genau so aus, wie du es dir vorstellst. Kein vorgefertigtes Template, sondern ein eigenes Design für dich.",
       bgKey: "design",
     },
     {
@@ -239,7 +239,7 @@ function Services() {
     {
       Icon: Rocket,
       title: "Fertig live, sofort nutzbar",
-      desc: "Domain, Hosting, Einrichtung. Wir kümmern uns um alles. Du bekommst eine fertige Website und kannst sofort loslegen.",
+      desc: "Domain, Hosting, Einrichtung. Wir kümmern uns um alles. Du bekommst eine fertige Webseite und kannst sofort loslegen.",
       bgKey: "rocket",
     },
   ];
@@ -250,7 +250,7 @@ function Services() {
         <SectionLabel>Leistungen</SectionLabel>
         <div className="mb-10 sm:mb-12 xl:mb-16 2xl:mb-20">
           <h2 className="text-white text-[clamp(28px,4.5vw,72px)] tracking-tight max-w-4xl 2xl:max-w-5xl">
-            Alles, was du für deine Website brauchst.
+            Alles, was du für deine Webseite brauchst.
           </h2>
           <p className="mt-4 xl:mt-6 max-w-2xl 2xl:max-w-3xl text-[15px] sm:text-[17px] xl:text-[19px] 2xl:text-[21px] leading-relaxed" style={{ color: "rgba(180,210,230,0.65)" }}>
             Wir übernehmen alles: Design, Entwicklung und Hosting.<br />Du musst dich um nichts kümmern.
@@ -284,7 +284,7 @@ function TeamPreview() {
       initials: null as string | null,
       name: "Jonas Gissler",
       role: "Design & Entwicklung",
-      desc: "Jonas entwirft und entwickelt deine Website – von der Idee bis zur Live-Schaltung. Design, Technik und Hosting aus einer Hand.",
+      desc: "Jonas entwirft und entwickelt deine Webseite – von der Idee bis zur Live-Schaltung. Design, Technik und Hosting aus einer Hand.",
       linkedin: "https://www.linkedin.com/in/jonas-gissler-37b1482b0/",
     },
     {
