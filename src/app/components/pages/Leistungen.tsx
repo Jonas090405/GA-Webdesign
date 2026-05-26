@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { usePageMeta } from "../../hooks/usePageMeta";
 import { SectionLabel } from "../SectionLabel";
 import { Card } from "../Card";
 import { PrimaryButton } from "../Button";
 import { FadeIn } from "../FadeIn";
-import { Palette, Code2, Rocket, CheckCircle2 } from "lucide-react";
+import { Palette, Code2, Rocket, CheckCircle2, Check, Server, Wrench, MessageSquare } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { ServiceCardBg, type BgKey } from "../ServiceCardBg";
 
@@ -39,7 +39,7 @@ const blocks: { Icon: React.ElementType; title: string; lead: string; points: st
     title: "Deployment",
     lead: "Du musst dich um nichts kümmern.",
     points: [
-      "Domain-Setup & Hosting inklusive",
+      "Domain-Setup & Hosting",
       "DSGVO-konform eingerichtet",
       "Fertig live auf deiner Wunsch-Domain",
       "Wir sind auch nach dem Launch da",
@@ -86,6 +86,359 @@ function LeistungenCard({
         </Card>
       </div>
     </FadeIn>
+  );
+}
+
+// ─── Tooltip ──────────────────────────────────────────────────────────────────
+function InfoTooltip({ text }: { text: string }) {
+  const [pos, setPos] = useState<{ x: number; y: number } | null>(null);
+  const btnRef = useRef<HTMLButtonElement>(null);
+
+  function handleEnter() {
+    if (!btnRef.current) return;
+    const rect = btnRef.current.getBoundingClientRect();
+    setPos({ x: rect.left + rect.width / 2, y: rect.top });
+  }
+
+  return (
+    <span className="inline-flex items-center align-middle">
+      <button
+        ref={btnRef}
+        type="button"
+        onMouseEnter={handleEnter}
+        onMouseLeave={() => setPos(null)}
+        className="ml-0.5 inline-flex items-center justify-center rounded-full cursor-default select-none shrink-0"
+        style={{
+          width: 15,
+          height: 15,
+          background: "rgba(77,190,243,0.12)",
+          border: "1px solid rgba(77,190,243,0.28)",
+          color: "#4dbef3",
+          fontSize: 9,
+          fontWeight: 700,
+          lineHeight: 1,
+        }}
+        aria-label="Mehr erfahren"
+      >
+        i
+      </button>
+      {pos && (
+        <span
+          className="z-[9999] w-56 rounded-xl px-3 py-2.5 text-[12px] text-slate-300 leading-relaxed pointer-events-none"
+          style={{
+            position: "fixed",
+            left: pos.x,
+            top: pos.y - 8,
+            transform: "translateX(-50%) translateY(-100%)",
+            background: "rgba(8,16,22,0.97)",
+            border: "1px solid rgba(77,190,243,0.18)",
+            backdropFilter: "blur(12px)",
+            boxShadow: "0 8px 32px rgba(0,0,0,0.5)",
+          }}
+        >
+          {text}
+        </span>
+      )}
+    </span>
+  );
+}
+
+// ─── Website-Preiskarte (dunkel, groß) ────────────────────────────────────────
+const websiteFeatureGroups: { label: string; points: string[] }[] = [
+  {
+    label: "Design",
+    points: [
+      "Individuelles Design – kein Template",
+      "Mobil-optimiert & schön auf allen Geräten",
+      "Auf deine Marke angepasst",
+      "Leicht verständlich für deine Kunden",
+    ],
+  },
+  {
+    label: "Technik",
+    points: [
+      "Schnelle Ladezeiten & modernste Technologie",
+      "SEO-Optimierung (Meta-Tags, Schema, Sitemap)",
+      "DSGVO-konform, SSL, Impressum & Datenschutz",
+      "Funktionen auf deine Bedürfnisse zugeschnitten",
+    ],
+  },
+  {
+    label: "Deployment",
+    points: [
+      "Domain-Setup & Hosting",
+      "DSGVO-konform eingerichtet & live geschaltet",
+      "Fertig auf deiner Wunsch-Domain",
+      "Persönlicher Support auch nach dem Launch",
+    ],
+  },
+];
+
+function WebsitePreisCard({ onContact }: { onContact: () => void }) {
+  return (
+    <div
+      className="flex flex-col h-full rounded-2xl p-7 xl:p-9 2xl:p-11"
+      style={{
+        background: "linear-gradient(145deg, rgba(12,22,30,0.99) 0%, rgba(7,14,20,1) 100%)",
+        border: "1px solid rgba(77,190,243,0.14)",
+      }}
+    >
+      {/* Header */}
+      <div className="mb-6">
+        <p className="text-[11px] tracking-[0.2em] uppercase font-medium mb-2" style={{ color: "#4dbef3" }}>
+          Website
+        </p>
+        <h3 className="text-white text-[26px] xl:text-[30px] 2xl:text-[34px] tracking-tight leading-tight mb-1">
+          Ihre Website
+        </h3>
+        <p className="text-slate-400 text-[14px] 2xl:text-[15px]">Komplett. Fertig. Persönlich.</p>
+      </div>
+
+      {/* Preis */}
+      <div className="mb-6">
+        <div className="flex items-baseline gap-2">
+          <span
+            className="text-[42px] xl:text-[50px] font-light tracking-tight"
+            style={{ color: "#4dbef3" }}
+          >
+            auf Anfrage
+          </span>
+        </div>
+        <p className="text-slate-500 text-[12px] mt-0.5">Individuelles Angebot nach Erstgespräch & Anforderungsanalyse</p>
+      </div>
+
+      <div className="h-px mb-6" style={{ background: "rgba(77,190,243,0.1)" }} />
+
+      {/* Features – gestaffelt nach Design / Technik / Deployment */}
+      <div className="space-y-4 mb-6">
+        {websiteFeatureGroups.map((group) => (
+          <div key={group.label}>
+            <p className="text-[10px] tracking-[0.18em] uppercase font-medium text-slate-500 mb-2">
+              {group.label}
+            </p>
+            <ul className="space-y-2">
+              {group.points.map((p) => (
+                <li key={p} className="flex items-start gap-2.5">
+                  <CheckCircle2 size={14} className="mt-0.5 shrink-0" style={{ color: "#4dbef3" }} />
+                  <span className="text-slate-300 text-[13px] xl:text-[14px] leading-snug">{p}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+
+      {/* CTA */}
+      <div className="mt-auto">
+        <button
+          onClick={onContact}
+          className="w-full rounded-xl py-3.5 text-[14px] xl:text-[15px] font-semibold text-white transition-all duration-300"
+          style={{
+            background: "linear-gradient(135deg, #006999 0%, #4dbef3 100%)",
+          }}
+          onMouseEnter={(e) => { e.currentTarget.style.filter = "brightness(1.1)"; }}
+          onMouseLeave={(e) => { e.currentTarget.style.filter = "brightness(1)"; }}
+        >
+          Erstgespräch vereinbaren
+        </button>
+      </div>
+    </div>
+  );
+}
+
+// ─── Hosting-Karte ─────────────────────────────────────────────────────────────
+function HostingCard() {
+  return (
+    <Card>
+      <div className="flex flex-col h-full">
+        <div className="flex items-center gap-2 mb-3">
+          <div
+            className="inline-flex h-9 w-9 items-center justify-center rounded-lg"
+            style={{ background: "rgba(77,190,243,0.1)", border: "1px solid rgba(77,190,243,0.18)" }}
+          >
+            <Server size={16} style={{ color: "#4dbef3" }} />
+          </div>
+          <h3 className="text-white text-[17px] xl:text-[19px] 2xl:text-[21px] font-medium">Hosting & Domain</h3>
+        </div>
+        <p className="text-slate-400 text-[13px] 2xl:text-[14px] leading-relaxed mb-5">
+          Wir kümmern uns um alles – Hosting, Domain-Beschaffung und Einrichtung. Du musst dich um nichts kümmern.
+        </p>
+        <div className="space-y-2">
+          {/* Hosting bei vorhandener Domain */}
+          <div
+            className="flex items-center justify-between rounded-lg px-3 py-2"
+            style={{ background: "rgba(77,190,243,0.05)", border: "1px solid rgba(77,190,243,0.1)" }}
+          >
+            <span className="text-slate-300 text-[12px]">Hosting bei vorhandener Domain</span>
+            <span className="text-[12px] font-semibold ml-3 shrink-0" style={{ color: "#4dbef3" }}>
+              5 €/Monat
+            </span>
+          </div>
+          {/* Domain-Beschaffung & Einrichtung */}
+          <div
+            className="rounded-lg px-3 py-2.5"
+            style={{ background: "rgba(77,190,243,0.05)", border: "1px solid rgba(77,190,243,0.1)" }}
+          >
+            <div className="flex items-start justify-between gap-3">
+              <span className="text-slate-300 text-[12px]">Domain-Beschaffung & Einrichtung</span>
+              <div className="text-right shrink-0">
+                <p className="text-[12px] font-semibold" style={{ color: "#4dbef3" }}>5 €/Monat</p>
+                <p className="text-[11px] font-medium mt-0.5" style={{ color: "#4dbef3" }}>+ Domainkosten je nach Wunschdomain</p>
+                <p className="text-[11px] font-medium mt-0.5" style={{ color: "#4dbef3" }}>+ 60 € Einrichtung (einmalig)</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Card>
+  );
+}
+
+// ─── Wartung-Karte ─────────────────────────────────────────────────────────────
+const wartungTiers: {
+  name: string;
+  price: string;
+  features: { label: React.ReactNode }[];
+}[] = [
+  {
+    name: "Basis",
+    price: "5 €/Monat",
+    features: [
+      { label: "Sicherheitsupdates der Website" },
+      { label: "Technische Fehlerbehebungen" },
+      { label: "Überwachung" },
+    ],
+  },
+  {
+    name: "Erweitert",
+    price: "20 €/Monat",
+    features: [
+      { label: "Alles aus Basis" },
+      {
+        label: (
+          <>
+            1 Inhaltsanpassung<InfoTooltip text="Texte, Bilder oder kleine Inhalte auf deiner Website werden auf Wunsch aktualisiert oder angepasst." /> pro Monat
+          </>
+        ),
+      },
+    ],
+  },
+  {
+    name: "Erweitert+",
+    price: "50 €/Monat",
+    features: [
+      { label: "Alles aus Erweitert" },
+      {
+        label: (
+          <>
+            2 Inhaltsanpassungen<InfoTooltip text="Texte, Bilder oder kleine Inhalte auf deiner Website werden auf Wunsch aktualisiert oder angepasst." /> pro Monat
+          </>
+        ),
+      },
+      {
+        label: (
+          <>
+            1 Inhaltserweiterung<InfoTooltip text="Eine komplett neue Sektion oder ein neues Element wird deiner Website hinzugefügt – z. B. eine neue Unterseite, ein neues Formular oder ein Galerie-Bereich." /> pro Monat
+          </>
+        ),
+      },
+    ],
+  },
+];
+
+function WartungCard() {
+  return (
+    <Card>
+      <div className="flex items-center gap-2 mb-5">
+        <div
+          className="inline-flex h-9 w-9 items-center justify-center rounded-lg"
+          style={{ background: "rgba(77,190,243,0.1)", border: "1px solid rgba(77,190,243,0.18)" }}
+        >
+          <Wrench size={16} style={{ color: "#4dbef3" }} />
+        </div>
+        <h3 className="text-white text-[17px] xl:text-[19px] 2xl:text-[21px] font-medium">Wartung</h3>
+      </div>
+      <p className="text-slate-400 text-[13px] 2xl:text-[14px] leading-relaxed mb-5">
+        Kein Muss – aber empfohlen. Wer seine Inhalte lieber selbst pflegen möchte, kann alternativ ein CMS bekommen und Änderungen eigenständig vornehmen.
+      </p>
+
+      <div className="space-y-0 divide-y" style={{ borderColor: "rgba(77,190,243,0.07)" }}>
+        {wartungTiers.map((tier) => (
+          <div
+            key={tier.name}
+            className="py-4 first:pt-0 last:pb-0"
+          >
+            <div className="flex items-center justify-between mb-2.5">
+              <span className="text-[15px] xl:text-[16px] font-semibold text-white">
+                {tier.name}
+              </span>
+              <span className="text-[13px] font-semibold" style={{ color: "#4dbef3" }}>
+                {tier.price}
+              </span>
+            </div>
+            <ul className="space-y-1.5">
+              {tier.features.map((f, idx) => (
+                <li
+                  key={idx}
+                  className="flex items-center gap-2 text-slate-400 text-[12px] xl:text-[13px] leading-snug"
+                >
+                  <Check size={12} className="shrink-0" style={{ color: "#4dbef3" }} />
+                  <span>{f.label}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+
+      <div className="mt-4 pt-4" style={{ borderTop: "1px solid rgba(77,190,243,0.07)" }}>
+        <p className="text-slate-500 text-[11px] leading-relaxed">
+          <MessageSquare size={11} className="inline mr-1.5 shrink-0 align-middle" />
+          Kein Paket nötig – einzelne Inhaltsanpassungen & Erweiterungen sind auch ohne Wartungsvertrag auf Anfrage buchbar. Preis je nach Aufwand.
+        </p>
+      </div>
+    </Card>
+  );
+}
+
+// ─── Preise Section ─────────────────────────────────────────────────────────────
+function PreiseSection({ onContact }: { onContact: () => void }) {
+  return (
+    <section className="mt-24 2xl:mt-32">
+      <FadeIn>
+        <SectionLabel>Preise</SectionLabel>
+        <h2 className="text-white text-[clamp(26px,4vw,52px)] tracking-tight leading-tight max-w-2xl 2xl:max-w-3xl mb-3">
+          Transparent.{" "}
+          <span
+            className="bg-clip-text text-transparent"
+            style={{ backgroundImage: "linear-gradient(135deg, #4dbef3 0%, #006999 100%)" }}
+          >
+            Fair.
+          </span>{" "}
+          Klar.
+        </h2>
+        <p className="text-slate-400 text-[15px] xl:text-[16px] 2xl:text-[17px] leading-relaxed max-w-xl 2xl:max-w-2xl">
+          Kein verstecktes Kleingedrucktes – du weißt von Anfang an, was du bekommst und was es kostet.
+        </p>
+      </FadeIn>
+
+      <div className="mt-10 2xl:mt-14 grid grid-cols-1 lg:grid-cols-2 gap-6 2xl:gap-8 items-start">
+        {/* Website Card (links, groß) */}
+        <FadeIn delay={0} className="h-full">
+          <WebsitePreisCard onContact={onContact} />
+        </FadeIn>
+
+        {/* Rechte Spalte: Hosting + Wartung */}
+        <div className="flex flex-col gap-6 2xl:gap-8">
+          <FadeIn delay={0.08}>
+            <HostingCard />
+          </FadeIn>
+          <FadeIn delay={0.16}>
+            <WartungCard />
+          </FadeIn>
+        </div>
+      </div>
+    </section>
   );
 }
 
@@ -165,6 +518,9 @@ export function Leistungen() {
           </div>
         </div>
       </FadeIn>
+
+      {/* Preise */}
+      <PreiseSection onContact={() => navigate("/kontakt")} />
 
       {/* CTA → Ablauf */}
       <FadeIn>
