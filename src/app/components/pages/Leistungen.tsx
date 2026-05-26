@@ -175,72 +175,113 @@ const websiteFeatureGroups: { label: string; points: string[] }[] = [
 ];
 
 function WebsitePreisCard({ onContact }: { onContact: () => void }) {
+  const outerRef = useRef<HTMLDivElement>(null);
+  const spotRef = useRef<HTMLDivElement>(null);
+
+  function handleMove(e: React.MouseEvent<HTMLDivElement>) {
+    const el = outerRef.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    const mx = e.clientX - rect.left;
+    const my = e.clientY - rect.top;
+    el.style.background = `radial-gradient(520px circle at ${mx}px ${my}px, rgba(77,190,243,0.55), rgba(77,190,243,0.06) 70%)`;
+    if (spotRef.current) {
+      spotRef.current.style.background = `radial-gradient(600px circle at ${mx}px ${my}px, rgba(77,190,243,0.07), transparent 70%)`;
+      spotRef.current.style.opacity = "1";
+    }
+  }
+
+  function handleLeave() {
+    const el = outerRef.current;
+    if (!el) return;
+    el.style.background = "rgba(77,190,243,0.14)";
+    if (spotRef.current) spotRef.current.style.opacity = "0";
+  }
+
   return (
     <div
-      className="flex flex-col h-full rounded-2xl p-7 xl:p-9 2xl:p-11"
-      style={{
-        background: "linear-gradient(145deg, rgba(12,22,30,0.99) 0%, rgba(7,14,20,1) 100%)",
-        border: "1px solid rgba(77,190,243,0.14)",
-      }}
+      ref={outerRef}
+      onMouseMove={handleMove}
+      onMouseLeave={handleLeave}
+      className="h-full rounded-2xl"
+      style={{ background: "rgba(77,190,243,0.14)", padding: "1px" }}
     >
-      {/* Header */}
-      <div className="mb-6">
-        <p className="text-[11px] tracking-[0.2em] uppercase font-medium mb-2" style={{ color: "#4dbef3" }}>
-          Website
-        </p>
-        <h3 className="text-white text-[26px] xl:text-[30px] 2xl:text-[34px] tracking-tight leading-tight mb-1">
-          Ihre Website
-        </h3>
-        <p className="text-slate-400 text-[14px] 2xl:text-[15px]">Komplett. Fertig. Persönlich.</p>
-      </div>
+      <div
+        className="relative overflow-hidden flex flex-col h-full rounded-2xl p-7 xl:p-9 2xl:p-11"
+        style={{
+          background: "linear-gradient(145deg, rgba(12,22,30,0.99) 0%, rgba(7,14,20,1) 100%)",
+        }}
+      >
+        {/* Spotlight overlay */}
+        <div
+          ref={spotRef}
+          aria-hidden
+          className="pointer-events-none absolute inset-0"
+          style={{ opacity: 0, transition: "opacity 0.3s" }}
+        />
 
-      {/* Preis */}
-      <div className="mb-6">
-        <div className="flex items-baseline gap-2">
-          <span
-            className="text-[42px] xl:text-[50px] font-light tracking-tight"
-            style={{ color: "#4dbef3" }}
-          >
-            auf Anfrage
-          </span>
-        </div>
-        <p className="text-slate-500 text-[12px] mt-0.5">Individuelles Angebot nach Erstgespräch & Anforderungsanalyse</p>
-      </div>
-
-      <div className="h-px mb-6" style={{ background: "rgba(77,190,243,0.1)" }} />
-
-      {/* Features – gestaffelt nach Design / Technik / Deployment */}
-      <div className="space-y-4 mb-6">
-        {websiteFeatureGroups.map((group) => (
-          <div key={group.label}>
-            <p className="text-[10px] tracking-[0.18em] uppercase font-medium text-slate-500 mb-2">
-              {group.label}
+        {/* Content */}
+        <div className="relative flex flex-col flex-1">
+          {/* Header */}
+          <div className="mb-6">
+            <p className="text-[11px] tracking-[0.2em] uppercase font-medium mb-2" style={{ color: "#4dbef3" }}>
+              Website
             </p>
-            <ul className="space-y-2">
-              {group.points.map((p) => (
-                <li key={p} className="flex items-start gap-2.5">
-                  <CheckCircle2 size={14} className="mt-0.5 shrink-0" style={{ color: "#4dbef3" }} />
-                  <span className="text-slate-300 text-[13px] xl:text-[14px] leading-snug">{p}</span>
-                </li>
-              ))}
-            </ul>
+            <h3 className="text-white text-[26px] xl:text-[30px] 2xl:text-[34px] tracking-tight leading-tight mb-1">
+              Ihre Website
+            </h3>
+            <p className="text-slate-400 text-[14px] 2xl:text-[15px]">Komplett. Fertig. Persönlich.</p>
           </div>
-        ))}
-      </div>
 
-      {/* CTA */}
-      <div className="mt-auto">
-        <button
-          onClick={onContact}
-          className="w-full rounded-xl py-3.5 text-[14px] xl:text-[15px] font-semibold text-white transition-all duration-300"
-          style={{
-            background: "linear-gradient(135deg, #006999 0%, #4dbef3 100%)",
-          }}
-          onMouseEnter={(e) => { e.currentTarget.style.filter = "brightness(1.1)"; }}
-          onMouseLeave={(e) => { e.currentTarget.style.filter = "brightness(1)"; }}
-        >
-          Erstgespräch vereinbaren
-        </button>
+          {/* Preis */}
+          <div className="mb-6">
+            <div className="flex items-baseline gap-2">
+              <span
+                className="text-[42px] xl:text-[50px] font-light tracking-tight"
+                style={{ color: "#4dbef3" }}
+              >
+                auf Anfrage
+              </span>
+            </div>
+            <p className="text-slate-500 text-[12px] mt-0.5">Individuelles Angebot nach Erstgespräch & Anforderungsanalyse</p>
+          </div>
+
+          <div className="h-px mb-6" style={{ background: "rgba(77,190,243,0.1)" }} />
+
+          {/* Features – gestaffelt nach Design / Technik / Deployment */}
+          <div className="space-y-4 mb-6">
+            {websiteFeatureGroups.map((group) => (
+              <div key={group.label}>
+                <p className="text-[10px] tracking-[0.18em] uppercase font-medium text-slate-500 mb-2">
+                  {group.label}
+                </p>
+                <ul className="space-y-2">
+                  {group.points.map((p) => (
+                    <li key={p} className="flex items-start gap-2.5">
+                      <CheckCircle2 size={14} className="mt-0.5 shrink-0" style={{ color: "#4dbef3" }} />
+                      <span className="text-slate-300 text-[13px] xl:text-[14px] leading-snug">{p}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+
+          {/* CTA */}
+          <div className="mt-auto">
+            <button
+              onClick={onContact}
+              className="w-full rounded-xl py-3.5 text-[14px] xl:text-[15px] font-semibold text-white transition-all duration-300"
+              style={{
+                background: "linear-gradient(135deg, #006999 0%, #4dbef3 100%)",
+              }}
+              onMouseEnter={(e) => { e.currentTarget.style.filter = "brightness(1.1)"; }}
+              onMouseLeave={(e) => { e.currentTarget.style.filter = "brightness(1)"; }}
+            >
+              Erstgespräch vereinbaren
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );
