@@ -6,6 +6,7 @@ import { PrimaryButton } from "../Button";
 import { Card } from "../Card";
 import { FadeIn } from "../FadeIn";
 import { Mail, MapPin, Clock, CheckCircle2, Phone } from "lucide-react";
+import { FAQSection } from "../FAQSection";
 import berkantImg from "../../../imports/Berkant_agyar.jpeg";
 import emailjs from "@emailjs/browser";
 
@@ -78,6 +79,14 @@ export function Kontakt() {
     name: "", email: "", phone: "", message: "",
   });
   const [errors, setErrors] = useState<FormErrors>({});
+  const [emailCopied, setEmailCopied] = useState(false);
+
+  function copyEmail() {
+    navigator.clipboard.writeText(BERKANT_EMAIL).then(() => {
+      setEmailCopied(true);
+      setTimeout(() => setEmailCopied(false), 2200);
+    });
+  }
 
   function handleChange(field: keyof FormData, value: string) {
     setFormData(prev => ({ ...prev, [field]: value }));
@@ -162,8 +171,8 @@ export function Kontakt() {
           <InfoItem
             Icon={Mail}
             label="E-Mail"
-            value={BERKANT_EMAIL}
-            href={`mailto:${BERKANT_EMAIL}`}
+            value={emailCopied ? "Kopiert ✓" : BERKANT_EMAIL}
+            onClick={copyEmail}
           />
           <InfoItem
             Icon={Phone}
@@ -253,12 +262,12 @@ export function Kontakt() {
                           <p className="text-red-400 text-[13px] leading-relaxed">
                             Beim Senden ist ein Fehler aufgetreten. Bitte versuche es erneut
                             oder schreib uns direkt an{" "}
-                            <a
-                              href={`mailto:${BERKANT_EMAIL}`}
-                              className="underline hover:text-red-300 transition-colors"
+                            <button
+                              onClick={copyEmail}
+                              className="underline cursor-pointer bg-transparent border-none p-0 text-red-400 hover:text-red-300 transition-colors"
                             >
-                              {BERKANT_EMAIL}
-                            </a>
+                              {emailCopied ? "Kopiert ✓" : BERKANT_EMAIL}
+                            </button>
                             .
                           </p>
                         )}
@@ -276,6 +285,8 @@ export function Kontakt() {
           </div>
         </FadeIn>
       </div>
+
+      <FAQSection className="mt-20 2xl:mt-28" showContactCTA={false} />
     </main>
   );
 }
@@ -367,11 +378,13 @@ function InfoItem({
   label,
   value,
   href,
+  onClick,
 }: {
   Icon: typeof Mail;
   label: string;
   value: string;
   href?: string;
+  onClick?: () => void;
 }) {
   return (
     <div className="flex items-start gap-4">
@@ -385,7 +398,14 @@ function InfoItem({
         <div className="text-slate-500 text-[12px] tracking-[0.15em] uppercase mb-1">
           {label}
         </div>
-        {href ? (
+        {onClick ? (
+          <button
+            onClick={onClick}
+            className="text-white text-[14px] hover:text-sky-300 transition-colors cursor-pointer bg-transparent border-none p-0 text-left"
+          >
+            {value}
+          </button>
+        ) : href ? (
           <a href={href} className="text-white text-[14px] hover:text-sky-300 transition-colors">
             {value}
           </a>

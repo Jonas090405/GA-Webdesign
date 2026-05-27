@@ -420,6 +420,14 @@ function Contact() {
   const [status, setStatus] = useState<"idle" | "loading" | "sent" | "error">("idle");
   const [formData, setFormData] = useState<HomeFormData>({ name: "", email: "", phone: "", message: "" });
   const [errors, setErrors] = useState<HomeFormErrors>({});
+  const [emailCopied, setEmailCopied] = useState(false);
+
+  function copyEmail() {
+    navigator.clipboard.writeText(BERKANT_EMAIL).then(() => {
+      setEmailCopied(true);
+      setTimeout(() => setEmailCopied(false), 2200);
+    });
+  }
 
   function handleChange(field: keyof HomeFormData, value: string) {
     setFormData(prev => ({ ...prev, [field]: value }));
@@ -496,9 +504,12 @@ function Contact() {
           <div className="space-y-3 text-[14px] xl:text-[16px]">
             <div>
               <div className="mb-1" style={{ color: "rgba(150, 180, 200, 0.5)" }}>E-Mail</div>
-              <a href={`mailto:${BERKANT_EMAIL}`} className="text-white hover:text-sky-300 transition-colors break-all">
-                {BERKANT_EMAIL}
-              </a>
+              <button
+                onClick={copyEmail}
+                className="cursor-pointer text-white hover:text-sky-300 transition-colors break-all bg-transparent border-none p-0 text-left text-[14px] xl:text-[16px]"
+              >
+                {emailCopied ? "Kopiert ✓" : BERKANT_EMAIL}
+              </button>
             </div>
             <div>
               <div className="mb-1" style={{ color: "rgba(150, 180, 200, 0.5)" }}>Telefon</div>
@@ -622,9 +633,9 @@ function Contact() {
                   {status === "error" && (
                     <p className="text-red-400 text-[13px]">
                       Fehler beim Senden. Bitte direkt an{" "}
-                      <a href={`mailto:${BERKANT_EMAIL}`} className="underline">
-                        {BERKANT_EMAIL}
-                      </a>{" "}
+                      <button onClick={copyEmail} className="underline cursor-pointer bg-transparent border-none p-0 text-red-400 hover:text-red-300 transition-colors">
+                        {emailCopied ? "Kopiert ✓" : BERKANT_EMAIL}
+                      </button>{" "}
                       schreiben.
                     </p>
                   )}

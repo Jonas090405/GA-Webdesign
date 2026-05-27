@@ -133,25 +133,9 @@
       <title>G&A Webdesign | Moderne Webseiten für lokale Unternehmen</title>
       <style>html, body { height: 100%; margin: 0; } #root { height: 100%; }</style>
 
-      <!-- Google Consent Mode V2 – defaults BEFORE gtag.js loads -->
-      <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('consent', 'default', {
-          'ad_storage':        'denied',
-          'ad_user_data':      'denied',
-          'ad_personalization':'denied',
-          'analytics_storage': 'denied'
-        });
-      </script>
-      <!-- Google tag (gtag.js) -->
-      <script async src="https://www.googletagmanager.com/gtag/js?id=%VITE_GA_MEASUREMENT_ID%"></script>
-      <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', '%VITE_GA_MEASUREMENT_ID%');
-      </script>
+      <!-- Google Analytics wird ausschließlich nach expliziter Nutzer-Einwilligung
+           via CookieBanner geladen (src/lib/analytics.ts → grantConsent).
+           Kein Script-Tag hier = kein Kontakt zu Google-Servern ohne Consent. -->
     </head>
 
     <body>

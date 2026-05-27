@@ -7,6 +7,7 @@ import { FadeIn } from "../FadeIn";
 import { Palette, Code2, Rocket, CheckCircle2, Check, Server, Wrench, MessageSquare } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { ServiceCardBg, type BgKey } from "../ServiceCardBg";
+import { FAQSection } from "../FAQSection";
 
 const blocks: { Icon: React.ElementType; title: string; lead: string; points: string[]; bgKey: BgKey }[] = [
   {
@@ -562,6 +563,9 @@ export function Leistungen() {
 
       {/* Preise */}
       <PreiseSection onContact={() => navigate("/kontakt")} />
+
+      {/* FAQ */}
+      <FAQSection />
 
       {/* CTA → Ablauf */}
       <FadeIn>
