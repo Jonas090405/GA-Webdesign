@@ -369,7 +369,7 @@ const wartungTiers: {
     name: "Erweitert+",
     price: "200 €/Monat",
     features: [
-      { label: "Alles aus Erweitert" },
+      { label: "Alles aus Basis" },
       {
         label: (
           <>
