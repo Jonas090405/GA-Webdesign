@@ -9,7 +9,7 @@ import { motion, AnimatePresence } from "motion/react";
 import berkantImg from "../../imports/Berkant_agyar.jpeg";
 import { SectionLabel } from "./SectionLabel";
 import { FadeIn } from "./FadeIn";
-import { Plus, ChevronLeft, ChevronRight } from "lucide-react";
+import { Plus, ChevronLeft, ChevronRight, Mail, Phone } from "lucide-react";
 
 // ─── Daten ────────────────────────────────────────────────────────────────────
 const FAQ_EMAIL = "Berkant@ga-webdesign.de";
@@ -43,6 +43,14 @@ const faqs: { q: string; a: string }[] = [
   {
     q: "Arbeitet ihr auch überregional?",
     a: "Ja – wir arbeiten mit Kunden aus ganz Deutschland zusammen, vollständig remote. Für Kennenlerngespräch, Anforderungsanalyse und alle weiteren Abstimmungen nutzen wir einfach Video-Call oder Telefon. Dein Standort spielt keine Rolle.",
+  },
+  {
+    q: "Bekomme ich eine Vorschau bevor die Seite live geht?",
+    a: "Ja, auf jeden Fall. Kurz vor dem Launch erhältst du einen Vorschau-Link, über den du die fertige Seite in Ruhe anschauen und testen kannst. Erst wenn du mit allem zufrieden bist, schalten wir live.",
+  },
+  {
+    q: "Arbeitet ihr mit Festpreisen oder nach Aufwand?",
+    a: "Wir arbeiten in der Regel mit transparenten Festpreisen, die wir nach der gemeinsamen Anforderungsanalyse schriftlich festhalten. So weißt du von Anfang an genau, was dein Projekt kostet – keine versteckten Kosten oder böse Überraschungen.",
   },
 ];
 
@@ -201,12 +209,22 @@ export function FAQSection({
     });
   }
 
-  const goNext = () => { setDir(1);  setStartIdx((i) => (i + 1) % total); };
-  const goPrev = () => { setDir(-1); setStartIdx((i) => (i - 1 + total) % total); };
+  // Seitenbasiert: 3 Karten pro Seite, keine doppelten Stages
+  const PAGE_SIZE = 3;
+  const numPages   = Math.ceil(total / PAGE_SIZE);
+
+  const goNext = () => { setDir(1);  setStartIdx((i) => (i + 1) % numPages); };
+  const goPrev = () => { setDir(-1); setStartIdx((i) => (i - 1 + numPages) % numPages); };
+
+  // Letzte Seite: zeigt die letzten PAGE_SIZE FAQs (kein Wrap zurück zu FAQ[0])
+  const pageStart =
+    startIdx === numPages - 1 && total % PAGE_SIZE !== 0
+      ? total - PAGE_SIZE
+      : startIdx * PAGE_SIZE;
 
   const visible = ([0, 1, 2] as const).map((offset) => ({
-    faq: faqs[(startIdx + offset) % total],
-    key: (startIdx + offset) % total,
+    faq: faqs[(pageStart + offset) % total],
+    key: pageStart + offset, // eindeutig pro Seite → saubere Animationen
   }));
 
   return (
@@ -282,9 +300,9 @@ export function FAQSection({
           </motion.div>
         </AnimatePresence>
 
-        {/* Progress dots */}
+        {/* Progress dots – eine pro Seite */}
         <div className="flex justify-center items-center gap-2 mt-6">
-          {faqs.map((_, i) => (
+          {Array.from({ length: numPages }).map((_, i) => (
             <button
               key={i}
               onClick={() => { setDir(i > startIdx ? 1 : -1); setStartIdx(i); }}
@@ -294,7 +312,7 @@ export function FAQSection({
                 width: i === startIdx ? 20 : 5,
                 background: i === startIdx ? "#4dbef3" : "rgba(77,190,243,0.25)",
               }}
-              aria-label={`Frage ${i + 1}`}
+              aria-label={`Seite ${i + 1}`}
             />
           ))}
         </div>
@@ -328,11 +346,12 @@ export function FAQSection({
             </div>
           </div>
 
-          {/* Kontakt-Buttons – visuell identisch, Clipboard-Copy */}
+          {/* Kontakt-Buttons – visuell identisch */}
           <div className="flex gap-2.5 shrink-0">
+            {/* E-Mail → Clipboard-Copy */}
             <button
               onClick={() => copyToClipboard("email")}
-              className="cursor-pointer inline-flex items-center rounded-full px-4 py-2 text-[13px] xl:text-[14px] font-medium transition-all duration-200 whitespace-nowrap"
+              className="cursor-pointer inline-flex items-center gap-2 rounded-full px-4 py-2 text-[13px] xl:text-[14px] font-medium transition-all duration-200 whitespace-nowrap"
               style={{
                 background: "rgba(77,190,243,0.09)",
                 border: "1px solid rgba(77,190,243,0.2)",
@@ -341,11 +360,13 @@ export function FAQSection({
               onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(77,190,243,0.16)"; e.currentTarget.style.borderColor = "rgba(77,190,243,0.38)"; }}
               onMouseLeave={(e) => { e.currentTarget.style.background = "rgba(77,190,243,0.09)"; e.currentTarget.style.borderColor = "rgba(77,190,243,0.2)"; }}
             >
+              <Mail size={14} />
               {copied === "email" ? "Kopiert ✓" : "E-Mail schreiben"}
             </button>
-            <button
-              onClick={() => copyToClipboard("phone")}
-              className="cursor-pointer inline-flex items-center rounded-full px-4 py-2 text-[13px] xl:text-[14px] font-medium transition-all duration-200 whitespace-nowrap"
+            {/* Anrufen → direkt tel: öffnen */}
+            <a
+              href={`tel:${FAQ_PHONE.replace(/[\s]/g, "")}`}
+              className="inline-flex items-center gap-2 rounded-full px-4 py-2 text-[13px] xl:text-[14px] font-medium transition-all duration-200 whitespace-nowrap"
               style={{
                 background: "rgba(77,190,243,0.09)",
                 border: "1px solid rgba(77,190,243,0.2)",
@@ -354,8 +375,9 @@ export function FAQSection({
               onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(77,190,243,0.16)"; e.currentTarget.style.borderColor = "rgba(77,190,243,0.38)"; }}
               onMouseLeave={(e) => { e.currentTarget.style.background = "rgba(77,190,243,0.09)"; e.currentTarget.style.borderColor = "rgba(77,190,243,0.2)"; }}
             >
-              {copied === "phone" ? "Kopiert ✓" : "Anrufen"}
-            </button>
+              <Phone size={14} />
+              Anrufen
+            </a>
           </div>
         </div>
       )}
