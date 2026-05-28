@@ -344,7 +344,7 @@ const wartungTiers: {
 }[] = [
   {
     name: "Basis",
-    price: "5 €/Monat",
+    price: "15 €/Monat",
     features: [
       { label: "Sicherheitsupdates der Webseite" },
       { label: "Technische Fehlerbehebungen" },
@@ -353,7 +353,7 @@ const wartungTiers: {
   },
   {
     name: "Erweitert",
-    price: "20 €/Monat",
+    price: "50 €/Monat",
     features: [
       { label: "Alles aus Basis" },
       {
@@ -367,7 +367,7 @@ const wartungTiers: {
   },
   {
     name: "Erweitert+",
-    price: "50 €/Monat",
+    price: "200 €/Monat",
     features: [
       { label: "Alles aus Erweitert" },
       {

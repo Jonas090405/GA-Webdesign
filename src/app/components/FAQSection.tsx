@@ -38,7 +38,7 @@ const faqs: { q: string; a: string }[] = [
   },
   {
     q: "Was ist der Unterschied zwischen den Wartungspaketen?",
-    a: "Basis (5 €/Mon.): Sicherheitsupdates, Fehlerbehebungen & Überwachung. Erweitert (20 €/Mon.): plus eine monatliche Inhaltsanpassung – z. B. Texte oder Bilder. Erweitert+ (50 €/Mon.): zwei Anpassungen und eine Inhaltserweiterung pro Monat, z. B. eine neue Unterseite.",
+    a: "Basis (15 €/Mon.): Sicherheitsupdates, Fehlerbehebungen & Überwachung. Erweitert (50 €/Mon.): plus eine monatliche Inhaltsanpassung – z. B. Texte oder Bilder. Erweitert+ (200 €/Mon.): zwei Anpassungen und eine Inhaltserweiterung pro Monat, z. B. eine neue Unterseite.",
   },
   {
     q: "Arbeitet ihr auch überregional?",
