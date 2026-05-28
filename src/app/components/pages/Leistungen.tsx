@@ -346,9 +346,11 @@ const wartungTiers: {
     name: "Basis",
     price: "15 €/Monat",
     features: [
-      { label: "Sicherheitsupdates der Webseite" },
-      { label: "Technische Fehlerbehebungen" },
       { label: "Überwachung" },
+      { label: "Meldung von Problemen" },
+      { label: "Beratung bei Problemen" },
+      { label: "Sicherheitsupdates" },
+      { label: "Technische Instandhaltung" },
     ],
   },
   {
