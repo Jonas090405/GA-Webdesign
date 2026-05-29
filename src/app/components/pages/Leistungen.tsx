@@ -534,6 +534,7 @@ export function Leistungen() {
               "Google Analytics Tracking",
               "Content Management System",
               "Admin Panel",
+              "Bewerbungsportal",
               "Mehrsprachigkeit",
               "Online-Shop",
               "Buchungssystem",
