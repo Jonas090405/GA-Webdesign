@@ -14,6 +14,7 @@ import emailjs from "@emailjs/browser";
 import profilbild from "../../../imports/Jonas_Gissler.png";
 import berkantImg from "../../../imports/Berkant_agyar.jpeg";
 import { DesignerSVG } from "../DesignerSVG";
+import { TeamBadge } from "../TeamBadge";
 import gcnImg from "../../../imports/gcn-fahrzeughandel.png";
 import gcnAvatar from "../../../imports/gcn-avatar.jpeg";
 
@@ -70,6 +71,7 @@ function Hero() {
       <div className="relative z-10 grid lg:grid-cols-2 gap-10 lg:gap-8 xl:gap-16 2xl:gap-24 items-center">
         <div>
           <FadeIn>
+            <TeamBadge />
             <SectionLabel>Webdesign · Entwicklung · Deployment</SectionLabel>
           </FadeIn>
 

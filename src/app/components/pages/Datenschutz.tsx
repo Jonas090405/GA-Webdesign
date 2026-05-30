@@ -1,7 +1,6 @@
 import { SectionLabel } from "../SectionLabel";
 import { Card } from "../Card";
 import { FadeIn } from "../FadeIn";
-
 export function Datenschutz() {
   return (
     <main className="mx-auto max-w-3xl px-5 sm:px-6 pt-28 sm:pt-32 pb-12">
