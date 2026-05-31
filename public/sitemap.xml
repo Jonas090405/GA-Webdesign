@@ -4,30 +4,36 @@
     <loc>https://ga-webdesign.de/</loc>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
-    <lastmod>2026-05-12</lastmod>
+    <lastmod>2026-05-31</lastmod>
   </url>
   <url>
     <loc>https://ga-webdesign.de/leistungen</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
-    <lastmod>2026-05-12</lastmod>
+    <lastmod>2026-05-31</lastmod>
   </url>
   <url>
     <loc>https://ga-webdesign.de/projekte</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
-    <lastmod>2026-05-12</lastmod>
+    <lastmod>2026-05-31</lastmod>
   </url>
   <url>
-    <loc>https://ga-webdesign.de/ueber-mich</loc>
+    <loc>https://ga-webdesign.de/ablauf</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <lastmod>2026-05-12</lastmod>
+    <lastmod>2026-05-31</lastmod>
+  </url>
+  <url>
+    <loc>https://ga-webdesign.de/ueber-uns</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <lastmod>2026-05-31</lastmod>
   </url>
   <url>
     <loc>https://ga-webdesign.de/kontakt</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <lastmod>2026-05-12</lastmod>
+    <lastmod>2026-05-31</lastmod>
   </url>
 </urlset>

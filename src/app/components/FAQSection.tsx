@@ -85,8 +85,14 @@ function DesktopFAQCard({ faq }: { faq: (typeof faqs)[0] }) {
       onMouseMove={handleMove}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={handleLeave}
-      className="rounded-2xl cursor-default"
-      style={{ background: "rgba(77,190,243,0.1)", padding: "1px" }}
+      onFocus={() => setHovered(true)}
+      onBlur={() => { setHovered(false); if (outerRef.current) outerRef.current.style.background = "rgba(77,190,243,0.1)"; }}
+      tabIndex={0}
+      role="button"
+      aria-expanded={hovered}
+      aria-label={faq.q}
+      className="rounded-2xl"
+      style={{ background: "rgba(77,190,243,0.1)", padding: "1px", cursor: "default" }}
     >
       <div
         className="relative overflow-hidden rounded-2xl h-[290px] xl:h-[300px] 2xl:h-[310px]"
@@ -151,6 +157,7 @@ function MobileAccordionItem({ faq }: { faq: (typeof faqs)[0] }) {
     >
       <button
         onClick={() => setOpen(!open)}
+        aria-expanded={open}
         className="w-full flex items-center justify-between gap-4 px-5 py-4 text-left"
       >
         <span
@@ -162,6 +169,7 @@ function MobileAccordionItem({ faq }: { faq: (typeof faqs)[0] }) {
         <motion.span
           animate={{ rotate: open ? 45 : 0 }}
           transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+          aria-hidden="true"
           className="shrink-0"
           style={{ color: "#4dbef3" }}
         >
@@ -306,14 +314,25 @@ export function FAQSection({
             <button
               key={i}
               onClick={() => { setDir(i > startIdx ? 1 : -1); setStartIdx(i); }}
-              className="rounded-full transition-all duration-300"
+              aria-label={`FAQ-Seite ${i + 1}${i === startIdx ? " (aktiv)" : ""}`}
+              aria-current={i === startIdx ? "true" : undefined}
+              className="rounded-full transition-all duration-300 flex items-center justify-center"
               style={{
-                height: 5,
-                width: i === startIdx ? 20 : 5,
-                background: i === startIdx ? "#4dbef3" : "rgba(77,190,243,0.25)",
+                padding: "10px",
+                margin: "-10px",
+                background: "transparent",
+                border: "none",
               }}
-              aria-label={`Seite ${i + 1}`}
-            />
+            >
+              <span
+                className="rounded-full block transition-all duration-300 pointer-events-none"
+                style={{
+                  height: 5,
+                  width: i === startIdx ? 20 : 5,
+                  background: i === startIdx ? "#4dbef3" : "rgba(77,190,243,0.25)",
+                }}
+              />
+            </button>
           ))}
         </div>
       </div>
@@ -340,7 +359,7 @@ export function FAQSection({
               <div className="text-white font-semibold text-[14px] xl:text-[15px] leading-tight">
                 Berkant Agyar
               </div>
-              <div className="text-[12px] xl:text-[13px] mt-0.5" style={{ color: "rgba(150,190,220,0.52)" }}>
+              <div className="text-[12px] xl:text-[13px] mt-0.5" style={{ color: "rgba(170,210,235,0.72)" }}>
                 Noch eine andere Frage? Meld dich gerne.
               </div>
             </div>
@@ -360,12 +379,13 @@ export function FAQSection({
               onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(77,190,243,0.16)"; e.currentTarget.style.borderColor = "rgba(77,190,243,0.38)"; }}
               onMouseLeave={(e) => { e.currentTarget.style.background = "rgba(77,190,243,0.09)"; e.currentTarget.style.borderColor = "rgba(77,190,243,0.2)"; }}
             >
-              <Mail size={14} />
+              <Mail size={14} aria-hidden="true" />
               {copied === "email" ? "Kopiert ✓" : "E-Mail schreiben"}
             </button>
             {/* Anrufen → direkt tel: öffnen */}
             <a
               href={`tel:${FAQ_PHONE.replace(/[\s]/g, "")}`}
+              aria-label="Berkant Agyar anrufen"
               className="inline-flex items-center gap-2 rounded-full px-4 py-2 text-[13px] xl:text-[14px] font-medium transition-all duration-200 whitespace-nowrap"
               style={{
                 background: "rgba(77,190,243,0.09)",
@@ -375,7 +395,7 @@ export function FAQSection({
               onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(77,190,243,0.16)"; e.currentTarget.style.borderColor = "rgba(77,190,243,0.38)"; }}
               onMouseLeave={(e) => { e.currentTarget.style.background = "rgba(77,190,243,0.09)"; e.currentTarget.style.borderColor = "rgba(77,190,243,0.2)"; }}
             >
-              <Phone size={14} />
+              <Phone size={14} aria-hidden="true" />
               Anrufen
             </a>
           </div>

@@ -3,7 +3,7 @@ import { Card } from "../Card";
 import { FadeIn } from "../FadeIn";
 export function Impressum() {
   return (
-    <main className="mx-auto max-w-3xl px-5 sm:px-6 pt-28 sm:pt-32 pb-12">
+    <main id="main-content" className="mx-auto max-w-3xl px-5 sm:px-6 pt-28 sm:pt-32 pb-12">
       <FadeIn>
         <SectionLabel>Rechtliches</SectionLabel>
         <h1 className="text-white text-[clamp(32px,6vw,64px)] tracking-tight leading-[1.05]">

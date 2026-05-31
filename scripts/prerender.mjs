@@ -3,7 +3,7 @@ import { createServer } from 'http';
 import { readFileSync, writeFileSync, mkdirSync } from 'fs';
 import { join, extname } from 'path';
 
-const ROUTES = ['/', '/projekte', '/leistungen', '/ueber-mich', '/kontakt', '/impressum', '/datenschutz'];
+const ROUTES = ['/', '/projekte', '/leistungen', '/ablauf', '/ueber-uns', '/kontakt', '/impressum', '/datenschutz'];
 const PORT = 3033;
 const distDir = join(process.cwd(), 'dist');
 
