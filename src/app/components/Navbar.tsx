@@ -83,7 +83,7 @@ export function Navbar() {
               >
                 <img
                   src={logoUrl}
-                  alt="GA Webdesign Logo"
+                  alt="G&A Webdesign Logo"
                   style={{ height: scrolled ? "36px" : "44px", transition: "height 0.3s ease", width: "auto" }}
                 />
               </Link>
@@ -154,7 +154,7 @@ export function Navbar() {
           aria-label="Zur Startseite"
           className="cursor-pointer hover:opacity-75 transition-opacity duration-200"
         >
-          <img src={logoUrl} alt="GA Webdesign Logo" className="h-9 w-auto" />
+          <img src={logoUrl} alt="G&A Webdesign Logo" className="h-9 w-auto" />
         </Link>
 
         <button
@@ -199,7 +199,7 @@ export function Navbar() {
                   aria-label="Zur Startseite"
                   className="cursor-pointer hover:opacity-70 transition-opacity duration-200"
                 >
-                  <img src={logoUrl} alt="GA Webdesign Logo" className="h-9 w-auto" />
+                  <img src={logoUrl} alt=" Logo" className="h-9 w-auto" />
                 </Link>
                 <button
                   onClick={() => setIsOpen(false)}

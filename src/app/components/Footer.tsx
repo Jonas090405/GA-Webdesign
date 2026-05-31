@@ -31,7 +31,7 @@ export function Footer() {
             <div className="flex items-center gap-2.5 mb-0.5">
               <img
                 src={logoUrl}
-                alt="GA Webdesign Logo"
+                alt="G&A Webdesign Logo"
                 className="h-8 2xl:h-9 w-auto opacity-80"
               />
               <div
@@ -43,7 +43,7 @@ export function Footer() {
                   backgroundClip: "text",
                 }}
               >
-                GA Webdesign
+                G&amp;A Webdesign
               </div>
             </div>
             <p
@@ -95,7 +95,7 @@ export function Footer() {
               href="https://www.linkedin.com/company/g%26a-webdesign/"
               target="_blank"
               rel="noreferrer"
-              aria-label="LinkedIn Profil von GA Webdesign"
+              aria-label="LinkedIn Profil von G&A Webdesign"
               className="mt-2 inline-flex items-center gap-2 text-[14px] 2xl:text-[16px] transition-colors duration-200 cursor-pointer"
               style={{ color: "rgba(200, 225, 240, 0.7)" }}
               onMouseEnter={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = "#4dbef3")}
@@ -151,7 +151,7 @@ export function Footer() {
           style={{ borderTop: "1px solid rgba(77, 190, 243, 0.06)" }}
         >
           <p className="text-[13px] 2xl:text-[15px]" style={{ color: "rgba(170, 200, 220, 0.65)" }}>
-            © 2026 GA Webdesign — Alle Rechte vorbehalten
+            © 2026 G&A Webdesign — Alle Rechte vorbehalten
           </p>
           <p className="text-[13px] 2xl:text-[15px]" style={{ color: "rgba(170, 200, 220, 0.5)" }}>
             Danke für deinen Besuch :)
