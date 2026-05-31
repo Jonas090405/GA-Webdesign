@@ -30,7 +30,7 @@ const blocks: { Icon: React.ElementType; title: string; lead: string; points: st
     points: [
       "Modernste Technik im Hintergrund",
       "Schnelle Ladezeiten",
-      "Gut bei Google auffindbar",
+      "Gut bei Google auffindbar (SEO)",
       "Funktionen, auf deine Bedürfnisse angepasst",
     ],
   },
