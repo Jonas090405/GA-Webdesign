@@ -346,6 +346,8 @@ const wartungTiers: {
       { label: "Beratung bei Problemen" },
       { label: "Sicherheitsupdates" },
       { label: "Technische Instandhaltung" },
+      { label: "WCAG-Konformitätsinstandhaltung" },
+
     ],
   },
   {
