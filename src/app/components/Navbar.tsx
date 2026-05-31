@@ -8,7 +8,7 @@ const items = [
   { id: "/projekte", label: "Projekte", Icon: Briefcase },
   { id: "/leistungen", label: "Leistungen", Icon: Layers },
   { id: "/ablauf", label: "Ablauf", Icon: Route },
-  { id: "/ueber-mich", label: "Über uns", Icon: User },
+  { id: "/ueber-uns", label: "Über uns", Icon: User },
   { id: "/kontakt", label: "Kontakt", Icon: Mail },
 ];
 
@@ -34,8 +34,24 @@ export function Navbar() {
 
   useEffect(() => { setIsOpen(false); }, [location.pathname]);
 
+  useEffect(() => {
+    if (!isOpen) return;
+    const handleEsc = (e: KeyboardEvent) => { if (e.key === "Escape") setIsOpen(false); };
+    window.addEventListener("keydown", handleEsc);
+    return () => window.removeEventListener("keydown", handleEsc);
+  }, [isOpen]);
+
   return (
     <>
+      {/* Skip navigation – WCAG 2.4.1 */}
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[200] focus:px-4 focus:py-2 focus:rounded-lg focus:font-medium focus:text-sm"
+        style={{ background: "#4dbef3", color: "#0d1115" }}
+      >
+        Zum Inhalt springen
+      </a>
+
       {/* ── DESKTOP header bar (lg+) ───────────────────────── */}
       <motion.header
         className="fixed top-0 left-0 right-0 z-50 hidden xl:block"
@@ -83,6 +99,7 @@ export function Navbar() {
                   <Link
                     key={id}
                     to={id}
+                    aria-current={active ? "page" : undefined}
                     className="nav-item group flex items-center gap-2.5 font-medium cursor-pointer relative py-1.5 whitespace-nowrap pointer-events-auto no-underline"
                     style={{ color: active ? "#ffffff" : "rgba(200,220,235,0.65)", fontSize: scrolled ? "15px" : "17px", transition: "color 0.2s, font-size 0.35s ease", textDecoration: "none" }}
                     onMouseEnter={(e) => {
@@ -166,6 +183,9 @@ export function Navbar() {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", damping: 26, stiffness: 220 }}
+              role="dialog"
+              aria-modal="true"
+              aria-label="Hauptmenü"
               className="fixed top-0 right-0 bottom-0 w-[300px] z-[70] flex flex-col shadow-[-16px_0_48px_rgba(0,0,0,0.6)]"
               style={{
                 background: "linear-gradient(160deg, rgb(16,24,28) 0%, rgb(11,15,19) 100%)",
@@ -206,6 +226,7 @@ export function Navbar() {
                         key={id}
                         to={id}
                         onClick={() => setIsOpen(false)}
+                        aria-current={active ? "page" : undefined}
                         className="flex items-center gap-4 rounded-2xl px-5 py-4 text-[17px] font-medium transition-colors cursor-pointer"
                         style={{
                           textDecoration: "none",

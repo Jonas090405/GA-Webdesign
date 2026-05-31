@@ -13,11 +13,11 @@ export function About() {
   usePageMeta({
     title: "Über uns | G&A Webdesign",
     description: "Wir sind Jonas Gissler (Design & Entwicklung) und Berkant Agyar (Kundenkommunikation & Projektmanagement) – ein eingespieltes Team für moderne Webseiten aus dem Schwarzwald.",
-    path: "/ueber-mich",
+    path: "/ueber-uns",
   });
   const navigate = useNavigate();
   return (
-    <main className="mx-auto max-w-6xl xl:max-w-7xl 2xl:max-w-[1440px] px-5 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 pt-36 sm:pt-44 lg:pt-52 xl:pt-60 2xl:pt-72 pb-12 xl:pb-20 2xl:pb-28">
+    <main id="main-content" className="mx-auto max-w-6xl xl:max-w-7xl 2xl:max-w-[1440px] px-5 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 pt-36 sm:pt-44 lg:pt-52 xl:pt-60 2xl:pt-72 pb-12 xl:pb-20 2xl:pb-28">
       <FadeIn>
         <SectionLabel>Über uns</SectionLabel>
       </FadeIn>
@@ -61,12 +61,13 @@ export function About() {
             href="https://www.linkedin.com/in/jonas-gissler-37b1482b0/"
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="Jonas Gissler auf LinkedIn (öffnet in neuem Tab)"
             className="mt-6 inline-flex items-center gap-2.5 text-[14px] xl:text-[15px] font-medium transition-colors duration-200"
             style={{ color: "rgba(150, 190, 220, 0.6)" }}
             onMouseEnter={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = "#4dbef3")}
             onMouseLeave={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = "rgba(150, 190, 220, 0.6)")}
           >
-            <Linkedin size={16} />
+            <Linkedin size={16} aria-hidden="true" />
             LinkedIn
           </a>
         </FadeIn>
@@ -181,12 +182,13 @@ export function About() {
             href="https://www.linkedin.com/in/berkant-agyar-2334a6363"
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="Berkant Agyar auf LinkedIn (öffnet in neuem Tab)"
             className="mt-6 inline-flex items-center gap-2.5 text-[14px] xl:text-[15px] font-medium transition-colors duration-200"
             style={{ color: "rgba(150, 190, 220, 0.6)" }}
             onMouseEnter={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = "#4dbef3")}
             onMouseLeave={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = "rgba(150, 190, 220, 0.6)")}
           >
-            <Linkedin size={16} />
+            <Linkedin size={16} aria-hidden="true" />
             LinkedIn
           </a>
         </FadeIn>

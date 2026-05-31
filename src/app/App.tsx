@@ -63,7 +63,7 @@ export default function App() {
               <Ablauf />
             </motion.div>
           } />
-          <Route path="/ueber-mich" element={
+          <Route path="/ueber-uns" element={
             <motion.div initial="initial" animate="animate" exit="exit" variants={pageVariants} transition={pageTransition}>
               <About />
             </motion.div>

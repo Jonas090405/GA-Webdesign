@@ -6,11 +6,13 @@ export function PrimaryButton({
   onClick,
   type = "button",
   disabled = false,
+  className = "",
 }: {
   children: React.ReactNode;
   onClick?: () => void;
   type?: "button" | "submit";
   disabled?: boolean;
+  className?: string;
 }) {
   const ref = useRef<HTMLButtonElement>(null);
 
@@ -29,7 +31,7 @@ export function PrimaryButton({
       onClick={onClick}
       disabled={disabled}
       onMouseMove={handleMove}
-      className="group/btn relative inline-flex cursor-pointer items-center gap-2 overflow-hidden rounded-full px-6 py-3 xl:px-7 xl:py-3.5 2xl:px-9 2xl:py-4 text-[15px] 2xl:text-[17px] text-white font-medium transition-[filter] duration-300 ease-out hover:brightness-110 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:brightness-100"
+      className={`group/btn relative inline-flex cursor-pointer items-center gap-2 overflow-hidden rounded-full px-6 py-3 xl:px-7 xl:py-3.5 2xl:px-9 2xl:py-4 text-[15px] 2xl:text-[17px] text-white font-medium transition-[filter] duration-300 ease-out hover:brightness-110 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:brightness-100 ${className}`}
       style={{
         background: "linear-gradient(135deg, #006999 0%, #4dbef3 100%)",
       }}

@@ -119,7 +119,7 @@ export function Footer() {
                   ["/", "Startseite"],
                   ["/projekte", "Projekte"],
                   ["/leistungen", "Leistungen"],
-                  ["/ueber-mich", "Über uns"],
+                  ["/ueber-uns", "Über uns"],
                   ["/kontakt", "Kontakt"],
                   ["/impressum", "Impressum"],
                   ["/datenschutz", "Datenschutz"],
@@ -150,10 +150,10 @@ export function Footer() {
           className="mt-12 sm:mt-16 2xl:mt-20 flex flex-col items-center gap-2 pt-8 text-center"
           style={{ borderTop: "1px solid rgba(77, 190, 243, 0.06)" }}
         >
-          <p className="text-[13px] 2xl:text-[15px]" style={{ color: "rgba(150, 180, 200, 0.4)" }}>
+          <p className="text-[13px] 2xl:text-[15px]" style={{ color: "rgba(170, 200, 220, 0.65)" }}>
             © 2026 GA Webdesign — Alle Rechte vorbehalten
           </p>
-          <p className="text-[13px] 2xl:text-[15px]" style={{ color: "rgba(150, 180, 200, 0.3)" }}>
+          <p className="text-[13px] 2xl:text-[15px]" style={{ color: "rgba(170, 200, 220, 0.5)" }}>
             Danke für deinen Besuch :)
           </p>
         </div>

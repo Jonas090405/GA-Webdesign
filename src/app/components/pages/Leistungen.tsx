@@ -16,10 +16,10 @@ const blocks: { Icon: React.ElementType; title: string; lead: string; points: st
     title: "Design",
     lead: "So, wie du dir das vorstellst.",
     points: [
-      "Individuelles Design – kein vorgefertigtes Template",
+      "Individuelles Design ",
       "Gut bedienbar & schön auf allen Geräten",
       "Auf deine Marke angepasst",
-      "Leicht verständlich für deine Kunden",
+      "Barrierefrei nach WCAG 2.2 AA",
     ],
   },
   {
@@ -149,10 +149,10 @@ const websiteFeatureGroups: { label: string; points: string[] }[] = [
   {
     label: "Design",
     points: [
-      "Individuelles Design – kein Template",
+      "Individuelles Design",
       "Mobil-optimiert & schön auf allen Geräten",
       "Auf deine Marke angepasst",
-      "Leicht verständlich für deine Kunden",
+      "Barrierefrei nach WCAG 2.2 AA",
     ],
   },
   {
@@ -270,17 +270,12 @@ function WebseitePreisCard({ onContact }: { onContact: () => void }) {
 
           {/* CTA */}
           <div className="mt-auto">
-            <button
+            <PrimaryButton
               onClick={onContact}
-              className="w-full rounded-xl py-3.5 text-[14px] xl:text-[15px] font-semibold text-white transition-all duration-300"
-              style={{
-                background: "linear-gradient(135deg, #006999 0%, #4dbef3 100%)",
-              }}
-              onMouseEnter={(e) => { e.currentTarget.style.filter = "brightness(1.1)"; }}
-              onMouseLeave={(e) => { e.currentTarget.style.filter = "brightness(1)"; }}
+              className="w-full justify-center !rounded-xl py-3.5 text-[14px] xl:text-[15px] font-semibold"
             >
               Erstgespräch vereinbaren
-            </button>
+            </PrimaryButton>
           </div>
         </div>
       </div>

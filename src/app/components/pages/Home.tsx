@@ -376,7 +376,7 @@ function TeamPreview() {
 
       <FadeIn delay={0.2}>
         <div className="mt-10 xl:mt-14 2xl:mt-16">
-          <GhostButton onClick={() => navigate("/ueber-mich")}>
+          <GhostButton onClick={() => navigate("/ueber-uns")}>
             Mehr über uns
           </GhostButton>
         </div>
