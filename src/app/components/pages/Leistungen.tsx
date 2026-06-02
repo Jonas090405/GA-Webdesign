@@ -1,10 +1,11 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
+import { motion, AnimatePresence } from "motion/react";
 import { usePageMeta } from "../../hooks/usePageMeta";
 import { SectionLabel } from "../SectionLabel";
 import { Card } from "../Card";
 import { PrimaryButton } from "../Button";
 import { FadeIn } from "../FadeIn";
-import { Palette, Code2, Rocket, CheckCircle2, Check, Server, Wrench, MessageSquare } from "lucide-react";
+import { Palette, Code2, Rocket, CheckCircle2, Check, Server, Wrench } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { ServiceCardBg, type BgKey } from "../ServiceCardBg";
 import { FAQSection } from "../FAQSection";
@@ -91,15 +92,51 @@ function LeistungenCard({
 }
 
 // ─── Tooltip ──────────────────────────────────────────────────────────────────
-function InfoTooltip({ text }: { text: string }) {
+function InfoTooltip({ text, onGradient = false }: { text: string; onGradient?: boolean }) {
   const [pos, setPos] = useState<{ x: number; y: number } | null>(null);
+  const [pinned, setPinned] = useState(false);
   const btnRef = useRef<HTMLButtonElement>(null);
 
-  function handleEnter() {
-    if (!btnRef.current) return;
+  function getPos() {
+    if (!btnRef.current) return null;
     const rect = btnRef.current.getBoundingClientRect();
-    setPos({ x: rect.left + rect.width / 2, y: rect.top });
+    return { x: rect.left + rect.width / 2, y: rect.top };
   }
+
+  function handleEnter() {
+    if (!pinned) setPos(getPos());
+  }
+
+  function handleLeave() {
+    if (!pinned) setPos(null);
+  }
+
+  function handleClick(e: React.MouseEvent) {
+    e.stopPropagation();
+    if (pinned) {
+      setPinned(false);
+      setPos(null);
+    } else {
+      setPinned(true);
+      setPos(getPos());
+    }
+  }
+
+  // Close pinned tooltip when tapping/clicking anywhere else
+  useEffect(() => {
+    if (!pinned) return;
+    function dismiss() {
+      setPinned(false);
+      setPos(null);
+    }
+    const id = setTimeout(() => {
+      document.addEventListener("pointerdown", dismiss, { once: true });
+    }, 0);
+    return () => {
+      clearTimeout(id);
+      document.removeEventListener("pointerdown", dismiss);
+    };
+  }, [pinned]);
 
   return (
     <span className="inline-flex items-center align-middle">
@@ -107,18 +144,34 @@ function InfoTooltip({ text }: { text: string }) {
         ref={btnRef}
         type="button"
         onMouseEnter={handleEnter}
-        onMouseLeave={() => setPos(null)}
-        className="ml-0.5 inline-flex items-center justify-center rounded-full cursor-default select-none shrink-0"
-        style={{
-          width: 15,
-          height: 15,
-          background: "rgba(77,190,243,0.12)",
-          border: "1px solid rgba(77,190,243,0.28)",
-          color: "#4dbef3",
-          fontSize: 9,
-          fontWeight: 700,
-          lineHeight: 1,
-        }}
+        onMouseLeave={handleLeave}
+        onClick={handleClick}
+        className="ml-0.5 inline-flex items-center justify-center rounded-full select-none shrink-0 transition-all duration-200"
+        style={
+          onGradient
+            ? {
+                width: 15,
+                height: 15,
+                background: "rgba(255,255,255,0.25)",
+                border: "1px solid rgba(255,255,255,0.55)",
+                color: "#fff",
+                fontSize: 9,
+                fontWeight: 700,
+                lineHeight: 1,
+                cursor: "default",
+              }
+            : {
+                width: 15,
+                height: 15,
+                background: "rgba(77,190,243,0.12)",
+                border: "1px solid rgba(77,190,243,0.28)",
+                color: "#4dbef3",
+                fontSize: 9,
+                fontWeight: 700,
+                lineHeight: 1,
+                cursor: "default",
+              }
+        }
         aria-label="Mehr erfahren"
       >
         i
@@ -225,11 +278,8 @@ function WebseitePreisCard({ onContact }: { onContact: () => void }) {
         <div className="relative flex flex-col flex-1">
           {/* Header */}
           <div className="mb-6">
-            <p className="text-[11px] tracking-[0.2em] uppercase font-medium mb-2" style={{ color: "#4dbef3" }}>
-              Webseite
-            </p>
             <h3 className="text-white text-[26px] xl:text-[30px] 2xl:text-[34px] tracking-tight leading-tight mb-1">
-              Ihre Webseite
+              Deine Webseite
             </h3>
             <p className="text-slate-400 text-[14px] 2xl:text-[15px]">Komplett. Fertig. Persönlich.</p>
           </div>
@@ -347,7 +397,6 @@ const wartungTiers: {
       { label: "Sicherheitsupdates" },
       { label: "Technische Instandhaltung" },
       { label: "WCAG-Konformitätsinstandhaltung" },
-
     ],
   },
   {
@@ -387,7 +436,93 @@ const wartungTiers: {
   },
 ];
 
+const wartungCmsTiers: {
+  name: string;
+  price: string;
+  features: { label: React.ReactNode }[];
+}[] = [
+  {
+    name: "Nur CMS",
+    price: "20 €/Monat",
+    features: [
+      { label: "Auf dich zugeschnittenes CMS" },
+    ],
+  },
+  {
+    name: "Basis",
+    price: "40 €/Monat",
+    features: [
+      { label: "Auf dich zugeschnittenes CMS" },
+      { label: "CMS-Instandhaltung" },
+      { label: "Sicherheitsupdates" },
+      { label: "Überwachung" },
+      { label: "Meldung von Problemen" },
+      { label: "Beratung bei Problemen" },
+      { label: "Technische Instandhaltung" },
+    ],
+  },
+  {
+    name: "Erweitert",
+    price: "150 €/Monat",
+    features: [
+      { label: "Alles aus Basis" },
+      { label: "Inhalte selbst anpassen – jederzeit, direkt im CMS" },
+      {
+        label: (
+          <>
+            1 Inhaltserweiterung<InfoTooltip text="Eine komplett neue Sektion oder ein neues Element wird deiner Webseite hinzugefügt – z. B. eine neue Unterseite, ein neues Formular oder ein Galerie-Bereich." /> pro Monat
+          </>
+        ),
+      },
+    ],
+  },
+];
+
+const wartungSlideVariants = {
+  enter: (d: number) => ({ x: d * 32, opacity: 0 }),
+  center: { x: 0, opacity: 1 },
+  exit: (d: number) => ({ x: d * -32, opacity: 0 }),
+};
+
+function WartungTabBtn({
+  active,
+  onClick,
+  children,
+}: {
+  active: boolean;
+  onClick: () => void;
+  children: React.ReactNode;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className="relative flex-1 rounded-lg px-3 py-2 text-[12px] font-medium tracking-wide cursor-pointer transition-colors duration-200 inline-flex items-center justify-center gap-1"
+      style={{ color: active ? "#fff" : "rgba(150,190,220,0.6)" }}
+    >
+      {active && (
+        <motion.div
+          layoutId="wartung-tab-pill"
+          className="absolute inset-0 rounded-lg"
+          style={{ background: "linear-gradient(135deg, #006999 0%, #4dbef3 100%)" }}
+          transition={{ type: "spring", stiffness: 400, damping: 35 }}
+        />
+      )}
+      <span className="relative z-10 inline-flex items-center gap-1">{children}</span>
+    </button>
+  );
+}
+
 function WartungCard() {
+  const [tab, setTab] = useState<"ohneCMS" | "mitCMS">("ohneCMS");
+  const [direction, setDirection] = useState(0);
+
+  function switchTab(next: "ohneCMS" | "mitCMS") {
+    if (next === tab) return;
+    setDirection(next === "mitCMS" ? 1 : -1);
+    setTab(next);
+  }
+
   return (
     <Card>
       <div className="flex items-center gap-2 mb-5">
@@ -399,45 +534,89 @@ function WartungCard() {
         </div>
         <h3 className="text-white text-[17px] xl:text-[19px] 2xl:text-[21px] font-medium">Wartung</h3>
       </div>
-      <p className="text-slate-400 text-[13px] 2xl:text-[14px] leading-relaxed mb-5">
-        Kein Muss – aber empfohlen. Wer seine Inhalte lieber selbst pflegen möchte, kann alternativ ein CMS bekommen und Änderungen eigenständig vornehmen.
+      <p className="text-slate-400 text-[13px] 2xl:text-[14px] leading-relaxed mb-4">
+        Damit deine Webseite dauerhaft sicher und aktuell bleibt. Wähle klassische Wartung oder die CMS-Option, bei der du Inhalte selbst bearbeitest.
       </p>
 
-      <div className="space-y-0 divide-y" style={{ borderColor: "rgba(77,190,243,0.07)" }}>
-        {wartungTiers.map((tier) => (
-          <div
-            key={tier.name}
-            className="py-4 first:pt-0 last:pb-0"
-          >
-            <div className="flex items-center justify-between mb-2.5">
-              <span className="text-[15px] xl:text-[16px] font-semibold text-white">
-                {tier.name}
-              </span>
-              <span className="text-[13px] font-semibold" style={{ color: "#4dbef3" }}>
-                {tier.price}
-              </span>
-            </div>
-            <ul className="space-y-1.5">
-              {tier.features.map((f, idx) => (
-                <li
-                  key={idx}
-                  className="flex items-center gap-2 text-slate-400 text-[12px] xl:text-[13px] leading-snug"
-                >
-                  <Check size={12} className="shrink-0" style={{ color: "#4dbef3" }} />
-                  <span>{f.label}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
+      {/* Toggle — identisch mit Kontakt-Form */}
+      <div
+        className="flex mb-5 p-1 rounded-xl gap-1"
+        style={{
+          background: "rgba(10,19,30,0.7)",
+          border: "1px solid rgba(77,190,243,0.12)",
+        }}
+      >
+        <WartungTabBtn active={tab === "ohneCMS"} onClick={() => switchTab("ohneCMS")}>
+          Standard
+          <InfoTooltip
+            text="Wir kümmern uns um alle Änderungen für dich – du schickst uns, was aktualisiert werden soll, und wir setzen es um."
+            onGradient={tab === "ohneCMS"}
+          />
+        </WartungTabBtn>
+        <WartungTabBtn active={tab === "mitCMS"} onClick={() => switchTab("mitCMS")}>
+          Mit CMS
+          <InfoTooltip
+            text="Mit CMS kannst du Texte, Bilder und Inhalte selbst bearbeiten – ohne Programmierkenntnisse. Der Preis beinhaltet Hosting, CMS-Updates und technische Wartung."
+            onGradient={tab === "mitCMS"}
+          />
+        </WartungTabBtn>
       </div>
 
-      <div className="mt-4 pt-4" style={{ borderTop: "1px solid rgba(77,190,243,0.07)" }}>
-        <p className="text-slate-500 text-[11px] leading-relaxed">
-          <MessageSquare size={11} className="inline mr-1.5 shrink-0 align-middle" />
-          Kein Paket nötig – einzelne Inhaltsanpassungen & Erweiterungen sind auch ohne Wartungsvertrag auf Anfrage buchbar. Preis je nach Aufwand.
-        </p>
+      {/* Tier panels — AnimatePresence identisch mit Kontakt */}
+      <div className="overflow-hidden">
+        <AnimatePresence mode="wait" custom={direction}>
+          <motion.div
+            key={tab}
+            custom={direction}
+            variants={wartungSlideVariants}
+            initial="enter"
+            animate="center"
+            exit="exit"
+            transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+          >
+            {tab === "ohneCMS" ? (
+              <div className="space-y-0 divide-y" style={{ borderColor: "rgba(77,190,243,0.07)" }}>
+                {wartungTiers.map((tier) => (
+                  <div key={tier.name} className="py-4 first:pt-0 last:pb-0">
+                    <div className="flex items-center justify-between mb-2.5">
+                      <span className="text-[15px] xl:text-[16px] font-semibold text-white">{tier.name}</span>
+                      <span className="text-[13px] font-semibold" style={{ color: "#4dbef3" }}>{tier.price}</span>
+                    </div>
+                    <ul className="space-y-1.5">
+                      {tier.features.map((f, idx) => (
+                        <li key={idx} className="flex items-center gap-2 text-slate-400 text-[12px] xl:text-[13px] leading-snug">
+                          <Check size={12} className="shrink-0" style={{ color: "#4dbef3" }} />
+                          <span>{f.label}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="space-y-0 divide-y" style={{ borderColor: "rgba(77,190,243,0.07)" }}>
+                {wartungCmsTiers.map((tier) => (
+                  <div key={tier.name} className="py-4 first:pt-0 last:pb-0">
+                    <div className="flex items-center justify-between mb-2.5">
+                      <span className="text-[15px] xl:text-[16px] font-semibold text-white">{tier.name}</span>
+                      <span className="text-[13px] font-semibold" style={{ color: "#4dbef3" }}>{tier.price}</span>
+                    </div>
+                    <ul className="space-y-1.5">
+                      {tier.features.map((f, idx) => (
+                        <li key={idx} className="flex items-center gap-2 text-slate-400 text-[12px] xl:text-[13px] leading-snug">
+                          <Check size={12} className="shrink-0" style={{ color: "#4dbef3" }} />
+                          <span>{f.label}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            )}
+          </motion.div>
+        </AnimatePresence>
       </div>
+
     </Card>
   );
 }
