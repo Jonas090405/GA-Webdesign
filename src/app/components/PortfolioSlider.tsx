@@ -16,6 +16,7 @@ type Testimonial = {
 
 type Project = {
   image: string | null;
+  video?: string | null;
   tag: string;
   title: string;
   desc: string;
@@ -85,15 +86,27 @@ export function PortfolioSlider({ projects }: { projects: Project[] }) {
                 className="rounded-[28px] sm:rounded-[32px] md:rounded-[36px] 2xl:rounded-[44px]"
                 innerClassName="p-3 sm:p-4 md:p-5 xl:p-6 2xl:p-8 overflow-hidden"
               >
-                <div className={`grid gap-6 md:gap-8 xl:gap-10 md:min-h-[420px] xl:min-h-[500px] 2xl:min-h-[600px] ${project.image ? "md:grid-cols-2" : ""}`}>
-                  {/* Image */}
-                  {project.image && (
+                <div className={`grid gap-6 md:gap-8 xl:gap-10 md:min-h-[420px] xl:min-h-[500px] 2xl:min-h-[600px] ${(project.video || project.image) ? "md:grid-cols-2" : ""}`}>
+                  {/* Media */}
+                  {(project.video || project.image) && (
                     <div className="h-[220px] md:h-full overflow-hidden">
-                      <ImageWithFallback
-                        src={project.image}
-                        alt={project.title}
-                        className="h-full w-full object-cover rounded-2xl 2xl:rounded-3xl"
-                      />
+                      {project.video ? (
+                        <video
+                          src={project.video}
+                          autoPlay
+                          muted
+                          loop
+                          playsInline
+                          aria-hidden="true"
+                          className="h-full w-full object-cover rounded-2xl 2xl:rounded-3xl"
+                        />
+                      ) : (
+                        <ImageWithFallback
+                          src={project.image!}
+                          alt={project.title}
+                          className="h-full w-full object-cover rounded-2xl 2xl:rounded-3xl"
+                        />
+                      )}
                     </div>
                   )}
 

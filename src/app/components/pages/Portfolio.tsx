@@ -7,10 +7,12 @@ import { ExternalLink } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import gcnImg from "../../../imports/gcn-fahrzeughandel.png";
 import gcnAvatar from "../../../imports/gcn-avatar.jpeg";
+import gcnVideo from "../../../imports/GCN-Projekt.mp4";
 
 const PROJECTS = [
   {
     image: gcnImg,
+    video: gcnVideo,
     tag: "Fahrzeughandel · 2026",
     title: "GCN-Fahrzeughandel",
     desc: "Vollständige Web-Plattform für einen Fahrzeughändler. Außendarstellung, Fahrzeugsuche, Verkaufsauftragsformulare mit automatischer E-Mail-Benachrichtigung und internes Kundenverwaltungs-Dashboard.",
