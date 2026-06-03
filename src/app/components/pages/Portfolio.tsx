@@ -1,7 +1,7 @@
 import { usePageMeta } from "../../hooks/usePageMeta";
 import { SectionLabel } from "../SectionLabel";
 import { FadeIn } from "../FadeIn";
-import { PortfolioSlider } from "../PortfolioSlider";
+import { PortfolioScrollSection } from "../PortfolioScrollSection";
 import { PrimaryButton } from "../Button";
 import { ExternalLink } from "lucide-react";
 import { useNavigate } from "react-router-dom";
@@ -63,7 +63,7 @@ export function Portfolio() {
       </FadeIn>
 
       <FadeIn delay={0.1} className="mt-12 sm:mt-16">
-        <PortfolioSlider projects={PROJECTS} />
+        <PortfolioScrollSection projects={PROJECTS} />
       </FadeIn>
 
       <FadeIn delay={0.2}>

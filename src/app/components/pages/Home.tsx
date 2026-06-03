@@ -5,7 +5,7 @@ import { SectionLabel } from "../SectionLabel";
 import { PrimaryButton, GhostButton, TertiaryButton } from "../Button";
 import { Card } from "../Card";
 import { FadeIn } from "../FadeIn";
-import { PortfolioSlider } from "../PortfolioSlider";
+import { PortfolioScrollSection } from "../PortfolioScrollSection";
 import { Aurora } from "../Aurora";
 import { useNavigate } from "react-router-dom";
 import { Palette, Code2, Rocket, Phone, Linkedin } from "lucide-react";
@@ -127,6 +127,7 @@ function Hero() {
 
 function PortfolioPreview() {
   const navigate = useNavigate();
+
   return (
     <section className="py-16 sm:py-20 lg:py-28 xl:py-36 2xl:py-48">
       <FadeIn>
@@ -141,12 +142,11 @@ function PortfolioPreview() {
         </div>
       </FadeIn>
 
-      <FadeIn delay={0.1}>
-        <PortfolioSlider projects={PROJECTS} />
-      </FadeIn>
+      {/* Identisch zur Portfolio-Seite, nur Featured-Projekt */}
+      <PortfolioScrollSection projects={[PROJECTS[0]]} hideTag />
 
       <FadeIn delay={0.2}>
-        <div className="mt-10 flex items-center gap-5 sm:gap-7">
+        <div className="mt-10 sm:mt-0 flex items-center justify-start sm:justify-center gap-5 sm:gap-7">
           <GhostButton onClick={() => navigate("/projekte")}>
             Alle Projekte
           </GhostButton>

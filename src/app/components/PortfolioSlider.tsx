@@ -86,10 +86,10 @@ export function PortfolioSlider({ projects }: { projects: Project[] }) {
                 className="rounded-[28px] sm:rounded-[32px] md:rounded-[36px] 2xl:rounded-[44px]"
                 innerClassName="p-3 sm:p-4 md:p-5 xl:p-6 2xl:p-8 overflow-hidden"
               >
-                <div className={`grid gap-6 md:gap-8 xl:gap-10 md:min-h-[420px] xl:min-h-[500px] 2xl:min-h-[600px] ${(project.video || project.image) ? "md:grid-cols-2" : ""}`}>
-                  {/* Media */}
+                <div className={`grid gap-6 md:gap-10 xl:gap-12 ${(project.video || project.image) ? "md:grid-cols-[2fr_3fr]" : ""}`}>
+                  {/* Mobile: media ohne Rahmen */}
                   {(project.video || project.image) && (
-                    <div className="h-[220px] md:h-full overflow-hidden">
+                    <div className="md:hidden aspect-video overflow-hidden rounded-2xl">
                       {project.video ? (
                         <video
                           src={project.video}
@@ -98,20 +98,20 @@ export function PortfolioSlider({ projects }: { projects: Project[] }) {
                           loop
                           playsInline
                           aria-hidden="true"
-                          className="h-full w-full object-cover rounded-2xl 2xl:rounded-3xl"
+                          className="h-full w-full object-cover"
                         />
                       ) : (
                         <ImageWithFallback
                           src={project.image!}
                           alt={project.title}
-                          className="h-full w-full object-cover rounded-2xl 2xl:rounded-3xl"
+                          className="h-full w-full object-cover"
                         />
                       )}
                     </div>
                   )}
 
-                  {/* Text-Seite */}
-                  <div className={`flex flex-col justify-center overflow-hidden ${project.image ? "px-2 pb-2 sm:px-4 sm:pb-4 md:p-4 xl:p-6" : "px-4 py-6 sm:px-8 md:px-12 xl:px-16 2xl:px-20"}`}>
+                  {/* Text — links auf Desktop */}
+                  <div className={`flex flex-col justify-center overflow-hidden ${(project.video || project.image) ? "py-2 md:py-6 xl:py-8" : "px-4 py-6 sm:px-8 md:px-12 xl:px-16 2xl:px-20"}`}>
                     <div className="text-sky-400 text-[12px] xl:text-[13px] 2xl:text-[15px] tracking-[0.2em] uppercase mb-3">
                       {project.tag}
                     </div>
@@ -167,6 +167,31 @@ export function PortfolioSlider({ projects }: { projects: Project[] }) {
                       </a>
                     )}
                   </div>
+
+                  {/* Desktop: macOS Browser-Rahmen rechts */}
+                  {(project.video || project.image) && (
+                    <div className="hidden md:flex items-center">
+                      <MacOSBrowserFrame url={project.url}>
+                        {project.video ? (
+                          <video
+                            src={project.video}
+                            autoPlay
+                            muted
+                            loop
+                            playsInline
+                            aria-hidden="true"
+                            className="w-full block"
+                          />
+                        ) : (
+                          <ImageWithFallback
+                            src={project.image!}
+                            alt={project.title}
+                            className="w-full block"
+                          />
+                        )}
+                      </MacOSBrowserFrame>
+                    </div>
+                  )}
                 </div>
               </Card>
             </motion.div>
@@ -267,6 +292,63 @@ function TestimonialContent({ t }: { t: Testimonial }) {
           — {t.name}, {t.role} · {t.company}
         </p>
       </div>
+    </div>
+  );
+}
+
+function MacOSBrowserFrame({
+  children,
+  url,
+}: {
+  children: React.ReactNode;
+  url?: string;
+}) {
+  const displayUrl = url
+    ? url.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, "")
+    : "vorschau";
+
+  return (
+    <div
+      className="w-full overflow-hidden rounded-xl"
+      style={{
+        border: "1px solid rgba(255,255,255,0.1)",
+        boxShadow:
+          "0 24px 64px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,255,255,0.04)",
+      }}
+    >
+      {/* Titelleiste */}
+      <div
+        className="flex items-center gap-3 px-4"
+        style={{
+          height: "36px",
+          background:
+            "linear-gradient(180deg, rgba(52,57,63,0.98) 0%, rgba(36,41,46,0.99) 100%)",
+          borderBottom: "1px solid rgba(0,0,0,0.35)",
+        }}
+      >
+        {/* Traffic lights */}
+        <div className="flex items-center gap-[5px] shrink-0">
+          <div className="w-3 h-3 rounded-full" style={{ background: "#ff5f57" }} />
+          <div className="w-3 h-3 rounded-full" style={{ background: "#ffbd2e" }} />
+          <div className="w-3 h-3 rounded-full" style={{ background: "#28c840" }} />
+        </div>
+        {/* URL-Leiste */}
+        <div className="flex-1 flex justify-center">
+          <div
+            className="px-3 py-[3px] rounded-md text-[11px] text-slate-400 max-w-[220px] truncate text-center"
+            style={{
+              background: "rgba(0,0,0,0.28)",
+              border: "1px solid rgba(255,255,255,0.07)",
+            }}
+          >
+            {displayUrl}
+          </div>
+        </div>
+        {/* Balance */}
+        <div className="w-[46px] shrink-0" />
+      </div>
+      {/* Inhalt */}
+      <div className="overflow-hidden">{children}</div>
     </div>
   );
 }
