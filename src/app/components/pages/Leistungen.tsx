@@ -449,7 +449,7 @@ const wartungCmsTiers: {
     ],
   },
   {
-    name: "Basis",
+    name: "Basis CMS",
     price: "40 €/Monat",
     features: [
       { label: "Auf dich zugeschnittenes CMS" },
@@ -462,10 +462,10 @@ const wartungCmsTiers: {
     ],
   },
   {
-    name: "Erweitert",
+    name: "Erweitert CMS",
     price: "150 €/Monat",
     features: [
-      { label: "Alles aus Basis" },
+      { label: "Alles aus Basis CMS" },
       { label: "Inhalte selbst anpassen – jederzeit, direkt im CMS" },
       {
         label: (
