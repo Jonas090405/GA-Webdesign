@@ -1,0 +1,20 @@
+/* ============================================================
+   FONTS – vollständig self-hosted, kein externer Request
+   Reihenfolge: Segoe UI (Windows-System) → Inter Variable
+                (lokal gebündelt via @fontsource-variable/inter)
+   ============================================================ */
+
+/* Inter Variable – lokal aus node_modules gebündelt (DSGVO-konform) */
+@import '@fontsource-variable/inter';
+
+/* ── Globale Font-Family ─────────────────────────────────── */
+:root {
+  --font-sans: 'Segoe UI', 'Inter Variable', Inter, system-ui, sans-serif;
+}
+
+html,
+body {
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
