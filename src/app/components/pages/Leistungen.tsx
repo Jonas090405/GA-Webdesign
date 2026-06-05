@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import { motion } from "motion/react";
 import { usePageMeta } from "../../hooks/usePageMeta";
 import { SectionLabel } from "../SectionLabel";
 import { Card } from "../Card";
@@ -358,7 +358,7 @@ function HostingCard() {
           >
             <span className="text-slate-300 text-[12px]">Hosting bei vorhandener Domain</span>
             <span className="text-[12px] font-semibold ml-3 shrink-0" style={{ color: "#4dbef3" }}>
-              5 €/Monat
+              10 €/Monat
             </span>
           </div>
           {/* Domain-Beschaffung & Einrichtung */}
@@ -369,7 +369,7 @@ function HostingCard() {
             <div className="flex items-start justify-between gap-3">
               <span className="text-slate-300 text-[12px]">Domain-Beschaffung & Einrichtung</span>
               <div className="text-right shrink-0">
-                <p className="text-[12px] font-semibold" style={{ color: "#4dbef3" }}>5 €/Monat</p>
+                <p className="text-[12px] font-semibold" style={{ color: "#4dbef3" }}>10 €/Monat</p>
                 <p className="text-[11px] font-medium mt-0.5" style={{ color: "#4dbef3" }}>+ Domainkosten je nach Wunschdomain</p>
                 <p className="text-[11px] font-medium mt-0.5" style={{ color: "#4dbef3" }}>+ 60 € Einrichtung (einmalig)</p>
               </div>
@@ -407,7 +407,7 @@ const wartungTiers: {
       {
         label: (
           <>
-            1 Inhaltsanpassung<InfoTooltip text="Texte, Bilder oder kleine Inhalte auf deiner Webseite werden auf Wunsch aktualisiert oder angepasst." /> pro Monat
+            2 Inhaltsanpassungen<InfoTooltip text="Texte, Bilder oder kleine Inhalte auf deiner Webseite werden auf Wunsch aktualisiert oder angepasst." /> pro Monat
           </>
         ),
       },
@@ -421,7 +421,7 @@ const wartungTiers: {
       {
         label: (
           <>
-            2 Inhaltsanpassungen<InfoTooltip text="Texte, Bilder oder kleine Inhalte auf deiner Webseite werden auf Wunsch aktualisiert oder angepasst." /> pro Monat
+            4 Inhaltsanpassungen<InfoTooltip text="Texte, Bilder oder kleine Inhalte auf deiner Webseite werden auf Wunsch aktualisiert oder angepasst." /> pro Monat
           </>
         ),
       },
@@ -443,14 +443,14 @@ const wartungCmsTiers: {
 }[] = [
   {
     name: "Nur CMS",
-    price: "20 €/Monat",
+    price: "30 €/Monat",
     features: [
       { label: "Auf dich zugeschnittenes CMS" },
     ],
   },
   {
     name: "Basis CMS",
-    price: "40 €/Monat",
+    price: "50 €/Monat",
     features: [
       { label: "Auf dich zugeschnittenes CMS" },
       { label: "CMS-Instandhaltung" },
@@ -463,10 +463,9 @@ const wartungCmsTiers: {
   },
   {
     name: "Erweitert CMS",
-    price: "150 €/Monat",
+    price: "160 €/Monat",
     features: [
       { label: "Alles aus Basis CMS" },
-      { label: "Inhalte selbst anpassen – jederzeit, direkt im CMS" },
       {
         label: (
           <>
@@ -478,11 +477,6 @@ const wartungCmsTiers: {
   },
 ];
 
-const wartungSlideVariants = {
-  enter: (d: number) => ({ x: d * 32, opacity: 0 }),
-  center: { x: 0, opacity: 1 },
-  exit: (d: number) => ({ x: d * -32, opacity: 0 }),
-};
 
 function WartungTabBtn({
   active,
@@ -515,11 +509,9 @@ function WartungTabBtn({
 
 function WartungCard() {
   const [tab, setTab] = useState<"ohneCMS" | "mitCMS">("ohneCMS");
-  const [direction, setDirection] = useState(0);
 
   function switchTab(next: "ohneCMS" | "mitCMS") {
     if (next === tab) return;
-    setDirection(next === "mitCMS" ? 1 : -1);
     setTab(next);
   }
 
@@ -562,61 +554,59 @@ function WartungCard() {
         </WartungTabBtn>
       </div>
 
-      {/* Tier panels — AnimatePresence identisch mit Kontakt */}
-      <div className="overflow-hidden">
-        <AnimatePresence mode="wait" custom={direction}>
-          <motion.div
-            key={tab}
-            custom={direction}
-            variants={wartungSlideVariants}
-            initial="enter"
-            animate="center"
-            exit="exit"
-            transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
-          >
-            {tab === "ohneCMS" ? (
-              <div className="space-y-0 divide-y" style={{ borderColor: "rgba(77,190,243,0.07)" }}>
-                {wartungTiers.map((tier) => (
-                  <div key={tier.name} className="py-4 first:pt-0 last:pb-0">
-                    <div className="flex items-center justify-between mb-2.5">
-                      <span className="text-[15px] xl:text-[16px] font-semibold text-white">{tier.name}</span>
-                      <span className="text-[13px] font-semibold" style={{ color: "#4dbef3" }}>{tier.price}</span>
-                    </div>
-                    <ul className="space-y-1.5">
-                      {tier.features.map((f, idx) => (
-                        <li key={idx} className="flex items-center gap-2 text-slate-400 text-[12px] xl:text-[13px] leading-snug">
-                          <Check size={12} className="shrink-0" style={{ color: "#4dbef3" }} />
-                          <span>{f.label}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
+      {/* Tier panels — beide immer gerendert, übereinander gestapelt via CSS Grid */}
+      <div className="overflow-hidden" style={{ display: "grid" }}>
+        <motion.div
+          style={{ gridRow: 1, gridColumn: 1, pointerEvents: tab === "ohneCMS" ? "auto" : "none" }}
+          animate={{ opacity: tab === "ohneCMS" ? 1 : 0, x: tab === "ohneCMS" ? 0 : -32 }}
+          transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <div className="space-y-0 divide-y" style={{ borderColor: "rgba(77,190,243,0.07)" }}>
+            {wartungTiers.map((tier) => (
+              <div key={tier.name} className="py-4 first:pt-0 last:pb-0">
+                <div className="flex items-center justify-between mb-2.5">
+                  <span className="text-[15px] xl:text-[16px] font-semibold text-white">{tier.name}</span>
+                  <span className="text-[13px] font-semibold" style={{ color: "#4dbef3" }}>{tier.price}</span>
+                </div>
+                <ul className="space-y-1.5">
+                  {tier.features.map((f, idx) => (
+                    <li key={idx} className="flex items-center gap-2 text-slate-400 text-[12px] xl:text-[13px] leading-snug">
+                      <Check size={12} className="shrink-0" style={{ color: "#4dbef3" }} />
+                      <span>{f.label}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
-            ) : (
-              <div className="space-y-0 divide-y" style={{ borderColor: "rgba(77,190,243,0.07)" }}>
-                {wartungCmsTiers.map((tier) => (
-                  <div key={tier.name} className="py-4 first:pt-0 last:pb-0">
-                    <div className="flex items-center justify-between mb-2.5">
-                      <span className="text-[15px] xl:text-[16px] font-semibold text-white">{tier.name}</span>
-                      <span className="text-[13px] font-semibold" style={{ color: "#4dbef3" }}>{tier.price}</span>
-                    </div>
-                    <ul className="space-y-1.5">
-                      {tier.features.map((f, idx) => (
-                        <li key={idx} className="flex items-center gap-2 text-slate-400 text-[12px] xl:text-[13px] leading-snug">
-                          <Check size={12} className="shrink-0" style={{ color: "#4dbef3" }} />
-                          <span>{f.label}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
+            ))}
+          </div>
+        </motion.div>
+        <motion.div
+          style={{ gridRow: 1, gridColumn: 1, pointerEvents: tab === "mitCMS" ? "auto" : "none" }}
+          animate={{ opacity: tab === "mitCMS" ? 1 : 0, x: tab === "mitCMS" ? 0 : 32 }}
+          transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <div className="space-y-0 divide-y" style={{ borderColor: "rgba(77,190,243,0.07)" }}>
+            {wartungCmsTiers.map((tier) => (
+              <div key={tier.name} className="py-4 first:pt-0 last:pb-0">
+                <div className="flex items-center justify-between mb-2.5">
+                  <span className="text-[15px] xl:text-[16px] font-semibold text-white">{tier.name}</span>
+                  <span className="text-[13px] font-semibold" style={{ color: "#4dbef3" }}>{tier.price}</span>
+                </div>
+                <ul className="space-y-1.5">
+                  {tier.features.map((f, idx) => (
+                    <li key={idx} className="flex items-center gap-2 text-slate-400 text-[12px] xl:text-[13px] leading-snug">
+                      <Check size={12} className="shrink-0" style={{ color: "#4dbef3" }} />
+                      <span>{f.label}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
-            )}
-          </motion.div>
-        </AnimatePresence>
+            ))}
+          </div>
+        </motion.div>
       </div>
 
+      <p className="mt-4 text-slate-500 text-[11px]">* Alle Preise inkl. MwSt.</p>
     </Card>
   );
 }
@@ -658,6 +648,7 @@ function PreiseSection({ onContact }: { onContact: () => void }) {
           </FadeIn>
         </div>
       </div>
+
     </section>
   );
 }
