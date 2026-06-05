@@ -67,7 +67,7 @@ export function Home() {
 function Hero() {
   const navigate = useNavigate();
   return (
-    <section className="relative pt-14 sm:pt-18 lg:pt-24 xl:pt-28 2xl:pt-36 pb-8 sm:pb-12 lg:pb-18 xl:pb-22 2xl:pb-28">
+    <section className="relative pt-22 sm:pt-18 lg:pt-24 xl:pt-28 2xl:pt-36 pb-12 sm:pb-12 lg:pb-18 xl:pb-22 2xl:pb-28">
       <Aurora />
 
       <div className="relative z-10 grid lg:grid-cols-2 gap-10 lg:gap-8 xl:gap-16 2xl:gap-24 items-center">
@@ -129,7 +129,7 @@ function PortfolioPreview() {
   const navigate = useNavigate();
 
   return (
-    <section className="py-8 sm:py-10 lg:py-14 xl:py-18 2xl:py-24">
+    <section className="py-12 sm:py-10 lg:py-14 xl:py-18 2xl:py-24">
       <FadeIn>
         <SectionLabel>Projekte</SectionLabel>
         <div className="mb-8 sm:mb-10 xl:mb-14 2xl:mb-20">
@@ -249,7 +249,7 @@ function Services() {
   ];
 
   return (
-    <section id="leistungen" className="py-8 sm:py-10 lg:py-14 xl:py-18 2xl:py-24">
+    <section id="leistungen" className="py-12 sm:py-10 lg:py-14 xl:py-18 2xl:py-24">
       <FadeIn>
         <SectionLabel>Leistungen</SectionLabel>
         <div className="mb-10 sm:mb-12 xl:mb-16 2xl:mb-20">
@@ -302,7 +302,7 @@ function TeamPreview() {
   ];
 
   return (
-    <section className="py-8 sm:py-10 lg:py-14 xl:py-18 2xl:py-24">
+    <section className="py-12 sm:py-10 lg:py-14 xl:py-18 2xl:py-24">
       <FadeIn>
         <SectionLabel>Über uns</SectionLabel>
         <div className="mb-10 sm:mb-12 xl:mb-16 2xl:mb-20">
@@ -474,7 +474,7 @@ function Contact() {
   }
 
   return (
-    <section id="kontakt" className="py-8 sm:py-10 lg:py-14 xl:py-18 2xl:py-24">
+    <section id="kontakt" className="py-12 sm:py-10 lg:py-14 xl:py-18 2xl:py-24">
       <FadeIn>
         <SectionLabel>Kontakt</SectionLabel>
       </FadeIn>
