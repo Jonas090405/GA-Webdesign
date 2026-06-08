@@ -59,7 +59,36 @@ export function Impressum() {
             <div className="text-slate-200 text-[15px] leading-[1.9] break-all">
               E-Mail: Jonas@ga-webdesign.de
               <br />
-              Telefon: +49 151 2079 7408
+              E-Mail: berkant@ga-webdesign.de
+              <br />
+              Telefon: +49 176 34649177
+              <br /><br />
+              <a
+                href="https://www.linkedin.com/in/jonas-gissler-37b1482b0/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sky-400 underline hover:text-sky-300 transition-colors"
+              >
+                LinkedIn – Jonas Gissler
+              </a>
+              <br />
+              <a
+                href="https://www.linkedin.com/in/berkant-agyar-2334a6363"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sky-400 underline hover:text-sky-300 transition-colors"
+              >
+                LinkedIn – Berkant Agyar
+              </a>
+              <br />
+              <a
+                href="https://www.linkedin.com/company/g%26a-webdesign/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sky-400 underline hover:text-sky-300 transition-colors"
+              >
+                LinkedIn – G&amp;A Webdesign
+              </a>
             </div>
           </Card>
         </FadeIn>
@@ -67,16 +96,13 @@ export function Impressum() {
         <FadeIn delay={0.2}>
           <Card>
             <div className="text-sky-400 text-[12px] tracking-[0.25em] uppercase mb-4">
-              Steuernummer
+              Steuer
             </div>
             <div className="text-slate-200 text-[15px] leading-[1.9]">
-              {/* TODO: Steuernummer eintragen */}
-              Steuernummer: wird nachgereicht
+              Steuernummer: 22191 / 13770
+              <br />
+              Umsatzsteuer-ID: wird nachgereicht
             </div>
-            <p className="text-slate-400 text-[13px] leading-relaxed mt-3">
-              Gemäß § 19 UStG wird keine Umsatzsteuer berechnet (Kleinunternehmerregelung).
-              Eine Umsatzsteuer-Identifikationsnummer liegt daher nicht vor.
-            </p>
           </Card>
         </FadeIn>
 

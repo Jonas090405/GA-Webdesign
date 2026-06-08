@@ -167,17 +167,20 @@ function TimelineStep({
   tag: string; index: number; isLast: boolean;
   scrollYProgress: MotionValue<number>; threshold: number;
 }) {
-  // strokeEnd = wenn die Linie den Dot erreicht (leicht dahinter),
-  // strokeStart = immer 7% davor → konstante Animationsdauer für alle Dots,
-  // auch den letzten (der sonst auf [0.995, 1.0] = 0.5% zusammengestaucht wäre)
-  const strokeEnd   = Math.min(1, threshold + 0.02);
-  const strokeStart = Math.max(0, strokeEnd - 0.07);
+  // strokeStart = genau wenn die Linie den Dot erreicht (= threshold)
+  // strokeEnd   = 6% später → Stroke füllt sich NACH Ankunft der Linie
+  const STROKE_DUR = 0.06;
+  const sStart = threshold;
+  const sEnd   = Math.min(1, sStart + STROKE_DUR);
+  // Letzter Dot: sStart kann = sEnd sein → minimalen Bereich sicherstellen
+  const sStartSafe = Math.min(sStart, sEnd - 0.001);
 
-  const pathLength  = useTransform(scrollYProgress, [strokeStart, strokeEnd], [0, 1], { clamp: true });
+  const pathLength = useTransform(scrollYProgress, [sStartSafe, sEnd], [0, 1], { clamp: true });
 
-  const activatedEnd   = Math.min(1, strokeEnd + 0.03);
-  const activatedStart = Math.max(0, activatedEnd - 0.04);
-  const activated      = useTransform(scrollYProgress, [activatedStart, activatedEnd], [0, 1], { clamp: true });
+  const aStart = sEnd;
+  const aEnd   = Math.min(1, aStart + 0.03);
+  const aStartSafe = Math.min(aStart, aEnd - 0.001);
+  const activated  = useTransform(scrollYProgress, [aStartSafe, aEnd], [0, 1], { clamp: true });
 
   return (
     <div className={isLast ? "" : "pb-14 sm:pb-20 xl:pb-24 2xl:pb-28"}>
