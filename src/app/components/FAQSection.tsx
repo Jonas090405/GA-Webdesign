@@ -94,8 +94,8 @@ function DesktopFAQCard({ faq }: { faq: (typeof faqs)[0] }) {
       className="rounded-2xl"
       style={{ background: "rgba(77,190,243,0.1)", padding: "1px", cursor: "default" }}
     >
-      <div
-        className="relative overflow-hidden rounded-2xl h-[290px] xl:h-[300px] 2xl:h-[310px]"
+        <div
+        className="relative overflow-hidden rounded-2xl h-[320px] xl:h-[340px] 2xl:h-[360px]"
         style={{ background: "linear-gradient(135deg, rgba(16,24,27,0.97) 0%, rgba(10,17,22,0.99) 100%)" }}
       >
         {/* Spotlight */}
@@ -111,7 +111,7 @@ function DesktopFAQCard({ faq }: { faq: (typeof faqs)[0] }) {
         <motion.div
           className="absolute left-0 right-0 z-10 px-6 xl:px-7"
           style={{ top: "50%" }}
-          animate={{ y: hovered ? -116 : -29 }}
+          animate={{ y: hovered ? -130 : -29 }}
           transition={{ duration: 0.38, ease: [0.22, 1, 0.36, 1] }}
         >
           <motion.h3
@@ -126,7 +126,7 @@ function DesktopFAQCard({ faq }: { faq: (typeof faqs)[0] }) {
           <AnimatePresence>
             {hovered && (
               <motion.p
-                className="text-slate-400 text-[12px] xl:text-[13px] leading-relaxed"
+                className="text-slate-400 text-[12px] xl:text-[13px] leading-relaxed overflow-y-auto max-h-[195px] xl:max-h-[205px] 2xl:max-h-[220px] pr-1 [&::-webkit-scrollbar]:w-[3px] [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-[rgba(77,190,243,0.3)] [&::-webkit-scrollbar-track]:bg-transparent"
                 initial={{ opacity: 0, y: 6 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 6 }}
