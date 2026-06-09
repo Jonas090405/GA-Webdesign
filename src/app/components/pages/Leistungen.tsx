@@ -394,7 +394,7 @@ const wartungTiers: {
       { label: "Überwachung" },
       { label: "Meldung von Problemen" },
       { label: "Beratung bei Problemen" },
-      { label: "Sicherheitsupdates" },
+      { label: "Sicherheits- & Datenschutzupdates" },
       { label: "Technische Instandhaltung" },
       { label: "WCAG-Konformitätsinstandhaltung" },
     ],
@@ -454,7 +454,7 @@ const wartungCmsTiers: {
     features: [
       { label: "Auf dich zugeschnittenes CMS" },
       { label: "CMS-Instandhaltung" },
-      { label: "Sicherheitsupdates" },
+      { label: "Sicherheits- & Datenschutzupdates" },
       { label: "Überwachung" },
       { label: "Meldung von Problemen" },
       { label: "Beratung bei Problemen" },
