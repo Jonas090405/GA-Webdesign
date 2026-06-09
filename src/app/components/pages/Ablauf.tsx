@@ -167,11 +167,11 @@ function TimelineStep({
   tag: string; index: number; isLast: boolean;
   scrollYProgress: MotionValue<number>; threshold: number;
 }) {
-  // strokeStart = genau wenn die Linie den Dot erreicht (= threshold)
-  // strokeEnd   = 6% später → Stroke füllt sich NACH Ankunft der Linie
+  // strokeEnd = genau wenn die Linie den Dot erreicht (= threshold)
+  // strokeStart = 6% früher → Stroke ist fertig, sobald die Linie ankommt
   const STROKE_DUR = 0.06;
-  const sStart = threshold;
-  const sEnd   = Math.min(1, sStart + STROKE_DUR);
+  const sEnd   = Math.min(1, threshold);
+  const sStart = Math.max(0, sEnd - STROKE_DUR);
   // Letzter Dot: sStart kann = sEnd sein → minimalen Bereich sicherstellen
   const sStartSafe = Math.min(sStart, sEnd - 0.001);
 
@@ -215,7 +215,7 @@ function ProcessTimeline() {
   // 0 wenn erster Dot Viewport-Mitte erreicht → 1 wenn letzter Dot Viewport-Mitte erreicht
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start center", "end center"],
+    offset: ["start center", "end 75%"],
   });
 
   return (

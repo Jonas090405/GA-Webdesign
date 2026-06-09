@@ -180,7 +180,7 @@ export function PortfolioSlider({ projects }: { projects: Project[] }) {
                             loop
                             playsInline
                             aria-hidden="true"
-                            className="w-full block"
+                            className="w-full block scale-[1.10]"
                           />
                         ) : (
                           <ImageWithFallback

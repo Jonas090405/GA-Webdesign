@@ -49,7 +49,7 @@ export function PortfolioScrollSection({
                     loop
                     playsInline
                     aria-hidden="true"
-                    className="w-full h-auto block"
+                    className="w-full block scale-[1.10]"
                   />
                 ) : (
                   <img
@@ -138,7 +138,7 @@ function MobileCarousel({ projects, hideTag = false }: { projects: Project[]; hi
                     loop
                     playsInline
                     aria-hidden="true"
-                    className="w-full block"
+                    className="w-full block scale-[1.10]"
                   />
                 ) : (
                   <img
