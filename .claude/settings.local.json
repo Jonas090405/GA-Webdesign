@@ -3,15 +3,14 @@
     "allow": [
       "Bash(npm install *)",
       "Bash(dir /b \"g:\\\\Fertige_Projekte\\\\Gissler-Webdesign\\\\Freelance Web Design Website\\\\Gissler-Webdesign\")",
-<<<<<<< Updated upstream
-      "Bash(npx tsc *)"
-=======
+      "Bash(npx tsc *)",
       "PowerShell(ls \"$env:USERPROFILE\\\\.claude\\\\projects\\\\\" | Sort-Object LastWriteTime -Descending | Select-Object -First 20 Name)",
       "PowerShell(Get-ChildItem \"$env:USERPROFILE\\\\.claude\\\\projects\\\\\" | Sort-Object LastWriteTime -Descending | Select-Object -First 20 | Format-Table Name, LastWriteTime)",
       "PowerShell(Get-ChildItem -Path \"g:\\\\Fertige_Projekte\\\\Gissler-Webdesign\\\\Freelance Web Design Website\\\\Gissler-Webdesign\" -Hidden -Directory -ErrorAction SilentlyContinue | Where-Object { $_.Name -eq \".claude\" })",
       "PowerShell($projectPath = \"g:\\\\Fertige_Projekte\\\\Gissler-Webdesign\\\\Freelance Web Design Website\\\\Gissler-Webdesign\\\\.claude\"; $globalPath = \"C:\\\\Users\\\\Anwender\\\\.claude\"; Write-Host \"Project .claude exists: $\\(Test-Path $projectPath\\)\"; Write-Host \"Global .claude exists: $\\(Test-Path $globalPath\\)\"; Write-Host \"`nProject .claude items:\"; Get-ChildItem $projectPath -Force 2>&1; Write-Host \"`nGlobal .claude items:\"; Get-ChildItem $globalPath -Force 2>&1)",
-      "PowerShell(Get-ChildItem -Path \"C:\\\\Users\\\\Anwender\\\\.claude\" -Directory -Force | Where-Object { $_.Name -in @\\(\"skills\", \"commands\", \"custom-skills\"\\) } | Select-Object FullName)"
->>>>>>> Stashed changes
+      "PowerShell(Get-ChildItem -Path \"C:\\\\Users\\\\Anwender\\\\.claude\" -Directory -Force | Where-Object { $_.Name -in @\\(\"skills\", \"commands\", \"custom-skills\"\\) } | Select-Object FullName)",
+      "Bash(lsof -ti:*)",
+      "Bash(command -v *)"
     ]
   }
 }

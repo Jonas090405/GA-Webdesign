@@ -1,6 +1,128 @@
+import { useState } from "react";
+import { motion, AnimatePresence } from "motion/react";
 import { SectionLabel } from "../SectionLabel";
 import { Card } from "../Card";
 import { FadeIn } from "../FadeIn";
+import { hasConsent, revokeConsent } from "../../../lib/analytics";
+
+// ─── Widerruf-Button + Bestätigungs-Popup ────────────────────────────────────
+function RevokeConsentButton() {
+  const [open, setOpen] = useState(false);
+  const [status] = useState<"active" | "inactive">(() =>
+    hasConsent() ? "active" : "inactive"
+  );
+  const [revoked, setRevoked] = useState(false);
+
+  if (revoked) {
+    return (
+      <p className="text-emerald-400/80 text-[13px] mt-4">
+        ✓ Einwilligung widerrufen – Google Analytics ist deaktiviert.
+      </p>
+    );
+  }
+
+  if (status === "inactive") {
+    return (
+      <p className="text-slate-500 text-[13px] mt-4 italic">
+        Du hast Google Analytics nicht zugestimmt – es findet kein Tracking statt.
+      </p>
+    );
+  }
+
+  return (
+    <>
+      <button
+        onClick={() => setOpen(true)}
+        className="mt-4 inline-flex items-center gap-2 rounded-full px-4 py-2 text-[13px] font-medium transition-all duration-200 cursor-pointer"
+        style={{
+          background: "rgba(77,190,243,0.07)",
+          border: "1px solid rgba(77,190,243,0.2)",
+          color: "rgba(125,211,252,0.9)",
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.background = "rgba(77,190,243,0.13)";
+          e.currentTarget.style.borderColor = "rgba(77,190,243,0.4)";
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.background = "rgba(77,190,243,0.07)";
+          e.currentTarget.style.borderColor = "rgba(77,190,243,0.2)";
+        }}
+      >
+        Einwilligung widerrufen
+      </button>
+
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4"
+            style={{ background: "rgba(0,0,0,0.65)" }}
+            onClick={() => setOpen(false)}
+          >
+            <motion.div
+              initial={{ scale: 0.95, y: 10, opacity: 0 }}
+              animate={{ scale: 1, y: 0, opacity: 1 }}
+              exit={{ scale: 0.95, y: 10, opacity: 0 }}
+              transition={{ duration: 0.24, ease: [0.22, 1, 0.36, 1] }}
+              className="w-full max-w-sm rounded-2xl p-6 shadow-2xl"
+              style={{
+                background: "rgb(16, 22, 28)",
+                border: "1px solid rgba(77,190,243,0.15)",
+              }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <h3 className="text-white font-semibold text-[16px] mb-2">
+                Einwilligung widerrufen?
+              </h3>
+              <p className="text-slate-400 text-[13px] leading-relaxed mb-5">
+                Google Analytics wird ab sofort nicht mehr geladen. Bereits
+                erhobene Daten bleiben beim Anbieter bestehen.
+              </p>
+              <div className="flex gap-3 justify-end">
+                <button
+                  onClick={() => setOpen(false)}
+                  className="px-4 py-2 rounded-xl text-[13px] font-medium transition-all duration-200 cursor-pointer"
+                  style={{
+                    background: "rgba(77,190,243,0.07)",
+                    border: "1px solid rgba(77,190,243,0.2)",
+                    color: "rgba(200,235,255,0.85)",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = "rgba(77,190,243,0.13)";
+                    e.currentTarget.style.borderColor = "rgba(77,190,243,0.4)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = "rgba(77,190,243,0.07)";
+                    e.currentTarget.style.borderColor = "rgba(77,190,243,0.2)";
+                  }}
+                >
+                  Abbrechen
+                </button>
+                <button
+                  onClick={() => {
+                    revokeConsent();
+                    setRevoked(true);
+                    setOpen(false);
+                  }}
+                  className="px-4 py-2 rounded-xl text-[13px] font-medium text-white transition-[filter] duration-300 hover:brightness-110 cursor-pointer"
+                  style={{
+                    background: "linear-gradient(135deg, #006999 0%, #4dbef3 100%)",
+                  }}
+                >
+                  Ja, widerrufen
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
+  );
+}
+
 export function Datenschutz() {
   return (
     <main id="main-content" className="mx-auto max-w-3xl px-5 sm:px-6 pt-28 sm:pt-32 pb-12">
@@ -10,7 +132,7 @@ export function Datenschutz() {
           Datenschutzerklärung
         </h1>
         <p className="mt-4 text-slate-400 text-[14px]">
-          Stand: Mai 2026
+          Stand: Juni 2026
         </p>
       </FadeIn>
 
@@ -96,9 +218,6 @@ export function Datenschutz() {
               zukommen lässt, werden deine Angaben zur Bearbeitung der
               Anfrage und für mögliche Anschlussfragen gespeichert. Diese
               Daten geben wir nicht ohne deine Einwilligung weiter.
-              Im Rahmen der Akquise und Kundenkommunikation kann Berkant Agyar
-              (selbstständiger externer Partner) Zugriff auf deine Anfrage erhalten,
-              soweit dies zur Bearbeitung erforderlich ist.
               Rechtsgrundlage: Art. 6 Abs. 1 lit. b und f DSGVO.
             </p>
           </Card>
@@ -115,9 +234,8 @@ export function Datenschutz() {
               deiner ausdrücklichen Einwilligung{" "}
               <strong className="text-slate-200">Google Analytics</strong> ein,
               das Analyse-Cookies verwendet, um die Nutzung der Webseite anonymisiert
-              auszuwerten. Du kannst deine Einwilligung jederzeit über den
-              Cookie-Banner widerrufen. Ohne deine Einwilligung werden keine
-              Analyse-Cookies gesetzt.
+              auszuwerten. Wie du die Erfassung unterbinden kannst, erfährst
+              du in Abschnitt 7.
             </p>
           </Card>
         </FadeIn>
@@ -139,18 +257,17 @@ export function Datenschutz() {
               gewährleistet ist.
             </p>
             <p className="text-slate-300 text-[14px] leading-relaxed mt-3">
-              Du kannst die Erfassung durch Google Analytics jederzeit ablehnen oder
-              eine bereits erteilte Einwilligung widerrufen, indem du im
-              Cookie-Banner auf „Ablehnen" klickst oder das{" "}
+              Du kannst deine Einwilligung jederzeit widerrufen – direkt hier
+              über den Button unten oder durch Installation des{" "}
               <a
                 href="https://tools.google.com/dlpage/gaoptout"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-sky-400 underline hover:text-sky-300 transition-colors"
               >
-                Browser-Add-on zur Deaktivierung von Google Analytics
-              </a>{" "}
-              installierst. Weitere Informationen:{" "}
+                Browser-Add-ons zur Deaktivierung von Google Analytics
+              </a>
+              . Weitere Informationen:{" "}
               <a
                 href="https://policies.google.com/privacy"
                 target="_blank"
@@ -161,6 +278,7 @@ export function Datenschutz() {
               </a>
               . Rechtsgrundlage: Art. 6 Abs. 1 lit. a DSGVO (Einwilligung).
             </p>
+            <RevokeConsentButton />
           </Card>
         </FadeIn>
 
@@ -259,6 +377,35 @@ export function Datenschutz() {
             </p>
           </Card>
         </FadeIn>
+
+        <FadeIn delay={0.6}>
+          <Card>
+            <div className="text-sky-400 text-[12px] tracking-[0.25em] uppercase mb-4">
+              12. Google Search Console
+            </div>
+            <p className="text-slate-300 text-[14px] leading-relaxed">
+              Diese Webseite ist in der{" "}
+              <strong className="text-slate-200">Google Search Console</strong>{" "}
+              (Google LLC, 1600 Amphitheatre Parkway, Mountain View, CA 94043,
+              USA) registriert. Dieses Tool liefert uns aggregierte,
+              anonymisierte Informationen über die Sichtbarkeit unserer Seite
+              in der Google-Suche – z. B. Suchanfragen, Klicks und Impressionen.
+              Personenbezogene Daten der Besucher dieser Webseite werden dabei
+              nicht an uns übermittelt; die Verarbeitung findet ausschließlich
+              auf Googles Seite statt. Weitere Informationen:{" "}
+              <a
+                href="https://policies.google.com/privacy"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sky-400 underline hover:text-sky-300 transition-colors"
+              >
+                Datenschutzerklärung von Google
+              </a>
+              . Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO.
+            </p>
+          </Card>
+        </FadeIn>
+
       </div>
     </main>
   );

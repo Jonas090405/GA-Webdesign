@@ -67,3 +67,9 @@ export function denyConsent() {
 export function hasConsent(): boolean {
   return localStorage.getItem("cookie-consent") === "granted";
 }
+
+/** Einwilligung widerrufen → localStorage zurücksetzen + Tracking stoppen. */
+export function revokeConsent() {
+  localStorage.setItem("cookie-consent", "denied");
+  denyConsent();
+}

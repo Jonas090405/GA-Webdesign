@@ -74,7 +74,7 @@ function Hero() {
         <div>
           <FadeIn>
             <TeamBadge />
-            <SectionLabel>Webdesign · Entwicklung · Deployment</SectionLabel>
+            <SectionLabel>Webdesign · Entwicklung · Hosting · SEO</SectionLabel>
           </FadeIn>
 
           <FadeIn delay={0.1}>

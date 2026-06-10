@@ -210,9 +210,23 @@ export function AGB() {
               solcher Drittleistungen, soweit diese nicht im eigenen Verantwortungsbereich liegen.
             </p>
             <p className="text-slate-300 text-[14px] leading-relaxed mt-3">
-              Preise solcher Drittanbieter gelten als externe Kosten. Änderungen dieser Preise können nach
-              vorheriger Information des Auftraggebers an diesen weitergegeben werden, soweit die entsprechende
-              Drittleistung Vertragsbestandteil ist.
+              Werden für ein Projekt kostenpflichtige externe Dienste eingebunden – beispielsweise
+              Datenbankdienste (z. B. Supabase), E-Mail-Dienste (z. B. EmailJS), Authentifizierungsdienste
+              oder vergleichbare technische Infrastrukturleistungen –, werden die entstehenden Kosten
+              im individuellen Angebot ausgewiesen. Der Auftraggeber stimmt mit Annahme des Angebots
+              der Einbindung und der monatlichen Weitergabe dieser Kosten zu.
+            </p>
+            <p className="text-slate-300 text-[14px] leading-relaxed mt-3">
+              Derartige Drittkosten werden dem Auftraggeber monatlich gemäß dem im Angebot ausgewiesenen
+              Betrag weiterberechnet. Dieser Betrag umfasst die anteiligen Kosten des jeweiligen Dienstes
+              sowie eine Servicegebühr für Beschaffung, Einrichtung und Verwaltung. Da einzelne Dienste
+              projektübergreifend genutzt werden können, erfolgt die Kalkulation auf Basis eines pauschalierten
+              Anteils; der im Angebot genannte Betrag ist maßgeblich. Die Abrechnung beginnt mit Aufnahme
+              des aktiven Betriebs des jeweiligen Dienstes. Ändern sich die Konditionen eines eingesetzten
+              Drittdienstes wesentlich, informiert die G&amp;A Webdesign GbR den Auftraggeber rechtzeitig;
+              der angepasste Betrag gilt ab dem folgenden Abrechnungsmonat. Ist der Auftraggeber mit der
+              Anpassung nicht einverstanden, kann er den betreffenden Dienst mit einer Frist von 30 Tagen
+              zum nächsten Monatsende abbestellen; die entsprechende Funktionalität entfällt in diesem Fall.
             </p>
             <p className="text-slate-300 text-[14px] leading-relaxed mt-3">
               Domains werden grundsätzlich auf den Auftraggeber registriert. Domainkosten werden in

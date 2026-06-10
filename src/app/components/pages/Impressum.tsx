@@ -46,7 +46,7 @@ export function Impressum() {
             <div className="text-slate-200 text-[15px] leading-[1.9]">
               Gesellschaft bürgerlichen Rechts (GbR)
               <br />
-              Gewerbliche Tätigkeit: Webdesign und Webentwicklung
+              Gewerbliche Tätigkeit: Webdesign, Webentwicklung, Hosting und SEO
             </div>
           </Card>
         </FadeIn>
