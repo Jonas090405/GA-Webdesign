@@ -37,42 +37,73 @@ function useInputTarget(): InputTarget {
       target.current.y = clamp((e.clientY / window.innerHeight) * 2 - 1);
     };
 
-    // --- Mobile/Tablet: Gyroskop ---
-    const onOrient = (e: DeviceOrientationEvent) => {
-      const gamma = e.gamma ?? 0; // links/rechts  [-90, 90]
-      const beta = e.beta ?? 0; //  vor/zurück    [-180, 180]
-      target.current.x = clamp(gamma / 35);
-      target.current.y = clamp((beta - 45) / 35); // neutral bei ~45° Haltung
-    };
-
     if (coarse && typeof window.DeviceOrientationEvent !== "undefined") {
+      // Erste Messung = Neutralstellung merken, danach nur die relative
+      // Abweichung verwenden – funktioniert unabhängig davon, in welchem
+      // Winkel das Gerät gehalten wird.
+      let base: { gamma: number; beta: number } | null = null;
+
+      const onOrient: EventListener = (event) => {
+        const e = event as DeviceOrientationEvent;
+        const gamma = e.gamma; // links/rechts
+        const beta = e.beta; //  vor/zurück
+        if (gamma === null || beta === null) return;
+
+        if (!base) {
+          base = { gamma, beta };
+          return;
+        }
+
+        target.current.x = clamp((gamma - base.gamma) / 26);
+        target.current.y = clamp((beta - base.beta) / 26);
+      };
+
+      const bind = () => {
+        window.addEventListener("deviceorientation", onOrient, true);
+        // Manche Android-Browser feuern nur das "absolute" Event.
+        window.addEventListener("deviceorientationabsolute", onOrient, true);
+      };
+      const unbind = () => {
+        window.removeEventListener("deviceorientation", onOrient, true);
+        window.removeEventListener("deviceorientationabsolute", onOrient, true);
+      };
+
       const DOE = window.DeviceOrientationEvent as unknown as {
         requestPermission?: () => Promise<"granted" | "denied">;
       };
 
-      const bind = () =>
-        window.addEventListener("deviceorientation", onOrient, true);
-
       // iOS verlangt eine Permission-Abfrage aus einer User-Geste heraus.
       const requestPermission = DOE.requestPermission;
       if (typeof requestPermission === "function") {
+        let requested = false;
         const request = () => {
+          if (requested) return;
+          requested = true;
           requestPermission()
-            .then((res) => res === "granted" && bind())
-            .catch(() => {});
+            .then((res) => {
+              if (res === "granted") bind();
+              else requested = false;
+            })
+            .catch(() => {
+              requested = false;
+            });
         };
-        window.addEventListener("touchend", request, { once: true });
-        window.addEventListener("click", request, { once: true });
+        const events: (keyof WindowEventMap)[] = [
+          "pointerdown",
+          "touchend",
+          "click",
+        ];
+        events.forEach((ev) =>
+          window.addEventListener(ev, request, { once: true })
+        );
         return () => {
-          window.removeEventListener("touchend", request);
-          window.removeEventListener("click", request);
-          window.removeEventListener("deviceorientation", onOrient, true);
+          events.forEach((ev) => window.removeEventListener(ev, request));
+          unbind();
         };
       }
 
       bind();
-      return () =>
-        window.removeEventListener("deviceorientation", onOrient, true);
+      return unbind;
     }
 
     window.addEventListener("pointermove", onPointer);
@@ -256,9 +287,10 @@ interface ModelProps {
   url: string;
   target: InputTarget;
   baseYaw: number;
+  onReady?: () => void;
 }
 
-function Model({ url, target, baseYaw }: ModelProps) {
+function Model({ url, target, baseYaw, onReady }: ModelProps) {
   const { scene } = useGLTF(url);
   const ground = useGroundTexture();
 
@@ -304,7 +336,14 @@ function Model({ url, target, baseYaw }: ModelProps) {
     };
   }, [scene]);
 
+  const readyFired = useRef(false);
+
   useFrame((_, delta) => {
+    if (!readyFired.current) {
+      readyFired.current = true;
+      onReady?.();
+    }
+
     const yaw = baseYaw + target.current.x * 0.55;
     const pitch = target.current.y * 0.3;
     for (const u of uniforms) {
@@ -335,7 +374,7 @@ function Model({ url, target, baseYaw }: ModelProps) {
   );
 }
 
-function ModelCanvas({ url, target, baseYaw }: ModelProps) {
+function ModelCanvas({ url, target, baseYaw, onReady }: ModelProps) {
   return (
     <Canvas
       dpr={[1, 1.75]}
@@ -348,7 +387,7 @@ function ModelCanvas({ url, target, baseYaw }: ModelProps) {
       <directionalLight position={[4, 6, 5]} intensity={1.1} />
 
       <Suspense fallback={null}>
-        <Model url={url} target={target} baseYaw={baseYaw} />
+        <Model url={url} target={target} baseYaw={baseYaw} onReady={onReady} />
 
         {/* In-Memory Environment (kein externer HDR-Download) – markenblaue Reflexe */}
         <Environment resolution={64} frames={1}>
@@ -376,16 +415,30 @@ function ModelCanvas({ url, target, baseYaw }: ModelProps) {
   );
 }
 
-export default function HeroModelsScene() {
+export default function HeroModelsScene({
+  onReady,
+}: {
+  onReady?: () => void;
+}) {
   const target = useInputTarget();
 
   return (
     <div className="grid grid-cols-2 gap-2 sm:gap-3 w-full">
       <div className="relative aspect-[3/4]">
-        <ModelCanvas url={MODELS.jonas} target={target} baseYaw={0.12} />
+        <ModelCanvas
+          url={MODELS.jonas}
+          target={target}
+          baseYaw={0.12}
+          onReady={onReady}
+        />
       </div>
       <div className="relative aspect-[3/4]">
-        <ModelCanvas url={MODELS.berkant} target={target} baseYaw={-0.12} />
+        <ModelCanvas
+          url={MODELS.berkant}
+          target={target}
+          baseYaw={-0.12}
+          onReady={onReady}
+        />
       </div>
     </div>
   );
