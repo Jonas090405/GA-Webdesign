@@ -123,7 +123,7 @@ function MobileCarousel({ projects, hideTag = false }: { projects: Project[]; hi
             <ProjectTitle project={project} index={index} hideTag={hideTag} />
 
             {project.url && (
-              <div className="flex justify-start px-2 mt-6 mb-5">
+              <div className="flex justify-start px-0 mt-6 mb-5">
                 <OpenButton project={project} noMargin />
               </div>
             )}
@@ -220,7 +220,7 @@ function OpenButton({ project, noMargin = false }: { project: Project; noMargin?
 
 function ProjectTitle({ project, index, hideTag = false }: { project: Project; index: number; hideTag?: boolean }) {
   return (
-    <div className="text-left md:text-center px-4">
+    <div className="text-left md:text-center px-0 md:px-4">
       {!hideTag && (
         <div className="flex items-center justify-start md:justify-center gap-3 mb-4">
           <span

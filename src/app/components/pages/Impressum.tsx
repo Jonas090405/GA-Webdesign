@@ -160,6 +160,35 @@ export function Impressum() {
             </p>
           </Card>
         </FadeIn>
+
+        <FadeIn delay={0.4}>
+          <Card>
+            <div className="text-sky-400 text-[12px] tracking-[0.25em] uppercase mb-4">
+              Bildnachweise
+            </div>
+            <p className="text-slate-300 text-[14px] leading-relaxed">
+              Die 3D-Modelle auf der Startseite wurden mit{" "}
+              <a
+                href="https://www.meshy.ai"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sky-400 underline hover:text-sky-300 transition-colors"
+              >
+                Meshy
+              </a>{" "}
+              erstellt und sind lizenziert unter{" "}
+              <a
+                href="https://creativecommons.org/licenses/by/4.0/deed.de"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sky-400 underline hover:text-sky-300 transition-colors"
+              >
+                CC BY 4.0
+              </a>
+              . Erstellt auf Basis eigener Fotos, bearbeitet.
+            </p>
+          </Card>
+        </FadeIn>
       </div>
     </main>
   );

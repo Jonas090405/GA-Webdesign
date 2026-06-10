@@ -13,7 +13,7 @@ import { ServiceCardBg, type BgKey } from "../ServiceCardBg";
 import emailjs from "@emailjs/browser";
 import profilbild from "../../../imports/Jonas_Gissler.png";
 import berkantImg from "../../../imports/Berkant_agyar.jpeg";
-import { DesignerSVG } from "../DesignerSVG";
+import { HeroModels } from "../HeroModels";
 import { TeamBadge } from "../TeamBadge";
 import gcnImg from "../../../imports/gcn-fahrzeughandel.png";
 import gcnAvatar from "../../../imports/gcn-avatar.jpeg";
@@ -111,14 +111,8 @@ function Hero() {
           </FadeIn>
         </div>
 
-        <FadeIn delay={0.4} className="hidden lg:flex justify-center lg:justify-end">
-          <motion.div
-            animate={{ y: [0, -10, 0] }}
-            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-            className="will-change-transform"
-          >
-            <DesignerSVG className="w-full max-w-[500px] xl:max-w-[700px] 2xl:max-w-[950px] h-auto" />
-          </motion.div>
+        <FadeIn delay={0.4} className="flex justify-center lg:justify-end">
+          <HeroModels className="max-w-[340px] sm:max-w-[460px] lg:max-w-[520px] xl:max-w-[660px] 2xl:max-w-[820px]" />
         </FadeIn>
       </div>
     </section>

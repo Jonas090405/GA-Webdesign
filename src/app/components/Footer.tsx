@@ -123,6 +123,7 @@ export function Footer() {
                   ["/kontakt", "Kontakt"],
                   ["/impressum", "Impressum"],
                   ["/datenschutz", "Datenschutz"],
+                  ["/agb", "AGB"],
                 ] as const
               ).map(([id, label]) => (
                 <li key={id}>

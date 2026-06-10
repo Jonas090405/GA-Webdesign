@@ -11,6 +11,7 @@ import { Ablauf } from "./components/pages/Ablauf";
 import { About } from "./components/pages/About";
 import { Impressum } from "./components/pages/Impressum";
 import { Datenschutz } from "./components/pages/Datenschutz";
+import { AGB } from "./components/pages/AGB";
 import { Kontakt } from "./components/pages/Kontakt";
 import { CookieBanner } from "./components/CookieBanner";
 
@@ -81,6 +82,11 @@ export default function App() {
           <Route path="/datenschutz" element={
             <motion.div initial="initial" animate="animate" exit="exit" variants={pageVariants} transition={pageTransition}>
               <Datenschutz />
+            </motion.div>
+          } />
+          <Route path="/agb" element={
+            <motion.div initial="initial" animate="animate" exit="exit" variants={pageVariants} transition={pageTransition}>
+              <AGB />
             </motion.div>
           } />
         </Routes>
