@@ -525,10 +525,17 @@ export function AGB() {
               Prozesse im Rahmen der Website-Erstellung und -Optimierung eingesetzt werden.
             </p>
             <p className="text-slate-300 text-[14px] leading-relaxed mt-3">
-              Vertrauliche Informationen, Zugangsdaten, Passwörter, API-Keys, Secrets oder sonstige sensible
-              Daten werden nicht in KI-Systeme eingegeben oder an diese weitergegeben. Solche Daten werden
-              ausschließlich sicher und getrennt gespeichert, insbesondere im geschützten Bereich des jeweiligen
-              GitHub-Repositories unter „Secrets" oder in vergleichbaren sicheren Umgebungen.
+              Zugangsdaten, Passwörter, API-Keys und sonstige Credentials werden nicht als Klartext direkt
+              in KI-Systeme eingegeben oder übermittelt. Solche Daten werden ausschließlich in sicheren,
+              isolierten Umgebungen gespeichert – insbesondere als verschlüsselte Secrets in
+              GitHub-Repositories oder vergleichbaren Systemen.
+            </p>
+            <p className="text-slate-300 text-[14px] leading-relaxed mt-3">
+              Der Einsatz KI-gestützter Entwicklungswerkzeuge mit kontrollierten Systemzugriffen (z. B. über
+              MCP-Schnittstellen zu Datenbankdiensten wie Supabase) ist möglich, sofern Credentials dabei
+              nicht im Klartext an das KI-Modell übertragen werden. Personenbezogene oder vertrauliche
+              Kundendaten werden in diesem Rahmen nur in dem Umfang verarbeitet, der für die jeweilige
+              Entwicklungsaufgabe erforderlich ist.
             </p>
           </Card>
         </FadeIn>
