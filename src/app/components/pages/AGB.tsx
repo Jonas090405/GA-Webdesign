@@ -201,8 +201,8 @@ export function AGB() {
             </div>
             <p className="text-slate-300 text-[14px] leading-relaxed">
               Die G&amp;A Webdesign GbR nutzt je nach Projekt Drittanbieter und externe Dienste, insbesondere
-              GitHub, Vercel, Strato, Cookie-Tools, Analyse-Tools, CMS-Dienste, EmailJS oder vergleichbare
-              technische Anbieter.
+              GitHub, Vercel, Strato, Cookie-Tools, Analyse-Tools, Headless-CMS-Systeme (Sanity, Strapi),
+              EmailJS oder vergleichbare technische Anbieter.
             </p>
             <p className="text-slate-300 text-[14px] leading-relaxed mt-3">
               Leistungen Dritter sind, soweit einschlägig, als Fremdleistungen zu verstehen. Die G&amp;A
@@ -211,8 +211,9 @@ export function AGB() {
             </p>
             <p className="text-slate-300 text-[14px] leading-relaxed mt-3">
               Werden für ein Projekt kostenpflichtige externe Dienste eingebunden – beispielsweise
-              Datenbankdienste (z. B. Supabase), E-Mail-Dienste (z. B. EmailJS), Authentifizierungsdienste
-              oder vergleichbare technische Infrastrukturleistungen –, werden die entstehenden Kosten
+              Datenbankdienste (z. B. Supabase), E-Mail-Dienste (z. B. EmailJS), Headless-CMS-Dienste
+              (z. B. Sanity, Strapi Cloud), Authentifizierungsdienste oder vergleichbare technische
+              Infrastrukturleistungen –, werden die entstehenden Kosten
               im individuellen Angebot ausgewiesen. Der Auftraggeber stimmt mit Annahme des Angebots
               der Einbindung und der monatlichen Weitergabe dieser Kosten zu.
             </p>
@@ -353,8 +354,14 @@ export function AGB() {
             />
 
             <p className="text-slate-300 text-[14px] leading-relaxed">
-              Backups und Versionsstände werden projektspezifisch insbesondere über GitHub-Repositories und,
-              bei CMS-Projekten, zusätzlich über Strapi Cloud oder vergleichbare Systeme abgesichert.
+              Je nach Projektumfang wird als Headless-CMS-System Sanity (bei kleineren Projekten) oder
+              Strapi (bei größeren Projekten) eingesetzt. Die konkrete Systemauswahl wird im individuellen
+              Angebot ausgewiesen. Entstehende Kosten des jeweiligen CMS-Dienstes werden gemäß Abschnitt 8
+              weiterberechnet.
+            </p>
+            <p className="text-slate-300 text-[14px] leading-relaxed mt-3">
+              Backups und Versionsstände werden projektspezifisch über GitHub-Repositories und, bei
+              CMS-Projekten, zusätzlich über das jeweils eingesetzte CMS-System abgesichert.
             </p>
             <p className="text-slate-300 text-[14px] leading-relaxed mt-3">
               Für Inhalte, die der Auftraggeber selbst im CMS erstellt, überarbeitet oder hochlädt, bleibt
