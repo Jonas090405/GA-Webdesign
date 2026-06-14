@@ -358,7 +358,7 @@ function HostingCard() {
           >
             <span className="text-slate-300 text-[12px]">Hosting bei vorhandener Domain</span>
             <span className="text-[12px] font-semibold ml-3 shrink-0" style={{ color: "#4dbef3" }}>
-              10 €/Monat
+              5 €/Monat
             </span>
           </div>
           {/* Domain-Beschaffung & Einrichtung */}
@@ -369,7 +369,7 @@ function HostingCard() {
             <div className="flex items-start justify-between gap-3">
               <span className="text-slate-300 text-[12px]">Domain-Beschaffung & Einrichtung</span>
               <div className="text-right shrink-0">
-                <p className="text-[12px] font-semibold" style={{ color: "#4dbef3" }}>10 €/Monat</p>
+                <p className="text-[12px] font-semibold" style={{ color: "#4dbef3" }}>5 €/Monat</p>
                 <p className="text-[11px] font-medium mt-0.5" style={{ color: "#4dbef3" }}>+ Domainkosten je nach Wunschdomain</p>
                 <p className="text-[11px] font-medium mt-0.5" style={{ color: "#4dbef3" }}>+ 60 € Einrichtung (einmalig)</p>
               </div>
@@ -442,15 +442,8 @@ const wartungCmsTiers: {
   features: { label: React.ReactNode }[];
 }[] = [
   {
-    name: "Nur CMS",
-    price: "30 €/Monat",
-    features: [
-      { label: "Auf dich zugeschnittenes CMS" },
-    ],
-  },
-  {
     name: "Basis CMS",
-    price: "50 €/Monat",
+    price: "25 €/Monat",
     features: [
       { label: "Auf dich zugeschnittenes CMS" },
       { label: "CMS-Instandhaltung" },
@@ -463,7 +456,7 @@ const wartungCmsTiers: {
   },
   {
     name: "Erweitert CMS",
-    price: "160 €/Monat",
+    price: "135 €/Monat",
     features: [
       { label: "Alles aus Basis CMS" },
       {

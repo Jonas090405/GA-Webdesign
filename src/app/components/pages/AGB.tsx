@@ -170,8 +170,8 @@ export function AGB() {
               Hosting wird ausschließlich für von der G&amp;A Webdesign GbR erstellte Projekte angeboten.
             </p>
             <p className="text-slate-300 text-[14px] leading-relaxed mt-3">
-              Das Hosting bei vorhandener Domain kostet 10 EUR pro Monat. Bei gewünschter Domain-Beschaffung
-              und Einrichtung beträgt das Hosting ebenfalls 10 EUR pro Monat, zuzüglich der tatsächlichen
+              Das Hosting bei vorhandener Domain kostet 5 EUR pro Monat. Bei gewünschter Domain-Beschaffung
+              und Einrichtung beträgt das Hosting ebenfalls 5 EUR pro Monat, zuzüglich der tatsächlichen
               Domainkosten entsprechend der gewünschten Domain sowie einer einmaligen Einrichtungspauschale
               von 60 EUR.
             </p>
@@ -323,16 +323,6 @@ export function AGB() {
             </div>
 
             <div className="space-y-5">
-              <div>
-                <p className="text-slate-200 text-[14px] font-medium mb-2">Nur CMS – Preis gemäß aktueller Preisliste</p>
-                <ul className="text-slate-300 text-[14px] leading-relaxed space-y-1 pl-4 list-disc marker:text-sky-400">
-                  <li>Ein auf den Auftraggeber zugeschnittenes CMS</li>
-                </ul>
-              </div>
-              <div
-                className="h-px"
-                style={{ background: "rgba(77,190,243,0.08)" }}
-              />
               <div>
                 <p className="text-slate-200 text-[14px] font-medium mb-2">Basis CMS – Preis gemäß aktueller Preisliste</p>
                 <ul className="text-slate-300 text-[14px] leading-relaxed space-y-1 pl-4 list-disc marker:text-sky-400">
