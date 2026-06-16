@@ -398,17 +398,25 @@ export function AGB() {
               12. Vergütung und Zahlungsbedingungen
             </div>
             <p className="text-slate-300 text-[14px] leading-relaxed">
-              Für die Erstellung von Webseiten gilt, sofern nicht anders vereinbart, folgende Zahlungsstaffel:
+              Für die Erstellung von Webseiten gilt, sofern nicht anders vereinbart, folgende Zahlungsregelung
+              auf Basis von Abschlägen:
             </p>
             <ul className="text-slate-300 text-[14px] leading-relaxed space-y-2 pl-4 list-disc marker:text-sky-400 mt-3">
               <li>
-                <strong className="text-slate-200">40 %</strong> der Gesamtvergütung werden als Anzahlung
-                unmittelbar nach Vertragsschluss und Rechnungsstellung fällig. Die G&amp;A Webdesign GbR ist
-                berechtigt, mit den Arbeiten erst nach vollständigem Zahlungseingang zu beginnen.
+                Die Vergütung wird projektbezogen nach abgeschlossenen Teilschritten bzw. Projektphasen
+                abgerechnet.
               </li>
               <li>
-                <strong className="text-slate-200">60 %</strong> der Gesamtvergütung werden nach erfolgreicher
-                Abnahme oder Eintritt der Abnahmefiktion und Erhalt der Schlussrechnung fällig.
+                Nach Abschluss und Freigabe eines vereinbarten Projektabschnitts stellt die G&amp;A Webdesign GbR
+                einen entsprechenden Abschlag in Rechnung.
+              </li>
+              <li>
+                Der jeweils nächste Projektabschnitt beginnt erst nach vollständigem Zahlungseingang des zuvor
+                gestellten Abschlags.
+              </li>
+              <li>
+                Die Höhe, Reihenfolge und Anzahl der Abschläge ergeben sich aus dem individuellen Angebot, der
+                Leistungsbeschreibung oder der sonstigen vertraglichen Vereinbarung.
               </li>
             </ul>
             <p className="text-slate-300 text-[14px] leading-relaxed mt-3">
