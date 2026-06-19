@@ -158,13 +158,56 @@ export function AGB() {
               Nach erfolgter Abnahme gewünschte weitere Anpassungen oder Inhaltserweiterungen sind nur im
               Rahmen eines gebuchten Wartungspakets oder gegen gesonderte Vergütung geschuldet.
             </p>
+            <p className="text-slate-300 text-[14px] leading-relaxed mt-3">
+              Für erstellte Webseiten gilt nach Abnahme eine Gewährleistungsfrist von zwölf Monaten.
+              Als Mangel gilt eine erhebliche Abweichung von der zum Zeitpunkt der Abnahme vereinbarten
+              Leistungsbeschreibung. Offensichtliche Mängel sind innerhalb von 10 Werktagen nach Abnahme
+              in Textform zu rügen; andernfalls gilt die Leistung insoweit als genehmigt. Mängelrechte
+              entfallen, soweit der Auftraggeber oder Dritte Änderungen am Code oder an der Webseite
+              vorgenommen haben und der Mangel hierauf zurückzuführen ist.
+            </p>
           </Card>
         </FadeIn>
 
         <FadeIn delay={0.23}>
           <Card>
             <div className="text-sky-400 text-[12px] tracking-[0.25em] uppercase mb-4">
-              7. Hosting
+              7. Termine und Lieferverzug
+            </div>
+            <p className="text-slate-300 text-[14px] leading-relaxed">
+              Die G&amp;A Webdesign GbR ist bestrebt, vereinbarte Fertigstellungstermine einzuhalten. Diese
+              können jedoch nur dann eingehalten werden, wenn der Auftraggeber seinen Mitwirkungspflichten
+              gemäß Abschnitt 4 vollständig und rechtzeitig nachkommt. Lieferverzögerungen oder Mehrkosten,
+              die durch unrichtige, unvollständige oder nachträglich geänderte Angaben, Unterlagen oder
+              Inhalte des Auftraggebers entstehen, gehen nicht zu Lasten der G&amp;A Webdesign GbR;
+              daraus resultierende Mehrkosten trägt der Auftraggeber.
+            </p>
+            <p className="text-slate-300 text-[14px] leading-relaxed mt-3">
+              Gerät die G&amp;A Webdesign GbR in Verzug, kann der Auftraggeber seine gesetzlichen Rechte
+              erst nach Ablauf einer schriftlich gesetzten Nachfrist von mindestens 14 Tagen geltend machen.
+              Die Frist beginnt mit Zugang des Mahnschreibens.
+            </p>
+            <p className="text-slate-300 text-[14px] leading-relaxed mt-3">
+              Eine Haftung für Verzugsschäden besteht nur bei Vorsatz oder grober Fahrlässigkeit. Höhere
+              Gewalt sowie sonstige unvorhersehbare oder unabwendbare Ereignisse – insbesondere Naturkatastrophen,
+              Krieg, Streik, Aussperrung, erhebliche unverschuldete Betriebsstörungen oder Verzögerungen
+              bei eingesetzten Drittanbietern – verlängern die vereinbarten Fristen um die Dauer der
+              Störung zuzüglich zwei weiterer Wochen. Die G&amp;A Webdesign GbR informiert den Auftraggeber
+              unverzüglich über den Eintritt und die voraussichtliche Dauer solcher Ereignisse.
+            </p>
+            <p className="text-slate-300 text-[14px] leading-relaxed mt-3">
+              Verzögert sich die Leistungserbringung aus Gründen, die der Auftraggeber zu vertreten hat,
+              kann die G&amp;A Webdesign GbR eine angemessene Erhöhung der vereinbarten Vergütung verlangen.
+              Bei Vorsatz oder grober Fahrlässigkeit des Auftraggebers können darüber hinaus
+              Schadensersatzansprüche geltend gemacht werden.
+            </p>
+          </Card>
+        </FadeIn>
+
+        <FadeIn delay={0.245}>
+          <Card>
+            <div className="text-sky-400 text-[12px] tracking-[0.25em] uppercase mb-4">
+              8. Hosting
             </div>
             <p className="text-slate-300 text-[14px] leading-relaxed">
               Hosting wird ausschließlich für von der G&amp;A Webdesign GbR erstellte Projekte angeboten.
@@ -197,7 +240,7 @@ export function AGB() {
         <FadeIn delay={0.26}>
           <Card>
             <div className="text-sky-400 text-[12px] tracking-[0.25em] uppercase mb-4">
-              8. Drittanbieter, Domains und Fremdleistungen
+              9. Drittanbieter, Domains und Fremdleistungen
             </div>
             <p className="text-slate-300 text-[14px] leading-relaxed">
               Die G&amp;A Webdesign GbR nutzt je nach Projekt Drittanbieter und externe Dienste, insbesondere
@@ -239,7 +282,7 @@ export function AGB() {
         <FadeIn delay={0.29}>
           <Card>
             <div className="text-sky-400 text-[12px] tracking-[0.25em] uppercase mb-4">
-              9. Wartungspakete für Webseiten
+              10. Wartungspakete für Webseiten
             </div>
 
             <div className="space-y-5">
@@ -320,7 +363,7 @@ export function AGB() {
         <FadeIn delay={0.32}>
           <Card>
             <div className="text-sky-400 text-[12px] tracking-[0.25em] uppercase mb-4">
-              10. CMS-Pakete
+              11. CMS-Pakete
             </div>
 
             <div className="space-y-5">
@@ -356,7 +399,7 @@ export function AGB() {
             <p className="text-slate-300 text-[14px] leading-relaxed">
               Je nach Projektumfang wird als Headless-CMS-System Sanity (bei kleineren Projekten) oder
               Strapi (bei größeren Projekten) eingesetzt. Die konkrete Systemauswahl wird im individuellen
-              Angebot ausgewiesen. Entstehende Kosten des jeweiligen CMS-Dienstes werden gemäß Abschnitt 8
+              Angebot ausgewiesen. Entstehende Kosten des jeweiligen CMS-Dienstes werden gemäß Abschnitt 9
               weiterberechnet.
             </p>
             <p className="text-slate-300 text-[14px] leading-relaxed mt-3">
@@ -374,7 +417,7 @@ export function AGB() {
         <FadeIn delay={0.35}>
           <Card>
             <div className="text-sky-400 text-[12px] tracking-[0.25em] uppercase mb-4">
-              11. SEO-Grundleistungen
+              12. SEO-Grundleistungen
             </div>
             <p className="text-slate-300 text-[14px] leading-relaxed">
               Im Rahmen der Webseiten-Erstellung sind technische SEO-Grundleistungen enthalten, soweit nicht
@@ -395,9 +438,13 @@ export function AGB() {
         <FadeIn delay={0.38}>
           <Card>
             <div className="text-sky-400 text-[12px] tracking-[0.25em] uppercase mb-4">
-              12. Vergütung und Zahlungsbedingungen
+              13. Vergütung und Zahlungsbedingungen
             </div>
             <p className="text-slate-300 text-[14px] leading-relaxed">
+              Alle genannten Preise verstehen sich als Nettopreise zuzüglich der jeweils geltenden
+              gesetzlichen Umsatzsteuer.
+            </p>
+            <p className="text-slate-300 text-[14px] leading-relaxed mt-3">
               Für die Erstellung von Webseiten gilt, sofern nicht anders vereinbart, folgende Zahlungsregelung
               auf Basis von Abschlägen:
             </p>
@@ -427,13 +474,25 @@ export function AGB() {
               Monatliche Gebühren für Hosting, Wartung, CMS oder sonstige laufende Leistungen sind jeweils im
               Voraus bis zum 3. Werktag eines Kalendermonats fällig.
             </p>
+            <p className="text-slate-300 text-[14px] leading-relaxed mt-3">
+              Wird ein Projekt durch den Auftraggeber vorzeitig beendet oder abgebrochen, ist die G&amp;A
+              Webdesign GbR berechtigt, die bis zu diesem Zeitpunkt erbrachten Leistungen nach tatsächlichem
+              Aufwand zu vergüten sowie bereits entstandene Kosten in Rechnung zu stellen. Ein weitergehender
+              Anspruch nach § 648 BGB bleibt unberührt.
+            </p>
+            <p className="text-slate-300 text-[14px] leading-relaxed mt-3">
+              Preise für laufende monatliche Leistungen (Hosting, Wartungspakete, CMS-Pakete) können von der
+              G&amp;A Webdesign GbR mit einer Ankündigungsfrist von sechs Wochen angepasst werden. Der
+              Auftraggeber ist berechtigt, den betroffenen Vertrag in diesem Fall mit Wirkung zum Ende des
+              laufenden Vertragsmonats zu kündigen.
+            </p>
           </Card>
         </FadeIn>
 
         <FadeIn delay={0.41}>
           <Card>
             <div className="text-sky-400 text-[12px] tracking-[0.25em] uppercase mb-4">
-              13. Zahlungsverzug, Sperrung und Wiederfreischaltung
+              14. Zahlungsverzug, Sperrung und Wiederfreischaltung
             </div>
             <p className="text-slate-300 text-[14px] leading-relaxed">
               Gerät der Auftraggeber mit einer fälligen Zahlung in Verzug, gelten die gesetzlichen
@@ -454,13 +513,18 @@ export function AGB() {
               Für die Wiederfreischaltung nach Ausgleich offener Forderungen kann eine angemessene Gebühr
               gemäß aktueller Preisliste erhoben werden.
             </p>
+            <p className="text-slate-300 text-[14px] leading-relaxed mt-3">
+              Der Auftraggeber ist zur Aufrechnung mit eigenen Forderungen nur berechtigt, soweit diese
+              unbestritten oder rechtskräftig festgestellt sind. Ein Zurückbehaltungsrecht steht dem
+              Auftraggeber nur zu, soweit es auf demselben Vertragsverhältnis beruht.
+            </p>
           </Card>
         </FadeIn>
 
         <FadeIn delay={0.44}>
           <Card>
             <div className="text-sky-400 text-[12px] tracking-[0.25em] uppercase mb-4">
-              14. Urheberrecht und Nutzungsrechte
+              15. Urheberrecht und Nutzungsrechte
             </div>
             <p className="text-slate-300 text-[14px] leading-relaxed">
               Jeder der Agentur erteilte Auftrag ist ein Werkvertrag, der auf die Einräumung von Nutzungsrechten
@@ -479,8 +543,8 @@ export function AGB() {
             <p className="text-slate-300 text-[14px] leading-relaxed mt-3">
               Eine Übertragung der Urheberrechte findet nicht statt. Eine Weitergabe des Quellcodes oder des
               Nutzungsrechts an Dritte, insbesondere an andere Agenturen oder Dienstleister, bedarf der
-              vorherigen schriftlichen Zustimmung der G&amp;A Webdesign GbR und ist nur gegen Zahlung einer
-              gesonderten Übergabepauschale möglich.
+              vorherigen in Textform erteilten Zustimmung der G&amp;A Webdesign GbR und ist nur gegen Zahlung
+              einer gesonderten Übergabepauschale möglich.
             </p>
             <p className="text-slate-300 text-[14px] leading-relaxed mt-3">
               Im Falle einer Projektübergabe an Dritte wird eine Übergabepauschale fällig. Diese umfasst die
@@ -497,14 +561,14 @@ export function AGB() {
         <FadeIn delay={0.47}>
           <Card>
             <div className="text-sky-400 text-[12px] tracking-[0.25em] uppercase mb-4">
-              15. Referenznutzung und Footer-Hinweis
+              16. Referenznutzung und Footer-Hinweis
             </div>
             <p className="text-slate-300 text-[14px] leading-relaxed">
               Die G&amp;A Webdesign GbR ist berechtigt, abgeschlossene Projekte als Referenz zu verwenden und
               dabei insbesondere Name, Logo, Screenshot, Screencast und Projektbeschreibung des Auftraggebers
               auf der eigenen Website, Social Media oder Präsentationen zu veröffentlichen, soweit keine
               zwingenden berechtigten Interessen des Auftraggebers entgegenstehen. Dies gilt standardmäßig,
-              sofern keine zusätzliche Vereinbarung mit dem Auftragnehmer schriftlich vereinbart wurde.
+              sofern kein abweichendes Einvernehmen in Textform vereinbart wurde.
             </p>
             <p className="text-slate-300 text-[14px] leading-relaxed mt-3">
               Die G&amp;A Webdesign GbR ist berechtigt, auf der erstellten Webseite im Footer einen
@@ -518,7 +582,7 @@ export function AGB() {
         <FadeIn delay={0.5}>
           <Card>
             <div className="text-sky-400 text-[12px] tracking-[0.25em] uppercase mb-4">
-              16. Einsatz von KI-Tools
+              17. Einsatz von KI-Tools
             </div>
             <p className="text-slate-300 text-[14px] leading-relaxed">
               Die G&amp;A Webdesign GbR nutzt im Rahmen ihrer Leistungen verschiedene KI-gestützte Tools und
@@ -548,7 +612,7 @@ export function AGB() {
         <FadeIn delay={0.53}>
           <Card>
             <div className="text-sky-400 text-[12px] tracking-[0.25em] uppercase mb-4">
-              17. Haftung
+              18. Haftung
             </div>
             <p className="text-slate-300 text-[14px] leading-relaxed">
               Die G&amp;A Webdesign GbR haftet unbeschränkt bei Vorsatz und grober Fahrlässigkeit sowie bei
@@ -580,7 +644,7 @@ export function AGB() {
         <FadeIn delay={0.56}>
           <Card>
             <div className="text-sky-400 text-[12px] tracking-[0.25em] uppercase mb-4">
-              18. Laufzeit und Kündigung laufender Leistungen
+              19. Laufzeit und Kündigung laufender Leistungen
             </div>
             <p className="text-slate-300 text-[14px] leading-relaxed">
               Laufende Leistungen wie Hosting, Wartung und CMS-Pakete sind monatlich kündbar. Die Kündigung
@@ -595,7 +659,7 @@ export function AGB() {
         <FadeIn delay={0.59}>
           <Card>
             <div className="text-sky-400 text-[12px] tracking-[0.25em] uppercase mb-4">
-              19. Schlussbestimmungen
+              20. Schlussbestimmungen
             </div>
             <p className="text-slate-300 text-[14px] leading-relaxed">
               Es gilt das Recht der Bundesrepublik Deutschland unter Ausschluss des UN-Kaufrechts.
