@@ -230,9 +230,22 @@ export function AGB() {
               vergüten.
             </p>
             <p className="text-slate-300 text-[14px] leading-relaxed mt-3">
+              Der Betrieb der Webseite ist an ein bestehendes Hosting bei der G&amp;A Webdesign GbR gebunden. Ein
+              Betrieb der Webseite bei einem anderen Anbieter ist nicht Gegenstand des Vertrages.
+            </p>
+            <p className="text-slate-300 text-[14px] leading-relaxed mt-3">
               Nach Beendigung des Hostings wird die Webseite zum Ablauf des Vertragszeitraums offline genommen.
-              Der Quellcode wird dem Auftraggeber auf Wunsch herausgegeben. Unterstützungsleistungen für einen
-              Umzug oder Wechsel des Hostings können gesondert vergütet werden.
+              Der zugrunde liegende Quellcode sowie die verwendeten Designs und wiederverwendbaren Komponenten
+              verbleiben bei der G&amp;A Webdesign GbR; ein Anspruch des Auftraggebers auf Herausgabe des Quellcodes
+              besteht nicht. Die Herausgabe des Quellcodes und die Einräumung erweiterter, übertragbarer
+              Nutzungsrechte richten sich ausschließlich nach Abschnitt 15 (Urheberrecht und Nutzungsrechte) und
+              sind nur gegen Zahlung der dort geregelten Übergabepauschale möglich.
+            </p>
+            <p className="text-slate-300 text-[14px] leading-relaxed mt-3">
+              Die vom Auftraggeber selbst bereitgestellten oder über das CMS eingepflegten Inhalte – insbesondere
+              Texte, Bilder und Dokumente – werden dem Auftraggeber auf Wunsch in einem üblichen Format zur
+              Verfügung gestellt. Dies umfasst nicht den Quellcode, das Design oder die technische Umsetzung der
+              Webseite.
             </p>
           </Card>
         </FadeIn>
