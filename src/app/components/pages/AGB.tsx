@@ -279,11 +279,23 @@ export function AGB() {
               sowie eine Servicegebühr für Beschaffung, Einrichtung und Verwaltung. Da einzelne Dienste
               projektübergreifend genutzt werden können, erfolgt die Kalkulation auf Basis eines pauschalierten
               Anteils; der im Angebot genannte Betrag ist maßgeblich. Die Abrechnung beginnt mit Aufnahme
-              des aktiven Betriebs des jeweiligen Dienstes. Ändern sich die Konditionen eines eingesetzten
-              Drittdienstes wesentlich, informiert die G&amp;A Webdesign GbR den Auftraggeber rechtzeitig;
-              der angepasste Betrag gilt ab dem folgenden Abrechnungsmonat. Ist der Auftraggeber mit der
-              Anpassung nicht einverstanden, kann er den betreffenden Dienst mit einer Frist von 30 Tagen
-              zum nächsten Monatsende abbestellen; die entsprechende Funktionalität entfällt in diesem Fall.
+              des aktiven Betriebs des jeweiligen Dienstes.
+            </p>
+            <p className="text-slate-300 text-[14px] leading-relaxed mt-3">
+              Ändern sich die Preise eines eingesetzten Drittdienstes (z. B. Vercel, Sanity, Supabase),
+              wird der weiterberechnete Betrag entsprechend angepasst: Er erhöht oder verringert sich in
+              dem Umfang, in dem sich die zugrunde liegenden tatsächlichen Kosten des jeweiligen
+              Drittdienstes ändern. Die enthaltene Servicegebühr bleibt hiervon unberührt und wird durch
+              eine solche Anpassung nicht verändert. Senkt ein Drittanbieter seine Preise, wird die
+              Kostenersparnis in gleicher Weise an den Auftraggeber weitergegeben.
+            </p>
+            <p className="text-slate-300 text-[14px] leading-relaxed mt-3">
+              Die G&amp;A Webdesign GbR informiert den Auftraggeber über eine solche Preisanpassung bis
+              spätestens zum 15. eines Kalendermonats in Textform. Der angepasste Betrag gilt ab der
+              darauffolgenden Zahlung, frühestens jedoch ab dem auf die Mitteilung folgenden Kalendermonat.
+              Ist der Auftraggeber mit einer Erhöhung nicht einverstanden, kann er den betreffenden Dienst
+              bis zum Wirksamwerden der Preisanpassung abbestellen; in diesem Fall entfällt die entsprechende
+              Funktionalität und es wird kein erhöhter Betrag berechnet.
             </p>
             <p className="text-slate-300 text-[14px] leading-relaxed mt-3">
               Domains werden grundsätzlich auf den Auftraggeber registriert. Domainkosten werden in
