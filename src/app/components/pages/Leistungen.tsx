@@ -598,8 +598,6 @@ function WartungCard() {
           </div>
         </motion.div>
       </div>
-
-      <p className="mt-4 text-slate-500 text-[11px]">* Alle Preise inkl. MwSt.</p>
     </Card>
   );
 }
