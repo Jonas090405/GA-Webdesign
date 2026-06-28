@@ -31,80 +31,17 @@ function useInputTarget(): InputTarget {
       typeof window.matchMedia === "function" &&
       window.matchMedia("(pointer: coarse)").matches;
 
+    // Mobile/Tablet (coarse pointer): kein Bewegungs-Effekt. Der frühere
+    // Gyroskop-Modus löste auf iOS bei jeder ersten Berührung einen
+    // Permission-Dialog für Bewegungssensoren aus (schlechte UX). Das Modell
+    // bleibt hier einfach in Neutralstellung.
+    if (coarse) return;
+
     // --- Desktop: Cursor-Tracking ---
     const onPointer = (e: PointerEvent) => {
       target.current.x = clamp((e.clientX / window.innerWidth) * 2 - 1);
       target.current.y = clamp((e.clientY / window.innerHeight) * 2 - 1);
     };
-
-    if (coarse && typeof window.DeviceOrientationEvent !== "undefined") {
-      // Erste Messung = Neutralstellung merken, danach nur die relative
-      // Abweichung verwenden – funktioniert unabhängig davon, in welchem
-      // Winkel das Gerät gehalten wird.
-      let base: { gamma: number; beta: number } | null = null;
-
-      const onOrient: EventListener = (event) => {
-        const e = event as DeviceOrientationEvent;
-        const gamma = e.gamma; // links/rechts
-        const beta = e.beta; //  vor/zurück
-        if (gamma === null || beta === null) return;
-
-        if (!base) {
-          base = { gamma, beta };
-          return;
-        }
-
-        target.current.x = clamp((gamma - base.gamma) / 26);
-        target.current.y = clamp((beta - base.beta) / 26);
-      };
-
-      const bind = () => {
-        window.addEventListener("deviceorientation", onOrient, true);
-        // Manche Android-Browser feuern nur das "absolute" Event.
-        window.addEventListener("deviceorientationabsolute", onOrient, true);
-      };
-      const unbind = () => {
-        window.removeEventListener("deviceorientation", onOrient, true);
-        window.removeEventListener("deviceorientationabsolute", onOrient, true);
-      };
-
-      const DOE = window.DeviceOrientationEvent as unknown as {
-        requestPermission?: () => Promise<"granted" | "denied">;
-      };
-
-      // iOS verlangt eine Permission-Abfrage aus einer User-Geste heraus.
-      const requestPermission = DOE.requestPermission;
-      if (typeof requestPermission === "function") {
-        let requested = false;
-        const request = () => {
-          if (requested) return;
-          requested = true;
-          requestPermission()
-            .then((res) => {
-              if (res === "granted") bind();
-              else requested = false;
-            })
-            .catch(() => {
-              requested = false;
-            });
-        };
-        const events: (keyof WindowEventMap)[] = [
-          "pointerdown",
-          "touchend",
-          "click",
-        ];
-        events.forEach((ev) =>
-          window.addEventListener(ev, request, { once: true })
-        );
-        return () => {
-          events.forEach((ev) => window.removeEventListener(ev, request));
-          unbind();
-        };
-      }
-
-      bind();
-      return unbind;
-    }
 
     window.addEventListener("pointermove", onPointer);
     return () => window.removeEventListener("pointermove", onPointer);
