@@ -1,7 +1,13 @@
 import { SectionLabel } from "../SectionLabel";
 import { Card } from "../Card";
 import { FadeIn } from "../FadeIn";
+import { usePageMeta } from "../../hooks/usePageMeta";
 export function Impressum() {
+  usePageMeta({
+    title: "Impressum | G&A Webdesign",
+    description: "Impressum und Anbieterkennzeichnung der G&A Webdesign GbR aus Triberg im Schwarzwald gemäß § 5 TMG.",
+    path: "/impressum",
+  });
   return (
     <main id="main-content" className="mx-auto max-w-3xl px-5 sm:px-6 pt-28 sm:pt-32 pb-12">
       <FadeIn>

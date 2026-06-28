@@ -1,8 +1,14 @@
 import { SectionLabel } from "../SectionLabel";
 import { Card } from "../Card";
 import { FadeIn } from "../FadeIn";
+import { usePageMeta } from "../../hooks/usePageMeta";
 
 export function AGB() {
+  usePageMeta({
+    title: "AGB | G&A Webdesign",
+    description: "Allgemeine Geschäftsbedingungen der G&A Webdesign GbR für Erstellung, Hosting, Wartung und technische Betreuung von Webseiten.",
+    path: "/agb",
+  });
   return (
     <main id="main-content" className="mx-auto max-w-3xl px-5 sm:px-6 pt-28 sm:pt-32 pb-12">
       <FadeIn>

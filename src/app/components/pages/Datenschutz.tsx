@@ -4,6 +4,7 @@ import { SectionLabel } from "../SectionLabel";
 import { Card } from "../Card";
 import { FadeIn } from "../FadeIn";
 import { hasConsent, revokeConsent } from "../../../lib/analytics";
+import { usePageMeta } from "../../hooks/usePageMeta";
 
 // ─── Widerruf-Button + Bestätigungs-Popup ────────────────────────────────────
 function RevokeConsentButton() {
@@ -124,6 +125,11 @@ function RevokeConsentButton() {
 }
 
 export function Datenschutz() {
+  usePageMeta({
+    title: "Datenschutz | G&A Webdesign",
+    description: "Datenschutzerklärung der G&A Webdesign GbR: Informationen zur Verarbeitung personenbezogener Daten und zum Einsatz von Google Analytics (nur mit Einwilligung).",
+    path: "/datenschutz",
+  });
   return (
     <main id="main-content" className="mx-auto max-w-3xl px-5 sm:px-6 pt-28 sm:pt-32 pb-12">
       <FadeIn>
