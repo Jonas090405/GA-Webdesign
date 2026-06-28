@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import logoUrl from "../../imports/Logo_GA_Webdesign.svg";
 
 const BERKANT_EMAIL = "Berkant@ga-webdesign.de";
-const JONAS_EMAIL = "Jonas@ga-webdesign.de";
 
 export function Footer() {
   const navigate = useNavigate();
@@ -77,7 +76,7 @@ export function Footer() {
             >
               Kontakt
             </div>
-            {[BERKANT_EMAIL, JONAS_EMAIL].map((email) => (
+            {[BERKANT_EMAIL].map((email) => (
               <button
                 key={email}
                 onClick={() => copyEmail(email)}
