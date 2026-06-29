@@ -3,7 +3,7 @@ import { usePageMeta } from "../../hooks/usePageMeta";
 import { SectionLabel } from "../SectionLabel";
 import { PrimaryButton } from "../Button";
 import { FadeIn } from "../FadeIn";
-import { MessageCircle, PenTool, RefreshCw, Globe, ClipboardList, Code2 } from "lucide-react";
+import { MessageCircle, PenTool, RefreshCw, Globe, Code2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useScroll, useTransform, motion } from "motion/react";
 import type { MotionValue } from "motion/react";
@@ -13,54 +13,46 @@ const timelineSteps = [
     icon: MessageCircle,
     step: "1",
     title: "Kennenlerngespräch",
-    desc: "Wir lernen uns kennen. Du erzählst uns, wer du bist, was du machst und was du dir für deine Webseite vorstellst. Kein Fachwissen nötig – wir stellen die richtigen Fragen und hören erst mal zu.",
-    tag: "kostenlos & unverbindlich",
-  },
-  {
-    icon: ClipboardList,
-    step: "2",
-    title: "Anforderungsanalyse",
-    desc: "Wir gehen gemeinsam ins Detail. Welche Seiten braucht die Webseite? Welche Funktionen, welche Inhalte? Wir definieren den genauen Umfang – damit am Ende keine Überraschungen entstehen.",
     tag: "kostenlos & unverbindlich",
   },
   {
     icon: PenTool,
-    step: "3",
+    step: "2",
     title: "Design & Konzept",
     desc: "Nachdem alle vertraglichen Details geklärt sind, entwickeln wir auf Basis der Anforderungen ein individuelles Designkonzept. In diesem Schritt liegt die visuelle Gestaltung im Vordergrund – wir definieren, wie dein Unternehmen nach außen wirkt.",
     tag: "individuelles Design",
   },
   {
     icon: MessageCircle,
-    step: "4",
+    step: "3",
     title: "1. Feedbackrunde",
     desc: "Wir zeigen dir, wie deine Seite aussehen wird und wie sie strukturiert ist. Du sagst uns direkt, was dir gefällt und was du gerne anders hättest. Hier zählt dein Gefühl.",
     tag: "deine Meinung ist wichtig",
   },
   {
     icon: Code2,
-    step: "5",
+    step: "4",
     title: "Technische Umsetzung",
     desc: "Wir setzen dein Feedback direkt um und integrieren alle gewünschten Funktionen. In diesem Schritt liegt der Fokus auf der Funktionalität, Schnelligkeit und Sichtbarkeit deiner Webseite.",
     tag: "sauber & modern",
   },
   {
     icon: MessageCircle,
-    step: "6",
+    step: "5",
     title: "2. Feedbackrunde",
     desc: "Wir gehen gemeinsam die fertige Webseite durch. Wir testen alle Funktionen, prüfen die Texte auf dem Handy und am PC und schauen uns das Gesamtergebnis im Detail an.",
     tag: "alles unter Kontrolle",
   },
   {
     icon: RefreshCw,
-    step: "7",
+    step: "6",
     title: "Feinschliff & Korrekturen",
     desc: "Hier kümmern wir uns um den letzten Feinschliff. Deine finalen Wünsche aus dem letzten Check werden punktgenau umgesetzt, damit alles bereit für den Start ist.",
     tag: "der letzte Feinschliff",
   },
   {
     icon: Globe,
-    step: "8",
+    step: "7",
     title: "Fertig – deine Webseite ist live",
     desc: "Deine Webseite geht online – fertig eingerichtet, auf deiner Domain, direkt nutzbar. Wir kümmern uns um Hosting, Domain und alles Technische. Du bekommst ein fertiges Ergebnis.",
     tag: "komplett fertig & gehostet",
@@ -152,7 +144,7 @@ function ContentBlock({
       <h3 className={`text-white text-[20px] sm:text-[23px] xl:text-[25px] 2xl:text-[28px] mb-3 tracking-tight leading-snug ${right ? "text-right" : ""}`}>
         {title}
       </h3>
-      <p className={`text-slate-400 text-[14px] sm:text-[15px] 2xl:text-[16px] leading-relaxed ${right ? "text-right" : ""}`}>
+      <p className={`text-slate-400 text-[14px] sm:text-[15px] 2xl:text-[16px] leading-relaxed text-pretty ${right ? "text-right" : ""}`}>
         {desc}
       </p>
     </div>
@@ -268,7 +260,7 @@ function ProcessTimeline() {
 export function Ablauf() {
   usePageMeta({
     title: "Ablauf | G&A Webdesign",
-    description: "So läuft die Zusammenarbeit ab – von der ersten Idee bis zur fertigen Webseite. 8 klare Schritte, transparenter Prozess.",
+    description: "So läuft die Zusammenarbeit ab – von der ersten Idee bis zur fertigen Webseite. 7 klare Schritte, transparenter Prozess.",
     path: "/ablauf",
   });
   const navigate = useNavigate();
