@@ -13,6 +13,7 @@ const timelineSteps = [
     icon: MessageCircle,
     step: "1",
     title: "Kennenlerngespräch",
+    desc: "Wir lernen uns kennen – und gehen dabei direkt ins Detail. Du erzählst uns, wer du bist, was du machst und was du dir für deine Webseite vorstellst. Gemeinsam klären wir, welche Seiten, Funktionen und Inhalte du brauchst, und definieren den genauen Umfang – damit am Ende keine Überraschungen entstehen. Kein Fachwissen nötig: Wir stellen die richtigen Fragen und hören erst mal zu.",
     tag: "kostenlos & unverbindlich",
   },
   {
