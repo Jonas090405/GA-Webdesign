@@ -79,12 +79,20 @@ function DesktopFAQCard({ faq }: { faq: (typeof faqs)[0] }) {
     if (spotRef.current)  spotRef.current.style.opacity  = "0";
   }
 
+  // Touch-Geräte feuern kein mouseleave — dort öffnet/schließt ein Tap die Karte
+  function handleClick() {
+    if (window.matchMedia("(hover: none)").matches) {
+      setHovered((h) => !h);
+    }
+  }
+
   return (
     <div
       ref={outerRef}
       onMouseMove={handleMove}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={handleLeave}
+      onClick={handleClick}
       onFocus={() => setHovered(true)}
       onBlur={() => { setHovered(false); if (outerRef.current) outerRef.current.style.background = "rgba(77,190,243,0.1)"; }}
       tabIndex={0}
@@ -286,6 +294,12 @@ export function FAQSection({
       {/* Karussell – xl+ */}
       <div
         className="hidden xl:block overflow-hidden"
+        role="region"
+        aria-label="FAQ-Karussell"
+        onKeyDown={(e) => {
+          if (e.key === "ArrowRight") { e.preventDefault(); goNext(); }
+          else if (e.key === "ArrowLeft") { e.preventDefault(); goPrev(); }
+        }}
         onTouchStart={(e) => { touchStartX.current = e.touches[0].clientX; }}
         onTouchEnd={(e) => {
           const delta = touchStartX.current - e.changedTouches[0].clientX;
@@ -353,7 +367,7 @@ export function FAQSection({
               className="shrink-0 h-10 w-10 rounded-full overflow-hidden"
               style={{ border: "1.5px solid rgba(77,190,243,0.38)" }}
             >
-              <img src={berkantImg} alt="Berkant Agyar" className="h-full w-full object-cover object-top" />
+              <img src={berkantImg} alt="Berkant Agyar" loading="lazy" decoding="async" className="h-full w-full object-cover object-top" />
             </div>
             <div>
               <div className="text-white font-semibold text-[14px] xl:text-[15px] leading-tight">

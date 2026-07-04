@@ -13,6 +13,7 @@ import { Impressum } from "./components/pages/Impressum";
 import { Datenschutz } from "./components/pages/Datenschutz";
 import { AGB } from "./components/pages/AGB";
 import { Kontakt } from "./components/pages/Kontakt";
+import { NotFound } from "./components/pages/NotFound";
 import { CookieBanner } from "./components/CookieBanner";
 
 export default function App() {
@@ -34,7 +35,7 @@ export default function App() {
 
   const pageTransition = {
     duration: 0.45,
-    ease: [0.22, 1, 0.36, 1],
+    ease: [0.22, 1, 0.36, 1] as const,
   };
 
   return (
@@ -87,6 +88,11 @@ export default function App() {
           <Route path="/agb" element={
             <motion.div initial="initial" animate="animate" exit="exit" variants={pageVariants} transition={pageTransition}>
               <AGB />
+            </motion.div>
+          } />
+          <Route path="*" element={
+            <motion.div initial="initial" animate="animate" exit="exit" variants={pageVariants} transition={pageTransition}>
+              <NotFound />
             </motion.div>
           } />
         </Routes>

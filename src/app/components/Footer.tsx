@@ -31,6 +31,8 @@ export function Footer() {
               <img
                 src={logoUrl}
                 alt="G&A Webdesign Logo"
+                loading="lazy"
+                decoding="async"
                 className="h-8 2xl:h-9 w-auto opacity-80"
               />
               <div

@@ -2,6 +2,7 @@ import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { ChevronLeft, ChevronRight, ExternalLink, Quote, X } from "lucide-react";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
+import { LazyVideo } from "./LazyVideo";
 import { Card } from "./Card";
 import { TertiaryButton } from "./Button";
 
@@ -91,13 +92,8 @@ export function PortfolioSlider({ projects }: { projects: Project[] }) {
                   {(project.video || project.image) && (
                     <div className="md:hidden aspect-video overflow-hidden rounded-2xl">
                       {project.video ? (
-                        <video
+                        <LazyVideo
                           src={project.video}
-                          autoPlay
-                          muted
-                          loop
-                          playsInline
-                          aria-hidden="true"
                           className="h-full w-full object-cover"
                         />
                       ) : (
@@ -173,13 +169,8 @@ export function PortfolioSlider({ projects }: { projects: Project[] }) {
                     <div className="hidden md:flex items-center">
                       <MacOSBrowserFrame url={project.url}>
                         {project.video ? (
-                          <video
+                          <LazyVideo
                             src={project.video}
-                            autoPlay
-                            muted
-                            loop
-                            playsInline
-                            aria-hidden="true"
                             className="w-full block scale-[1.10]"
                           />
                         ) : (
@@ -254,10 +245,11 @@ export function PortfolioSlider({ projects }: { projects: Project[] }) {
             >
               <button
                 onClick={() => setTestimonialOpen(false)}
+                aria-label="Kundenstimme schließen"
                 className="absolute top-4 right-4 flex h-7 w-7 items-center justify-center rounded-full text-slate-400 transition-colors"
                 style={{ background: "rgba(255,255,255,0.06)" }}
               >
-                <X size={15} />
+                <X size={15} aria-hidden />
               </button>
 
               <p className="text-[11px] tracking-[0.2em] uppercase text-sky-400 mb-4">Kundenstimme</p>
@@ -277,6 +269,8 @@ function TestimonialContent({ t }: { t: Testimonial }) {
         <img
           src={t.avatar}
           alt={t.name}
+          loading="lazy"
+          decoding="async"
           className="shrink-0 w-11 h-11 xl:w-13 xl:h-13 2xl:w-15 2xl:h-15 rounded-full object-cover object-top"
           style={{
             border: "1.5px solid rgba(77,190,243,0.35)",

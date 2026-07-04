@@ -2,6 +2,7 @@ import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { ChevronLeft, ChevronRight, ExternalLink } from "lucide-react";
 import { ContainerScroll } from "./ui/container-scroll-animation";
+import { LazyVideo } from "./LazyVideo";
 
 type Testimonial = {
   show: boolean;
@@ -42,19 +43,16 @@ export function PortfolioScrollSection({
             <div key={i}>
               <ContainerScroll titleComponent={<ProjectTitle project={project} index={i} hideTag={hideTag} />}>
                 {project.video ? (
-                  <video
+                  <LazyVideo
                     src={project.video}
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    aria-hidden="true"
                     className="w-full block scale-[1.10]"
                   />
                 ) : (
                   <img
                     src={project.image!}
                     alt={project.title}
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-auto block"
                   />
                 )}
@@ -131,19 +129,16 @@ function MobileCarousel({ projects, hideTag = false }: { projects: Project[]; hi
             <div>
               <MacOSBrowserFrame url={project.url}>
                 {project.video ? (
-                  <video
+                  <LazyVideo
                     src={project.video}
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    aria-hidden="true"
                     className="w-full block scale-[1.10]"
                   />
                 ) : (
                   <img
                     src={project.image!}
                     alt={project.title}
+                    loading="lazy"
+                    decoding="async"
                     className="w-full block"
                   />
                 )}
@@ -258,6 +253,8 @@ export function TestimonialBlock({ t }: { t: Testimonial }) {
           <img
             src={t.avatar}
             alt={t.name}
+            loading="lazy"
+            decoding="async"
             className="w-7 h-7 rounded-full object-cover object-top shrink-0"
             style={{ border: "1.5px solid rgba(77,190,243,0.35)" }}
           />

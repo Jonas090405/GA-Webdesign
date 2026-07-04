@@ -221,6 +221,8 @@ export function About() {
               <img
                 src={berkantImg}
                 alt="Berkant Agyar"
+                loading="lazy"
+                decoding="async"
                 className="h-full w-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-110"
               />
             </div>

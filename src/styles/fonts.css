@@ -1,15 +1,17 @@
 /* ============================================================
    FONTS – vollständig self-hosted, kein externer Request
-   Reihenfolge: Segoe UI (Windows-System) → Inter Variable
-                (lokal gebündelt via @fontsource-variable/inter)
+   Body: Segoe UI (Windows-System) → Inter Variable
+   Display (h1–h3): Bricolage Grotesque Variable
+   (beide lokal gebündelt via @fontsource-variable, DSGVO-konform)
    ============================================================ */
 
-/* Inter Variable – lokal aus node_modules gebündelt (DSGVO-konform) */
 @import '@fontsource-variable/inter';
+@import '@fontsource-variable/bricolage-grotesque';
 
-/* ── Globale Font-Family ─────────────────────────────────── */
+/* ── Globale Font-Families ───────────────────────────────── */
 :root {
   --font-sans: 'Segoe UI', 'Inter Variable', Inter, system-ui, sans-serif;
+  --font-display: 'Bricolage Grotesque Variable', 'Inter Variable', system-ui, sans-serif;
 }
 
 html,
@@ -17,4 +19,12 @@ body {
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Display-Schrift nur für Headlines – Body/UI bleibt Inter */
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  letter-spacing: -0.015em;
 }

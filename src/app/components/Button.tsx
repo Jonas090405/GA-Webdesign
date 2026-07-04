@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, ArrowRight } from "lucide-react";
 
 export function PrimaryButton({
   children,
@@ -7,12 +7,14 @@ export function PrimaryButton({
   type = "button",
   disabled = false,
   className = "",
+  arrow = "up-right",
 }: {
   children: React.ReactNode;
   onClick?: () => void;
   type?: "button" | "submit";
   disabled?: boolean;
   className?: string;
+  arrow?: "up-right" | "right";
 }) {
   const ref = useRef<HTMLButtonElement>(null);
 
@@ -52,10 +54,17 @@ export function PrimaryButton({
       />
       <span className="relative z-10 inline-flex items-center gap-2">
         {children}
-        <ArrowUpRight
-          size={16}
-          className="transition-transform duration-300 ease-out group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5"
-        />
+        {arrow === "right" ? (
+          <ArrowRight
+            size={16}
+            className="transition-transform duration-300 ease-out group-hover/btn:translate-x-0.5"
+          />
+        ) : (
+          <ArrowUpRight
+            size={16}
+            className="transition-transform duration-300 ease-out group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5"
+          />
+        )}
       </span>
     </button>
   );

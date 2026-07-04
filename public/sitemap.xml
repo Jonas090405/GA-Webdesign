@@ -36,4 +36,22 @@
     <priority>0.8</priority>
     <lastmod>2026-05-31</lastmod>
   </url>
+  <url>
+    <loc>https://ga-webdesign.de/impressum</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+    <lastmod>2026-07-02</lastmod>
+  </url>
+  <url>
+    <loc>https://ga-webdesign.de/datenschutz</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+    <lastmod>2026-07-02</lastmod>
+  </url>
+  <url>
+    <loc>https://ga-webdesign.de/agb</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+    <lastmod>2026-07-02</lastmod>
+  </url>
 </urlset>

@@ -10,7 +10,7 @@ import { Aurora } from "../Aurora";
 import { useNavigate } from "react-router-dom";
 import { Palette, Code2, Rocket, Phone, Linkedin } from "lucide-react";
 import { ServiceCardBg, type BgKey } from "../ServiceCardBg";
-import emailjs from "@emailjs/browser";
+import { ContactForm, BERKANT_EMAIL, BERKANT_PHONE } from "../ContactForm";
 import profilbild from "../../../imports/Jonas_Gissler.png";
 import berkantImg from "../../../imports/Berkant_agyar.jpeg";
 import { HeroModels } from "../HeroModels";
@@ -329,7 +329,7 @@ function TeamPreview() {
                   }}
                 >
                   {photo ? (
-                    <img src={photo} alt={name} className="h-full w-full object-cover object-top" />
+                    <img src={photo} alt={name} loading="lazy" decoding="async" className="h-full w-full object-cover object-top" />
                   ) : (
                     initials
                   )}
@@ -381,31 +381,6 @@ function TeamPreview() {
   );
 }
 
-// ─── EmailJS (Werte aus .env – nie in Git pushen!) ────────────────────────────
-const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
-const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
-const EMAILJS_AUTOREPLY_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_AUTOREPLY_TEMPLATE_ID;
-const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
-const BERKANT_EMAIL = "Berkant@ga-webdesign.de";
-const BERKANT_PHONE = "+49 176 3464 9177";
-
-type HomeFormData = { name: string; email: string; phone: string; message: string };
-type HomeFormErrors = Partial<Record<keyof HomeFormData, string>>;
-
-function validateHome(d: HomeFormData): HomeFormErrors {
-  const e: HomeFormErrors = {};
-  if (!d.name.trim()) e.name = "Name ist erforderlich.";
-  else if (d.name.trim().length < 2) e.name = "Name muss mind. 2 Zeichen haben.";
-  if (!d.email.trim()) e.email = "E-Mail ist erforderlich.";
-  else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(d.email.trim()))
-    e.email = "Bitte gültige E-Mail eingeben.";
-  if (d.phone.trim() && !/^[\+\d\s\-\(\)\/]{6,20}$/.test(d.phone.trim()))
-    e.phone = "Bitte gültige Telefonnummer eingeben.";
-  if (!d.message.trim()) e.message = "Nachricht ist erforderlich.";
-  else if (d.message.trim().length < 20) e.message = "Bitte etwas ausführlicher (mind. 20 Zeichen).";
-  return e;
-}
-
 const slideVariants = {
   enter: (d: number) => ({ x: d * 40, opacity: 0 }),
   center: { x: 0, opacity: 1 },
@@ -415,9 +390,6 @@ const slideVariants = {
 function Contact() {
   const [mode, setMode] = useState<"form" | "call">("form");
   const [direction, setDirection] = useState(0);
-  const [status, setStatus] = useState<"idle" | "loading" | "sent" | "error">("idle");
-  const [formData, setFormData] = useState<HomeFormData>({ name: "", email: "", phone: "", message: "" });
-  const [errors, setErrors] = useState<HomeFormErrors>({});
   const [emailCopied, setEmailCopied] = useState(false);
 
   function copyEmail() {
@@ -425,46 +397,6 @@ function Contact() {
       setEmailCopied(true);
       setTimeout(() => setEmailCopied(false), 2200);
     });
-  }
-
-  function handleChange(field: keyof HomeFormData, value: string) {
-    setFormData(prev => ({ ...prev, [field]: value }));
-    if (errors[field]) setErrors(prev => ({ ...prev, [field]: undefined }));
-  }
-
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    const errs = validateHome(formData);
-    if (Object.keys(errs).length > 0) { setErrors(errs); return; }
-    setStatus("loading");
-    try {
-      await emailjs.send(
-        EMAILJS_SERVICE_ID,
-        EMAILJS_TEMPLATE_ID,
-        {
-          from_name: formData.name,
-          from_email: formData.email,
-          phone: formData.phone.trim() || "–",
-          subject: "Anfrage über Startseite",
-          message: formData.message,
-        },
-        EMAILJS_PUBLIC_KEY,
-      );
-      // Eingangsbestätigung an Absender (best-effort)
-      emailjs.send(
-        EMAILJS_SERVICE_ID,
-        EMAILJS_AUTOREPLY_TEMPLATE_ID,
-        {
-          name: formData.name,
-          email: formData.email,
-          message: formData.message,
-        },
-        EMAILJS_PUBLIC_KEY,
-      ).catch(() => {});
-      setStatus("sent");
-    } catch {
-      setStatus("error");
-    }
   }
 
   return (
@@ -484,7 +416,7 @@ function Contact() {
               className="shrink-0 h-9 w-9 rounded-full overflow-hidden"
               style={{ border: "1.5px solid rgba(77,190,243,0.4)" }}
             >
-              <img src={berkantImg} alt="Berkant Agyar" className="h-full w-full object-cover object-top" />
+              <img src={berkantImg} alt="Berkant Agyar" loading="lazy" decoding="async" className="h-full w-full object-cover object-top" />
             </div>
             <div>
               <div className="text-[11px]" style={{ color: "rgba(150,190,220,0.5)" }}>Dein Ansprechpartner</div>
@@ -591,57 +523,7 @@ function Contact() {
             </Card>
           ) : (
             <Card>
-              {status === "sent" ? (
-                <div className="py-12 text-center">
-                  <div
-                    className="text-[12px] tracking-[0.25em] uppercase mb-3"
-                    style={{ color: "#4dbef3" }}
-                  >
-                    Gesendet
-                  </div>
-                  <h3 className="text-white text-[22px] mb-2">Danke!</h3>
-                  <p className="text-[14px]" style={{ color: "rgba(180, 210, 230, 0.6)" }}>
-                    Wir melden uns so schnell wie möglich bei dir.
-                  </p>
-                </div>
-              ) : (
-                <form onSubmit={handleSubmit} noValidate className="space-y-5">
-                  <div className="grid gap-5 sm:grid-cols-2">
-                    <Field
-                      label="Name *" name="name" value={formData.name}
-                      onChange={v => handleChange("name", v)} error={errors.name}
-                      placeholder="Max Mustermann"
-                    />
-                    <Field
-                      label="E-Mail *" name="email" type="email" value={formData.email}
-                      onChange={v => handleChange("email", v)} error={errors.email}
-                      placeholder="max@beispiel.de"
-                    />
-                  </div>
-                  <Field
-                    label="Telefon (optional)" name="phone" type="tel" value={formData.phone}
-                    onChange={v => handleChange("phone", v)} error={errors.phone}
-                    placeholder="+49 123 456789"
-                  />
-                  <Field
-                    label="Nachricht *" name="message" textarea value={formData.message}
-                    onChange={v => handleChange("message", v)} error={errors.message}
-                    placeholder="Erzähl uns kurz, was du brauchst…"
-                  />
-                  {status === "error" && (
-                    <p className="text-red-400 text-[13px]">
-                      Fehler beim Senden. Bitte direkt an{" "}
-                      <button onClick={copyEmail} className="underline cursor-pointer bg-transparent border-none p-0 text-red-400 hover:text-red-300 transition-colors">
-                        {emailCopied ? "Kopiert ✓" : BERKANT_EMAIL}
-                      </button>{" "}
-                      schreiben.
-                    </p>
-                  )}
-                  <PrimaryButton type="submit" disabled={status === "loading"}>
-                    {status === "loading" ? "Wird gesendet…" : "Projekt anfragen"}
-                  </PrimaryButton>
-                </form>
-              )}
+              <ContactForm subject="Anfrage über Startseite" />
             </Card>
           )}
           </motion.div>
@@ -679,64 +561,5 @@ function HomeTabBtn({
       )}
       <span className="relative z-10">{children}</span>
     </button>
-  );
-}
-
-function Field({
-  label,
-  name,
-  type = "text",
-  textarea = false,
-  placeholder,
-  value,
-  onChange,
-  error,
-}: {
-  label: string;
-  name: string;
-  type?: string;
-  textarea?: boolean;
-  placeholder?: string;
-  value: string;
-  onChange: (v: string) => void;
-  error?: string;
-}) {
-  const baseCls =
-    "w-full rounded-xl px-4 py-3 text-white placeholder:text-slate-600 outline-none transition-all text-[14px]";
-
-  const sharedProps = {
-    name,
-    value,
-    placeholder,
-    className: baseCls,
-    style: {
-      background: "rgba(10, 17, 25, 0.8)",
-      border: error ? "1px solid rgba(248,113,113,0.6)" : "1px solid rgba(77, 190, 243, 0.12)",
-    } as React.CSSProperties,
-    onFocus: (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-      e.currentTarget.style.borderColor = error ? "rgba(248,113,113,0.8)" : "rgba(77, 190, 243, 0.45)";
-      e.currentTarget.style.boxShadow = error ? "0 0 0 3px rgba(248,113,113,0.1)" : "0 0 0 3px rgba(77,190,243,0.1)";
-    },
-    onBlur: (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-      e.currentTarget.style.borderColor = error ? "rgba(248,113,113,0.6)" : "rgba(77, 190, 243, 0.12)";
-      e.currentTarget.style.boxShadow = "none";
-    },
-  };
-
-  return (
-    <label className="block">
-      <span
-        className="block text-[12px] tracking-[0.2em] uppercase mb-2"
-        style={{ color: "rgba(150, 190, 220, 0.6)" }}
-      >
-        {label}
-      </span>
-      {textarea ? (
-        <textarea {...sharedProps} rows={5} onChange={e => onChange(e.target.value)} />
-      ) : (
-        <input {...sharedProps} type={type} onChange={e => onChange(e.target.value)} />
-      )}
-      {error && <span className="block mt-1.5 text-[12px] text-red-400">{error}</span>}
-    </label>
   );
 }

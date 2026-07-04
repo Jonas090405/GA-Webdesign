@@ -152,6 +152,14 @@ function ContentBlock({
   );
 }
 
+// Slide-in der Content-Blöcke: smooth, aber snappy (steile Ease-Out-Kurve)
+const slideIn = (fromX: number) => ({
+  initial: { opacity: 0, x: fromX },
+  whileInView: { opacity: 1, x: 0 },
+  viewport: { once: true, margin: "-15% 0px" },
+  transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] as const },
+});
+
 // ─── Step — empfängt den geteilten scrollYProgress + seinen threshold ─────────
 function TimelineStep({
   icon: Icon, step, title, desc, tag, index, isLast, scrollYProgress, threshold,
@@ -180,21 +188,29 @@ function TimelineStep({
       {/* Mobile */}
       <div className="md:hidden flex items-start gap-6">
         <TimelineDot Icon={Icon} pathLength={pathLength} activated={activated} />
-        <div className="pt-1">
+        <motion.div className="pt-1" {...slideIn(28)}>
           <ContentBlock step={step} tag={tag} title={title} desc={desc} />
-        </div>
+        </motion.div>
       </div>
 
-      {/* Desktop: alternierend links/rechts */}
+      {/* Desktop: alternierend links/rechts — Blöcke wischen von ihrer Seite rein */}
       <div className="hidden md:grid grid-cols-[1fr_56px_1fr] items-start gap-x-8 xl:gap-x-14 2xl:gap-x-20">
         <div className="pt-1">
-          {index % 2 === 0 && <ContentBlock step={step} tag={tag} title={title} desc={desc} align="right" />}
+          {index % 2 === 0 && (
+            <motion.div {...slideIn(-72)}>
+              <ContentBlock step={step} tag={tag} title={title} desc={desc} align="right" />
+            </motion.div>
+          )}
         </div>
         <div className="flex justify-center">
           <TimelineDot Icon={Icon} pathLength={pathLength} activated={activated} />
         </div>
         <div className="pt-1">
-          {index % 2 === 1 && <ContentBlock step={step} tag={tag} title={title} desc={desc} />}
+          {index % 2 === 1 && (
+            <motion.div {...slideIn(72)}>
+              <ContentBlock step={step} tag={tag} title={title} desc={desc} />
+            </motion.div>
+          )}
         </div>
       </div>
     </div>
