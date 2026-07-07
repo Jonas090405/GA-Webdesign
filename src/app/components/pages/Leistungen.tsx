@@ -5,15 +5,21 @@ import { SectionLabel } from "../SectionLabel";
 import { Card } from "../Card";
 import { PrimaryButton } from "../Button";
 import { FadeIn } from "../FadeIn";
-import { Palette, Code2, Rocket, CheckCircle2, Check, Server, Wrench } from "lucide-react";
+import { CheckCircle2, Check, Server, Wrench } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { ServiceCardBg, type BgKey } from "../ServiceCardBg";
 import { FAQSection } from "../FAQSection";
+import { TileMedia } from "../TileMedia";
+import tileDesignClip from "../../../imports/tile-design.mp4";
+import tileDesignPoster from "../../../imports/tile-design-poster.webp";
+import tileCodeClip from "../../../imports/tile-code.mp4";
+import tileCodePoster from "../../../imports/tile-code-poster.webp";
+import tileRocketClip from "../../../imports/tile-rocket.mp4";
+import tileRocketPoster from "../../../imports/tile-rocket-poster.webp";
 
-const blocks: { Icon: React.ElementType; title: string; lead: string; points: string[]; bgKey: BgKey }[] = [
+const blocks: { poster: string; clip: string; title: string; lead: string; points: string[] }[] = [
   {
-    Icon: Palette,
-    bgKey: "design",
+    poster: tileDesignPoster,
+    clip: tileDesignClip,
     title: "Design",
     lead: "So, wie du dir das vorstellst.",
     points: [
@@ -24,8 +30,8 @@ const blocks: { Icon: React.ElementType; title: string; lead: string; points: st
     ],
   },
   {
-    Icon: Code2,
-    bgKey: "code",
+    poster: tileCodePoster,
+    clip: tileCodeClip,
     title: "Entwicklung",
     lead: "Schnell, stabil & zukunftssicher.",
     points: [
@@ -36,8 +42,8 @@ const blocks: { Icon: React.ElementType; title: string; lead: string; points: st
     ],
   },
   {
-    Icon: Rocket,
-    bgKey: "rocket",
+    poster: tileRocketPoster,
+    clip: tileRocketClip,
     title: "Deployment",
     lead: "Du musst dich um nichts kümmern.",
     points: [
@@ -50,10 +56,10 @@ const blocks: { Icon: React.ElementType; title: string; lead: string; points: st
 ];
 
 function LeistungenCard({
-  Icon, title, lead, points, bgKey, i,
+  poster, clip, title, lead, points, i,
 }: {
-  Icon: React.ElementType; title: string; lead: string;
-  points: string[]; bgKey: BgKey; i: number;
+  poster: string; clip: string; title: string; lead: string;
+  points: string[]; i: number;
 }) {
   const [hovered, setHovered] = useState(false);
   return (
@@ -65,14 +71,15 @@ function LeistungenCard({
       >
         <Card className="h-full">
           <div className="flex flex-col h-full">
-            <ServiceCardBg bgKey={bgKey} hovered={hovered} />
-            <div className="relative z-10 flex flex-col h-full">
-              <div
-                className="mb-5 inline-flex h-12 w-12 2xl:h-16 2xl:w-16 items-center justify-center rounded-xl"
-                style={{ background: "linear-gradient(135deg, rgba(0,105,153,0.25) 0%, rgba(77,190,243,0.12) 100%)", border: "1px solid rgba(77,190,243,0.20)" }}
-              >
-                <Icon size={22} className="text-sky-400 2xl:!h-7 2xl:!w-7" />
-              </div>
+            {/* Illustration — statisch gedämpft, zündet beim Hover */}
+            <TileMedia
+              poster={poster}
+              src={clip}
+              label={title}
+              active={hovered}
+              className="mb-4 w-full aspect-[16/9]"
+            />
+            <div className="flex flex-col flex-1">
               <h3 className="text-white text-[22px] 2xl:text-[26px] mb-1">{title}</h3>
               <p className="text-slate-400 text-[14px] 2xl:text-[16px] mb-5">{lead}</p>
               <ul className="space-y-2.5">
@@ -673,8 +680,8 @@ export function Leistungen() {
 
       {/* Service cards */}
       <div className="mt-16 2xl:mt-20 grid gap-6 2xl:gap-8 md:grid-cols-3 items-stretch">
-        {blocks.map(({ Icon, title, lead, points, bgKey }, i) => (
-          <LeistungenCard key={title} Icon={Icon} title={title} lead={lead} points={points} bgKey={bgKey} i={i} />
+        {blocks.map(({ poster, clip, title, lead, points }, i) => (
+          <LeistungenCard key={title} poster={poster} clip={clip} title={title} lead={lead} points={points} i={i} />
         ))}
       </div>
 

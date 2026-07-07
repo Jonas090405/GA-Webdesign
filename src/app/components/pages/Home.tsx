@@ -8,8 +8,14 @@ import { FadeIn } from "../FadeIn";
 import { PortfolioScrollSection } from "../PortfolioScrollSection";
 import { Aurora } from "../Aurora";
 import { useNavigate } from "react-router-dom";
-import { Palette, Code2, Rocket, Phone, Linkedin } from "lucide-react";
-import { ServiceCardBg, type BgKey } from "../ServiceCardBg";
+import { Phone, Linkedin } from "lucide-react";
+import { TileMedia } from "../TileMedia";
+import tileDesignClip from "../../../imports/tile-design.mp4";
+import tileDesignPoster from "../../../imports/tile-design-poster.webp";
+import tileCodeClip from "../../../imports/tile-code.mp4";
+import tileCodePoster from "../../../imports/tile-code-poster.webp";
+import tileRocketClip from "../../../imports/tile-rocket.mp4";
+import tileRocketPoster from "../../../imports/tile-rocket-poster.webp";
 import { ContactForm, BERKANT_EMAIL, BERKANT_PHONE } from "../ContactForm";
 import profilbild from "../../../imports/Jonas_Gissler.png";
 import berkantImg from "../../../imports/Berkant_agyar.jpeg";
@@ -155,17 +161,17 @@ function PortfolioPreview() {
 
 
 function ServiceCard({
-  Icon,
+  poster,
+  clip,
   title,
   desc,
   i,
-  bgKey,
 }: {
-  Icon: React.ElementType;
+  poster: string;
+  clip: string;
   title: string;
   desc: string;
   i: number;
-  bgKey: BgKey;
 }) {
   const [hovered, setHovered] = useState(false);
 
@@ -178,40 +184,24 @@ function ServiceCard({
       >
         <Card className="h-full">
           <div className="flex flex-col h-full">
+            {/* Illustration — statisch gedämpft, zündet beim Hover */}
+            <TileMedia
+              poster={poster}
+              src={clip}
+              label={title}
+              active={hovered}
+              className="mb-4 xl:mb-6 w-full aspect-[16/9]"
+            />
 
-            {/* ── Hintergrund-Animation (shared) ── */}
-            <ServiceCardBg bgKey={bgKey} hovered={hovered} />
-
-            {/* ── Inhalt (z-10 über Background) ── */}
-            <div className="relative z-10 flex flex-col h-full">
-              {/* Icon box */}
-              <div className="mb-5 xl:mb-7 self-start">
-                <div
-                  className="inline-flex h-12 w-12 xl:h-16 xl:w-16 2xl:h-20 2xl:w-20 items-center justify-center rounded-xl"
-                  style={{
-                    background: "linear-gradient(135deg, rgba(0,105,153,0.25) 0%, rgba(77,190,243,0.12) 100%)",
-                    border: "1px solid rgba(77,190,243,0.2)",
-                  }}
-                >
-                  <Icon
-                    size={22}
-                    className="xl:!h-7 xl:!w-7 2xl:!h-8 2xl:!w-8"
-                    style={{ color: "#4dbef3" }}
-                  />
-                </div>
-              </div>
-
-              <h3 className="text-white text-[18px] sm:text-[20px] xl:text-[22px] 2xl:text-[25px] mb-2 xl:mb-3">
-                {title}
-              </h3>
-              <p
-                className="text-[14px] xl:text-[16px] 2xl:text-[18px] leading-relaxed flex-1"
-                style={{ color: "rgba(180,210,230,0.6)" }}
-              >
-                {desc}
-              </p>
-            </div>
-
+            <h3 className="text-white text-[18px] sm:text-[20px] xl:text-[22px] 2xl:text-[25px] mb-2 xl:mb-3">
+              {title}
+            </h3>
+            <p
+              className="text-[14px] xl:text-[16px] 2xl:text-[18px] leading-relaxed flex-1"
+              style={{ color: "rgba(180,210,230,0.6)" }}
+            >
+              {desc}
+            </p>
           </div>
         </Card>
       </div>
@@ -221,24 +211,24 @@ function ServiceCard({
 
 function Services() {
   const navigate = useNavigate();
-  const services: { Icon: React.ElementType; title: string; desc: string; bgKey: BgKey }[] = [
+  const services: { poster: string; clip: string; title: string; desc: string }[] = [
     {
-      Icon: Palette,
+      poster: tileDesignPoster,
+      clip: tileDesignClip,
       title: "Individuelles Design",
       desc: "Deine Webseite sieht genau so aus, wie du es dir vorstellst. Kein vorgefertigtes Template, sondern ein eigenes Design für dich.",
-      bgKey: "design",
     },
     {
-      Icon: Code2,
+      poster: tileCodePoster,
+      clip: tileCodeClip,
       title: "Technische Umsetzung",
       desc: "Alle Funktionen sauber mit modernster Technik umgesetzt. Schnell geladen, für Google optimiert und auf jedem Gerät perfekt nutzbar.",
-      bgKey: "code",
     },
     {
-      Icon: Rocket,
+      poster: tileRocketPoster,
+      clip: tileRocketClip,
       title: "Fertig live, sofort nutzbar",
       desc: "Domain, Hosting, Einrichtung. Wir kümmern uns um alles. Du bekommst eine fertige Webseite und kannst sofort loslegen.",
-      bgKey: "rocket",
     },
   ];
 
@@ -257,8 +247,8 @@ function Services() {
       </FadeIn>
 
       <div className="grid gap-5 sm:gap-6 xl:gap-8 2xl:gap-10 sm:grid-cols-2 md:grid-cols-3 items-stretch">
-        {services.map(({ Icon, title, desc, bgKey }, i) => (
-          <ServiceCard key={title} Icon={Icon} title={title} desc={desc} i={i} bgKey={bgKey} />
+        {services.map(({ poster, clip, title, desc }, i) => (
+          <ServiceCard key={title} poster={poster} clip={clip} title={title} desc={desc} i={i} />
         ))}
       </div>
 
