@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { usePageMeta } from "../../hooks/usePageMeta";
 import { motion } from "motion/react";
 import { SectionLabel } from "../SectionLabel";
@@ -7,7 +8,67 @@ import { FadeIn } from "../FadeIn";
 import { useNavigate } from "react-router-dom";
 import profilbild from "../../../imports/Jonas_Gissler.png";
 import berkantImg from "../../../imports/Berkant_agyar.jpeg";
-import { Zap, Layers, Users, Linkedin, type LucideIcon } from "lucide-react";
+import { Linkedin } from "lucide-react";
+import { TileMedia } from "../TileMedia";
+import tileZapClip from "../../../imports/tile-zap.mp4";
+import tileZapPoster from "../../../imports/tile-zap-poster.webp";
+import tileLayersClip from "../../../imports/tile-layers.mp4";
+import tileLayersPoster from "../../../imports/tile-layers-poster.webp";
+import tileUsersClip from "../../../imports/tile-users.mp4";
+import tileUsersPoster from "../../../imports/tile-users-poster.webp";
+
+const ANSATZ: { poster: string; clip: string; t: string; d: string }[] = [
+  {
+    poster: tileZapPoster,
+    clip: tileZapClip,
+    t: "Einfach & klar",
+    d: "Ein modernes Design, bei dem eure Kunden sofort verstehen, was ihr anbietet. Ganz ohne suchen zu müssen.",
+  },
+  {
+    poster: tileLayersPoster,
+    clip: tileLayersClip,
+    t: "Design & Technik aus einer Hand",
+    d: "Wir machen beides selbst. So entsteht kein Wirrwarr zwischen verschiedenen Anbietern.",
+  },
+  {
+    poster: tileUsersPoster,
+    clip: tileUsersClip,
+    t: "Persönliche Betreuung",
+    d: "Ihr habt feste Ansprechpartner. Kein Callcenter, kein Ping-Pong – direkt, schnell und auf Augenhöhe.",
+  },
+];
+
+function AnsatzCard({
+  poster, clip, t, d, i,
+}: {
+  poster: string; clip: string; t: string; d: string; i: number;
+}) {
+  const [hovered, setHovered] = useState(false);
+  return (
+    <FadeIn delay={i * 0.08} className="h-full">
+      <div
+        className="h-full"
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+      >
+        <Card className="h-full">
+          {/* Illustration — statisch gedämpft, zündet beim Hover */}
+          <TileMedia
+            poster={poster}
+            src={clip}
+            label={t}
+            active={hovered}
+            className="mb-4 w-full aspect-[16/9]"
+          />
+          <h3 className="text-white text-[18px] sm:text-[20px] 2xl:text-[23px] mb-2">{t}</h3>
+          <p className="text-[14px] 2xl:text-[16px] leading-relaxed" style={{ color: "rgba(180, 210, 230, 0.6)" }}>
+            {d}
+          </p>
+        </Card>
+      </div>
+    </FadeIn>
+  );
+}
 
 export function About() {
   usePageMeta({
@@ -278,40 +339,8 @@ export function About() {
           </h2>
         </FadeIn>
         <div className="grid gap-6 2xl:gap-8 sm:grid-cols-2 md:grid-cols-3 items-stretch">
-          {([
-            {
-              Icon: Zap,
-              t: "Einfach & klar",
-              d: "Eure Kunden sollen sofort verstehen, was ihr anbietet. Ganz ohne suchen zu müssen.",
-            },
-            {
-              Icon: Layers,
-              t: "Design & Technik aus einer Hand",
-              d: "Wir machen beides selbst. So entsteht kein Wirrwarr zwischen verschiedenen Anbietern.",
-            },
-            {
-              Icon: Users,
-              t: "Persönliche Betreuung",
-              d: "Ihr habt feste Ansprechpartner. Kein Callcenter, kein Ping-Pong – direkt, schnell und auf Augenhöhe.",
-            },
-          ] as { Icon: LucideIcon; t: string; d: string }[]).map(({ Icon, t, d }) => (
-            <FadeIn key={t} className="h-full">
-              <Card className="h-full">
-                <div
-                  className="mb-4 inline-flex items-center justify-center rounded-xl p-2.5"
-                  style={{
-                    background: "rgba(77, 190, 243, 0.10)",
-                    border: "1px solid rgba(77, 190, 243, 0.18)",
-                  }}
-                >
-                  <Icon size={22} color="#4dbef3" strokeWidth={1.8} />
-                </div>
-                <h3 className="text-white text-[18px] sm:text-[20px] 2xl:text-[23px] mb-2">{t}</h3>
-                <p className="text-[14px] 2xl:text-[16px] leading-relaxed" style={{ color: "rgba(180, 210, 230, 0.6)" }}>
-                  {d}
-                </p>
-              </Card>
-            </FadeIn>
+          {ANSATZ.map((item, i) => (
+            <AnsatzCard key={item.t} {...item} i={i} />
           ))}
         </div>
       </div>
