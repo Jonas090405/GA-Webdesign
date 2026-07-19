@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { motion } from "motion/react";
 import { usePageMeta } from "../../hooks/usePageMeta";
 import { SectionLabel } from "../SectionLabel";
@@ -183,23 +184,27 @@ function InfoTooltip({ text, onGradient = false }: { text: string; onGradient?: 
       >
         i
       </button>
-      {pos && (
-        <span
-          className="z-[9999] w-56 rounded-xl px-3 py-2.5 text-[12px] text-slate-300 leading-relaxed pointer-events-none"
-          style={{
-            position: "fixed",
-            left: pos.x,
-            top: pos.y - 8,
-            transform: "translateX(-50%) translateY(-100%)",
-            background: "rgba(8,16,22,0.97)",
-            border: "1px solid rgba(77,190,243,0.18)",
-            backdropFilter: "blur(12px)",
-            boxShadow: "0 8px 32px rgba(0,0,0,0.5)",
-          }}
-        >
-          {text}
-        </span>
-      )}
+      {/* Portal: umgeht Stacking-Contexts der Karten, damit der Tooltip über der Navbar liegt */}
+      {pos &&
+        createPortal(
+          <span
+            role="tooltip"
+            className="z-[9999] w-56 rounded-xl px-3 py-2.5 text-[12px] text-slate-300 leading-relaxed pointer-events-none"
+            style={{
+              position: "fixed",
+              left: pos.x,
+              top: pos.y - 8,
+              transform: "translateX(-50%) translateY(-100%)",
+              background: "rgba(8,16,22,0.97)",
+              border: "1px solid rgba(77,190,243,0.18)",
+              backdropFilter: "blur(12px)",
+              boxShadow: "0 8px 32px rgba(0,0,0,0.5)",
+            }}
+          >
+            {text}
+          </span>,
+          document.body
+        )}
     </span>
   );
 }
