@@ -747,7 +747,7 @@ export function Leistungen() {
             Wie läuft die Zusammenarbeit ab?
           </h2>
           <p className="text-slate-400 text-[15px] xl:text-[16px] 2xl:text-[18px] mb-8 max-w-xl 2xl:max-w-2xl mx-auto">
-            Von der ersten Anfrage bis zur fertigen Webseite – in 8 transparenten Schritten.
+            Von der ersten Anfrage bis zur fertigen Webseite – in 7 transparenten Schritten.
           </p>
           <PrimaryButton onClick={() => navigate("/ablauf")}>
             Ablauf ansehen
