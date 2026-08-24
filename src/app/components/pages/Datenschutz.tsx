@@ -145,7 +145,7 @@ export function Datenschutz() {
       <div className="mt-10 sm:mt-12 space-y-5 sm:space-y-6">
         <FadeIn delay={0.05}>
           <Card>
-            <div className="text-sky-400 text-[12px] tracking-[0.25em] uppercase mb-4">
+            <div className="text-sky-400 text-[12px] tracking-[0.25em] mb-4">
               1. Verantwortlicher
             </div>
             <div className="text-slate-200 text-[15px] leading-[1.9]">
@@ -168,7 +168,7 @@ export function Datenschutz() {
 
         <FadeIn delay={0.1}>
           <Card>
-            <div className="text-sky-400 text-[12px] tracking-[0.25em] uppercase mb-4">
+            <div className="text-sky-400 text-[12px] tracking-[0.25em] mb-4">
               2. Allgemeine Hinweise
             </div>
             <p className="text-slate-300 text-[14px] leading-relaxed">
@@ -184,7 +184,7 @@ export function Datenschutz() {
 
         <FadeIn delay={0.15}>
           <Card>
-            <div className="text-sky-400 text-[12px] tracking-[0.25em] uppercase mb-4">
+            <div className="text-sky-400 text-[12px] tracking-[0.25em] mb-4">
               3. SSL- bzw. TLS-Verschlüsselung
             </div>
             <p className="text-slate-300 text-[14px] leading-relaxed">
@@ -200,7 +200,7 @@ export function Datenschutz() {
 
         <FadeIn delay={0.2}>
           <Card>
-            <div className="text-sky-400 text-[12px] tracking-[0.25em] uppercase mb-4">
+            <div className="text-sky-400 text-[12px] tracking-[0.25em] mb-4">
               4. Server-Logfiles
             </div>
             <p className="text-slate-300 text-[14px] leading-relaxed">
@@ -216,7 +216,7 @@ export function Datenschutz() {
 
         <FadeIn delay={0.25}>
           <Card>
-            <div className="text-sky-400 text-[12px] tracking-[0.25em] uppercase mb-4">
+            <div className="text-sky-400 text-[12px] tracking-[0.25em] mb-4">
               5. Kontaktformular &amp; E-Mail-Kontakt
             </div>
             <p className="text-slate-300 text-[14px] leading-relaxed">
@@ -231,7 +231,7 @@ export function Datenschutz() {
 
         <FadeIn delay={0.3}>
           <Card>
-            <div className="text-sky-400 text-[12px] tracking-[0.25em] uppercase mb-4">
+            <div className="text-sky-400 text-[12px] tracking-[0.25em] mb-4">
               6. Cookies &amp; Tracking
             </div>
             <p className="text-slate-300 text-[14px] leading-relaxed">
@@ -248,7 +248,7 @@ export function Datenschutz() {
 
         <FadeIn delay={0.35}>
           <Card>
-            <div className="text-sky-400 text-[12px] tracking-[0.25em] uppercase mb-4">
+            <div className="text-sky-400 text-[12px] tracking-[0.25em] mb-4">
               7. Google Analytics
             </div>
             <p className="text-slate-300 text-[14px] leading-relaxed">
@@ -290,7 +290,7 @@ export function Datenschutz() {
 
         <FadeIn delay={0.4}>
           <Card>
-            <div className="text-sky-400 text-[12px] tracking-[0.25em] uppercase mb-4">
+            <div className="text-sky-400 text-[12px] tracking-[0.25em] mb-4">
               8. Deine Rechte
             </div>
             <p className="text-slate-300 text-[14px] leading-relaxed">
@@ -317,7 +317,7 @@ export function Datenschutz() {
 
         <FadeIn delay={0.45}>
           <Card>
-            <div className="text-sky-400 text-[12px] tracking-[0.25em] uppercase mb-4">
+            <div className="text-sky-400 text-[12px] tracking-[0.25em] mb-4">
               9. Hosting – GitHub Pages
             </div>
             <p className="text-slate-300 text-[14px] leading-relaxed">
@@ -343,7 +343,7 @@ export function Datenschutz() {
 
         <FadeIn delay={0.5}>
           <Card>
-            <div className="text-sky-400 text-[12px] tracking-[0.25em] uppercase mb-4">
+            <div className="text-sky-400 text-[12px] tracking-[0.25em] mb-4">
               10. Kontaktformular – EmailJS
             </div>
             <p className="text-slate-300 text-[14px] leading-relaxed">
@@ -370,7 +370,7 @@ export function Datenschutz() {
 
         <FadeIn delay={0.55}>
           <Card>
-            <div className="text-sky-400 text-[12px] tracking-[0.25em] uppercase mb-4">
+            <div className="text-sky-400 text-[12px] tracking-[0.25em] mb-4">
               11. Speicherdauer
             </div>
             <p className="text-slate-300 text-[14px] leading-relaxed">
@@ -386,7 +386,7 @@ export function Datenschutz() {
 
         <FadeIn delay={0.6}>
           <Card>
-            <div className="text-sky-400 text-[12px] tracking-[0.25em] uppercase mb-4">
+            <div className="text-sky-400 text-[12px] tracking-[0.25em] mb-4">
               12. Google Search Console
             </div>
             <p className="text-slate-300 text-[14px] leading-relaxed">

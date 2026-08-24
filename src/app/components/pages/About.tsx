@@ -96,7 +96,7 @@ export function About() {
             </span>
           </h1>
           <p
-            className="mt-2 text-[12px] sm:text-[13px] tracking-[0.2em] uppercase"
+            className="mt-2 text-[12px] sm:text-[13px] tracking-[0.2em]"
             style={{ color: "#4dbef3" }}
           >
             Design & Entwicklung
@@ -172,7 +172,7 @@ export function About() {
       <div className="mt-16 2xl:mt-24 grid gap-4 2xl:gap-6 md:grid-cols-2 items-stretch">
         <FadeIn className="h-full">
           <Card className="h-full">
-            <div className="text-[12px] tracking-[0.25em] uppercase mb-5" style={{ color: "#4dbef3" }}>
+            <div className="text-[12px] tracking-[0.25em] mb-5" style={{ color: "#4dbef3" }}>
               Hintergrund
             </div>
             <ul className="space-y-3 text-[14px]" style={{ color: "rgba(200, 225, 240, 0.8)" }}>
@@ -185,7 +185,7 @@ export function About() {
         </FadeIn>
         <FadeIn delay={0.08} className="h-full">
           <Card className="h-full">
-            <div className="text-[12px] tracking-[0.25em] uppercase mb-5" style={{ color: "#4dbef3" }}>
+            <div className="text-[12px] tracking-[0.25em] mb-5" style={{ color: "#4dbef3" }}>
               Womit ich arbeite
             </div>
             <div className="flex flex-wrap gap-2">
@@ -220,7 +220,7 @@ export function About() {
             </span>
           </h2>
           <p
-            className="mt-2 text-[12px] sm:text-[13px] tracking-[0.2em] uppercase"
+            className="mt-2 text-[12px] sm:text-[13px] tracking-[0.2em]"
             style={{ color: "#4dbef3" }}
           >
             Kundenkommunikation & Projektmanagement
@@ -295,7 +295,7 @@ export function About() {
       <div className="mt-16 2xl:mt-24 grid gap-4 2xl:gap-6 md:grid-cols-2 items-stretch">
         <FadeIn className="h-full">
           <Card className="h-full">
-            <div className="text-[12px] tracking-[0.25em] uppercase mb-5" style={{ color: "#4dbef3" }}>
+            <div className="text-[12px] tracking-[0.25em] mb-5" style={{ color: "#4dbef3" }}>
               Hintergrund
             </div>
             <ul className="space-y-3 text-[14px]" style={{ color: "rgba(200, 225, 240, 0.8)" }}>
@@ -308,7 +308,7 @@ export function About() {
         </FadeIn>
         <FadeIn delay={0.08} className="h-full">
           <Card className="h-full">
-            <div className="text-[12px] tracking-[0.25em] uppercase mb-5" style={{ color: "#4dbef3" }}>
+            <div className="text-[12px] tracking-[0.25em] mb-5" style={{ color: "#4dbef3" }}>
               Aufgabenbereiche
             </div>
             <div className="flex flex-wrap gap-2">

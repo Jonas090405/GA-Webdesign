@@ -8,7 +8,7 @@ export function SectionLabel({ children }: { children: React.ReactNode }) {
         }}
       />
       <span
-        className="min-w-0 text-[11px] sm:text-[12px] 2xl:text-[14px] tracking-[0.16em] sm:tracking-[0.22em] uppercase font-medium leading-snug"
+        className="min-w-0 text-[11px] sm:text-[12px] 2xl:text-[14px] tracking-[0.16em] sm:tracking-[0.22em] font-medium leading-snug"
         style={{ color: "#4dbef3" }}
       >
         {children}

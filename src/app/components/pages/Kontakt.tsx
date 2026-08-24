@@ -225,7 +225,7 @@ function InfoItem({
         <Icon size={18} className="text-sky-400" />
       </div>
       <div>
-        <div className="text-slate-500 text-[12px] tracking-[0.15em] uppercase mb-1">
+        <div className="text-slate-500 text-[12px] tracking-[0.15em] mb-1">
           {label}
         </div>
         {onClick ? (

@@ -50,7 +50,7 @@ export function HeroTicker() {
           ITEMS.map((item, j) => (
             <span
               key={`${c}-${j}`}
-              className="inline-flex items-center text-[11px] sm:text-[12px] tracking-[0.2em] uppercase font-medium"
+              className="inline-flex items-center text-[11px] sm:text-[12px] tracking-[0.2em] font-medium"
               style={{ color: "rgba(180, 215, 240, 0.45)" }}
             >
               {item}

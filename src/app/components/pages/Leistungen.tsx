@@ -315,7 +315,7 @@ function WebseitePreisCard({ onContact }: { onContact: () => void }) {
           <div className="space-y-4 mb-6">
             {websiteFeatureGroups.map((group) => (
               <div key={group.label}>
-                <p className="text-[10px] tracking-[0.18em] uppercase font-medium text-slate-500 mb-2">
+                <p className="text-[10px] tracking-[0.18em] font-medium text-slate-500 mb-2">
                   {group.label}
                 </p>
                 <ul className="space-y-2">

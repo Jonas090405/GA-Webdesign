@@ -108,7 +108,7 @@ export function PortfolioSlider({ projects }: { projects: Project[] }) {
 
                   {/* Text — links auf Desktop */}
                   <div className={`flex flex-col justify-center overflow-hidden ${(project.video || project.image) ? "py-2 md:py-6 xl:py-8" : "px-4 py-6 sm:px-8 md:px-12 xl:px-16 2xl:px-20"}`}>
-                    <div className="text-sky-400 text-[12px] xl:text-[13px] 2xl:text-[15px] tracking-[0.2em] uppercase mb-3">
+                    <div className="text-sky-400 text-[12px] xl:text-[13px] 2xl:text-[15px] tracking-[0.2em] mb-3">
                       {project.tag}
                     </div>
                     <h3 className="text-white text-[22px] sm:text-[28px] xl:text-[34px] 2xl:text-[40px] mb-3 xl:mb-4 tracking-tight">
@@ -252,7 +252,7 @@ export function PortfolioSlider({ projects }: { projects: Project[] }) {
                 <X size={15} aria-hidden />
               </button>
 
-              <p className="text-[11px] tracking-[0.2em] uppercase text-sky-400 mb-4">Kundenstimme</p>
+              <p className="text-[11px] tracking-[0.2em] text-sky-400 mb-4">Kundenstimme</p>
               <TestimonialContent t={t} />
             </motion.div>
           </motion.div>

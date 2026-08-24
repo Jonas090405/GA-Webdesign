@@ -19,7 +19,7 @@ import tileRocketPoster from "../../../imports/tile-rocket-poster.webp";
 import { ContactForm, BERKANT_EMAIL, BERKANT_PHONE } from "../ContactForm";
 import profilbild from "../../../imports/Jonas_Gissler.png";
 import berkantImg from "../../../imports/Berkant_agyar.jpeg";
-import { HeroModels } from "../HeroModels";
+import { DeviceDuo } from "../DeviceDuo";
 import { TeamBadge } from "../TeamBadge";
 import gcnImg from "../../../imports/gcn-fahrzeughandel.png";
 import gcnAvatar from "../../../imports/gcn-avatar.jpeg";
@@ -118,7 +118,7 @@ function Hero() {
         </div>
 
         <FadeIn delay={0.4} className="flex justify-center lg:justify-end">
-          <HeroModels className="max-w-[340px] sm:max-w-[460px] lg:max-w-[520px] xl:max-w-[660px] 2xl:max-w-[820px]" />
+          <DeviceDuo className="max-w-[380px] sm:max-w-[480px] lg:max-w-[540px] xl:max-w-[640px] 2xl:max-w-[760px]" />
         </FadeIn>
       </div>
     </section>
@@ -329,7 +329,7 @@ function TeamPreview() {
                     {name}
                   </h3>
                   <p
-                    className="text-[11px] tracking-[0.18em] uppercase leading-snug"
+                    className="text-[11px] tracking-[0.18em] leading-snug"
                     style={{ color: "#4dbef3" }}
                   >
                     {role}

@@ -219,13 +219,13 @@ function ProjectTitle({ project, index, hideTag = false }: { project: Project; i
       {!hideTag && (
         <div className="flex items-center justify-start md:justify-center gap-3 mb-4">
           <span
-            className="text-[11px] tracking-[0.3em] uppercase font-mono tabular-nums"
+            className="text-[11px] tracking-[0.3em] font-mono tabular-nums"
             style={{ color: "rgba(77,190,243,0.45)" }}
           >
             {String(index + 1).padStart(2, "0")}
           </span>
           <span className="w-8 h-px" style={{ background: "rgba(77,190,243,0.2)" }} />
-          <span className="text-[11px] tracking-[0.22em] uppercase text-sky-400">
+          <span className="text-[11px] tracking-[0.22em] text-sky-400">
             {project.tag}
           </span>
         </div>

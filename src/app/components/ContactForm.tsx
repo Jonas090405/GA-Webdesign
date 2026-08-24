@@ -269,7 +269,7 @@ export function ContactForm({ subject }: { subject: string }) {
             })}
           </div>
           <span
-            className="text-[11px] tracking-[0.2em] uppercase tabular-nums"
+            className="text-[11px] tracking-[0.2em] tabular-nums"
             style={{ color: "rgba(150,190,220,0.5)" }}
             aria-hidden
           >
@@ -372,7 +372,7 @@ function SuccessState({ onReset }: { onReset?: () => void }) {
   return (
     <div className="py-14 flex flex-col items-center text-center gap-4" role="status">
       <CheckCircle2 size={40} className="text-sky-400" />
-      <div className="text-sky-400 text-[11px] tracking-[0.25em] uppercase">Gesendet</div>
+      <div className="text-sky-400 text-[11px] tracking-[0.25em]">Gesendet</div>
       <h3 className="text-white text-[22px]">Danke für deine Nachricht!</h3>
       <p className="text-slate-400 text-[14px] max-w-sm leading-relaxed">
         Wir haben deine Anfrage erhalten und melden uns so schnell wie möglich bei dir.
@@ -446,7 +446,7 @@ function StepField({
         {step.question}
         {step.optional && (
           <span
-            className="ml-2.5 align-middle text-[11px] tracking-[0.15em] uppercase"
+            className="ml-2.5 align-middle text-[11px] tracking-[0.15em]"
             style={{ color: "rgba(150,190,220,0.5)" }}
           >
             Optional

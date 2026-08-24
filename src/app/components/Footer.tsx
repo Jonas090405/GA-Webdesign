@@ -57,7 +57,7 @@ export function Footer() {
 
           <div>
             <div
-              className="mb-3 text-[12px] 2xl:text-[13px] tracking-[0.25em] uppercase font-medium"
+              className="mb-3 text-[12px] 2xl:text-[13px] tracking-[0.25em] font-medium"
               style={{ color: "#4dbef3" }}
             >
               Standort
@@ -73,7 +73,7 @@ export function Footer() {
 
           <div>
             <div
-              className="mb-3 text-[12px] 2xl:text-[13px] tracking-[0.25em] uppercase font-medium"
+              className="mb-3 text-[12px] 2xl:text-[13px] tracking-[0.25em] font-medium"
               style={{ color: "#4dbef3" }}
             >
               Kontakt
@@ -109,7 +109,7 @@ export function Footer() {
 
           <div>
             <div
-              className="mb-3 text-[12px] 2xl:text-[13px] tracking-[0.25em] uppercase font-medium"
+              className="mb-3 text-[12px] 2xl:text-[13px] tracking-[0.25em] font-medium"
               style={{ color: "#4dbef3" }}
             >
               Navigation

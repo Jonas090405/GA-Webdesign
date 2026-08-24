@@ -132,7 +132,7 @@ function ContentBlock({
   return (
     <div>
       <div className={`flex flex-wrap items-center gap-2.5 mb-3 ${right ? "justify-end" : ""}`}>
-        <span className="text-sky-400 text-[11px] 2xl:text-[12px] tracking-[0.2em] uppercase font-medium">
+        <span className="text-sky-400 text-[11px] 2xl:text-[12px] tracking-[0.2em] font-medium">
           Schritt {step}
         </span>
         <span
