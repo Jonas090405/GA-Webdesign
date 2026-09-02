@@ -6,7 +6,7 @@ import { PrimaryButton, GhostButton, TertiaryButton } from "../Button";
 import { Card } from "../Card";
 import { FadeIn } from "../FadeIn";
 import { PortfolioScrollSection } from "../PortfolioScrollSection";
-import { Aurora } from "../Aurora";
+import { HeroBackground } from "../HeroBackground";
 import { useNavigate } from "react-router-dom";
 import { Phone, Linkedin } from "lucide-react";
 import { TileMedia } from "../TileMedia";
@@ -19,7 +19,7 @@ import tileRocketPoster from "../../../imports/tile-rocket-poster.webp";
 import { ContactForm, BERKANT_EMAIL, BERKANT_PHONE } from "../ContactForm";
 import profilbild from "../../../imports/Jonas_Gissler.png";
 import berkantImg from "../../../imports/Berkant_agyar.jpeg";
-import { AgencyIntro } from "../AgencyIntro";
+import { TeamBadge } from "../TeamBadge";
 import gcnImg from "../../../imports/gcn-fahrzeughandel.png";
 import gcnAvatar from "../../../imports/gcn-avatar.jpeg";
 import gcnVideo from "../../../imports/GCN-Projekt.mp4";
@@ -73,13 +73,13 @@ function Hero() {
   const navigate = useNavigate();
   return (
     <section className="relative pt-22 sm:pt-18 lg:pt-24 xl:pt-28 2xl:pt-36 pb-12 sm:pb-12 lg:pb-18 xl:pb-22 2xl:pb-28">
-      <Aurora />
+      <HeroBackground />
 
-      <div className="relative z-10 grid lg:grid-cols-2 gap-10 lg:gap-8 xl:gap-16 2xl:gap-24 items-center">
-        <div>
-          <FadeIn>
-            <SectionLabel>Webdesign · Entwicklung · Hosting · SEO</SectionLabel>
-          </FadeIn>
+      <div className="relative z-10 max-w-3xl">
+        <FadeIn>
+          <TeamBadge />
+          <SectionLabel>Webdesign · Entwicklung · Hosting · SEO</SectionLabel>
+        </FadeIn>
 
           <FadeIn delay={0.1}>
             <h1 className="text-white text-[clamp(34px,6.5vw,108px)] leading-[1.05] tracking-tight">
@@ -114,11 +114,6 @@ function Hero() {
               </PrimaryButton>
             </div>
           </FadeIn>
-        </div>
-
-        <FadeIn delay={0.4}>
-          <AgencyIntro />
-        </FadeIn>
       </div>
     </section>
   );
@@ -296,7 +291,11 @@ function TeamPreview() {
             className="mt-4 xl:mt-6 max-w-2xl 2xl:max-w-3xl text-[15px] sm:text-[17px] xl:text-[19px] 2xl:text-[21px] leading-relaxed"
             style={{ color: "rgba(180,210,230,0.65)" }}
           >
-            Design, Entwicklung und Hosting — du musst dich um nichts kümmern.
+            Als kleines Team aus dem Schwarzwald erstellen wir moderne Webseiten für
+            lokale Unternehmen – von Triberg über St. Georgen bis Villingen-Schwenningen.
+            Vom ersten Gespräch bis zur fertigen Website hast du feste Ansprechpartner,
+            die deine Region und deine Kunden kennen. Webdesign, Entwicklung, Hosting und
+            SEO kommen komplett aus einer Hand – du musst dich um nichts kümmern.
           </p>
         </div>
       </FadeIn>
