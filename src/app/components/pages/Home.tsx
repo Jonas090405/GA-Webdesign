@@ -19,8 +19,7 @@ import tileRocketPoster from "../../../imports/tile-rocket-poster.webp";
 import { ContactForm, BERKANT_EMAIL, BERKANT_PHONE } from "../ContactForm";
 import profilbild from "../../../imports/Jonas_Gissler.png";
 import berkantImg from "../../../imports/Berkant_agyar.jpeg";
-import { DeviceDuo } from "../DeviceDuo";
-import { TeamBadge } from "../TeamBadge";
+import { AgencyIntro } from "../AgencyIntro";
 import gcnImg from "../../../imports/gcn-fahrzeughandel.png";
 import gcnAvatar from "../../../imports/gcn-avatar.jpeg";
 import gcnVideo from "../../../imports/GCN-Projekt.mp4";
@@ -79,7 +78,6 @@ function Hero() {
       <div className="relative z-10 grid lg:grid-cols-2 gap-10 lg:gap-8 xl:gap-16 2xl:gap-24 items-center">
         <div>
           <FadeIn>
-            <TeamBadge />
             <SectionLabel>Webdesign · Entwicklung · Hosting · SEO</SectionLabel>
           </FadeIn>
 
@@ -103,8 +101,8 @@ function Hero() {
               className="mt-5 sm:mt-7 text-[16px] sm:text-[18px] lg:text-[19px] xl:text-[21px] 2xl:text-[24px] leading-relaxed"
               style={{ color: "rgba(200, 225, 240, 0.75)" }}
             >
-              Wir entwerfen und bauen deine Webseite. Von der ersten Idee bis sie live ist.
-              Du musst dich um nichts kümmern.
+              Moderne, professionelle Webseiten für lokale Unternehmen im Schwarzwald –
+              von der ersten Idee bis sie live ist. Du musst dich um nichts kümmern.
             </p>
           </FadeIn>
 
@@ -117,8 +115,8 @@ function Hero() {
           </FadeIn>
         </div>
 
-        <FadeIn delay={0.4} className="flex justify-center lg:justify-end">
-          <DeviceDuo className="max-w-[380px] sm:max-w-[480px] lg:max-w-[540px] xl:max-w-[640px] 2xl:max-w-[760px]" />
+        <FadeIn delay={0.4}>
+          <AgencyIntro />
         </FadeIn>
       </div>
     </section>
