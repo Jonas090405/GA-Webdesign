@@ -54,8 +54,8 @@ const PROJECTS = [
 
 export function Home() {
   usePageMeta({
-    title: "G&A Webdesign | Moderne Webseiten für lokale Unternehmen",
-    description: "Wir entwerfen und entwickeln moderne, professionelle Webseiten für lokale Unternehmen. Komplett fertig eingerichtet inkl. Hosting & SEO.",
+    title: "Webdesign im Schwarzwald – Moderne Webseiten | G&A Webdesign",
+    description: "G&A Webdesign aus Triberg: modernes Webdesign und professionelle Webseiten für lokale Unternehmen im Schwarzwald – komplett aus einer Hand, inkl. Hosting & SEO.",
     path: "/",
   });
   return (
@@ -101,8 +101,9 @@ function Hero() {
               className="mt-5 sm:mt-7 text-[16px] sm:text-[18px] lg:text-[19px] xl:text-[21px] 2xl:text-[24px] leading-relaxed"
               style={{ color: "rgba(200, 225, 240, 0.75)" }}
             >
-              Moderne, professionelle Webseiten für lokale Unternehmen im Schwarzwald –
-              von der ersten Idee bis sie live ist. Du musst dich um nichts kümmern.
+              Modernes Webdesign für lokale Unternehmen im Schwarzwald – wir erstellen
+              professionelle Webseiten, von der ersten Idee bis sie live ist. Du musst
+              dich um nichts kümmern.
             </p>
           </FadeIn>
 

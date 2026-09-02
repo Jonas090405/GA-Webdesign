@@ -1,46 +1,23 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, MapPin } from "lucide-react";
-import { Card } from "./Card";
+import { ArrowRight } from "lucide-react";
 import jonasImg from "../../imports/Jonas_Gissler.png";
 import berkantImg from "../../imports/Berkant_agyar.jpeg";
 
 /**
  * Kompakte Agentur-Vorstellung für die Hero-Section: Jonas & Berkant plus ein
- * kurzer, lokal fokussierter Intro-Text (Schwarzwald / Triberg).
+ * kurzer, lokal fokussierter Intro-Text (Schwarzwald / Triberg). Offener Block
+ * ohne Container.
  */
-
-function Chip({
-  children,
-  icon: Icon,
-}: {
-  children: React.ReactNode;
-  icon?: React.ElementType;
-}) {
-  return (
-    <span
-      className="inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[12px] xl:text-[13px] font-medium"
-      style={{
-        background: "rgba(77,190,243,0.08)",
-        border: "1px solid rgba(77,190,243,0.18)",
-        color: "rgba(200,235,255,0.8)",
-      }}
-    >
-      {Icon && <Icon size={13} style={{ color: "#4dbef3" }} aria-hidden />}
-      {children}
-    </span>
-  );
-}
-
 export function AgencyIntro() {
   return (
-    <Card>
+    <div>
       {/* Team – Jonas & Berkant */}
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-5">
         <div className="flex shrink-0">
           <div
-            className="h-[52px] w-[52px] xl:h-[58px] xl:w-[58px] overflow-hidden rounded-full"
+            className="h-[80px] w-[80px] xl:h-[96px] xl:w-[96px] overflow-hidden rounded-full"
             style={{
-              border: "2px solid rgba(77,190,243,0.45)",
+              border: "2px solid rgba(77,190,243,0.5)",
               position: "relative",
               zIndex: 2,
             }}
@@ -54,10 +31,9 @@ export function AgencyIntro() {
             />
           </div>
           <div
-            className="h-[52px] w-[52px] xl:h-[58px] xl:w-[58px] overflow-hidden rounded-full"
+            className="h-[80px] w-[80px] xl:h-[96px] xl:w-[96px] -ml-5 xl:-ml-6 overflow-hidden rounded-full"
             style={{
-              border: "2px solid rgba(77,190,243,0.45)",
-              marginLeft: -16,
+              border: "2px solid rgba(77,190,243,0.5)",
               position: "relative",
               zIndex: 1,
             }}
@@ -72,49 +48,45 @@ export function AgencyIntro() {
           </div>
         </div>
         <div>
-          <div className="text-[17px] xl:text-[19px] font-medium leading-tight text-white">
+          <div className="text-[19px] xl:text-[22px] font-medium leading-tight text-white">
             Jonas &amp; Berkant
           </div>
-          <div className="mt-1 text-[12px] xl:text-[13px]" style={{ color: "#4dbef3" }}>
+          <div className="mt-1 text-[13px] xl:text-[14px]" style={{ color: "#4dbef3" }}>
             G&amp;A Webdesign · Triberg
           </div>
         </div>
       </div>
 
       {/* Intro */}
-      <h2 className="mt-6 xl:mt-7 text-[21px] sm:text-[23px] xl:text-[27px] leading-snug tracking-tight text-white">
-        Persönlich aus dem Schwarzwald.
+      <h2 className="mt-7 xl:mt-9 text-[24px] sm:text-[27px] xl:text-[32px] leading-snug tracking-tight text-white">
+        Persönliches Webdesign aus dem Schwarzwald.
       </h2>
       <p
-        className="mt-3 text-[14px] xl:text-[16px] leading-relaxed"
-        style={{ color: "rgba(180,210,230,0.7)" }}
+        className="mt-4 max-w-xl text-[15px] xl:text-[17px] leading-relaxed"
+        style={{ color: "rgba(180,210,230,0.72)" }}
       >
-        Wir bauen moderne Webseiten für lokale Unternehmen in der Region rund um
-        Triberg – verständlich erklärt und komplett aus einer Hand.
+        Als kleines Team aus dem Schwarzwald erstellen wir moderne Webseiten für
+        lokale Unternehmen – von Triberg über St. Georgen bis Villingen-Schwenningen.
+        Vom ersten Gespräch bis zur fertigen Website hast du feste Ansprechpartner,
+        die deine Region und deine Kunden kennen. Webdesign, Entwicklung, Hosting und
+        SEO kommen komplett aus einer Hand – du musst dich um nichts kümmern.
       </p>
-
-      {/* Trust-Chips */}
-      <div className="mt-5 flex flex-wrap gap-2">
-        <Chip icon={MapPin}>Aus Triberg</Chip>
-        <Chip>Persönlich vor Ort</Chip>
-        <Chip>Alles aus einer Hand</Chip>
-      </div>
 
       {/* Link */}
       <Link
         to="/ueber-uns"
-        className="group/link mt-6 inline-flex items-center gap-1.5 text-[14px] xl:text-[15px] font-medium transition-colors duration-200"
+        className="group/link mt-6 inline-flex items-center gap-1.5 text-[15px] xl:text-[16px] font-medium transition-colors duration-200"
         style={{ color: "rgba(125,211,252,0.9)" }}
         onMouseEnter={(e) => (e.currentTarget.style.color = "rgba(186,230,253,1)")}
         onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(125,211,252,0.9)")}
       >
         Lerne uns kennen
         <ArrowRight
-          size={15}
+          size={16}
           className="transition-transform duration-200 ease-out group-hover/link:translate-x-0.5"
           aria-hidden
         />
       </Link>
-    </Card>
+    </div>
   );
 }
