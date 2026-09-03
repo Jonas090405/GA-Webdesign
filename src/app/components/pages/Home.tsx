@@ -8,7 +8,8 @@ import { FadeIn } from "../FadeIn";
 import { PortfolioScrollSection } from "../PortfolioScrollSection";
 import { HeroBackground } from "../HeroBackground";
 import { useNavigate } from "react-router-dom";
-import { Phone, Linkedin } from "lucide-react";
+import { Phone, Linkedin, Mail, MapPin } from "lucide-react";
+import { ContactLine } from "../ContactLine";
 import { TileMedia } from "../TileMedia";
 import tileDesignClip from "../../../imports/tile-design.mp4";
 import tileDesignPoster from "../../../imports/tile-design-poster.webp";
@@ -419,29 +420,20 @@ function Contact() {
             Wir melden uns innerhalb von 24 Stunden
             mit einer ersten Einschätzung und einem unverbindlichen Termin.
           </p>
-          <div className="space-y-3 text-[14px] xl:text-[16px]">
-            <div>
-              <div className="mb-1" style={{ color: "rgba(150, 180, 200, 0.5)" }}>E-Mail</div>
-              <button
-                onClick={copyEmail}
-                className="cursor-pointer text-white hover:text-sky-300 transition-colors break-all bg-transparent border-none p-0 text-left text-[14px] xl:text-[16px]"
-              >
-                {emailCopied ? "Kopiert ✓" : BERKANT_EMAIL}
-              </button>
-            </div>
-            <div>
-              <div className="mb-1" style={{ color: "rgba(150, 180, 200, 0.5)" }}>Telefon</div>
-              <a
-                href={`tel:${BERKANT_PHONE.replace(/[\s]/g, "")}`}
-                className="text-white hover:text-sky-300 transition-colors"
-              >
-                {BERKANT_PHONE}
-              </a>
-            </div>
-            <div>
-              <div className="mb-1" style={{ color: "rgba(150, 180, 200, 0.5)" }}>Standort</div>
-              <div className="text-white">Triberg, Schwarzwald</div>
-            </div>
+          <div className="space-y-4">
+            <ContactLine
+              Icon={Mail}
+              label="E-Mail"
+              value={emailCopied ? "Kopiert ✓" : BERKANT_EMAIL}
+              onClick={copyEmail}
+            />
+            <ContactLine
+              Icon={Phone}
+              label="Telefon"
+              value={BERKANT_PHONE}
+              href={`tel:${BERKANT_PHONE.replace(/[\s]/g, "")}`}
+            />
+            <ContactLine Icon={MapPin} label="Standort" value="Triberg, Schwarzwald" />
           </div>
         </FadeIn>
 

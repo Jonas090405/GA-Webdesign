@@ -4,9 +4,10 @@ import { motion, AnimatePresence } from "motion/react";
 import { SectionLabel } from "../SectionLabel";
 import { Card } from "../Card";
 import { FadeIn } from "../FadeIn";
-import { Mail, MapPin, Clock, Phone } from "lucide-react";
+import { Mail, MapPin, Phone } from "lucide-react";
 import { FAQSection } from "../FAQSection";
 import { ContactForm, BERKANT_EMAIL, BERKANT_PHONE } from "../ContactForm";
+import { ContactLine } from "../ContactLine";
 import berkantImg from "../../../imports/Berkant_agyar.jpeg";
 
 type ContactMode = "form" | "call";
@@ -70,21 +71,20 @@ export function Kontakt() {
 
       <div className="grid gap-10 md:gap-14 2xl:gap-20 md:grid-cols-5 items-start">
         {/* Info-Spalte */}
-        <FadeIn className="md:col-span-2 space-y-8">
-          <InfoItem
+        <FadeIn className="md:col-span-2 space-y-4">
+          <ContactLine
             Icon={Mail}
             label="E-Mail"
             value={emailCopied ? "Kopiert ✓" : BERKANT_EMAIL}
             onClick={copyEmail}
           />
-          <InfoItem
+          <ContactLine
             Icon={Phone}
             label="Telefon"
             value={BERKANT_PHONE}
             href={`tel:${BERKANT_PHONE.replace(/[\s]/g, "")}`}
           />
-          <InfoItem Icon={MapPin} label="Standort" value="Triberg, Schwarzwald" />
-          <InfoItem Icon={Clock} label="Antwortzeit" value="In der Regel innerhalb von 24 Stunden" />
+          <ContactLine Icon={MapPin} label="Standort" value="Triberg, Schwarzwald" />
         </FadeIn>
 
         {/* Form / Anruf */}
@@ -203,46 +203,3 @@ function CallCard({ phone }: { phone: string }) {
   );
 }
 
-function InfoItem({
-  Icon,
-  label,
-  value,
-  href,
-  onClick,
-}: {
-  Icon: typeof Mail;
-  label: string;
-  value: string;
-  href?: string;
-  onClick?: () => void;
-}) {
-  return (
-    <div className="flex items-start gap-4">
-      <div
-        className="shrink-0 h-10 w-10 rounded-xl flex items-center justify-center"
-        style={{ background: "rgba(77, 190, 243, 0.10)", border: "1px solid rgba(77, 190, 243, 0.20)" }}
-      >
-        <Icon size={18} className="text-sky-400" />
-      </div>
-      <div>
-        <div className="text-slate-500 text-[12px] tracking-[0.15em] mb-1">
-          {label}
-        </div>
-        {onClick ? (
-          <button
-            onClick={onClick}
-            className="text-white text-[14px] hover:text-sky-300 transition-colors cursor-pointer bg-transparent border-none p-0 text-left"
-          >
-            {value}
-          </button>
-        ) : href ? (
-          <a href={href} className="text-white text-[14px] hover:text-sky-300 transition-colors">
-            {value}
-          </a>
-        ) : (
-          <div className="text-white text-[14px]">{value}</div>
-        )}
-      </div>
-    </div>
-  );
-}
