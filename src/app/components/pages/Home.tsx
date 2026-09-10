@@ -379,14 +379,6 @@ const slideVariants = {
 function Contact() {
   const [mode, setMode] = useState<"form" | "call">("form");
   const [direction, setDirection] = useState(0);
-  const [emailCopied, setEmailCopied] = useState(false);
-
-  function copyEmail() {
-    navigator.clipboard.writeText(BERKANT_EMAIL).then(() => {
-      setEmailCopied(true);
-      setTimeout(() => setEmailCopied(false), 2200);
-    });
-  }
 
   return (
     <section id="kontakt" className="py-12 sm:py-10 lg:py-14 xl:py-18 2xl:py-24">
@@ -424,8 +416,8 @@ function Contact() {
             <ContactLine
               Icon={Mail}
               label="E-Mail"
-              value={emailCopied ? "Kopiert ✓" : BERKANT_EMAIL}
-              onClick={copyEmail}
+              value={BERKANT_EMAIL}
+              href={`mailto:${BERKANT_EMAIL}`}
             />
             <ContactLine
               Icon={Phone}

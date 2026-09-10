@@ -213,17 +213,8 @@ export function FAQSection({
 }) {
   const [startIdx, setStartIdx] = useState(0);
   const [dir, setDir]           = useState(1);
-  const [copied, setCopied]     = useState<"email" | "phone" | null>(null);
   const total      = faqs.length;
   const touchStartX = useRef(0);
-
-  function copyToClipboard(type: "email" | "phone") {
-    const text = type === "email" ? FAQ_EMAIL : FAQ_PHONE;
-    navigator.clipboard.writeText(text).then(() => {
-      setCopied(type);
-      setTimeout(() => setCopied(null), 2200);
-    });
-  }
 
   // Seitenbasiert: 3 Karten pro Seite, keine doppelten Stages
   const PAGE_SIZE = 3;
@@ -260,13 +251,13 @@ export function FAQSection({
             </h2>
             <p className="text-slate-400 text-[15px] xl:text-[16px] 2xl:text-[17px] leading-relaxed max-w-lg">
               Antworten auf die Fragen, die uns am häufigsten gestellt werden. Etwas fehlt?{" "}
-              <button
-                onClick={() => copyToClipboard("email")}
-                className="cursor-pointer transition-colors duration-200 underline-offset-2 hover:underline bg-transparent border-none p-0"
-                style={{ color: copied === "email" ? "rgba(186,230,253,1)" : "#4dbef3" }}
+              <a
+                href={`mailto:${FAQ_EMAIL}`}
+                className="cursor-pointer transition-colors duration-200 underline-offset-2 hover:underline"
+                style={{ color: "#4dbef3" }}
               >
-                {copied === "email" ? "E-Mail kopiert ✓" : "Schreib uns einfach."}
-              </button>
+                Schreib uns einfach.
+              </a>
             </p>
           </div>
 
@@ -381,9 +372,10 @@ export function FAQSection({
 
           {/* Kontakt-Buttons – visuell identisch */}
           <div className="flex gap-2.5 shrink-0">
-            {/* E-Mail → Clipboard-Copy */}
-            <button
-              onClick={() => copyToClipboard("email")}
+            {/* E-Mail → direkt Mailprogramm öffnen */}
+            <a
+              href={`mailto:${FAQ_EMAIL}`}
+              aria-label="E-Mail an Berkant Agyar schreiben"
               className="cursor-pointer inline-flex items-center gap-2 rounded-full px-4 py-2 text-[13px] xl:text-[14px] font-medium transition-all duration-200 whitespace-nowrap"
               style={{
                 background: "rgba(77,190,243,0.09)",
@@ -394,8 +386,8 @@ export function FAQSection({
               onMouseLeave={(e) => { e.currentTarget.style.background = "rgba(77,190,243,0.09)"; e.currentTarget.style.borderColor = "rgba(77,190,243,0.2)"; }}
             >
               <Mail size={14} aria-hidden="true" />
-              {copied === "email" ? "Kopiert ✓" : "E-Mail schreiben"}
-            </button>
+              E-Mail schreiben
+            </a>
             {/* Anrufen → direkt tel: öffnen */}
             <a
               href={`tel:${FAQ_PHONE.replace(/[\s]/g, "")}`}

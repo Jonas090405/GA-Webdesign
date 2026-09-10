@@ -123,7 +123,6 @@ export function ContactForm({ subject }: { subject: string }) {
     name: "", email: "", phone: "", message: "",
   });
   const [errors, setErrors] = useState<FormErrors>({});
-  const [emailCopied, setEmailCopied] = useState(false);
   // Honeypot: unsichtbares Feld, das nur Bots ausfüllen
   const [honeypot, setHoneypot] = useState("");
   const inputRef = useRef<HTMLInputElement | HTMLTextAreaElement | null>(null);
@@ -132,13 +131,6 @@ export function ContactForm({ subject }: { subject: string }) {
 
   const current = STEPS[step];
   const isLast = step === STEPS.length - 1;
-
-  function copyEmail() {
-    navigator.clipboard.writeText(BERKANT_EMAIL).then(() => {
-      setEmailCopied(true);
-      setTimeout(() => setEmailCopied(false), 2200);
-    });
-  }
 
   function goTo(next: number) {
     hasNavigated.current = true;
@@ -315,13 +307,12 @@ export function ContactForm({ subject }: { subject: string }) {
           <p className="text-red-400 text-[13px] leading-relaxed mb-5">
             Beim Senden ist ein Fehler aufgetreten. Bitte versuche es erneut
             oder schreib uns direkt an{" "}
-            <button
-              type="button"
-              onClick={copyEmail}
-              className="underline cursor-pointer bg-transparent border-none p-0 text-red-400 hover:text-red-300 transition-colors"
+            <a
+              href={`mailto:${BERKANT_EMAIL}`}
+              className="underline cursor-pointer text-red-400 hover:text-red-300 transition-colors"
             >
-              {emailCopied ? "Kopiert ✓" : BERKANT_EMAIL}
-            </button>
+              {BERKANT_EMAIL}
+            </a>
             .
           </p>
         )}

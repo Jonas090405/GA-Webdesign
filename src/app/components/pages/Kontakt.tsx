@@ -26,14 +26,6 @@ export function Kontakt() {
   });
   const [mode, setMode] = useState<ContactMode>("form");
   const [direction, setDirection] = useState(0);
-  const [emailCopied, setEmailCopied] = useState(false);
-
-  function copyEmail() {
-    navigator.clipboard.writeText(BERKANT_EMAIL).then(() => {
-      setEmailCopied(true);
-      setTimeout(() => setEmailCopied(false), 2200);
-    });
-  }
 
   return (
     <main id="main-content" className="mx-auto max-w-5xl xl:max-w-6xl 2xl:max-w-7xl px-5 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 pt-36 sm:pt-44 lg:pt-52 xl:pt-60 2xl:pt-72 pb-24 2xl:pb-32">
@@ -75,8 +67,8 @@ export function Kontakt() {
           <ContactLine
             Icon={Mail}
             label="E-Mail"
-            value={emailCopied ? "Kopiert ✓" : BERKANT_EMAIL}
-            onClick={copyEmail}
+            value={BERKANT_EMAIL}
+            href={`mailto:${BERKANT_EMAIL}`}
           />
           <ContactLine
             Icon={Phone}

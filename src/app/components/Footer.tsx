@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Linkedin, Mail, MapPin } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import logoUrl from "../../imports/Logo_GA_Webdesign.svg";
@@ -7,14 +6,6 @@ const BERKANT_EMAIL = "Berkant@ga-webdesign.de";
 
 export function Footer() {
   const navigate = useNavigate();
-  const [copiedEmail, setCopiedEmail] = useState<string | null>(null);
-
-  function copyEmail(email: string) {
-    navigator.clipboard.writeText(email).then(() => {
-      setCopiedEmail(email);
-      setTimeout(() => setCopiedEmail(null), 2200);
-    });
-  }
 
   return (
     <footer
@@ -79,18 +70,18 @@ export function Footer() {
               Kontakt
             </div>
             {[BERKANT_EMAIL].map((email) => (
-              <button
+              <a
                 key={email}
-                onClick={() => copyEmail(email)}
-                aria-label={`E-Mail ${email} kopieren`}
-                className="mt-1.5 first:mt-0 flex items-center gap-2 text-[12px] sm:text-[13px] xl:text-[14px] transition-colors duration-200 cursor-pointer bg-transparent border-none p-0 text-left"
-                style={{ color: copiedEmail === email ? "#4dbef3" : "rgba(200, 225, 240, 0.7)" }}
-                onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.color = "#4dbef3"; }}
-                onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.color = copiedEmail === email ? "#4dbef3" : "rgba(200, 225, 240, 0.7)"; }}
+                href={`mailto:${email}`}
+                aria-label={`E-Mail an ${email} schreiben`}
+                className="mt-1.5 first:mt-0 flex items-center gap-2 text-[12px] sm:text-[13px] xl:text-[14px] transition-colors duration-200 cursor-pointer"
+                style={{ color: "rgba(200, 225, 240, 0.7)" }}
+                onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = "#4dbef3"; }}
+                onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = "rgba(200, 225, 240, 0.7)"; }}
               >
                 <Mail size={13} className="shrink-0" style={{ color: "rgba(77,190,243,0.7)" }} />
-                <span className="break-all">{copiedEmail === email ? "Kopiert ✓" : email}</span>
-              </button>
+                <span className="break-all">{email}</span>
+              </a>
             ))}
             <a
               href="https://www.linkedin.com/company/g%26a-webdesign/"
