@@ -39,7 +39,9 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen text-white relative overflow-x-hidden" style={{ background: "linear-gradient(160deg, rgb(13,17,21) 0%, rgb(16,24,28) 60%, rgb(13,17,21) 100%)" }}>
+    // overflow-x-clip statt -hidden: `hidden` würde diesen Container zum
+    // Scroll-Container machen und damit `position: sticky` im Hero aushebeln.
+    <div className="min-h-screen text-white relative overflow-x-clip" style={{ background: "linear-gradient(160deg, rgb(13,17,21) 0%, rgb(16,24,28) 60%, rgb(13,17,21) 100%)" }}>
       <ScrollProgress />
       <Navbar />
 

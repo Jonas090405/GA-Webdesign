@@ -1,0 +1,14 @@
+{
+  "frames": 40,
+  "sizes": {
+    "w1920": {
+      "width": 1920,
+      "height": 1080
+    },
+    "w960": {
+      "width": 960,
+      "height": 540
+    }
+  },
+  "source": "flug2.mp4"
+}

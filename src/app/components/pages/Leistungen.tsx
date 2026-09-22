@@ -62,22 +62,16 @@ function LeistungenCard({
   poster: string; clip: string; title: string; lead: string;
   points: string[]; i: number;
 }) {
-  const [hovered, setHovered] = useState(false);
   return (
     <FadeIn delay={i * 0.08} className="h-full">
-      <div
-        className="h-full"
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
-      >
+      <div className="h-full">
         <Card className="h-full">
           <div className="flex flex-col h-full">
-            {/* Illustration — statisch gedämpft, zündet beim Hover */}
+            {/* Illustration — läuft im Viewport dauerhaft */}
             <TileMedia
               poster={poster}
               src={clip}
               label={title}
-              active={hovered}
               className="mb-4 w-full aspect-[16/9]"
             />
             <div className="flex flex-col flex-1">

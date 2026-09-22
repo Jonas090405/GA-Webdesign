@@ -2,14 +2,15 @@ import { useState } from "react";
 import { usePageMeta } from "../../hooks/usePageMeta";
 import { motion, AnimatePresence } from "motion/react";
 import { SectionLabel } from "../SectionLabel";
-import { PrimaryButton, GhostButton, TertiaryButton } from "../Button";
+import { GhostButton, TertiaryButton } from "../Button";
 import { Card } from "../Card";
 import { FadeIn } from "../FadeIn";
 import { PortfolioScrollSection } from "../PortfolioScrollSection";
-import { HeroBackground } from "../HeroBackground";
+import { HeroFlight } from "../HeroFlight";
 import { useNavigate } from "react-router-dom";
 import { Phone, Linkedin, Mail, MapPin } from "lucide-react";
 import { ContactLine } from "../ContactLine";
+import { PortraitRing } from "../PortraitRing";
 import { TileMedia } from "../TileMedia";
 import tileDesignClip from "../../../imports/tile-design.mp4";
 import tileDesignPoster from "../../../imports/tile-design-poster.webp";
@@ -20,7 +21,6 @@ import tileRocketPoster from "../../../imports/tile-rocket-poster.webp";
 import { ContactForm, BERKANT_EMAIL, BERKANT_PHONE } from "../ContactForm";
 import profilbild from "../../../imports/Jonas_Gissler.png";
 import berkantImg from "../../../imports/Berkant_agyar.jpeg";
-import { TeamBadge } from "../TeamBadge";
 import gcnImg from "../../../imports/gcn-fahrzeughandel.png";
 import gcnAvatar from "../../../imports/gcn-avatar.jpeg";
 import gcnVideo from "../../../imports/GCN-Projekt.mp4";
@@ -60,63 +60,15 @@ export function Home() {
     path: "/",
   });
   return (
-    <main id="main-content" className="mx-auto max-w-7xl 2xl:max-w-[1600px] px-5 sm:px-8 lg:px-12 xl:px-16 2xl:px-24">
-      <Hero />
-      <PortfolioPreview />
-      <Services />
-      <TeamPreview />
-      <Contact />
-    </main>
-  );
-}
-
-function Hero() {
-  const navigate = useNavigate();
-  return (
-    <section className="relative pt-22 sm:pt-18 lg:pt-24 xl:pt-28 2xl:pt-36 pb-12 sm:pb-12 lg:pb-18 xl:pb-22 2xl:pb-28">
-      <HeroBackground />
-
-      <div className="relative z-10 max-w-3xl">
-        <FadeIn>
-          <TeamBadge />
-          <SectionLabel>Webdesign · Entwicklung · Hosting · SEO</SectionLabel>
-        </FadeIn>
-
-          <FadeIn delay={0.1}>
-            <h1 className="text-white text-[clamp(34px,6.5vw,108px)] leading-[1.05] tracking-tight">
-              Webseiten,{" "}
-              <span
-                className="bg-clip-text text-transparent"
-                style={{
-                  backgroundImage:
-                    "linear-gradient(135deg, #4dbef3 0%, #006999 100%)",
-                }}
-              >
-                die Wirkung zeigen.
-              </span>
-            </h1>
-          </FadeIn>
-
-          <FadeIn delay={0.2}>
-            <p
-              className="mt-5 sm:mt-7 text-[16px] sm:text-[18px] lg:text-[19px] xl:text-[21px] 2xl:text-[24px] leading-relaxed"
-              style={{ color: "rgba(200, 225, 240, 0.75)" }}
-            >
-              Modernes Webdesign für lokale Unternehmen im Schwarzwald – wir erstellen
-              professionelle Webseiten, von der ersten Idee bis sie live ist. Du musst
-              dich um nichts kümmern.
-            </p>
-          </FadeIn>
-
-          <FadeIn delay={0.3}>
-            <div className="mt-8 sm:mt-10 xl:mt-12">
-              <PrimaryButton onClick={() => navigate("/kontakt")}>
-                Projekt anfragen
-              </PrimaryButton>
-            </div>
-          </FadeIn>
+    <main id="main-content">
+      <HeroFlight />
+      <div className="mx-auto max-w-7xl 2xl:max-w-[1600px] px-5 sm:px-8 lg:px-12 xl:px-16 2xl:px-24">
+        <PortfolioPreview />
+        <Services />
+        <TeamPreview />
+        <Contact />
       </div>
-    </section>
+    </main>
   );
 }
 
@@ -168,23 +120,16 @@ function ServiceCard({
   desc: string;
   i: number;
 }) {
-  const [hovered, setHovered] = useState(false);
-
   return (
     <FadeIn delay={i * 0.08} className="h-full">
-      <div
-        className="h-full"
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
-      >
+      <div className="h-full">
         <Card className="h-full">
           <div className="flex flex-col h-full">
-            {/* Illustration — statisch gedämpft, zündet beim Hover */}
+            {/* Illustration — läuft im Viewport dauerhaft */}
             <TileMedia
               poster={poster}
               src={clip}
               label={title}
-              active={hovered}
               className="mb-4 xl:mb-6 w-full aspect-[16/9]"
             />
 
@@ -204,28 +149,29 @@ function ServiceCard({
   );
 }
 
+const SERVICES: { poster: string; clip: string; title: string; desc: string }[] = [
+  {
+    poster: tileDesignPoster,
+    clip: tileDesignClip,
+    title: "Individuelles Design",
+    desc: "Deine Webseite sieht genau so aus, wie du es dir vorstellst. Kein vorgefertigtes Template, sondern ein eigenes Design für dich.",
+  },
+  {
+    poster: tileCodePoster,
+    clip: tileCodeClip,
+    title: "Technische Umsetzung",
+    desc: "Alle Funktionen sauber mit modernster Technik umgesetzt. Schnell geladen, für Google optimiert und auf jedem Gerät perfekt nutzbar.",
+  },
+  {
+    poster: tileRocketPoster,
+    clip: tileRocketClip,
+    title: "Fertig live, sofort nutzbar",
+    desc: "Domain, Hosting, Einrichtung. Wir kümmern uns um alles. Du bekommst eine fertige Webseite und kannst sofort loslegen.",
+  },
+];
+
 function Services() {
   const navigate = useNavigate();
-  const services: { poster: string; clip: string; title: string; desc: string }[] = [
-    {
-      poster: tileDesignPoster,
-      clip: tileDesignClip,
-      title: "Individuelles Design",
-      desc: "Deine Webseite sieht genau so aus, wie du es dir vorstellst. Kein vorgefertigtes Template, sondern ein eigenes Design für dich.",
-    },
-    {
-      poster: tileCodePoster,
-      clip: tileCodeClip,
-      title: "Technische Umsetzung",
-      desc: "Alle Funktionen sauber mit modernster Technik umgesetzt. Schnell geladen, für Google optimiert und auf jedem Gerät perfekt nutzbar.",
-    },
-    {
-      poster: tileRocketPoster,
-      clip: tileRocketClip,
-      title: "Fertig live, sofort nutzbar",
-      desc: "Domain, Hosting, Einrichtung. Wir kümmern uns um alles. Du bekommst eine fertige Webseite und kannst sofort loslegen.",
-    },
-  ];
 
   return (
     <section id="leistungen" className="py-12 sm:py-10 lg:py-14 xl:py-18 2xl:py-24">
@@ -242,7 +188,7 @@ function Services() {
       </FadeIn>
 
       <div className="grid gap-5 sm:gap-6 xl:gap-8 2xl:gap-10 sm:grid-cols-2 md:grid-cols-3 items-stretch">
-        {services.map(({ poster, clip, title, desc }, i) => (
+        {SERVICES.map(({ poster, clip, title, desc }, i) => (
           <ServiceCard key={title} poster={poster} clip={clip} title={title} desc={desc} i={i} />
         ))}
       </div>
@@ -258,33 +204,87 @@ function Services() {
   );
 }
 
+const MEMBERS = [
+  {
+    photo: profilbild,
+    name: "Jonas Gissler",
+    role: "Design & Entwicklung",
+    desc: "Entwirft und entwickelt deine Webseite – von der ersten Skizze bis zur Live-Schaltung. Design, Technik und Hosting aus einer Hand.",
+    linkedin: "https://www.linkedin.com/in/jonas-gissler-37b1482b0/",
+  },
+  {
+    photo: berkantImg,
+    name: "Berkant Agyar",
+    role: "Kundenkommunikation & Projektmanagement",
+    desc: "Dein erster Ansprechpartner. Begleitet dich durch den ganzen Prozess – von der Anfrage über das Angebot bis zum fertigen Ergebnis.",
+    linkedin: "https://www.linkedin.com/in/berkant-agyar-2334a6363",
+  },
+];
+
+/**
+ * Porträt-Band statt Personen-Kacheln: dasselbe runde Bild mit Lichtring wie
+ * auf „Über uns", darunter Name, Rolle und ein Satz zur Person.
+ */
+function Member({
+  photo,
+  name,
+  role,
+  desc,
+  linkedin,
+  spin,
+}: (typeof MEMBERS)[number] & { spin: 1 | -1 }) {
+  return (
+    <article>
+      <PortraitRing
+        photo={photo}
+        alt={name}
+        spin={spin}
+        duration={spin === 1 ? 18 : 22}
+        className="h-52 w-52 sm:h-56 sm:w-56 xl:h-64 xl:w-64 2xl:h-72 2xl:w-72"
+      />
+
+      <h3 className="mt-5 xl:mt-6 text-white text-[clamp(22px,2.6vw,34px)] leading-[1.1] tracking-tight">
+        {name}
+      </h3>
+      <p
+        className="mt-2.5 text-[11px] xl:text-[12px] tracking-[0.2em] uppercase leading-snug"
+        style={{ color: "#4dbef3" }}
+      >
+        {role}
+      </p>
+      <p
+        className="mt-4 xl:mt-5 max-w-md text-[14px] xl:text-[16px] 2xl:text-[17px] leading-relaxed"
+        style={{ color: "rgba(180, 210, 230, 0.62)" }}
+      >
+        {desc}
+      </p>
+      <a
+        href={linkedin}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={`${name} auf LinkedIn (öffnet in neuem Tab)`}
+        className="mt-5 inline-flex items-center gap-2 text-[13px] xl:text-[14px] font-medium transition-colors duration-200"
+        style={{ color: "rgba(150, 190, 220, 0.6)" }}
+        onMouseEnter={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = "#4dbef3")}
+        onMouseLeave={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = "rgba(150, 190, 220, 0.6)")}
+        onFocus={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = "#4dbef3")}
+        onBlur={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = "rgba(150, 190, 220, 0.6)")}
+      >
+        <Linkedin size={14} aria-hidden="true" />
+        LinkedIn
+      </a>
+    </article>
+  );
+}
+
 function TeamPreview() {
   const navigate = useNavigate();
-
-  const members = [
-    {
-      photo: profilbild as string | null,
-      initials: null as string | null,
-      name: "Jonas Gissler",
-      role: "Design & Entwicklung",
-      desc: "Jonas entwirft und entwickelt deine Webseite – von der Idee bis zur Live-Schaltung. Design, Technik und Hosting aus einer Hand.",
-      linkedin: "https://www.linkedin.com/in/jonas-gissler-37b1482b0/",
-    },
-    {
-      photo: berkantImg as string | null,
-      initials: null as string | null,
-      name: "Berkant Agyar",
-      role: "Kundenkommunikation & Projektmanagement",
-      desc: "Berkant ist dein erster Ansprechpartner. Er begleitet dich durch den gesamten Prozess – von der ersten Anfrage bis zum finalen Ergebnis.",
-      linkedin: "https://www.linkedin.com/in/berkant-agyar-2334a6363",
-    },
-  ];
 
   return (
     <section className="py-12 sm:py-10 lg:py-14 xl:py-18 2xl:py-24">
       <FadeIn>
         <SectionLabel>Über uns</SectionLabel>
-        <div className="mb-10 sm:mb-12 xl:mb-16 2xl:mb-20">
+        <div className="mb-12 sm:mb-14 xl:mb-20 2xl:mb-24">
           <h2 className="text-white text-[clamp(28px,4.5vw,72px)] tracking-tight">
             Das sind wir.
           </h2>
@@ -292,75 +292,23 @@ function TeamPreview() {
             className="mt-4 xl:mt-6 max-w-2xl 2xl:max-w-3xl text-[15px] sm:text-[17px] xl:text-[19px] 2xl:text-[21px] leading-relaxed"
             style={{ color: "rgba(180,210,230,0.65)" }}
           >
-            Als kleines Team aus dem Schwarzwald erstellen wir moderne Webseiten für
-            lokale Unternehmen – von Triberg über St. Georgen bis Villingen-Schwenningen.
-            Vom ersten Gespräch bis zur fertigen Website hast du feste Ansprechpartner,
-            die deine Region und deine Kunden kennen. Webdesign, Entwicklung, Hosting und
-            SEO kommen komplett aus einer Hand – du musst dich um nichts kümmern.
+            Wir sind Jonas und Berkant – zwei aus Triberg, die zusammen Webseiten für
+            Unternehmen im Schwarzwald bauen. Du weißt von Anfang an, wer an deinem
+            Projekt arbeitet und wen du anrufst.
           </p>
         </div>
       </FadeIn>
 
-      <div className="grid gap-5 sm:gap-6 xl:gap-8 2xl:gap-10 sm:grid-cols-2 items-stretch">
-        {members.map(({ photo, initials, name, role, desc, linkedin }, i) => (
-          <FadeIn key={name} delay={i * 0.1} className="h-full">
-            <Card className="h-full">
-              {/* Avatar + name + role */}
-              <div className="flex items-center gap-4 mb-5 xl:mb-6">
-                <div
-                  className="shrink-0 h-14 w-14 xl:h-16 xl:w-16 2xl:h-[72px] 2xl:w-[72px] rounded-full overflow-hidden flex items-center justify-center text-[17px] xl:text-[20px] font-bold"
-                  style={{
-                    border: "2px solid rgba(77, 190, 243, 0.45)",
-                    background: photo
-                      ? "transparent"
-                      : "linear-gradient(135deg, rgba(0,105,153,0.5) 0%, rgba(77,190,243,0.18) 100%)",
-                    color: "#4dbef3",
-                  }}
-                >
-                  {photo ? (
-                    <img src={photo} alt={name} loading="lazy" decoding="async" className="h-full w-full object-cover object-top" />
-                  ) : (
-                    initials
-                  )}
-                </div>
-                <div>
-                  <h3 className="text-white text-[17px] xl:text-[19px] 2xl:text-[21px] font-medium leading-tight mb-1.5">
-                    {name}
-                  </h3>
-                  <p
-                    className="text-[11px] tracking-[0.18em] leading-snug"
-                    style={{ color: "#4dbef3" }}
-                  >
-                    {role}
-                  </p>
-                </div>
-              </div>
-
-              <p
-                className="text-[14px] xl:text-[15px] 2xl:text-[16px] leading-relaxed mb-5"
-                style={{ color: "rgba(180, 210, 230, 0.6)" }}
-              >
-                {desc}
-              </p>
-              <a
-                href={linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-[13px] xl:text-[14px] font-medium transition-colors duration-200"
-                style={{ color: "rgba(150, 190, 220, 0.6)" }}
-                onMouseEnter={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = "#4dbef3")}
-                onMouseLeave={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = "rgba(150, 190, 220, 0.6)")}
-              >
-                <Linkedin size={14} />
-                LinkedIn
-              </a>
-            </Card>
+      <div className="grid gap-12 sm:gap-8 xl:gap-16 sm:grid-cols-2">
+        {MEMBERS.map((m, i) => (
+          <FadeIn key={m.name} delay={i * 0.1}>
+            <Member {...m} spin={i === 0 ? 1 : -1} />
           </FadeIn>
         ))}
       </div>
 
       <FadeIn delay={0.2}>
-        <div className="mt-10 xl:mt-14 2xl:mt-16">
+        <div className="mt-12 xl:mt-16 2xl:mt-20">
           <GhostButton onClick={() => navigate("/ueber-uns")}>
             Mehr über uns
           </GhostButton>
