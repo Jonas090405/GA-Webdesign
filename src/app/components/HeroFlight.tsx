@@ -29,6 +29,8 @@ import { FadeIn } from "./FadeIn";
  *
  * Zwei Bildbreiten: >1200 effektive Pixel bekommen w1920, alles darunter w960.
  * `prefers-reduced-motion` bekommt einen normal hohen Hero ohne Scroll-Bindung.
+ * Smartphones und Tablets (Touch oder < 1024 px) bekommen keine Fahrt, sondern
+ * nur den Video-Loop hinter der Headline — siehe `VideoHero`.
  */
 
 const FRAME_COUNT = 40;
@@ -309,6 +311,30 @@ function Beat({
   );
 }
 
+/* ──────────────────────────── Geräteweiche ──────────────────────────────── */
+
+/**
+ * Die Fahrt lohnt sich nur mit Maus/Trackpad auf breitem Display. Auf Touch
+ * kämpft die Scroll-Bindung gegen Trägheit und Adressleiste, und 440 Bildschirm-
+ * höhen Wischen bis zum ersten Inhalt sind dort schlicht zu viel — Tablets im
+ * Querformat eingeschlossen.
+ */
+const FLIGHT_QUERY = "(min-width: 1024px) and (hover: hover) and (pointer: fine)";
+
+function useFlightCapable() {
+  const [ok, setOk] = useState(
+    () => typeof window !== "undefined" && window.matchMedia(FLIGHT_QUERY).matches,
+  );
+  useEffect(() => {
+    const mq = window.matchMedia(FLIGHT_QUERY);
+    const sync = () => setOk(mq.matches);
+    sync();
+    mq.addEventListener("change", sync);
+    return () => mq.removeEventListener("change", sync);
+  }, []);
+  return ok;
+}
+
 /* ─────────────────────────────────  Hero  ────────────────────────────────── */
 
 const CONTAINER =
@@ -321,6 +347,7 @@ const LEAD_COLOR = "rgba(206, 228, 242, 0.82)";
 export function HeroFlight() {
   const navigate = useNavigate();
   const reduce = useReducedMotion();
+  const flight = useFlightCapable();
   const sectionRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress: rawProgress } = useScroll({
     target: sectionRef,
@@ -348,6 +375,7 @@ export function HeroFlight() {
   const cueOpacity = useRange(scrollYProgress, [0.02, 0.1], [1, 0]);
 
   if (reduce) return <StaticHero navigate={navigate} />;
+  if (!flight) return <VideoHero onCta={() => navigate("/kontakt")} />;
 
   return (
     <section
@@ -438,30 +466,7 @@ export function HeroFlight() {
                   Als einziger im Textfluss gibt er außerdem die Höhe vor —
                   die kürzeren Blöcke zentrieren sich darin. */}
               <Beat progress={scrollYProgress} index={HEADLINE_BEAT} flow>
-                <TeamBadge />
-                <SectionLabel>Webdesign · Entwicklung · Hosting · SEO</SectionLabel>
-                <h1 className="text-white text-[clamp(34px,6.5vw,108px)] leading-[1.05] tracking-tight">
-                  Webseiten,{" "}
-                  <span
-                    className="bg-clip-text text-transparent"
-                    style={{
-                      backgroundImage:
-                        "linear-gradient(135deg, #4dbef3 0%, #006999 100%)",
-                    }}
-                  >
-                    die Wirkung zeigen.
-                  </span>
-                </h1>
-                <p className={LEAD_CLASS} style={{ color: LEAD_COLOR }}>
-                  Modernes Webdesign für lokale Unternehmen im Schwarzwald – wir erstellen
-                  professionelle Webseiten, von der ersten Idee bis sie live ist. Du musst
-                  dich um nichts kümmern.
-                </p>
-                <div className="mt-8 sm:mt-10">
-                  <PrimaryButton onClick={() => navigate("/kontakt")}>
-                    Projekt anfragen
-                  </PrimaryButton>
-                </div>
+                <HeadlineCopy onCta={() => navigate("/kontakt")} />
               </Beat>
 
               <Beat progress={scrollYProgress} index={0}>
@@ -526,6 +531,140 @@ export function HeroFlight() {
             />
           </motion.svg>
         </motion.div>
+      </div>
+    </section>
+  );
+}
+
+/** Headline, Lead und CTA — in Fahrt und Video-Hero identisch. */
+function HeadlineCopy({ onCta }: { onCta: () => void }) {
+  return (
+    <>
+      <TeamBadge />
+      <SectionLabel>Webdesign · Entwicklung · Hosting · SEO</SectionLabel>
+      <h1 className="text-white text-[clamp(34px,6.5vw,108px)] leading-[1.05] tracking-tight">
+        Webseiten,{" "}
+        <span
+          className="bg-clip-text text-transparent"
+          style={{
+            backgroundImage: "linear-gradient(135deg, #4dbef3 0%, #006999 100%)",
+          }}
+        >
+          die Wirkung zeigen.
+        </span>
+      </h1>
+      <p className={LEAD_CLASS} style={{ color: LEAD_COLOR }}>
+        Modernes Webdesign für lokale Unternehmen im Schwarzwald – wir erstellen
+        professionelle Webseiten, von der ersten Idee bis sie live ist. Du musst
+        dich um nichts kümmern.
+      </p>
+      <div className="mt-8 sm:mt-10">
+        <PrimaryButton onClick={onCta}>Projekt anfragen</PrimaryButton>
+      </div>
+    </>
+  );
+}
+
+/* ─────────────────────── Variante für Smartphone & Tablet ─────────────────── */
+
+/**
+ * Nur der Video-Loop hinter der Headline, keine Scroll-Bindung.
+ * Das Standbild steht sofort (LCP), das Video kommt nach Idle dazu und blendet
+ * weich darüber. Im Datensparmodus bleibt es beim Standbild.
+ * `hero-schwarzwald-mobile.mp4` ist derselbe Clip, nur stärker komprimiert
+ * (x264 CRF 26, ~1,4 MB statt ~10,8 MB).
+ */
+function VideoHero({ onCta }: { onCta: () => void }) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [videoOn, setVideoOn] = useState(false);
+  const [ready, setReady] = useState(false);
+
+  useEffect(() => {
+    const saveData = (navigator as Navigator & { connection?: { saveData?: boolean } })
+      .connection?.saveData === true;
+    if (saveData) return;
+    const w = window as Window & {
+      requestIdleCallback?: (cb: () => void, o?: { timeout: number }) => number;
+      cancelIdleCallback?: (id: number) => void;
+    };
+    let id = 0;
+    let timer: ReturnType<typeof setTimeout> | undefined;
+    if (w.requestIdleCallback) id = w.requestIdleCallback(() => setVideoOn(true), { timeout: 1500 });
+    else timer = setTimeout(() => setVideoOn(true), 500);
+    return () => {
+      if (id && w.cancelIdleCallback) w.cancelIdleCallback(id);
+      if (timer) clearTimeout(timer);
+    };
+  }, []);
+
+  // Außerhalb des Blickfelds anhalten.
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) video.play().catch(() => {});
+        else video.pause();
+      },
+      { threshold: 0.05 },
+    );
+    io.observe(video);
+    return () => io.disconnect();
+  }, [videoOn]);
+
+  return (
+    <section
+      aria-label="Willkommen bei G&A Webdesign"
+      className="relative overflow-hidden pt-28 sm:pt-36 md:pt-40 pb-4 sm:pb-8"
+    >
+      <div aria-hidden className="pointer-events-none absolute inset-0">
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage: "url('/hero-schwarzwald.webp')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        />
+        {videoOn && (
+          <video
+            ref={videoRef}
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="auto"
+            poster="/hero-schwarzwald.webp"
+            onCanPlay={() => setReady(true)}
+            className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ease-out ${
+              ready ? "opacity-100" : "opacity-0"
+            }`}
+          >
+            <source src="/hero-schwarzwald-mobile.mp4" type="video/mp4" />
+          </video>
+        )}
+        <div className="absolute inset-0" style={{ background: "rgba(9,13,18,0.45)" }} />
+        <div
+          className="absolute inset-0 hidden sm:block"
+          style={{
+            background:
+              "linear-gradient(to right, rgba(9,13,18,0.86) 0%, rgba(9,13,18,0.42) 46%, transparent 74%)",
+          }}
+        />
+        <div
+          className="absolute inset-0"
+          style={{
+            background: `linear-gradient(to bottom, transparent 48%, ${PAGE_BG} 100%)`,
+          }}
+        />
+      </div>
+
+      <div className={`${CONTAINER} relative`}>
+        <div className="max-w-3xl">
+          <FadeIn>
+            <HeadlineCopy onCta={onCta} />
+          </FadeIn>
+        </div>
       </div>
     </section>
   );
