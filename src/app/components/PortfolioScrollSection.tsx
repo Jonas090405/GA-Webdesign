@@ -45,7 +45,7 @@ export function PortfolioScrollSection({
                 {project.video ? (
                   <LazyVideo
                     src={project.video}
-                    className="w-full block scale-[1.10]"
+                    className="w-full block"
                   />
                 ) : (
                   <img
@@ -131,7 +131,7 @@ function MobileCarousel({ projects, hideTag = false }: { projects: Project[]; hi
                 {project.video ? (
                   <LazyVideo
                     src={project.video}
-                    className="w-full block scale-[1.10]"
+                    className="w-full block"
                   />
                 ) : (
                   <img

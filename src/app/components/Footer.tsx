@@ -1,6 +1,7 @@
 import { Linkedin, Mail, MapPin } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import logoUrl from "../../imports/Logo_GA_Webdesign.svg";
+import { ForestRunner } from "./ForestRunner";
 
 const BERKANT_EMAIL = "Berkant@ga-webdesign.de";
 
@@ -15,7 +16,7 @@ export function Footer() {
         borderTop: "1px solid rgba(77, 190, 243, 0.08)",
       }}
     >
-      <div className="mx-auto max-w-6xl xl:max-w-7xl 2xl:max-w-[1440px] px-5 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 py-12 sm:py-16 2xl:py-20">
+      <div className="mx-auto max-w-6xl xl:max-w-7xl 2xl:max-w-[1440px] px-5 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 pt-12 sm:pt-16 2xl:pt-20">
         <div className="grid gap-10 sm:gap-12 2xl:gap-16 sm:grid-cols-2 md:grid-cols-4">
           <div>
             <div className="flex items-center gap-2.5 mb-0.5">
@@ -138,6 +139,17 @@ export function Footer() {
             </ul>
           </div>
         </div>
+      </div>
+
+      <ForestRunner className="mt-14 sm:mt-16" />
+
+      <div className="mx-auto max-w-6xl xl:max-w-7xl 2xl:max-w-[1440px] px-5 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 pb-12 sm:pb-16 2xl:pb-20">
+        <p
+          className="text-[12px] 2xl:text-[13px]"
+          style={{ color: "rgba(170, 200, 220, 0.38)" }}
+        >
+          Weil jede gute Seite eine Stelle verdient, die niemand gebraucht hat.
+        </p>
 
         <div
           className="mt-12 sm:mt-16 2xl:mt-20 flex flex-col items-center gap-2 pt-8 text-center"

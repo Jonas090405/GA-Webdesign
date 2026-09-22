@@ -26,3 +26,6 @@ dist
 *.njsproj
 *.sln
 *.sw?
+
+# Roh-Videomaterial (zu groß fürs Repo)
+media-quellen
