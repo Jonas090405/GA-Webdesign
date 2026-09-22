@@ -14,7 +14,11 @@ import { PrimaryButton } from "./Button";
 import { FadeIn } from "./FadeIn";
 
 /**
- * HeroFlight — der Scroll-Hero der Startseite.
+ * HeroFlight — der Hero der Startseite.
+ *
+ * STAND: Die Scroll-Fahrt ist geparkt, gerendert wird überall `VideoHero`
+ * (siehe `HeroFlight` weiter unten). Die folgende Beschreibung gilt für die
+ * geparkte Fahrt (`ScrollFlightHero`).
  *
  * Die Kamerafahrt durch den Schwarzwald liegt als Framesequenz vor (40 WebP,
  * aus dem generierten Clip geschnitten via `scripts/extract-frames.mjs`) und
@@ -344,7 +348,23 @@ const LEAD_CLASS =
   "mt-5 sm:mt-6 text-[16px] sm:text-[18px] lg:text-[19px] xl:text-[21px] 2xl:text-[24px] leading-relaxed max-w-xl 2xl:max-w-2xl";
 const LEAD_COLOR = "rgba(206, 228, 242, 0.82)";
 
+/**
+ * Aktuell auf allen Geräten nur der Video-Hero — die Scroll-Fahrt
+ * (`ScrollFlightHero`) ist geparkt. Reaktivieren: hier wieder
+ * `<ScrollFlightHero />` zurückgeben.
+ *
+ * Da nichts mehr auf die Fahrt verweist, wirft der Bundler sie samt Canvas-
+ * und Frame-Logik aus dem Build; die Frames unter /hero-flug werden nie
+ * angefragt.
+ */
 export function HeroFlight() {
+  const navigate = useNavigate();
+  return <VideoHero onCta={() => navigate("/kontakt")} />;
+}
+
+/* ─────────────────────── GEPARKT: Scroll-Fahrt ───────────────────────────── */
+
+function ScrollFlightHero() {
   const navigate = useNavigate();
   const reduce = useReducedMotion();
   const flight = useFlightCapable();
@@ -565,12 +585,14 @@ function HeadlineCopy({ onCta }: { onCta: () => void }) {
   );
 }
 
-/* ─────────────────────── Variante für Smartphone & Tablet ─────────────────── */
+/* ──────────────────────────────── Video-Hero ─────────────────────────────── */
 
 /**
- * Nur der Video-Loop hinter der Headline, keine Scroll-Bindung.
- * Das Standbild steht sofort (LCP), das Video kommt nach Idle dazu und blendet
- * weich darüber. Im Datensparmodus bleibt es beim Standbild.
+ * Der Hero auf allen Geräten: Video-Loop hinter der Headline, keine
+ * Scroll-Bindung. Das Standbild ist ein echtes <img> mit hoher Priorität und
+ * damit das LCP-Element; das Video kommt erst nach Idle dazu und blendet weich
+ * darüber — es bremst weder LCP noch den ersten Render. Im Datensparmodus und
+ * bei `prefers-reduced-motion` bleibt es beim Standbild.
  * `hero-schwarzwald-mobile.mp4` ist derselbe Clip, nur stärker komprimiert
  * (x264 CRF 26, ~1,4 MB statt ~10,8 MB).
  */
@@ -578,8 +600,10 @@ function VideoHero({ onCta }: { onCta: () => void }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [videoOn, setVideoOn] = useState(false);
   const [ready, setReady] = useState(false);
+  const reduce = useReducedMotion();
 
   useEffect(() => {
+    if (reduce) return;
     const saveData = (navigator as Navigator & { connection?: { saveData?: boolean } })
       .connection?.saveData === true;
     if (saveData) return;
@@ -595,7 +619,7 @@ function VideoHero({ onCta }: { onCta: () => void }) {
       if (id && w.cancelIdleCallback) w.cancelIdleCallback(id);
       if (timer) clearTimeout(timer);
     };
-  }, []);
+  }, [reduce]);
 
   // Außerhalb des Blickfelds anhalten.
   useEffect(() => {
@@ -615,18 +639,17 @@ function VideoHero({ onCta }: { onCta: () => void }) {
   return (
     <section
       aria-label="Willkommen bei G&A Webdesign"
-      className="relative overflow-hidden pt-28 sm:pt-36 md:pt-40 pb-4 sm:pb-8"
+      className="relative overflow-hidden pt-28 sm:pt-36 md:pt-40 pb-4 sm:pb-8 lg:min-h-[100svh] lg:flex lg:items-center lg:pt-24 lg:pb-20"
     >
       <div aria-hidden className="pointer-events-none absolute inset-0">
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage: "url('/hero-schwarzwald.webp')",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
+        <img
+          src="/hero-schwarzwald.webp"
+          alt=""
+          decoding="async"
+          {...{ fetchpriority: "high" }}
+          className="absolute inset-0 h-full w-full object-cover"
         />
-        {videoOn && (
+        {videoOn && !reduce && (
           <video
             ref={videoRef}
             autoPlay
@@ -659,7 +682,7 @@ function VideoHero({ onCta }: { onCta: () => void }) {
         />
       </div>
 
-      <div className={`${CONTAINER} relative`}>
+      <div className={`${CONTAINER} relative w-full`}>
         <div className="max-w-3xl">
           <FadeIn>
             <HeadlineCopy onCta={onCta} />
