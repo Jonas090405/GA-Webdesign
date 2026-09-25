@@ -703,6 +703,9 @@ export function Leistungen() {
               "Online-Shop",
               "Buchungssystem",
               "Newsletter-Integration",
+              "Videoproduktion",
+              "Fotoproduktion",
+              "SEA (Google Ads)",
             ].map((item) => (
               <span
                 key={item}

@@ -21,6 +21,18 @@ const faqs: { q: string; a: string }[] = [
     a: "Das lässt sich nicht pauschal beantworten – der Preis hängt von deinen Anforderungen und dem Umfang ab. Im ersten Schritt führen wir gemeinsam eine kostenlose Anforderungsanalyse durch, erst dann erhältst du ein individuelles Angebot. Bis dahin ist alles unverbindlich und kostenlos für dich.",
   },
   {
+    q: "Arbeitet ihr mit Festpreisen oder nach Aufwand?",
+    a: "Wir arbeiten in der Regel mit transparenten Festpreisen, die wir nach der gemeinsamen Anforderungsanalyse schriftlich festhalten. So weißt du von Anfang an genau, was dein Projekt kostet – keine versteckten Kosten oder böse Überraschungen.",
+  },
+  {
+    q: "Macht ihr auch Video- und Fotoproduktionen?",
+    a: "Ja. Dafür arbeiten wir mit professionellen Partnern zusammen, die Video- und Fotoproduktionen für dich umsetzen – vom Dreh bzw. Shooting bis zur fertigen Post-Production. Ob für deine neue Webseite oder ganz unabhängig davon, z. B. für Social Media oder Werbung. Die komplette Planung und Kommunikation mit unseren Partnern übernehmen wir – du hast damit keinen zusätzlichen Aufwand und nur einen Ansprechpartner.",
+  },
+  {
+    q: "Wie läuft die Bezahlung ab?",
+    a: "Du zahlst nicht alles auf einmal im Voraus. Wir rechnen in Abschlägen nach abgeschlossenen Projektphasen ab – erst wenn ein Abschnitt fertig ist und du ihn freigegeben hast, stellen wir den entsprechenden Teilbetrag in Rechnung. Wie viele Abschläge es gibt und in welcher Höhe, steht transparent in deinem Angebot.",
+  },
+  {
     q: "Wie lange dauert es bis meine Webseite live ist?",
     a: "Das kommt auf den Umfang deines Projekts an. Kleinere Webseiten können schon nach 2–3 Monaten fertig sein, größere Projekte brauchen entsprechend mehr Zeit. Im Erstgespräch bekommst du direkt eine ehrliche Einschätzung.",
   },
@@ -33,6 +45,26 @@ const faqs: { q: string; a: string }[] = [
     a: "Nein. Das Kennenlerngespräch dient genau dazu, gemeinsam herauszufinden, was du brauchst. Wir stellen die richtigen Fragen, hören zu und nehmen dich an die Hand – kein Vorwissen, keine Vorbereitung nötig.",
   },
   {
+    q: "Muss ich Texte und Bilder selbst liefern?",
+    a: "Nicht unbedingt. Wenn du schon Texte und Bilder hast, bauen wir sie gerne ein. Wenn nicht, unterstützen wir dich: Wir beraten dich, welche Inhalte auf deine Seite gehören, und formulieren die Texte auf Wunsch auch für dich. Fehlen dir professionelle Fotos oder Videos, organisieren wir über unsere Partner eine passende Produktion.",
+  },
+  {
+    q: "Bekomme ich eine Vorschau bevor die Seite live geht?",
+    a: "Ja, auf jeden Fall. Kurz vor dem Launch erhältst du einen Vorschau-Link, über den du die fertige Seite in Ruhe anschauen und testen kannst. Erst wenn du mit allem zufrieden bist, schalten wir live.",
+  },
+  {
+    q: "Ist meine Webseite DSGVO-konform und barrierefrei?",
+    a: "Ja. Wir richten deine Webseite DSGVO-konform ein – inklusive SSL-Verschlüsselung, Impressum und Datenschutzerklärung. Außerdem gestalten und entwickeln wir barrierefrei nach WCAG 2.2 AA, damit alle Menschen deine Seite gut nutzen können, zum Beispiel auch mit Screenreader oder nur per Tastatur.",
+  },
+  {
+    q: "Werde ich mit meiner Webseite bei Google gefunden?",
+    a: "Dafür legen wir die Grundlage: Jede Webseite bekommt von uns eine saubere technische SEO-Optimierung – mit passenden Seitentiteln und Beschreibungen, strukturierten Daten, einer Sitemap und schnellen Ladezeiten. Eine Platz-1-Garantie kann seriös niemand geben, denn das Ranking hängt auch von deinen Inhalten und deiner Konkurrenz ab. Aber wir sorgen dafür, dass Google deine Seite gut versteht und gerne anzeigt. Und wenn du darüber hinaus schneller sichtbar werden willst, übernehmen wir auf Wunsch auch SEA (Search Engine Advertising) – also bezahlte Anzeigen, z. B. bei Google Ads.",
+  },
+  {
+    q: "Was kostet das Hosting?",
+    a: "Das Hosting kostet 5 € im Monat und ist monatlich kündbar. Hast du noch keine Domain, besorgen und richten wir sie dir ein – dafür kommen einmalig 60 € Einrichtung plus die Kosten deiner Wunschdomain dazu. Wir prüfen regelmäßig, ob deine Seite erreichbar ist, und melden uns bei einem Ausfall innerhalb von 24 Stunden an Werktagen.",
+  },
+  {
     q: "Was ist wenn ich nach dem Launch noch etwas ändern möchte?",
     a: "Wir sind auch danach für dich da. Du kannst dir ein CMS (Content Management System – ein Tool zum selbst Bearbeiten von Texten & Bildern, ohne Programmierkenntnisse) einrichten lassen, eines unserer Wartungspakete buchen oder direkt bei uns anfragen – wir erstellen dir ein Angebot je nach Aufwand.",
   },
@@ -43,14 +75,6 @@ const faqs: { q: string; a: string }[] = [
   {
     q: "Arbeitet ihr auch überregional?",
     a: "Ja – wir arbeiten mit Kunden aus ganz Deutschland zusammen, vollständig remote. Für Kennenlerngespräch, Anforderungsanalyse und alle weiteren Abstimmungen nutzen wir einfach Video-Call oder Telefon. Dein Standort spielt keine Rolle.",
-  },
-  {
-    q: "Bekomme ich eine Vorschau bevor die Seite live geht?",
-    a: "Ja, auf jeden Fall. Kurz vor dem Launch erhältst du einen Vorschau-Link, über den du die fertige Seite in Ruhe anschauen und testen kannst. Erst wenn du mit allem zufrieden bist, schalten wir live.",
-  },
-  {
-    q: "Arbeitet ihr mit Festpreisen oder nach Aufwand?",
-    a: "Wir arbeiten in der Regel mit transparenten Festpreisen, die wir nach der gemeinsamen Anforderungsanalyse schriftlich festhalten. So weißt du von Anfang an genau, was dein Projekt kostet – keine versteckten Kosten oder böse Überraschungen.",
   },
 ];
 
