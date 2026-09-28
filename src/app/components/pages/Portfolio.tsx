@@ -79,7 +79,7 @@ export function Portfolio() {
             href="https://portfolio.ga-webdesign.de"
             target="_blank"
             rel="noreferrer"
-            className="group inline-flex items-center gap-2 rounded-full border border-sky-400/40 bg-sky-400/10 px-6 py-3 text-sky-300 hover:bg-sky-400/20 transition-all"
+            className="group inline-flex items-center gap-2 rounded-full border border-brand/40 bg-brand/10 px-6 py-3 text-brand-light hover:bg-brand/20 transition-all"
           >
             Persönliches Portfolio öffnen
             <ExternalLink size={16} className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />

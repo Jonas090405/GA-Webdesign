@@ -33,9 +33,9 @@ export function PrimaryButton({
       onClick={onClick}
       disabled={disabled}
       onMouseMove={handleMove}
-      className={`group/btn relative inline-flex cursor-pointer items-center gap-2 overflow-hidden rounded-full px-6 py-3 xl:px-7 xl:py-3.5 2xl:px-9 2xl:py-4 text-[15px] 2xl:text-[17px] text-white font-medium transition-[filter] duration-300 ease-out hover:brightness-110 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:brightness-100 ${className}`}
+      className={`group/btn relative inline-flex cursor-pointer items-center gap-2 overflow-hidden rounded-full px-6 py-3 xl:px-7 xl:py-3.5 2xl:px-9 2xl:py-4 text-[15px] 2xl:text-[17px] text-white font-medium disabled:opacity-50 disabled:cursor-not-allowed ${className}`}
       style={{
-        background: "linear-gradient(135deg, #006999 0%, #4dbef3 100%)",
+        background: "var(--gradient-cta)",
       }}
     >
       {/* Cursor-Spotlight */}
@@ -44,7 +44,7 @@ export function PrimaryButton({
         className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover/btn:opacity-100"
         style={{
           background:
-            "radial-gradient(220px circle at var(--mx,50%) var(--my,50%), rgba(255,255,255,0.2), transparent 70%)",
+            "radial-gradient(220px circle at var(--mx,50%) var(--my,50%), rgba(255,255,255,0.1), transparent 70%)",
         }}
       />
       {/* Sweep-Shine */}
@@ -83,7 +83,7 @@ export function TertiaryButton({
 }) {
   const cls =
     "group/btn inline-flex cursor-pointer items-center gap-1.5 text-[14px] xl:text-[15px] 2xl:text-[16px] font-medium transition-colors duration-200 whitespace-nowrap";
-  const color = "rgba(125, 211, 252, 0.85)";
+  const color = "rgba(152, 220, 252, 0.85)";
   const colorHover = "rgba(186, 230, 253, 1)";
   const icon = (
     <ArrowUpRight

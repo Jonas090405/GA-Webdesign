@@ -362,8 +362,8 @@ export function ContactForm({ subject }: { subject: string }) {
 function SuccessState({ onReset }: { onReset?: () => void }) {
   return (
     <div className="py-14 flex flex-col items-center text-center gap-4" role="status">
-      <CheckCircle2 size={40} className="text-sky-400" />
-      <div className="text-sky-400 text-[11px] tracking-[0.25em]">Gesendet</div>
+      <CheckCircle2 size={40} className="text-brand" />
+      <div className="text-brand text-[11px] tracking-[0.25em]">Gesendet</div>
       <h3 className="text-white text-[22px]">Danke für deine Nachricht!</h3>
       <p className="text-slate-400 text-[14px] max-w-sm leading-relaxed">
         Wir haben deine Anfrage erhalten und melden uns so schnell wie möglich bei dir.
@@ -372,7 +372,7 @@ function SuccessState({ onReset }: { onReset?: () => void }) {
         <button
           type="button"
           onClick={onReset}
-          className="mt-2 text-[13px] cursor-pointer bg-transparent border-none p-0 underline underline-offset-4 text-sky-400 hover:text-sky-300 transition-colors"
+          className="mt-2 text-[13px] cursor-pointer bg-transparent border-none p-0 underline underline-offset-4 text-brand hover:text-brand-light transition-colors"
         >
           Weitere Nachricht senden
         </button>

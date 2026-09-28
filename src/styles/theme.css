@@ -79,6 +79,10 @@
 }
 
 @theme inline {
+  /* CI-Blau als Tailwind-Farben (Quelle: globals.css) – statt sky-* */
+  --color-brand: var(--accent-light);
+  --color-brand-light: var(--accent-lightest);
+  --color-brand-dark: var(--accent-color);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);

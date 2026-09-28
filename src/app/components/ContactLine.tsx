@@ -18,7 +18,7 @@ export function ContactLine({
   onClick?: () => void;
 }) {
   const base = "text-white text-[14px] xl:text-[16px]";
-  const interactive = `${base} hover:text-sky-300 transition-colors`;
+  const interactive = `${base} hover:text-brand-light transition-colors`;
 
   return (
     <div className="flex items-center gap-3">

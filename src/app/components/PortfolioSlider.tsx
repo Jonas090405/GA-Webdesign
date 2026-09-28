@@ -108,7 +108,7 @@ export function PortfolioSlider({ projects }: { projects: Project[] }) {
 
                   {/* Text — links auf Desktop */}
                   <div className={`flex flex-col justify-center overflow-hidden ${(project.video || project.image) ? "py-2 md:py-6 xl:py-8" : "px-4 py-6 sm:px-8 md:px-12 xl:px-16 2xl:px-20"}`}>
-                    <div className="text-sky-400 text-[12px] xl:text-[13px] 2xl:text-[15px] tracking-[0.2em] mb-3">
+                    <div className="text-brand text-[12px] xl:text-[13px] 2xl:text-[15px] tracking-[0.2em] mb-3">
                       {project.tag}
                     </div>
                     <h3 className="text-white text-[22px] sm:text-[28px] xl:text-[34px] 2xl:text-[40px] mb-3 xl:mb-4 tracking-tight">
@@ -200,7 +200,7 @@ export function PortfolioSlider({ projects }: { projects: Project[] }) {
                   setTestimonialOpen(false);
                 }}
                 className={`h-1.5 2xl:h-2 cursor-pointer rounded-full transition-all ${
-                  i === index ? "w-8 2xl:w-10 bg-sky-400" : "w-1.5 2xl:w-2 bg-white/20"
+                  i === index ? "w-8 2xl:w-10 bg-brand" : "w-1.5 2xl:w-2 bg-white/20"
                 }`}
                 aria-label={`Projekt ${i + 1}`}
               />
@@ -252,7 +252,7 @@ export function PortfolioSlider({ projects }: { projects: Project[] }) {
                 <X size={15} aria-hidden />
               </button>
 
-              <p className="text-[11px] tracking-[0.2em] text-sky-400 mb-4">Kundenstimme</p>
+              <p className="text-[11px] tracking-[0.2em] text-brand mb-4">Kundenstimme</p>
               <TestimonialContent t={t} />
             </motion.div>
           </motion.div>
@@ -360,7 +360,7 @@ function SliderBtn({
     <button
       onClick={onClick}
       aria-label={aria}
-      className="inline-flex h-12 w-12 sm:h-10 sm:w-10 xl:h-12 xl:w-12 2xl:h-14 2xl:w-14 cursor-pointer items-center justify-center rounded-full border border-white/10 bg-white/5 text-slate-200 transition-all duration-300 hover:border-sky-400/40 hover:text-sky-300 active:scale-95"
+      className="inline-flex h-12 w-12 sm:h-10 sm:w-10 xl:h-12 xl:w-12 2xl:h-14 2xl:w-14 cursor-pointer items-center justify-center rounded-full border border-white/10 bg-white/5 text-slate-200 transition-all duration-300 hover:border-brand/40 hover:text-brand-light active:scale-95"
     >
       {children}
     </button>

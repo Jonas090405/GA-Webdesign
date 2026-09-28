@@ -293,7 +293,7 @@ export function FAQSection({
                   key={i}
                   onClick={action}
                   className="flex items-center justify-center w-10 h-10 xl:w-11 xl:h-11 rounded-full transition-all duration-200"
-                  style={{ background: "rgba(77,190,243,0.07)", border: "1px solid rgba(77,190,243,0.2)", color: "rgba(125,211,252,0.8)" }}
+                  style={{ background: "rgba(77,190,243,0.07)", border: "1px solid rgba(77,190,243,0.2)", color: "rgba(152,220,252,0.8)" }}
                   onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(77,190,243,0.13)"; e.currentTarget.style.borderColor = "rgba(77,190,243,0.4)"; }}
                   onMouseLeave={(e) => { e.currentTarget.style.background = "rgba(77,190,243,0.07)"; e.currentTarget.style.borderColor = "rgba(77,190,243,0.2)"; }}
                   aria-label={i === 0 ? "Vorherige Frage" : "Nächste Frage"}
@@ -404,7 +404,7 @@ export function FAQSection({
               style={{
                 background: "rgba(77,190,243,0.09)",
                 border: "1px solid rgba(77,190,243,0.2)",
-                color: "rgba(125,211,252,0.9)",
+                color: "rgba(152,220,252,0.9)",
               }}
               onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(77,190,243,0.16)"; e.currentTarget.style.borderColor = "rgba(77,190,243,0.38)"; }}
               onMouseLeave={(e) => { e.currentTarget.style.background = "rgba(77,190,243,0.09)"; e.currentTarget.style.borderColor = "rgba(77,190,243,0.2)"; }}
@@ -420,7 +420,7 @@ export function FAQSection({
               style={{
                 background: "rgba(77,190,243,0.09)",
                 border: "1px solid rgba(77,190,243,0.2)",
-                color: "rgba(125,211,252,0.9)",
+                color: "rgba(152,220,252,0.9)",
               }}
               onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(77,190,243,0.16)"; e.currentTarget.style.borderColor = "rgba(77,190,243,0.38)"; }}
               onMouseLeave={(e) => { e.currentTarget.style.background = "rgba(77,190,243,0.09)"; e.currentTarget.style.borderColor = "rgba(77,190,243,0.2)"; }}

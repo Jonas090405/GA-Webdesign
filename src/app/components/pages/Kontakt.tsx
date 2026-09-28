@@ -148,7 +148,7 @@ function TabBtn({
         <motion.div
           layoutId="kontakt-tab-pill"
           className="absolute inset-0 rounded-lg"
-          style={{ background: "linear-gradient(135deg, #006999 0%, #4dbef3 100%)" }}
+          style={{ background: "var(--gradient-cta)" }}
           transition={{ type: "spring", stiffness: 400, damping: 35 }}
         />
       )}
@@ -174,7 +174,7 @@ function CallCard({ phone }: { phone: string }) {
           <p className="text-slate-400 text-[14px] mb-2">Ruf uns einfach direkt an:</p>
           <a
             href={`tel:${phone.replace(/[\s\-\(\)]/g, "")}`}
-            className="text-white text-[28px] sm:text-[34px] font-semibold tracking-tight hover:text-sky-300 transition-colors"
+            className="text-white text-[28px] sm:text-[34px] font-semibold tracking-tight hover:text-brand-light transition-colors"
           >
             {phone}
           </a>
@@ -185,7 +185,7 @@ function CallCard({ phone }: { phone: string }) {
         <a
           href={`tel:${phone.replace(/[\s\-\(\)]/g, "")}`}
           className="inline-flex items-center gap-2 rounded-full px-7 py-3 text-white font-medium transition-all duration-200 hover:brightness-110"
-          style={{ background: "linear-gradient(135deg, #006999 0%, #4dbef3 100%)" }}
+          style={{ background: "var(--gradient-cta)" }}
         >
           <Phone size={16} />
           Jetzt anrufen

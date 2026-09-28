@@ -25,7 +25,7 @@ export function AGB() {
 
         <FadeIn delay={0.05}>
           <Card>
-            <div className="text-sky-400 text-[12px] tracking-[0.25em] mb-4">
+            <div className="text-brand text-[12px] tracking-[0.25em] mb-4">
               1. Geltungsbereich
             </div>
             <p className="text-slate-300 text-[14px] leading-relaxed">
@@ -49,13 +49,13 @@ export function AGB() {
 
         <FadeIn delay={0.08}>
           <Card>
-            <div className="text-sky-400 text-[12px] tracking-[0.25em] mb-4">
+            <div className="text-brand text-[12px] tracking-[0.25em] mb-4">
               2. Leistungen
             </div>
             <p className="text-slate-300 text-[14px] leading-relaxed mb-3">
               Die G&amp;A Webdesign GbR erbringt insbesondere folgende Leistungen:
             </p>
-            <ul className="text-slate-300 text-[14px] leading-relaxed space-y-1.5 pl-4 list-disc marker:text-sky-400">
+            <ul className="text-slate-300 text-[14px] leading-relaxed space-y-1.5 pl-4 list-disc marker:text-brand">
               <li>Erstellung und Entwicklung individueller Webseiten</li>
               <li>Gestalterische und technische Umsetzung</li>
               <li>Hosting für selbst erstellte Projekte</li>
@@ -78,7 +78,7 @@ export function AGB() {
 
         <FadeIn delay={0.11}>
           <Card>
-            <div className="text-sky-400 text-[12px] tracking-[0.25em] mb-4">
+            <div className="text-brand text-[12px] tracking-[0.25em] mb-4">
               3. Vertragsschluss
             </div>
             <p className="text-slate-300 text-[14px] leading-relaxed">
@@ -94,7 +94,7 @@ export function AGB() {
 
         <FadeIn delay={0.14}>
           <Card>
-            <div className="text-sky-400 text-[12px] tracking-[0.25em] mb-4">
+            <div className="text-brand text-[12px] tracking-[0.25em] mb-4">
               4. Mitwirkungspflichten des Auftraggebers
             </div>
             <p className="text-slate-300 text-[14px] leading-relaxed">
@@ -123,7 +123,7 @@ export function AGB() {
 
         <FadeIn delay={0.17}>
           <Card>
-            <div className="text-sky-400 text-[12px] tracking-[0.25em] mb-4">
+            <div className="text-brand text-[12px] tracking-[0.25em] mb-4">
               5. Freistellung
             </div>
             <p className="text-slate-300 text-[14px] leading-relaxed">
@@ -137,7 +137,7 @@ export function AGB() {
 
         <FadeIn delay={0.2}>
           <Card>
-            <div className="text-sky-400 text-[12px] tracking-[0.25em] mb-4">
+            <div className="text-brand text-[12px] tracking-[0.25em] mb-4">
               6. Erstellung, Feedback und Abnahme
             </div>
             <p className="text-slate-300 text-[14px] leading-relaxed">
@@ -177,7 +177,7 @@ export function AGB() {
 
         <FadeIn delay={0.23}>
           <Card>
-            <div className="text-sky-400 text-[12px] tracking-[0.25em] mb-4">
+            <div className="text-brand text-[12px] tracking-[0.25em] mb-4">
               7. Termine und Lieferverzug
             </div>
             <p className="text-slate-300 text-[14px] leading-relaxed">
@@ -212,7 +212,7 @@ export function AGB() {
 
         <FadeIn delay={0.245}>
           <Card>
-            <div className="text-sky-400 text-[12px] tracking-[0.25em] mb-4">
+            <div className="text-brand text-[12px] tracking-[0.25em] mb-4">
               8. Hosting
             </div>
             <p className="text-slate-300 text-[14px] leading-relaxed">
@@ -258,7 +258,7 @@ export function AGB() {
 
         <FadeIn delay={0.26}>
           <Card>
-            <div className="text-sky-400 text-[12px] tracking-[0.25em] mb-4">
+            <div className="text-brand text-[12px] tracking-[0.25em] mb-4">
               9. Drittanbieter, Domains und Fremdleistungen
             </div>
             <p className="text-slate-300 text-[14px] leading-relaxed">
@@ -312,14 +312,14 @@ export function AGB() {
 
         <FadeIn delay={0.29}>
           <Card>
-            <div className="text-sky-400 text-[12px] tracking-[0.25em] mb-4">
+            <div className="text-brand text-[12px] tracking-[0.25em] mb-4">
               10. Wartungspakete für Webseiten
             </div>
 
             <div className="space-y-5">
               <div>
                 <p className="text-slate-200 text-[14px] font-medium mb-2">Basis – Preis gemäß aktueller Preisliste</p>
-                <ul className="text-slate-300 text-[14px] leading-relaxed space-y-1 pl-4 list-disc marker:text-sky-400">
+                <ul className="text-slate-300 text-[14px] leading-relaxed space-y-1 pl-4 list-disc marker:text-brand">
                   <li>Überwachung</li>
                   <li>Meldung von Problemen</li>
                   <li>Beratung bei Problemen</li>
@@ -335,7 +335,7 @@ export function AGB() {
               <div>
                 <p className="text-slate-200 text-[14px] font-medium mb-2">Erweitert – Preis gemäß aktueller Preisliste</p>
                 <p className="text-slate-400 text-[13px] mb-2">Alle Leistungen aus Basis, zusätzlich:</p>
-                <ul className="text-slate-300 text-[14px] leading-relaxed space-y-1 pl-4 list-disc marker:text-sky-400">
+                <ul className="text-slate-300 text-[14px] leading-relaxed space-y-1 pl-4 list-disc marker:text-brand">
                   <li>2 Inhaltsanpassungen pro Monat</li>
                 </ul>
               </div>
@@ -346,7 +346,7 @@ export function AGB() {
               <div>
                 <p className="text-slate-200 text-[14px] font-medium mb-2">Erweitert+ – Preis gemäß aktueller Preisliste</p>
                 <p className="text-slate-400 text-[13px] mb-2">Alle Leistungen aus Basis, zusätzlich:</p>
-                <ul className="text-slate-300 text-[14px] leading-relaxed space-y-1 pl-4 list-disc marker:text-sky-400">
+                <ul className="text-slate-300 text-[14px] leading-relaxed space-y-1 pl-4 list-disc marker:text-brand">
                   <li>4 Inhaltsanpassungen pro Monat</li>
                   <li>1 Inhaltserweiterung pro Monat</li>
                 </ul>
@@ -393,14 +393,14 @@ export function AGB() {
 
         <FadeIn delay={0.32}>
           <Card>
-            <div className="text-sky-400 text-[12px] tracking-[0.25em] mb-4">
+            <div className="text-brand text-[12px] tracking-[0.25em] mb-4">
               11. CMS-Pakete
             </div>
 
             <div className="space-y-5">
               <div>
                 <p className="text-slate-200 text-[14px] font-medium mb-2">Basis CMS – Preis gemäß aktueller Preisliste</p>
-                <ul className="text-slate-300 text-[14px] leading-relaxed space-y-1 pl-4 list-disc marker:text-sky-400">
+                <ul className="text-slate-300 text-[14px] leading-relaxed space-y-1 pl-4 list-disc marker:text-brand">
                   <li>Individuelles CMS</li>
                   <li>CMS-Instandhaltung</li>
                   <li>Sicherheitsupdates</li>
@@ -416,7 +416,7 @@ export function AGB() {
               <div>
                 <p className="text-slate-200 text-[14px] font-medium mb-2">Erweitert CMS – Preis gemäß aktueller Preisliste</p>
                 <p className="text-slate-400 text-[13px] mb-2">Alle Leistungen aus Basis CMS, zusätzlich:</p>
-                <ul className="text-slate-300 text-[14px] leading-relaxed space-y-1 pl-4 list-disc marker:text-sky-400">
+                <ul className="text-slate-300 text-[14px] leading-relaxed space-y-1 pl-4 list-disc marker:text-brand">
                   <li>1 Inhaltserweiterung pro Monat</li>
                 </ul>
               </div>
@@ -447,7 +447,7 @@ export function AGB() {
 
         <FadeIn delay={0.35}>
           <Card>
-            <div className="text-sky-400 text-[12px] tracking-[0.25em] mb-4">
+            <div className="text-brand text-[12px] tracking-[0.25em] mb-4">
               12. SEO-Grundleistungen
             </div>
             <p className="text-slate-300 text-[14px] leading-relaxed">
@@ -468,7 +468,7 @@ export function AGB() {
 
         <FadeIn delay={0.38}>
           <Card>
-            <div className="text-sky-400 text-[12px] tracking-[0.25em] mb-4">
+            <div className="text-brand text-[12px] tracking-[0.25em] mb-4">
               13. Vergütung und Zahlungsbedingungen
             </div>
             <p className="text-slate-300 text-[14px] leading-relaxed">
@@ -479,7 +479,7 @@ export function AGB() {
               Für die Erstellung von Webseiten gilt, sofern nicht anders vereinbart, folgende Zahlungsregelung
               auf Basis von Abschlägen:
             </p>
-            <ul className="text-slate-300 text-[14px] leading-relaxed space-y-2 pl-4 list-disc marker:text-sky-400 mt-3">
+            <ul className="text-slate-300 text-[14px] leading-relaxed space-y-2 pl-4 list-disc marker:text-brand mt-3">
               <li>
                 Die Vergütung wird projektbezogen nach abgeschlossenen Teilschritten bzw. Projektphasen
                 abgerechnet.
@@ -522,7 +522,7 @@ export function AGB() {
 
         <FadeIn delay={0.41}>
           <Card>
-            <div className="text-sky-400 text-[12px] tracking-[0.25em] mb-4">
+            <div className="text-brand text-[12px] tracking-[0.25em] mb-4">
               14. Zahlungsverzug, Sperrung und Wiederfreischaltung
             </div>
             <p className="text-slate-300 text-[14px] leading-relaxed">
@@ -554,7 +554,7 @@ export function AGB() {
 
         <FadeIn delay={0.44}>
           <Card>
-            <div className="text-sky-400 text-[12px] tracking-[0.25em] mb-4">
+            <div className="text-brand text-[12px] tracking-[0.25em] mb-4">
               15. Urheberrecht und Nutzungsrechte
             </div>
             <p className="text-slate-300 text-[14px] leading-relaxed">
@@ -591,7 +591,7 @@ export function AGB() {
 
         <FadeIn delay={0.47}>
           <Card>
-            <div className="text-sky-400 text-[12px] tracking-[0.25em] mb-4">
+            <div className="text-brand text-[12px] tracking-[0.25em] mb-4">
               16. Referenznutzung und Footer-Hinweis
             </div>
             <p className="text-slate-300 text-[14px] leading-relaxed">
@@ -612,7 +612,7 @@ export function AGB() {
 
         <FadeIn delay={0.5}>
           <Card>
-            <div className="text-sky-400 text-[12px] tracking-[0.25em] mb-4">
+            <div className="text-brand text-[12px] tracking-[0.25em] mb-4">
               17. Einsatz von KI-Tools
             </div>
             <p className="text-slate-300 text-[14px] leading-relaxed">
@@ -642,7 +642,7 @@ export function AGB() {
 
         <FadeIn delay={0.53}>
           <Card>
-            <div className="text-sky-400 text-[12px] tracking-[0.25em] mb-4">
+            <div className="text-brand text-[12px] tracking-[0.25em] mb-4">
               18. Haftung
             </div>
             <p className="text-slate-300 text-[14px] leading-relaxed">
@@ -656,7 +656,7 @@ export function AGB() {
             <p className="text-slate-300 text-[14px] leading-relaxed mt-3">
               Keine Haftung besteht insbesondere für:
             </p>
-            <ul className="text-slate-300 text-[14px] leading-relaxed space-y-1.5 pl-4 list-disc marker:text-sky-400 mt-3">
+            <ul className="text-slate-300 text-[14px] leading-relaxed space-y-1.5 pl-4 list-disc marker:text-brand mt-3">
               <li>Vom Auftraggeber bereitgestellte oder selbst gepflegte Inhalte</li>
               <li>Rechtliche Zulässigkeit von Inhalten</li>
               <li>Rechtswidrige Nutzung der Website durch den Auftraggeber</li>
@@ -674,7 +674,7 @@ export function AGB() {
 
         <FadeIn delay={0.56}>
           <Card>
-            <div className="text-sky-400 text-[12px] tracking-[0.25em] mb-4">
+            <div className="text-brand text-[12px] tracking-[0.25em] mb-4">
               19. Laufzeit und Kündigung laufender Leistungen
             </div>
             <p className="text-slate-300 text-[14px] leading-relaxed">
@@ -689,7 +689,7 @@ export function AGB() {
 
         <FadeIn delay={0.59}>
           <Card>
-            <div className="text-sky-400 text-[12px] tracking-[0.25em] mb-4">
+            <div className="text-brand text-[12px] tracking-[0.25em] mb-4">
               20. Schlussbestimmungen
             </div>
             <p className="text-slate-300 text-[14px] leading-relaxed">

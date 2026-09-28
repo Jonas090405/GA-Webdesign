@@ -32,6 +32,10 @@
 
     /* ── Gradient Helper Colors ─────────────────────────────── */
     --gradient-accent: linear-gradient(to right, var(--accent-color), var(--accent-light));
+    /* Flächen mit weißer Schrift (Buttons, aktive Tabs): beide Enden ≥ 5,5:1,
+       auch mit hover:brightness-110 noch ≥ 4,5:1 (WCAG AA). Das helle
+       #4dbef3 bleibt Text, Linien und Deko vorbehalten. */
+    --gradient-cta: linear-gradient(135deg, #00567c 0%, #0a6f9f 100%);
     --gradient-button: linear-gradient(to right, rgba(0, 105, 153, 0.5), rgba(77, 190, 243, 0.5));
     --gradient-button-hover: linear-gradient(to right, rgba(10, 139, 201, 0.6), rgba(109, 212, 255, 0.6));
 

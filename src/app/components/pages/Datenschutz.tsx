@@ -38,7 +38,7 @@ function RevokeConsentButton() {
         style={{
           background: "rgba(77,190,243,0.07)",
           border: "1px solid rgba(77,190,243,0.2)",
-          color: "rgba(125,211,252,0.9)",
+          color: "rgba(152,220,252,0.9)",
         }}
         onMouseEnter={(e) => {
           e.currentTarget.style.background = "rgba(77,190,243,0.13)";
@@ -110,7 +110,7 @@ function RevokeConsentButton() {
                   }}
                   className="px-4 py-2 rounded-xl text-[13px] font-medium text-white transition-[filter] duration-300 hover:brightness-110 cursor-pointer"
                   style={{
-                    background: "linear-gradient(135deg, #006999 0%, #4dbef3 100%)",
+                    background: "var(--gradient-cta)",
                   }}
                 >
                   Ja, widerrufen
@@ -145,7 +145,7 @@ export function Datenschutz() {
       <div className="mt-10 sm:mt-12 space-y-5 sm:space-y-6">
         <FadeIn delay={0.05}>
           <Card>
-            <div className="text-sky-400 text-[12px] tracking-[0.25em] mb-4">
+            <div className="text-brand text-[12px] tracking-[0.25em] mb-4">
               1. Verantwortlicher
             </div>
             <div className="text-slate-200 text-[15px] leading-[1.9]">
@@ -168,7 +168,7 @@ export function Datenschutz() {
 
         <FadeIn delay={0.1}>
           <Card>
-            <div className="text-sky-400 text-[12px] tracking-[0.25em] mb-4">
+            <div className="text-brand text-[12px] tracking-[0.25em] mb-4">
               2. Allgemeine Hinweise
             </div>
             <p className="text-slate-300 text-[14px] leading-relaxed">
@@ -184,7 +184,7 @@ export function Datenschutz() {
 
         <FadeIn delay={0.15}>
           <Card>
-            <div className="text-sky-400 text-[12px] tracking-[0.25em] mb-4">
+            <div className="text-brand text-[12px] tracking-[0.25em] mb-4">
               3. SSL- bzw. TLS-Verschlüsselung
             </div>
             <p className="text-slate-300 text-[14px] leading-relaxed">
@@ -200,7 +200,7 @@ export function Datenschutz() {
 
         <FadeIn delay={0.2}>
           <Card>
-            <div className="text-sky-400 text-[12px] tracking-[0.25em] mb-4">
+            <div className="text-brand text-[12px] tracking-[0.25em] mb-4">
               4. Server-Logfiles
             </div>
             <p className="text-slate-300 text-[14px] leading-relaxed">
@@ -216,7 +216,7 @@ export function Datenschutz() {
 
         <FadeIn delay={0.25}>
           <Card>
-            <div className="text-sky-400 text-[12px] tracking-[0.25em] mb-4">
+            <div className="text-brand text-[12px] tracking-[0.25em] mb-4">
               5. Kontaktformular &amp; E-Mail-Kontakt
             </div>
             <p className="text-slate-300 text-[14px] leading-relaxed">
@@ -231,7 +231,7 @@ export function Datenschutz() {
 
         <FadeIn delay={0.3}>
           <Card>
-            <div className="text-sky-400 text-[12px] tracking-[0.25em] mb-4">
+            <div className="text-brand text-[12px] tracking-[0.25em] mb-4">
               6. Cookies &amp; Tracking
             </div>
             <p className="text-slate-300 text-[14px] leading-relaxed">
@@ -248,7 +248,7 @@ export function Datenschutz() {
 
         <FadeIn delay={0.35}>
           <Card>
-            <div className="text-sky-400 text-[12px] tracking-[0.25em] mb-4">
+            <div className="text-brand text-[12px] tracking-[0.25em] mb-4">
               7. Google Analytics
             </div>
             <p className="text-slate-300 text-[14px] leading-relaxed">
@@ -269,7 +269,7 @@ export function Datenschutz() {
                 href="https://tools.google.com/dlpage/gaoptout"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-sky-400 underline hover:text-sky-300 transition-colors"
+                className="text-brand underline hover:text-brand-light transition-colors"
               >
                 Browser-Add-ons zur Deaktivierung von Google Analytics
               </a>
@@ -278,7 +278,7 @@ export function Datenschutz() {
                 href="https://policies.google.com/privacy"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-sky-400 underline hover:text-sky-300 transition-colors"
+                className="text-brand underline hover:text-brand-light transition-colors"
               >
                 Datenschutzerklärung von Google
               </a>
@@ -290,7 +290,7 @@ export function Datenschutz() {
 
         <FadeIn delay={0.4}>
           <Card>
-            <div className="text-sky-400 text-[12px] tracking-[0.25em] mb-4">
+            <div className="text-brand text-[12px] tracking-[0.25em] mb-4">
               8. Deine Rechte
             </div>
             <p className="text-slate-300 text-[14px] leading-relaxed">
@@ -317,7 +317,7 @@ export function Datenschutz() {
 
         <FadeIn delay={0.45}>
           <Card>
-            <div className="text-sky-400 text-[12px] tracking-[0.25em] mb-4">
+            <div className="text-brand text-[12px] tracking-[0.25em] mb-4">
               9. Hosting – GitHub Pages
             </div>
             <p className="text-slate-300 text-[14px] leading-relaxed">
@@ -332,7 +332,7 @@ export function Datenschutz() {
                 href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-sky-400 underline hover:text-sky-300 transition-colors"
+                className="text-brand underline hover:text-brand-light transition-colors"
               >
                 Datenschutzerklärung von GitHub
               </a>
@@ -343,7 +343,7 @@ export function Datenschutz() {
 
         <FadeIn delay={0.5}>
           <Card>
-            <div className="text-sky-400 text-[12px] tracking-[0.25em] mb-4">
+            <div className="text-brand text-[12px] tracking-[0.25em] mb-4">
               10. Kontaktformular – EmailJS
             </div>
             <p className="text-slate-300 text-[14px] leading-relaxed">
@@ -359,7 +359,7 @@ export function Datenschutz() {
                 href="https://www.emailjs.com/legal/privacy-policy/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-sky-400 underline hover:text-sky-300 transition-colors"
+                className="text-brand underline hover:text-brand-light transition-colors"
               >
                 Datenschutzerklärung von EmailJS
               </a>
@@ -370,7 +370,7 @@ export function Datenschutz() {
 
         <FadeIn delay={0.55}>
           <Card>
-            <div className="text-sky-400 text-[12px] tracking-[0.25em] mb-4">
+            <div className="text-brand text-[12px] tracking-[0.25em] mb-4">
               11. Speicherdauer
             </div>
             <p className="text-slate-300 text-[14px] leading-relaxed">
@@ -386,7 +386,7 @@ export function Datenschutz() {
 
         <FadeIn delay={0.6}>
           <Card>
-            <div className="text-sky-400 text-[12px] tracking-[0.25em] mb-4">
+            <div className="text-brand text-[12px] tracking-[0.25em] mb-4">
               12. Google Search Console
             </div>
             <p className="text-slate-300 text-[14px] leading-relaxed">
@@ -403,7 +403,7 @@ export function Datenschutz() {
                 href="https://policies.google.com/privacy"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-sky-400 underline hover:text-sky-300 transition-colors"
+                className="text-brand underline hover:text-brand-light transition-colors"
               >
                 Datenschutzerklärung von Google
               </a>

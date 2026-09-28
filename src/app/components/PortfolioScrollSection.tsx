@@ -168,7 +168,7 @@ function MobileCarousel({ projects, hideTag = false }: { projects: Project[]; hi
                   setIndex(i);
                 }}
                 className={`h-1.5 cursor-pointer rounded-full transition-all ${
-                  i === index ? "w-8 bg-sky-400" : "w-1.5 bg-white/20"
+                  i === index ? "w-8 bg-brand" : "w-1.5 bg-white/20"
                 }`}
                 aria-label={`Projekt ${i + 1}`}
               />
@@ -225,7 +225,7 @@ function ProjectTitle({ project, index, hideTag = false }: { project: Project; i
             {String(index + 1).padStart(2, "0")}
           </span>
           <span className="w-8 h-px" style={{ background: "rgba(77,190,243,0.2)" }} />
-          <span className="text-[11px] tracking-[0.22em] text-sky-400">
+          <span className="text-[11px] tracking-[0.22em] text-brand">
             {project.tag}
           </span>
         </div>
@@ -333,7 +333,7 @@ function SliderBtn({
     <button
       onClick={onClick}
       aria-label={aria}
-      className="inline-flex h-11 w-11 cursor-pointer items-center justify-center rounded-full border border-white/10 bg-white/5 text-slate-200 transition-all duration-300 hover:border-sky-400/40 hover:text-sky-300 active:scale-95"
+      className="inline-flex h-11 w-11 cursor-pointer items-center justify-center rounded-full border border-white/10 bg-white/5 text-slate-200 transition-all duration-300 hover:border-brand/40 hover:text-brand-light active:scale-95"
     >
       {children}
     </button>

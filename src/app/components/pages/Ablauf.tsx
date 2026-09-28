@@ -132,11 +132,11 @@ function ContentBlock({
   return (
     <div>
       <div className={`flex flex-wrap items-center gap-2.5 mb-3 ${right ? "justify-end" : ""}`}>
-        <span className="text-sky-400 text-[11px] 2xl:text-[12px] tracking-[0.2em] font-medium">
+        <span className="text-brand text-[11px] 2xl:text-[12px] tracking-[0.2em] font-medium">
           Schritt {step}
         </span>
         <span
-          className="rounded-full px-2.5 py-0.5 text-[11px] 2xl:text-[12px] text-sky-300"
+          className="rounded-full px-2.5 py-0.5 text-[11px] 2xl:text-[12px] text-brand-light"
           style={{ background: "rgba(77,190,243,0.08)", border: "1px solid rgba(77,190,243,0.2)" }}
         >
           {tag}
@@ -230,9 +230,9 @@ function ProcessTimeline() {
   return (
     <div ref={containerRef} className="relative mt-14">
       {/* Statische Hintergrundlinie */}
-      <div className="absolute top-6 w-px bg-sky-400/[0.12] md:hidden"
+      <div className="absolute top-6 w-px bg-brand/[0.12] md:hidden"
         style={{ left: "24px", height: "calc(100% - 48px)" }} />
-      <div className="absolute top-6 w-px bg-sky-400/[0.12] hidden md:block"
+      <div className="absolute top-6 w-px bg-brand/[0.12] hidden md:block"
         style={{ left: "50%", transform: "translateX(-50%)", height: "calc(100% - 48px)" }} />
 
       {/* Animierte Fülllinie — gleicher scrollYProgress wie die Dots */}

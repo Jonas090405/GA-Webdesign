@@ -423,7 +423,7 @@ function Contact() {
                   </p>
                   <a
                     href={`tel:${BERKANT_PHONE.replace(/[\s]/g, "")}`}
-                    className="text-white text-[24px] font-semibold tracking-tight hover:text-sky-300 transition-colors"
+                    className="text-white text-[24px] font-semibold tracking-tight hover:text-brand-light transition-colors"
                   >
                     {BERKANT_PHONE}
                   </a>
@@ -434,7 +434,7 @@ function Contact() {
                 <a
                   href={`tel:${BERKANT_PHONE.replace(/[\s]/g, "")}`}
                   className="inline-flex items-center gap-2 rounded-full px-6 py-3 text-white font-medium transition-all duration-200 hover:brightness-110"
-                  style={{ background: "linear-gradient(135deg, #006999 0%, #4dbef3 100%)" }}
+                  style={{ background: "var(--gradient-cta)" }}
                 >
                   <Phone size={15} />
                   Jetzt anrufen
@@ -475,7 +475,7 @@ function HomeTabBtn({
         <motion.div
           layoutId="home-tab-pill"
           className="absolute inset-0 rounded-lg"
-          style={{ background: "linear-gradient(135deg, #006999 0%, #4dbef3 100%)" }}
+          style={{ background: "var(--gradient-cta)" }}
           transition={{ type: "spring", stiffness: 400, damping: 35 }}
         />
       )}

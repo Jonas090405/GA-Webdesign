@@ -47,7 +47,7 @@ export function CookieBanner() {
               Einwilligung ist freiwillig und jederzeit widerrufbar.{" "}
               <a
                 href="/datenschutz"
-                className="text-sky-400 underline hover:text-sky-300 transition-colors"
+                className="text-brand underline hover:text-brand-light transition-colors"
               >
                 Mehr erfahren
               </a>
@@ -76,7 +76,7 @@ export function CookieBanner() {
                 onClick={accept}
                 className="px-4 py-2 rounded-xl text-[13px] font-medium text-white transition-[filter] duration-300 hover:brightness-110 cursor-pointer"
                 style={{
-                  background: "linear-gradient(135deg, #006999 0%, #4dbef3 100%)",
+                  background: "var(--gradient-cta)",
                 }}
               >
                 Akzeptieren

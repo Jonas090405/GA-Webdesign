@@ -80,7 +80,7 @@ function LeistungenCard({
               <ul className="space-y-2.5">
                 {points.map((p) => (
                   <li key={p} className="flex items-start gap-2 text-slate-300 text-[14px] 2xl:text-[16px]">
-                    <CheckCircle2 size={16} className="mt-0.5 shrink-0 text-sky-400" />
+                    <CheckCircle2 size={16} className="mt-0.5 shrink-0 text-brand" />
                     <span>{p}</span>
                   </li>
                 ))}
@@ -497,7 +497,7 @@ function WartungTabBtn({
         <motion.div
           layoutId="wartung-tab-pill"
           className="absolute inset-0 rounded-lg"
-          style={{ background: "linear-gradient(135deg, #006999 0%, #4dbef3 100%)" }}
+          style={{ background: "var(--gradient-cta)" }}
           transition={{ type: "spring", stiffness: 400, damping: 35 }}
         />
       )}
@@ -709,7 +709,7 @@ export function Leistungen() {
             ].map((item) => (
               <span
                 key={item}
-                className="tag-pill rounded-full px-4 py-1.5 xl:px-5 2xl:px-6 2xl:py-2 text-[13px] 2xl:text-[15px] text-sky-300"
+                className="tag-pill rounded-full px-4 py-1.5 xl:px-5 2xl:px-6 2xl:py-2 text-[13px] 2xl:text-[15px] text-brand-light"
                 style={{
                   background: "rgba(77, 190, 243, 0.07)",
                   border: "1px solid rgba(77, 190, 243, 0.18)",
