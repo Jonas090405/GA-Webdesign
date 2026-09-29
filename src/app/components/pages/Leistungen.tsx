@@ -6,7 +6,7 @@ import { SectionLabel } from "../SectionLabel";
 import { Card } from "../Card";
 import { PrimaryButton } from "../Button";
 import { FadeIn } from "../FadeIn";
-import { CheckCircle2, Check, Server, Wrench } from "lucide-react";
+import { Check, Minus, Server, Wrench } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { FAQSection } from "../FAQSection";
 import { TileMedia } from "../TileMedia";
@@ -24,7 +24,7 @@ const blocks: { poster: string; clip: string; title: string; lead: string; point
     title: "Design",
     lead: "So, wie du dir das vorstellst.",
     points: [
-      "Individuelles Design ",
+      "Individuelles Design, kein Template",
       "Gut bedienbar & schön auf allen Geräten",
       "Auf deine Marke angepasst",
       "Barrierefrei nach WCAG 2.2 AA",
@@ -36,7 +36,7 @@ const blocks: { poster: string; clip: string; title: string; lead: string; point
     title: "Entwicklung",
     lead: "Schnell, stabil & zukunftssicher.",
     points: [
-      "Modernste Technik im Hintergrund",
+      "Handgebaut mit Astro oder Next.js",
       "Schnelle Ladezeiten",
       "Gut bei Google auffindbar (SEO)",
       "Funktionen, auf deine Bedürfnisse angepasst",
@@ -55,6 +55,29 @@ const blocks: { poster: string; clip: string; title: string; lead: string; point
     ],
   },
 ];
+
+/**
+ * Einheitlicher Listenpunkt für alle Leistungs- und Preislisten: schlichter
+ * Haken ohne Kreis. Der Icon-Wrapper ist genau eine Zeile hoch (1.5em bei leading-normal), dadurch
+ * sitzt der Haken bei jeder Schriftgröße mittig auf der ersten Textzeile –
+ * auch wenn der Text umbricht.
+ */
+function CheckItem({
+  children,
+  className = "",
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
+  return (
+    <li className={`flex items-start gap-2.5 leading-normal ${className}`}>
+      <span className="flex shrink-0 items-center" style={{ height: "1.5em" }} aria-hidden>
+        <Check size={15} strokeWidth={2.5} className="text-brand" />
+      </span>
+      <span className="min-w-0">{children}</span>
+    </li>
+  );
+}
 
 function LeistungenCard({
   poster, clip, title, lead, points, i,
@@ -79,10 +102,9 @@ function LeistungenCard({
               <p className="text-slate-400 text-[14px] 2xl:text-[16px] mb-5">{lead}</p>
               <ul className="space-y-2.5">
                 {points.map((p) => (
-                  <li key={p} className="flex items-start gap-2 text-slate-300 text-[14px] 2xl:text-[16px]">
-                    <CheckCircle2 size={16} className="mt-0.5 shrink-0 text-brand" />
-                    <span>{p}</span>
-                  </li>
+                  <CheckItem key={p} className="text-slate-300 text-[14px] 2xl:text-[16px]">
+                    {p}
+                  </CheckItem>
                 ))}
               </ul>
             </div>
@@ -314,10 +336,9 @@ function WebseitePreisCard({ onContact }: { onContact: () => void }) {
                 </p>
                 <ul className="space-y-2">
                   {group.points.map((p) => (
-                    <li key={p} className="flex items-start gap-2.5">
-                      <CheckCircle2 size={14} className="mt-0.5 shrink-0" style={{ color: "#4dbef3" }} />
-                      <span className="text-slate-300 text-[13px] xl:text-[14px] leading-snug">{p}</span>
-                    </li>
+                    <CheckItem key={p} className="text-slate-300 text-[13px] xl:text-[14px]">
+                      {p}
+                    </CheckItem>
                   ))}
                 </ul>
               </div>
@@ -569,10 +590,9 @@ function WartungCard() {
                 </div>
                 <ul className="space-y-1.5">
                   {tier.features.map((f, idx) => (
-                    <li key={idx} className="flex items-center gap-2 text-slate-400 text-[12px] xl:text-[13px] leading-snug">
-                      <Check size={12} className="shrink-0" style={{ color: "#4dbef3" }} />
-                      <span>{f.label}</span>
-                    </li>
+                    <CheckItem key={idx} className="text-slate-400 text-[12px] xl:text-[13px]">
+                      {f.label}
+                    </CheckItem>
                   ))}
                 </ul>
               </div>
@@ -593,10 +613,9 @@ function WartungCard() {
                 </div>
                 <ul className="space-y-1.5">
                   {tier.features.map((f, idx) => (
-                    <li key={idx} className="flex items-center gap-2 text-slate-400 text-[12px] xl:text-[13px] leading-snug">
-                      <Check size={12} className="shrink-0" style={{ color: "#4dbef3" }} />
-                      <span>{f.label}</span>
-                    </li>
+                    <CheckItem key={idx} className="text-slate-400 text-[12px] xl:text-[13px]">
+                      {f.label}
+                    </CheckItem>
                   ))}
                 </ul>
               </div>
@@ -605,6 +624,147 @@ function WartungCard() {
         </motion.div>
       </div>
     </Card>
+  );
+}
+
+// ─── Konzept: individuell statt Baukasten ──────────────────────────────────────
+const STACK = ["Astro", "Next.js", "React", "TypeScript", "Tailwind CSS", "Headless CMS"];
+
+const VERGLEICH: { topic: string; ours: string; wp: string; wpGood?: boolean }[] = [
+  {
+    topic: "Ladezeit",
+    ours: "Fertige Seiten, die sofort ausgeliefert werden – ohne Datenbankabfrage bei jedem Aufruf.",
+    wp: "Viel ungenutzter Code aus Vorlagen und Erweiterungen wird bei jedem Besuch mitgeladen.",
+  },
+  {
+    topic: "Sicherheit",
+    ours: "Keine Plugins, kein öffentlicher Admin-Login – kaum Angriffsfläche.",
+    wp: "Plugins, Erweiterungen und Login-Seiten sind häufige Einfallstore für Angriffe.",
+  },
+  {
+    topic: "Wartung",
+    ours: "Kein ständiges Update-Karussell. Was einmal läuft, läuft.",
+    wp: "Erweiterungen und Vorlagen brauchen laufend Updates – oder du bist an Plattform und Abo gebunden.",
+  },
+  {
+    topic: "Design",
+    ours: "Jedes Detail frei gestaltet, genau passend zu deiner Marke.",
+    wp: "Die Vorlage gibt Raster und Grenzen vor, individuelle Wünsche gehen oft nur über Umwege.",
+  },
+  {
+    topic: "Google",
+    ours: "Schlanker Code und sehr gute Core Web Vitals – eine starke Basis für SEO.",
+    wp: "Überladene Vorlagen und Page-Builder können die Seite bremsen – und damit das Ranking.",
+  },
+  {
+    topic: "Inhalte pflegen",
+    ours: "Auf Wunsch mit maßgeschneidertem CMS – nur die Felder, die du wirklich brauchst.",
+    wp: "Einfach zu bedienen. Das ist die echte Stärke von Baukästen.",
+    wpGood: true,
+  },
+];
+
+function KonzeptSection() {
+  return (
+    <section aria-labelledby="konzept-heading" className="mt-24 2xl:mt-32">
+      <div className="grid gap-12 lg:gap-16 2xl:gap-24 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] items-start">
+        <FadeIn className="lg:sticky lg:top-32">
+          <SectionLabel>Unser Konzept</SectionLabel>
+          <h2
+            id="konzept-heading"
+            className="text-white text-[clamp(26px,4vw,52px)] tracking-tight leading-[1.08] text-balance"
+          >
+            Handgebaut{" "}
+            <span
+              className="bg-clip-text text-transparent"
+              style={{ backgroundImage: "linear-gradient(135deg, #4dbef3 0%, #006999 100%)" }}
+            >
+              statt Baukasten.
+            </span>
+          </h2>
+          <p className="mt-5 text-slate-400 text-[15px] xl:text-[16px] 2xl:text-[18px] leading-relaxed max-w-md 2xl:max-w-lg">
+            Wir nutzen keine fertige Vorlage aus dem Baukasten, sondern programmieren
+            jede Webseite individuell – mit Astro oder Next.js. Das Ergebnis: schneller, sicherer und
+            genau so, wie du es dir vorstellst.
+          </p>
+          <ul className="mt-7 flex flex-wrap gap-2" aria-label="Unsere Technologien">
+            {STACK.map((tech) => (
+              <li
+                key={tech}
+                className="rounded-full px-3.5 py-1 text-[12px] xl:text-[13px] 2xl:text-[14px] text-brand-light"
+                style={{
+                  background: "rgba(77, 190, 243, 0.07)",
+                  border: "1px solid rgba(77, 190, 243, 0.18)",
+                }}
+              >
+                {tech}
+              </li>
+            ))}
+          </ul>
+        </FadeIn>
+
+        <FadeIn delay={0.1}>
+          <div
+            className="rounded-2xl"
+            style={{
+              background: "linear-gradient(135deg, rgba(16,24,27,0.97) 0%, rgba(10,17,22,0.99) 100%)",
+              border: "1px solid rgba(77,190,243,0.1)",
+            }}
+          >
+            {/* Spaltenköpfe – ab sm, mobil trägt jede Zeile ihre eigenen Labels */}
+            <div
+              aria-hidden
+              className="hidden sm:grid grid-cols-[120px_1fr_1fr] xl:grid-cols-[140px_1fr_1fr] gap-6 px-6 xl:px-8 pt-6 xl:pt-7 pb-4 text-[11px] xl:text-[12px] tracking-[0.18em] font-medium"
+              style={{ borderBottom: "1px solid rgba(77,190,243,0.1)" }}
+            >
+              <span />
+              <span className="text-brand">Astro / Next.js</span>
+              <span className="text-slate-500">Baukastensysteme</span>
+            </div>
+
+            <ul>
+              {VERGLEICH.map((row) => (
+                <li
+                  key={row.topic}
+                  className="grid gap-3 sm:gap-6 sm:grid-cols-[120px_1fr_1fr] xl:grid-cols-[140px_1fr_1fr] px-6 xl:px-8 py-5 xl:py-6 border-t first:border-t-0"
+                  style={{ borderColor: "rgba(77,190,243,0.07)" }}
+                >
+                  <h3 className="text-white text-[15px] xl:text-[16px] 2xl:text-[17px] font-medium leading-normal">
+                    {row.topic}
+                  </h3>
+                  <p className="flex items-start gap-2.5 text-slate-200 text-[14px] 2xl:text-[15px] leading-normal">
+                    <span className="flex shrink-0 items-center" style={{ height: "1.5em" }} aria-hidden>
+                      <Check size={15} strokeWidth={2.5} className="text-brand" />
+                    </span>
+                    <span>
+                      <span className="sm:sr-only text-brand text-[11px] tracking-[0.14em] block mb-0.5">
+                        Astro / Next.js
+                      </span>
+                      {row.ours}
+                    </span>
+                  </p>
+                  <p className="flex items-start gap-2.5 text-slate-400 text-[14px] 2xl:text-[15px] leading-normal">
+                    <span className="flex shrink-0 items-center" style={{ height: "1.5em" }} aria-hidden>
+                      {row.wpGood ? (
+                        <Check size={15} strokeWidth={2.5} className="text-slate-400" />
+                      ) : (
+                        <Minus size={15} strokeWidth={2.5} className="text-slate-500" />
+                      )}
+                    </span>
+                    <span>
+                      <span className="sm:sr-only text-slate-500 text-[11px] tracking-[0.14em] block mb-0.5">
+                        Baukastensysteme
+                      </span>
+                      {row.wp}
+                    </span>
+                  </p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </FadeIn>
+      </div>
+    </section>
   );
 }
 
@@ -652,8 +812,8 @@ function PreiseSection({ onContact }: { onContact: () => void }) {
 
 export function Leistungen() {
   usePageMeta({
-    title: "Leistungen | G&A Webdesign",
-    description: "Webdesign, Entwicklung & Deployment aus einer Hand. Individuelles Design, schnelle Ladezeiten und alles fertig live – inkl. Hosting & SEO.",
+    title: "Leistungen – Webdesign, Entwicklung & Hosting | G&A Webdesign",
+    description: "Individuelle Webseiten mit Astro oder Next.js statt Baukasten: schnelle Ladezeiten, sicher und wartungsarm. Dazu Corporate Design, Hosting & SEO aus einer Hand.",
     path: "/leistungen",
   });
   const navigate = useNavigate();
@@ -684,9 +844,12 @@ export function Leistungen() {
         ))}
       </div>
 
+      {/* Konzept: warum individuell statt Baukasten */}
+      <KonzeptSection />
+
       {/* Extra services */}
       <FadeIn>
-        <div className="mt-14 2xl:mt-20">
+        <div className="mt-24 2xl:mt-32">
           <h2 className="text-white text-[clamp(22px,3vw,40px)] tracking-tight max-w-xl 2xl:max-w-2xl mb-3">
             Du brauchst noch etwas anderes?
           </h2>
@@ -695,6 +858,7 @@ export function Leistungen() {
           </p>
           <div className="flex flex-wrap gap-2.5">
             {[
+              "Corporate Design (Logo, Markenfarben, Schriften)",
               "Google Analytics Tracking",
               "Content Management System",
               "Admin Panel",

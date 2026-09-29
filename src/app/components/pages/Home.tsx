@@ -208,15 +208,15 @@ const MEMBERS = [
   {
     photo: profilbild,
     name: "Jonas Gissler",
-    role: "Design & Entwicklung",
-    desc: "Entwirft und entwickelt deine Webseite – von der ersten Skizze bis zur Live-Schaltung. Design, Technik und Hosting aus einer Hand.",
+    role: "Design & Frontend",
+    desc: "Gestaltet deine Webseite und auf Wunsch dein Corporate Design – und setzt alles im Frontend um. Also das, was deine Kunden sehen und erleben.",
     linkedin: "https://www.linkedin.com/in/jonas-gissler-37b1482b0/",
   },
   {
     photo: berkantImg,
     name: "Berkant Agyar",
-    role: "Kundenkommunikation & Projektmanagement",
-    desc: "Dein erster Ansprechpartner. Begleitet dich durch den ganzen Prozess – von der Anfrage über das Angebot bis zum fertigen Ergebnis.",
+    role: "Backend & Kundenkontakt",
+    desc: "Dein Ansprechpartner von der Anfrage bis zum Livegang. Sorgt im Backend dafür, dass Formulare, CMS und Hosting zuverlässig laufen.",
     linkedin: "https://www.linkedin.com/in/berkant-agyar-2334a6363",
   },
 ];

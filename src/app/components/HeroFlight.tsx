@@ -494,9 +494,9 @@ function ScrollFlightHero() {
                   Wir sind zu zweit.
                 </h2>
                 <p className={LEAD_CLASS} style={{ color: LEAD_COLOR }}>
-                  Jonas designt und entwickelt deine Webseite. Berkant ist dein
-                  Ansprechpartner – von der ersten Frage bis zum Livegang. Keine
-                  Agentur dazwischen, keine Warteschleife.
+                  Jonas gestaltet deine Webseite und setzt sie um. Berkant baut
+                  das Backend und ist dein Ansprechpartner – von der ersten Frage
+                  bis zum Livegang. Keine Agentur dazwischen, keine Warteschleife.
                 </p>
               </Beat>
 
@@ -505,7 +505,7 @@ function ScrollFlightHero() {
                   Alles aus einer Hand.
                 </h2>
                 <p className={LEAD_CLASS} style={{ color: LEAD_COLOR }}>
-                  Design, Entwicklung, Hosting und SEO. Du redest mit uns – nicht mit
+                  Logo, Design, Entwicklung, Hosting und SEO. Du redest mit uns – nicht mit
                   vier Dienstleistern, die sich gegenseitig die Schuld geben.
                 </p>
               </Beat>
@@ -739,8 +739,8 @@ function StaticHero({ navigate }: { navigate: (to: string) => void }) {
 
           <div className="mt-10 grid gap-6 sm:grid-cols-3 max-w-3xl">
             {[
-              ["Wir sind zu zweit.", "Jonas designt und entwickelt, Berkant ist dein Ansprechpartner."],
-              ["Alles aus einer Hand.", "Design, Entwicklung, Hosting und SEO – nicht vier Dienstleister."],
+              ["Wir sind zu zweit.", "Jonas gestaltet das Design und Frontend, Berkant das Backend – und ist dein Ansprechpartner."],
+              ["Alles aus einer Hand.", "Corporate Design, Webseite, Hosting und SEO – nicht vier Dienstleister."],
               ["Aus Triberg.", "Von St. Georgen bis Villingen-Schwenningen."],
             ].map(([title, text]) => (
               <div key={title}>

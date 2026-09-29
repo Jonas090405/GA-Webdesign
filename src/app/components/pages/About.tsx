@@ -67,7 +67,7 @@ function AnsatzCard({
 export function About() {
   usePageMeta({
     title: "Über uns | G&A Webdesign",
-    description: "Wir sind Jonas Gissler (Design & Entwicklung) und Berkant Agyar (Kundenkommunikation & Projektmanagement) – ein eingespieltes Team für moderne Webseiten aus dem Schwarzwald.",
+    description: "Wir sind Jonas Gissler (Design & Frontend) und Berkant Agyar (Backend & Kundenkontakt) – ein eingespieltes Team für individuelle Webseiten aus dem Schwarzwald.",
     path: "/ueber-uns",
   });
   const navigate = useNavigate();
@@ -93,15 +93,16 @@ export function About() {
             className="mt-2 text-[12px] sm:text-[13px] tracking-[0.2em]"
             style={{ color: "#4dbef3" }}
           >
-            Design & Entwicklung
+            Design & Frontend
           </p>
           <p
             className="mt-7 text-[16px] sm:text-[17px] xl:text-[19px] 2xl:text-[21px] leading-relaxed"
             style={{ color: "rgba(200, 225, 240, 0.8)" }}
           >
             Ich bin 21 Jahre alt und komme aus Triberg im Schwarzwald.
-            Ich designe und entwickle Webseiten für lokale Unternehmen –
-            von der ersten Idee bis sie live sind.
+            Ich gestalte eure Webseite und setze sie im Frontend um – also alles,
+            was eure Kunden später sehen und anklicken. Auf Wunsch auch euren
+            kompletten Markenauftritt, vom Logo bis zu den Farben.
           </p>
           <p
             className="mt-4 text-[15px] xl:text-[17px] 2xl:text-[18px] leading-relaxed"
@@ -116,11 +117,10 @@ export function About() {
             className="mt-4 text-[15px] xl:text-[17px] 2xl:text-[18px] leading-relaxed"
             style={{ color: "rgba(180, 210, 230, 0.6)" }}
           >
-            Gestaltet wird in Figma, gebaut mit React, TypeScript und TailwindCSS –
-            inklusive der kleinen Bewegungen, die eine Seite lebendig machen. Dazu kommt
-            alles, was eine Webseite im Betrieb braucht: Hosting, Formulare, Analytics
-            und auf Wunsch ein Redaktionssystem, über das ihr eure Inhalte selbst pflegt.
-            KI setze ich da ein, wo sie Arbeit spart – nicht als Selbstzweck.
+            Entworfen wird in Figma – von der Webseite bis zu Logo und Markenauftritt.
+            Gebaut wird mit Astro oder Next.js, React, TypeScript und
+            Tailwind CSS – inklusive der kleinen Animationen, die eine Seite lebendig
+            machen. KI setze ich da ein, wo sie Arbeit spart – nicht als Selbstzweck.
           </p>
           <a
             href="https://www.linkedin.com/in/jonas-gissler-37b1482b0/"
@@ -158,15 +158,15 @@ export function About() {
             className="mt-2 text-[12px] sm:text-[13px] tracking-[0.2em]"
             style={{ color: "#4dbef3" }}
           >
-            Kundenkommunikation & Projektmanagement
+            Backend & Kundenkontakt
           </p>
           <p
             className="mt-7 text-[16px] sm:text-[17px] xl:text-[19px] 2xl:text-[21px] leading-relaxed"
             style={{ color: "rgba(200, 225, 240, 0.8)" }}
           >
-            Ich komme wie Jonas aus Triberg und bin euer erster Ansprechpartner. Von der
-            ersten Anfrage bis zum finalen Ergebnis begleite ich euch durch den gesamten
-            Prozess – klar, direkt und zuverlässig.
+            Ich komme wie Jonas aus Triberg und bin euer Ansprechpartner – von der
+            ersten Anfrage bis zum Livegang. Und ich sorge dafür, dass hinter eurer
+            Webseite alles zuverlässig läuft.
           </p>
           <p
             className="mt-4 text-[15px] xl:text-[17px] 2xl:text-[18px] leading-relaxed"
@@ -180,9 +180,11 @@ export function About() {
             className="mt-4 text-[15px] xl:text-[17px] 2xl:text-[18px] leading-relaxed"
             style={{ color: "rgba(180, 210, 230, 0.6)" }}
           >
-            Bei euren Projekten kümmere ich mich um alles rund um die Zusammenarbeit:
-            Angebot, Vertrag, Termine und die Abstimmung zwischen euch und Jonas.
-            Ihr wisst immer, wo euer Projekt steht – und was als nächstes passiert.
+            Technisch kümmere ich mich um das Backend: Kontaktformulare und E-Mail-Versand,
+            Datenbanken, Schnittstellen und das Redaktionssystem, über das ihr eure Inhalte
+            selbst pflegt – mit Node.js, Supabase und Sanity. Dazu Hosting, Domain und
+            Deployment. Und bei Angebot, Terminen und Abstimmung bin ich euer direkter Draht
+            zu uns.
           </p>
           <a
             href="https://www.linkedin.com/in/berkant-agyar-2334a6363"
