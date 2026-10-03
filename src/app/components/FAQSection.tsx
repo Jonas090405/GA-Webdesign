@@ -54,7 +54,7 @@ const faqs: { q: string; a: string }[] = [
   },
   {
     q: "Ist meine Webseite DSGVO-konform und barrierefrei?",
-    a: "Ja. Wir richten deine Webseite DSGVO-konform ein – inklusive SSL-Verschlüsselung, Impressum und Datenschutzerklärung. Außerdem gestalten und entwickeln wir barrierefrei nach WCAG 2.2 AA, damit alle Menschen deine Seite gut nutzen können, zum Beispiel auch mit Screenreader oder nur per Tastatur.",
+    a: "Ja, technisch setzen wir beides um. Wir richten deine Webseite datenschutzfreundlich ein – mit SSL-Verschlüsselung, lokal eingebundenen Schriften, Cookie-Banner sowie eingebundenem Impressum und Datenschutzerklärung. Eine Rechtsberatung können wir dabei nicht leisten; für die rechtliche Prüfung der Texte empfehlen wir einen Rechtstext-Dienst oder eine Kanzlei, die technischen Angaben dafür liefern wir dir. Außerdem gestalten und entwickeln wir barrierefrei nach WCAG 2.2 AA, damit alle Menschen deine Seite gut nutzen können, zum Beispiel auch mit Screenreader oder nur per Tastatur.",
   },
   {
     q: "Werde ich mit meiner Webseite bei Google gefunden?",
@@ -62,7 +62,7 @@ const faqs: { q: string; a: string }[] = [
   },
   {
     q: "Was kostet das Hosting?",
-    a: "Das Hosting kostet 5 € im Monat und ist monatlich kündbar. Hast du noch keine Domain, besorgen und richten wir sie dir ein – dafür kommen einmalig 60 € Einrichtung plus die Kosten deiner Wunschdomain dazu. Wir prüfen regelmäßig, ob deine Seite erreichbar ist, und melden uns bei einem Ausfall innerhalb von 24 Stunden an Werktagen.",
+    a: "Das Hosting kostet 5 € im Monat und ist monatlich kündbar. Hast du noch keine Domain, besorgen und richten wir sie dir ein – dafür kommen einmalig 60 € Einrichtung plus die Kosten deiner Wunschdomain dazu. Wir prüfen regelmäßig, ob deine Seite erreichbar ist, und melden uns bei einem Ausfall innerhalb von 24 Stunden an Werktagen, nachdem wir davon erfahren haben.",
   },
   {
     q: "Was ist wenn ich nach dem Launch noch etwas ändern möchte?",
@@ -70,7 +70,7 @@ const faqs: { q: string; a: string }[] = [
   },
   {
     q: "Was ist der Unterschied zwischen den Wartungspaketen?",
-    a: "Basis (15 €/Mon.): Überwachung, Meldung & Beratung bei Problemen, Sicherheitsupdates und technische Instandhaltung. Erweitert (50 €/Mon.): plus eine monatliche Inhaltsanpassung – z. B. Texte oder Bilder. Erweitert+ (200 €/Mon.): zwei Anpassungen und eine Inhaltserweiterung pro Monat, z. B. eine neue Unterseite.",
+    a: "Basis (15 €/Mon.): Überwachung, Meldung & Beratung bei Problemen, Sicherheits- & Datenschutzupdates, technische Instandhaltung und Erhalt der Barrierefreiheit. Erweitert (50 €/Mon.): plus zwei Inhaltsanpassungen pro Monat – z. B. Texte oder Bilder. Erweitert+ (200 €/Mon.): vier Anpassungen und eine Inhaltserweiterung pro Monat, z. B. eine neue Unterseite.",
   },
   {
     q: "Arbeitet ihr auch überregional?",

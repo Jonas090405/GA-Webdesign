@@ -5,7 +5,7 @@ import { usePageMeta } from "../../hooks/usePageMeta";
 export function Impressum() {
   usePageMeta({
     title: "Impressum | G&A Webdesign",
-    description: "Impressum und Anbieterkennzeichnung der G&A Webdesign GbR aus Triberg im Schwarzwald gemäß § 5 TMG.",
+    description: "Impressum und Anbieterkennzeichnung der G&A Webdesign GbR aus Triberg im Schwarzwald gemäß § 5 DDG.",
     path: "/impressum",
   });
   return (
@@ -16,7 +16,7 @@ export function Impressum() {
           Impressum
         </h1>
         <p className="mt-4 text-slate-400 text-[14px]">
-          Angaben gemäß § 5 TMG
+          Angaben gemäß § 5 DDG
         </p>
       </FadeIn>
 
@@ -133,17 +133,6 @@ export function Impressum() {
               Streitbeilegung
             </div>
             <p className="text-slate-300 text-[14px] leading-relaxed">
-              Die Europäische Kommission stellt eine Plattform zur
-              Online-Streitbeilegung (OS) bereit:{" "}
-              <a
-                href="https://ec.europa.eu/consumers/odr/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-brand underline hover:text-brand-light transition-colors"
-              >
-                https://ec.europa.eu/consumers/odr/
-              </a>
-              .<br />
               Wir sind nicht bereit oder verpflichtet, an
               Streitbeilegungsverfahren vor einer
               Verbraucherschlichtungsstelle teilzunehmen.

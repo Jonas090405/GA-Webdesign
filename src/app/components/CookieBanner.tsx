@@ -41,10 +41,12 @@ export function CookieBanner() {
             style={{ background: "rgb(16, 22, 28)" }}
           >
             <p className="text-slate-300 text-[13px] leading-relaxed mb-4">
-              Diese Webseite verwendet{" "}
-              <strong className="text-slate-100">Cookies</strong>, um die
-              Nutzung anonym auszuwerten und das Angebot zu verbessern. Deine
-              Einwilligung ist freiwillig und jederzeit widerrufbar.{" "}
+              Mit deiner Einwilligung nutzen wir{" "}
+              <strong className="text-slate-100">Google Analytics</strong> mit
+              Cookies, um die Nutzung pseudonym auszuwerten und das Angebot zu
+              verbessern. Dabei können Daten an Google in die USA übermittelt
+              werden. Deine Einwilligung ist freiwillig und jederzeit
+              widerrufbar.{" "}
               <a
                 href="/datenschutz"
                 className="text-brand underline hover:text-brand-light transition-colors"

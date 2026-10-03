@@ -40,14 +40,18 @@ function injectGtagScript() {
   document.head.appendChild(s);
 }
 
-/** Consent erteilt → Skript laden + Tracking aktivieren. */
+/**
+ * Consent erteilt → Skript laden + Tracking aktivieren.
+ * Das Banner fragt nur nach Analyse – Werbesignale bleiben daher immer aus.
+ */
 export function grantConsent() {
   injectGtagScript();
   ensureGtag();
+  (window as unknown as Record<string, boolean>)[`ga-disable-${GA_ID}`] = false;
   window.gtag("consent", "update", {
-    ad_storage: "granted",
-    ad_user_data: "granted",
-    ad_personalization: "granted",
+    ad_storage: "denied",
+    ad_user_data: "denied",
+    ad_personalization: "denied",
     analytics_storage: "granted",
   });
 }
@@ -68,8 +72,25 @@ export function hasConsent(): boolean {
   return localStorage.getItem("cookie-consent") === "granted";
 }
 
-/** Einwilligung widerrufen → localStorage zurücksetzen + Tracking stoppen. */
+/** Entfernt die GA-Cookies (_ga, _ga_<ID>) für alle Domain-Varianten. */
+function deleteGaCookies() {
+  const host = window.location.hostname;
+  const domains = ["", host, `.${host}`, `.${host.replace(/^www\./, "")}`];
+  document.cookie
+    .split(";")
+    .map((c) => c.split("=")[0].trim())
+    .filter((name) => name.startsWith("_ga"))
+    .forEach((name) => {
+      domains.forEach((domain) => {
+        document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/${domain ? `; domain=${domain}` : ""}`;
+      });
+    });
+}
+
+/** Einwilligung widerrufen → localStorage zurücksetzen, Tracking stoppen, Cookies löschen. */
 export function revokeConsent() {
   localStorage.setItem("cookie-consent", "denied");
   denyConsent();
+  (window as unknown as Record<string, boolean>)[`ga-disable-${GA_ID}`] = true;
+  deleteGaCookies();
 }
