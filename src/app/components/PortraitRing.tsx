@@ -34,11 +34,11 @@ export function PortraitRing({
     <div className="group relative w-fit">
       <div
         className="absolute inset-0 rounded-full scale-[1.10]"
-        style={{ border: "1px solid rgba(77, 190, 243, 0.15)" }}
+        style={{ border: "1px solid rgb(var(--blue-400-rgb) / 0.15)" }}
       />
       <div
         className="absolute inset-0 rounded-full scale-[1.04]"
-        style={{ border: "1px solid rgba(77, 190, 243, 0.08)" }}
+        style={{ border: "1px solid rgb(var(--blue-400-rgb) / 0.08)" }}
       />
       <motion.div
         aria-hidden
@@ -61,7 +61,7 @@ export function PortraitRing({
           "relative rounded-full overflow-hidden transition-transform duration-500 ease-out group-hover:scale-[1.02]",
           className,
         )}
-        style={{ border: "2px solid rgba(77, 190, 243, 0.45)" }}
+        style={{ border: "2px solid rgb(var(--blue-400-rgb) / 0.45)" }}
       >
         <img
           src={photo}

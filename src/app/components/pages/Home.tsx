@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { usePageMeta } from "../../hooks/usePageMeta";
 import { motion, AnimatePresence } from "motion/react";
-import { SectionLabel } from "../SectionLabel";
+import { SectionHeader } from "../SectionHeader";
 import { GhostButton, TertiaryButton } from "../Button";
 import { Card } from "../Card";
 import { FadeIn } from "../FadeIn";
@@ -19,39 +19,9 @@ import tileCodePoster from "../../../imports/tile-code-poster.webp";
 import tileRocketClip from "../../../imports/tile-rocket.mp4";
 import tileRocketPoster from "../../../imports/tile-rocket-poster.webp";
 import { ContactForm, BERKANT_EMAIL, BERKANT_PHONE } from "../ContactForm";
+import { PROJECTS } from "../../../content/projects";
 import profilbild from "../../../imports/Jonas_Gissler.png";
 import berkantImg from "../../../imports/Berkant_agyar.jpeg";
-import gcnImg from "../../../imports/gcn-fahrzeughandel.png";
-import gcnAvatar from "../../../imports/gcn-avatar.jpeg";
-import gcnVideo from "../../../imports/GCN-Projekt.mp4";
-
-const PROJECTS = [
-  {
-    image: gcnImg,
-    video: gcnVideo,
-    tag: "Fahrzeughandel · 2026",
-    title: "GCN-Fahrzeughandel",
-    desc: "Vollständige Web-Plattform für einen Fahrzeughändler – Außendarstellung, Fahrzeugsuche, Verkaufsauftragsformulare mit automatischer E-Mail-Benachrichtigung und internes Kundenverwaltungs-Dashboard.",
-    url: "https://gcn-fahrzeughandel.de/",
-    features: ["React", "Dashboard", "Fahrzeugsuche", "E-Mail-System", "Deployment"],
-    testimonial: {
-      show: true, // ← false = Testimonial ausblenden
-      quote: "Die Zusammenarbeit war von Anfang bis Ende reibungslos. Unsere Vorstellungen wurden genau verstanden und eine Webseite gebaut, die wirklich zu uns passt. Außerdem erleichtert unser neues Admin-Panel die Verwaltung unserer Kunden erheblich.",
-      name: "Giosue Canobbio",
-      role: "Geschäftsführer",
-      company: "GCN-Fahrzeughandel",
-      avatar: gcnAvatar,
-    },
-  },
-  {
-    image: null,
-    tag: "Weitere Projekte",
-    title: "Persönliches Portfolio",
-    desc: "Hier sind nur ausgewählte Projekte zu sehen. Auf meiner Portfolio-Seite findest du alle meine Arbeiten.",
-    url: "/projekte",
-    urlLabel: "Alle Projekte",
-  },
-];
 
 export function Home() {
   usePageMeta({
@@ -77,30 +47,24 @@ function PortfolioPreview() {
 
   return (
     <section className="py-12 sm:py-10 lg:py-14 xl:py-18 2xl:py-24">
-      <FadeIn>
-        <SectionLabel>Projekte</SectionLabel>
-        <div className="mb-8 sm:mb-10 xl:mb-14 2xl:mb-20">
-          <h2 className="text-white text-[clamp(28px,4.5vw,72px)] tracking-tight max-w-4xl 2xl:max-w-5xl">
-            Projekte, die wir umgesetzt haben.
-          </h2>
-          <p className="mt-4 xl:mt-6 max-w-2xl 2xl:max-w-3xl text-[15px] sm:text-[17px] xl:text-[19px] 2xl:text-[21px] leading-relaxed" style={{ color: "rgba(180,210,230,0.65)" }}>
-            Eine Auswahl unserer aktuellen Kundenarbeiten.
-          </p>
-        </div>
-      </FadeIn>
+      <SectionHeader
+        title="Projekte, die wir umgesetzt haben."
+        lead="Eine Auswahl unserer aktuellen Kundenarbeiten."
+        className="mb-8 sm:mb-10 xl:mb-14 2xl:mb-20"
+      />
 
       {/* Identisch zur Portfolio-Seite, nur Featured-Projekt */}
-      <PortfolioScrollSection projects={[PROJECTS[0]]} hideTag />
+      <PortfolioScrollSection projects={PROJECTS.slice(0, 1)} hideTag />
 
+      {/* Weiterführend als ruhige Zeile – die Hauptaktionen stehen in der Projektkarte */}
       <FadeIn delay={0.2}>
-        <div className="mt-10 sm:mt-0 flex items-center justify-start sm:justify-center gap-5 sm:gap-7">
-          <GhostButton onClick={() => navigate("/projekte")}>
-            Alle Projekte
-          </GhostButton>
+        <p className="mt-10 sm:mt-0 flex flex-wrap items-center justify-start sm:justify-center gap-x-6 gap-y-3 text-[14px] xl:text-[15px] text-ink-400">
+          <span className="basis-full sm:basis-auto">Mehr von uns:</span>
+          <TertiaryButton onClick={() => navigate("/projekte")}>Alle Projekte</TertiaryButton>
           <TertiaryButton href="https://portfolio.ga-webdesign.de" external={true}>
             Persönliches Portfolio
           </TertiaryButton>
-        </div>
+        </p>
       </FadeIn>
     </section>
   );
@@ -137,8 +101,7 @@ function ServiceCard({
               {title}
             </h3>
             <p
-              className="text-[14px] xl:text-[16px] 2xl:text-[18px] leading-relaxed flex-1"
-              style={{ color: "rgba(180,210,230,0.6)" }}
+              className="text-[14px] xl:text-[16px] 2xl:text-[18px] leading-relaxed flex-1 text-ink-300"
             >
               {desc}
             </p>
@@ -175,17 +138,10 @@ function Services() {
 
   return (
     <section id="leistungen" className="py-12 sm:py-10 lg:py-14 xl:py-18 2xl:py-24">
-      <FadeIn>
-        <SectionLabel>Leistungen</SectionLabel>
-        <div className="mb-10 sm:mb-12 xl:mb-16 2xl:mb-20">
-          <h2 className="text-white text-[clamp(28px,4.5vw,72px)] tracking-tight max-w-4xl 2xl:max-w-5xl">
-            Alles, was du für deine Webseite brauchst.
-          </h2>
-          <p className="mt-4 xl:mt-6 max-w-2xl 2xl:max-w-3xl text-[15px] sm:text-[17px] xl:text-[19px] 2xl:text-[21px] leading-relaxed" style={{ color: "rgba(180,210,230,0.65)" }}>
-            Wir übernehmen alles: Design, Entwicklung und Hosting.<br />Du musst dich um nichts kümmern.
-          </p>
-        </div>
-      </FadeIn>
+      <SectionHeader
+        title="Alles, was du für deine Webseite brauchst."
+        lead={<>Wir übernehmen alles: Design, Entwicklung und Hosting.<br />Du musst dich um nichts kümmern.</>}
+      />
 
       <div className="grid gap-5 sm:gap-6 xl:gap-8 2xl:gap-10 sm:grid-cols-2 md:grid-cols-3 items-stretch">
         {SERVICES.map(({ poster, clip, title, desc }, i) => (
@@ -247,14 +203,12 @@ function Member({
         {name}
       </h3>
       <p
-        className="mt-2.5 text-[11px] xl:text-[12px] tracking-[0.2em] uppercase leading-snug"
-        style={{ color: "#4dbef3" }}
+        className="mt-2.5 text-[11px] xl:text-[12px] tracking-[0.2em] uppercase leading-snug text-blue-400"
       >
         {role}
       </p>
       <p
-        className="mt-4 xl:mt-5 max-w-md text-[14px] xl:text-[16px] 2xl:text-[17px] leading-relaxed"
-        style={{ color: "rgba(180, 210, 230, 0.62)" }}
+        className="mt-4 xl:mt-5 max-w-md text-[14px] xl:text-[16px] 2xl:text-[17px] leading-relaxed text-ink-300"
       >
         {desc}
       </p>
@@ -263,12 +217,7 @@ function Member({
         target="_blank"
         rel="noopener noreferrer"
         aria-label={`${name} auf LinkedIn (öffnet in neuem Tab)`}
-        className="mt-5 inline-flex items-center gap-2 text-[13px] xl:text-[14px] font-medium transition-colors duration-200"
-        style={{ color: "rgba(150, 190, 220, 0.6)" }}
-        onMouseEnter={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = "#4dbef3")}
-        onMouseLeave={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = "rgba(150, 190, 220, 0.6)")}
-        onFocus={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = "#4dbef3")}
-        onBlur={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = "rgba(150, 190, 220, 0.6)")}
+        className="mt-5 inline-flex items-center gap-2 text-[13px] xl:text-[14px] font-medium text-ink-400 transition-colors duration-200 hover:text-blue-400 focus-visible:text-blue-400"
       >
         <Linkedin size={14} aria-hidden="true" />
         LinkedIn
@@ -282,22 +231,11 @@ function TeamPreview() {
 
   return (
     <section className="py-12 sm:py-10 lg:py-14 xl:py-18 2xl:py-24">
-      <FadeIn>
-        <SectionLabel>Über uns</SectionLabel>
-        <div className="mb-12 sm:mb-14 xl:mb-20 2xl:mb-24">
-          <h2 className="text-white text-[clamp(28px,4.5vw,72px)] tracking-tight">
-            Das sind wir.
-          </h2>
-          <p
-            className="mt-4 xl:mt-6 max-w-2xl 2xl:max-w-3xl text-[15px] sm:text-[17px] xl:text-[19px] 2xl:text-[21px] leading-relaxed"
-            style={{ color: "rgba(180,210,230,0.65)" }}
-          >
-            Wir sind Jonas und Berkant – zwei aus Triberg, die zusammen Webseiten für
-            Unternehmen im Schwarzwald bauen. Du weißt von Anfang an, wer an deinem
-            Projekt arbeitet und wen du anrufst.
-          </p>
-        </div>
-      </FadeIn>
+      <SectionHeader
+        title="Das sind wir."
+        lead="Wir sind Jonas und Berkant – zwei aus Triberg, die zusammen Webseiten für Unternehmen im Schwarzwald bauen. Du weißt von Anfang an, wer an deinem Projekt arbeitet und wen du anrufst."
+        className="mb-12 sm:mb-14 xl:mb-20 2xl:mb-24"
+      />
 
       <div className="grid gap-12 sm:gap-8 xl:gap-16 sm:grid-cols-2">
         {MEMBERS.map((m, i) => (
@@ -330,9 +268,6 @@ function Contact() {
 
   return (
     <section id="kontakt" className="py-12 sm:py-10 lg:py-14 xl:py-18 2xl:py-24">
-      <FadeIn>
-        <SectionLabel>Kontakt</SectionLabel>
-      </FadeIn>
       <div className="grid gap-10 md:gap-12 xl:gap-20 2xl:gap-28 md:grid-cols-2 items-start">
         <FadeIn>
           <h2 className="text-white text-[clamp(26px,4vw,64px)] tracking-tight mb-4 xl:mb-5">
@@ -343,19 +278,18 @@ function Contact() {
           <div className="flex items-center gap-3 mb-5 xl:mb-6">
             <div
               className="shrink-0 h-9 w-9 rounded-full overflow-hidden"
-              style={{ border: "1.5px solid rgba(77,190,243,0.4)" }}
+              style={{ border: "1.5px solid rgb(var(--blue-400-rgb) / 0.4)" }}
             >
               <img src={berkantImg} alt="Berkant Agyar" loading="lazy" decoding="async" className="h-full w-full object-cover object-top" />
             </div>
             <div>
-              <div className="text-[11px]" style={{ color: "rgba(150,190,220,0.5)" }}>Dein Ansprechpartner</div>
+              <div className="text-[11px] text-ink-400">Dein Ansprechpartner</div>
               <div className="text-[13px] text-white font-medium leading-tight">Berkant Agyar</div>
             </div>
           </div>
 
           <p
-            className="text-[14px] sm:text-[15px] xl:text-[17px] 2xl:text-[19px] leading-relaxed mb-8 max-w-md xl:max-w-lg 2xl:max-w-xl"
-            style={{ color: "rgba(180, 210, 230, 0.6)" }}
+            className="text-[14px] sm:text-[15px] xl:text-[17px] 2xl:text-[19px] leading-relaxed mb-8 max-w-md xl:max-w-lg 2xl:max-w-xl text-ink-300"
           >
             Wir melden uns innerhalb von 24 Stunden
             mit einer ersten Einschätzung und einem unverbindlichen Termin.
@@ -382,8 +316,8 @@ function Contact() {
           <div
             className="flex mb-4 p-1 rounded-xl gap-1"
             style={{
-              background: "rgba(10,19,30,0.7)",
-              border: "1px solid rgba(77,190,243,0.12)",
+              background: "rgb(var(--ink-950-rgb) / 0.7)",
+              border: "1px solid rgb(var(--blue-400-rgb) / 0.12)",
             }}
           >
             <HomeTabBtn active={mode === "form"} onClick={() => { setDirection(-1); setMode("form"); }}>
@@ -411,14 +345,14 @@ function Contact() {
                 <div
                   className="h-16 w-16 rounded-full flex items-center justify-center"
                   style={{
-                    background: "linear-gradient(135deg, rgba(0,105,153,0.3) 0%, rgba(77,190,243,0.15) 100%)",
-                    border: "1px solid rgba(77,190,243,0.3)",
+                    background: "linear-gradient(135deg, rgb(var(--blue-700-rgb) / 0.3) 0%, rgb(var(--blue-400-rgb) / 0.15) 100%)",
+                    border: "1px solid rgb(var(--blue-400-rgb) / 0.3)",
                   }}
                 >
-                  <Phone size={26} style={{ color: "#4dbef3" }} />
+                  <Phone size={26} style={{ color: "var(--blue-400)" }} />
                 </div>
                 <div>
-                  <p className="text-[13px] mb-1" style={{ color: "rgba(150,190,220,0.6)" }}>
+                  <p className="text-[13px] mb-1 text-ink-400">
                     Ruf uns einfach direkt an:
                   </p>
                   <a
@@ -428,7 +362,7 @@ function Contact() {
                     {BERKANT_PHONE}
                   </a>
                 </div>
-                <p className="text-[13px] max-w-xs leading-relaxed" style={{ color: "rgba(150,190,220,0.5)" }}>
+                <p className="text-[13px] max-w-xs leading-relaxed text-ink-400">
                   Falls wir nicht erreichbar sind, hinterlasse eine kurze Nachricht — wir melden uns schnellstmöglich.
                 </p>
                 <a
@@ -469,7 +403,7 @@ function HomeTabBtn({
       type="button"
       onClick={onClick}
       className="relative flex-1 rounded-lg px-4 py-2.5 text-[13px] font-medium tracking-wide cursor-pointer transition-colors duration-200"
-      style={{ color: active ? "#fff" : "rgba(150,190,220,0.6)" }}
+      style={{ color: active ? "#fff" : "var(--ink-400)" }}
     >
       {active && (
         <motion.div

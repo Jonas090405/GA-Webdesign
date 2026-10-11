@@ -9,7 +9,6 @@ import {
 } from "motion/react";
 import { useNavigate } from "react-router-dom";
 import { TeamBadge } from "./TeamBadge";
-import { SectionLabel } from "./SectionLabel";
 import { PrimaryButton } from "./Button";
 import { FadeIn } from "./FadeIn";
 
@@ -38,7 +37,7 @@ import { FadeIn } from "./FadeIn";
  */
 
 const FRAME_COUNT = 40;
-const PAGE_BG = "rgb(13,17,21)";
+const PAGE_BG = "var(--ink-950)";
 
 /**
  * Die vier Textblöcke auf dem Scrollfortschritt (0…1).
@@ -346,7 +345,7 @@ const CONTAINER =
 
 const LEAD_CLASS =
   "mt-5 sm:mt-6 text-[16px] sm:text-[18px] lg:text-[19px] xl:text-[21px] 2xl:text-[24px] leading-relaxed max-w-xl 2xl:max-w-2xl";
-const LEAD_COLOR = "rgba(206, 228, 242, 0.82)";
+const LEAD_COLOR = "var(--ink-100)";
 
 /**
  * Aktuell auf allen Geräten nur der Video-Hero — die Scroll-Fahrt
@@ -437,7 +436,7 @@ function ScrollFlightHero() {
             opacity: bloomOpacity,
             scale: bloomScale,
             background:
-              "radial-gradient(circle, rgba(77,190,243,0.42) 0%, rgba(0,105,153,0.16) 38%, transparent 68%)",
+              "radial-gradient(circle, rgb(var(--blue-400-rgb) / 0.42) 0%, rgb(var(--blue-700-rgb) / 0.16) 38%, transparent 68%)",
           }}
         />
 
@@ -452,7 +451,7 @@ function ScrollFlightHero() {
           className="absolute inset-0 pointer-events-none hidden sm:block"
           style={{
             background:
-              "linear-gradient(to right, rgba(9,13,18,0.86) 0%, rgba(9,13,18,0.42) 46%, transparent 74%)",
+              "linear-gradient(to right, rgb(var(--ink-950-rgb) / 0.86) 0%, rgb(var(--ink-950-rgb) / 0.42) 46%, transparent 74%)",
           }}
         />
         <div
@@ -460,7 +459,7 @@ function ScrollFlightHero() {
           className="absolute inset-0 pointer-events-none sm:hidden"
           style={{
             background:
-              "linear-gradient(to bottom, rgba(9,13,18,0.22) 0%, rgba(9,13,18,0.58) 52%, rgba(9,13,18,0.70) 100%)",
+              "linear-gradient(to bottom, rgb(var(--ink-950-rgb) / 0.22) 0%, rgb(var(--ink-950-rgb) / 0.58) 52%, rgb(var(--ink-950-rgb) / 0.70) 100%)",
           }}
         />
         <div
@@ -544,7 +543,7 @@ function ScrollFlightHero() {
           >
             <path
               d="M2 2.5 L11 11 L20 2.5"
-              stroke="#4dbef3"
+              className="stroke-blue-400"
               strokeWidth="1.7"
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -561,14 +560,10 @@ function HeadlineCopy({ onCta }: { onCta: () => void }) {
   return (
     <>
       <TeamBadge />
-      <SectionLabel>Webdesign · Entwicklung · Hosting · SEO</SectionLabel>
       <h1 className="text-white text-[clamp(34px,6.5vw,108px)] leading-[1.05] tracking-tight">
         Webseiten,{" "}
         <span
-          className="bg-clip-text text-transparent"
-          style={{
-            backgroundImage: "linear-gradient(135deg, #4dbef3 0%, #006999 100%)",
-          }}
+          className="text-blue-400"
         >
           die Wirkung zeigen.
         </span>
@@ -666,12 +661,12 @@ function VideoHero({ onCta }: { onCta: () => void }) {
             <source src="/hero-schwarzwald-mobile.mp4" type="video/mp4" />
           </video>
         )}
-        <div className="absolute inset-0" style={{ background: "rgba(9,13,18,0.45)" }} />
+        <div className="absolute inset-0" style={{ background: "rgb(var(--ink-950-rgb) / 0.45)" }} />
         <div
           className="absolute inset-0 hidden sm:block"
           style={{
             background:
-              "linear-gradient(to right, rgba(9,13,18,0.86) 0%, rgba(9,13,18,0.42) 46%, transparent 74%)",
+              "linear-gradient(to right, rgb(var(--ink-950-rgb) / 0.86) 0%, rgb(var(--ink-950-rgb) / 0.42) 46%, transparent 74%)",
           }}
         />
         <div
@@ -707,7 +702,7 @@ function StaticHero({ navigate }: { navigate: (to: string) => void }) {
           backgroundPosition: "center",
         }}
       >
-        <div className="absolute inset-0" style={{ background: "rgba(9,13,18,0.58)" }} />
+        <div className="absolute inset-0" style={{ background: "rgb(var(--ink-950-rgb) / 0.58)" }} />
         <div
           className="absolute inset-0"
           style={{
@@ -719,14 +714,10 @@ function StaticHero({ navigate }: { navigate: (to: string) => void }) {
       <div className={`${CONTAINER} relative`}>
         <div className="max-w-3xl">
           <TeamBadge />
-          <SectionLabel>Webdesign · Entwicklung · Hosting · SEO</SectionLabel>
           <h1 className="text-white text-[clamp(34px,6.5vw,108px)] leading-[1.05] tracking-tight">
             Webseiten,{" "}
             <span
-              className="bg-clip-text text-transparent"
-              style={{
-                backgroundImage: "linear-gradient(135deg, #4dbef3 0%, #006999 100%)",
-              }}
+              className="text-blue-400"
             >
               die Wirkung zeigen.
             </span>
@@ -745,7 +736,7 @@ function StaticHero({ navigate }: { navigate: (to: string) => void }) {
             ].map(([title, text]) => (
               <div key={title}>
                 <h2 className="text-white text-[17px] mb-1.5">{title}</h2>
-                <p className="text-[14px] leading-relaxed" style={{ color: "rgba(180,210,230,0.62)" }}>
+                <p className="text-[14px] leading-relaxed text-ink-300">
                   {text}
                 </p>
               </div>

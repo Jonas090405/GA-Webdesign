@@ -22,9 +22,9 @@ export function ContactLine({
 
   return (
     <div className="flex items-center gap-3">
-      <Icon size={18} className="shrink-0" style={{ color: "#4dbef3" }} aria-hidden />
+      <Icon size={18} className="shrink-0 text-blue-400" aria-hidden />
       <div className="min-w-0">
-        <div className="mb-1 text-[14px] xl:text-[16px]" style={{ color: "rgba(150,180,200,0.5)" }}>
+        <div className="mb-1 text-[14px] xl:text-[16px] text-ink-400">
           {label}
         </div>
         {onClick ? (

@@ -1,106 +1,151 @@
-import { usePageMeta } from "../../hooks/usePageMeta";
-import { SectionLabel } from "../SectionLabel";
-import { FadeIn } from "../FadeIn";
-import { PortfolioScrollSection } from "../PortfolioScrollSection";
-import { PrimaryButton } from "../Button";
+import { Link, useNavigate } from "react-router-dom";
 import { ExternalLink } from "lucide-react";
-import { useNavigate } from "react-router-dom";
-import gcnImg from "../../../imports/gcn-fahrzeughandel.png";
-import gcnAvatar from "../../../imports/gcn-avatar.jpeg";
-import gcnVideo from "../../../imports/GCN-Projekt.mp4";
-
-const PROJECTS = [
-  {
-    image: gcnImg,
-    video: gcnVideo,
-    tag: "Fahrzeughandel · 2026",
-    title: "GCN-Fahrzeughandel",
-    desc: "Vollständige Web-Plattform für einen Fahrzeughändler. Außendarstellung, Fahrzeugsuche, Verkaufsauftragsformulare mit automatischer E-Mail-Benachrichtigung und internes Kundenverwaltungs-Dashboard.",
-    url: "https://gcn-fahrzeughandel.de/",
-    testimonial: {
-      show: true, // ← false = Testimonial ausblenden
-      quote: "Die Zusammenarbeit war von Anfang bis Ende reibungslos. Unsere Vorstellungen wurden genau verstanden und eine Webseite gebaut, die wirklich zu uns passt. Wir bekommen regelmäßig positives Feedback von unseren Kunden.",
-      name: "Giosue Canobbio",
-      role: "Geschäftsführer",
-      company: "GCN-Fahrzeughandel",
-      avatar: gcnAvatar,
-    },
-  },
-  {
-    image: null,
-    tag: "In Umsetzung",
-    title: "Nächstes Projekt",
-    desc: "Unser nächstes Projekt ist gerade in Arbeit. Melde dich gerne, wenn du Interesse an einer Zusammenarbeit hast.",
-  },
-];
+import { usePageMeta } from "../../hooks/usePageMeta";
+import { FadeIn } from "../FadeIn";
+import { PrimaryButton } from "../Button";
+import { BrowserFrame } from "../BrowserFrame";
+import { ProjectActions } from "../ProjectActions";
+import { PROJECTS, type Project, isVisible, projectPath } from "../../../content/projects";
 
 export function Portfolio() {
   const navigate = useNavigate();
   usePageMeta({
-    title: "Portfolio | G&A Webdesign",
-    description: "Ausgewählte Webdesign-Projekte von G&A Webdesign. Moderne Webseiten für lokale Unternehmen aus dem Schwarzwald.",
+    title: "Projekte & Case Studies | G&A Webdesign",
+    description:
+      "Kundenprojekte von G&A Webdesign mit Case Study: Ausgangslage, Lösung und Ergebnis – moderne Webseiten für Unternehmen aus dem Schwarzwald.",
     path: "/projekte",
   });
+
   return (
-    <main id="main-content" className="mx-auto max-w-6xl xl:max-w-7xl 2xl:max-w-[1440px] px-5 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 pt-36 sm:pt-44 lg:pt-52 xl:pt-60 2xl:pt-72 pb-12 xl:pb-20 2xl:pb-28">
+    <main
+      id="main-content"
+      className="mx-auto max-w-6xl xl:max-w-7xl 2xl:max-w-[1440px] px-5 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 pt-36 sm:pt-44 lg:pt-52 xl:pt-60 2xl:pt-72 pb-12 xl:pb-20 2xl:pb-28"
+    >
       <FadeIn>
-        <SectionLabel>Projekte</SectionLabel>
         <h1 className="text-white text-[clamp(32px,6vw,84px)] tracking-tight leading-[1.05] max-w-4xl 2xl:max-w-5xl">
-          Projekte, die{" "}
-          <span
-            className="bg-clip-text text-transparent"
-            style={{
-              backgroundImage:
-                "linear-gradient(135deg, #4dbef3 0%, #006999 100%)",
-            }}
-          >
-            für sich sprechen.
-          </span>
+          Projekte, die <span className="text-blue-400">für sich sprechen.</span>
         </h1>
-        <p className="mt-5 sm:mt-6 max-w-2xl 2xl:max-w-3xl text-[15px] sm:text-[16px] 2xl:text-[18px] text-slate-400 leading-relaxed">
-          Eine Auswahl aktueller Kundenarbeiten.
+        <p className="mt-5 sm:mt-6 max-w-2xl 2xl:max-w-3xl text-[15px] sm:text-[17px] 2xl:text-[19px] text-ink-300 leading-relaxed">
+          Unsere Kundenprojekte – jeweils mit Case Study: wo das Problem lag, was wir gebaut
+          haben und was es gebracht hat.
         </p>
       </FadeIn>
 
-      <FadeIn delay={0.1} className="mt-12 sm:mt-16">
-        <PortfolioScrollSection projects={PROJECTS} />
-      </FadeIn>
+      <div className="mt-16 sm:mt-20 xl:mt-28 space-y-20 sm:space-y-28 xl:space-y-36">
+        {PROJECTS.map((p, i) => (
+          <ProjectTeaser key={p.slug} project={p} flip={i % 2 === 1} />
+        ))}
+      </div>
 
-      <FadeIn delay={0.2}>
-        <div className="mt-16 sm:mt-20 2xl:mt-28">
-          <SectionLabel>Persönliches Portfolio</SectionLabel>
-          <h2 className="text-white text-[22px] sm:text-[28px] 2xl:text-[36px] mb-3">
+      {/* Hochschulprojekte & Eigenarbeiten */}
+      <FadeIn>
+        <section
+          aria-labelledby="eigenarbeiten"
+          className="mt-24 sm:mt-32 xl:mt-40 border-t border-line pt-14 sm:pt-16 2xl:pt-20"
+        >
+          <h2
+            id="eigenarbeiten"
+            className="text-white text-[24px] sm:text-[30px] 2xl:text-[38px] tracking-tight mb-3"
+          >
             Hochschulprojekte &amp; Eigenarbeiten
           </h2>
-          <p className="text-slate-400 text-[14px] 2xl:text-[16px] leading-relaxed max-w-xl 2xl:max-w-2xl mb-7">
-            Im Laufe meines Studiums und durch private Nebenprojekte sind zahlreiche Arbeiten entstanden. Diese findest du gebündelt in meinem persönlichen Portfolio.
+          <p className="text-ink-300 text-[14px] sm:text-[15px] 2xl:text-[17px] leading-relaxed max-w-xl 2xl:max-w-2xl mb-7">
+            Im Laufe meines Studiums und durch private Nebenprojekte sind zahlreiche Arbeiten
+            entstanden. Diese findest du gebündelt in meinem persönlichen Portfolio.
           </p>
           <a
             href="https://portfolio.ga-webdesign.de"
             target="_blank"
             rel="noreferrer"
-            className="group inline-flex items-center gap-2 rounded-full border border-brand/40 bg-brand/10 px-6 py-3 text-brand-light hover:bg-brand/20 transition-all"
+            className="group inline-flex items-center gap-2 rounded-full border border-blue-400/30 bg-blue-400/10 px-6 py-3 text-blue-200 transition-colors duration-200 hover:bg-blue-400/20"
           >
             Persönliches Portfolio öffnen
-            <ExternalLink size={16} className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            <ExternalLink
+              size={16}
+              aria-hidden
+              className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+            />
           </a>
-        </div>
+        </section>
       </FadeIn>
 
       {/* CTA */}
       <FadeIn>
-        <div className="mt-20 2xl:mt-28 text-center">
-          <h2 className="text-white text-[28px] xl:text-[34px] 2xl:text-[42px] mb-3">
+        <div className="mt-24 2xl:mt-32 text-center">
+          <h2 className="text-white text-[28px] xl:text-[34px] 2xl:text-[42px] tracking-tight mb-3">
             Dein Projekt soll das nächste sein.
           </h2>
-          <p className="text-slate-400 text-[15px] xl:text-[16px] 2xl:text-[18px] mb-8 max-w-xl 2xl:max-w-2xl mx-auto">
+          <p className="text-ink-300 text-[15px] xl:text-[16px] 2xl:text-[18px] mb-8 max-w-xl 2xl:max-w-2xl mx-auto">
             Sag uns, was du dir vorstellst – das erste Gespräch ist kostenlos und unverbindlich.
           </p>
-          <PrimaryButton onClick={() => navigate("/kontakt")}>
-            Projekt anfragen
-          </PrimaryButton>
+          <PrimaryButton onClick={() => navigate("/kontakt")}>Projekt anfragen</PrimaryButton>
         </div>
       </FadeIn>
     </main>
+  );
+}
+
+/**
+ * Ein Projekt in der Übersicht: Screen auf der einen, Text auf der anderen
+ * Seite. Jedes zweite Projekt spiegelt die Seiten, damit die Liste bei
+ * mehreren Projekten nicht monoton wird.
+ */
+function ProjectTeaser({ project, flip }: { project: Project; flip: boolean }) {
+  const href = isVisible(project) ? projectPath(project) : project.url;
+  const internal = isVisible(project);
+
+  const screen = (
+    <BrowserFrame url={project.url} className="transition-transform duration-500 ease-out group-hover:-translate-y-1">
+      <img
+        src={project.cover.src}
+        alt={project.cover.alt}
+        loading="lazy"
+        decoding="async"
+        width={1440}
+        height={900}
+        className="block w-full h-auto"
+      />
+    </BrowserFrame>
+  );
+
+  return (
+    <FadeIn>
+      <article className="grid gap-8 lg:gap-12 xl:gap-16 lg:grid-cols-12 lg:items-center">
+        <div className={`group lg:col-span-7 ${flip ? "lg:order-2" : ""}`}>
+          {href && internal ? (
+            <Link to={href} tabIndex={-1} aria-hidden>
+              {screen}
+            </Link>
+          ) : (
+            screen
+          )}
+        </div>
+
+        <div className={`lg:col-span-5 ${flip ? "lg:order-1" : ""}`}>
+          <h2 className="text-white text-[clamp(28px,3.6vw,52px)] leading-[1.05] tracking-tight">
+            {project.title}
+          </h2>
+          <p className="mt-3 text-[13px] xl:text-[14px] text-ink-400">
+            {project.industry} · {project.location} · {project.year}
+          </p>
+          <p className="mt-5 text-[15px] xl:text-[17px] 2xl:text-[18px] leading-relaxed text-ink-300">
+            {project.summary}
+          </p>
+          <ul className="mt-6 flex flex-wrap gap-2" aria-label="Leistungen in diesem Projekt">
+            {project.services.map((s) => (
+              <li
+                key={s}
+                className="rounded-full border border-blue-400/15 bg-blue-400/[0.06] px-3 py-1 text-[12px] xl:text-[13px] text-ink-200"
+              >
+                {s}
+              </li>
+            ))}
+          </ul>
+          <div className="mt-8">
+            <ProjectActions project={project} noMargin align="start" />
+          </div>
+        </div>
+      </article>
+    </FadeIn>
   );
 }

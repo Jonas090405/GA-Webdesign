@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from "react";
+import { BLUE_400, blue400 } from "../../lib/tokens";
 
 /**
  * Schwarzwald-Runner — kleines Canvas-Spiel im Footer.
@@ -13,7 +14,7 @@ import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from "
 // Himmel über dem Boden lässt auch beim höchsten Sprung das Geweih im Bild.
 const WORLD_H = 202;
 const GROUND_Y = 162;
-const GROUND_COLOR = "rgba(77, 190, 243, 0.32)";
+const GROUND_COLOR = blue400(0.32);
 const HUD_LEFT =
   "left-5 sm:left-8 lg:left-12 xl:left-16 2xl:left-20";
 const HUD_RIGHT =
@@ -297,7 +298,7 @@ export function ForestRunner({ className = "" }: ForestRunnerProps) {
     ctx.translate(0, shakeY);
 
     // Ferne Hügelkette
-    ctx.fillStyle = "rgba(77, 190, 243, 0.07)";
+    ctx.fillStyle = blue400(0.07);
     for (const h of st.hillsFar) {
       const hx = ((h.x - st.distance * 0.18) % (w + 500) + w + 500) % (w + 500) - 250;
       ctx.beginPath();
@@ -308,7 +309,7 @@ export function ForestRunner({ className = "" }: ForestRunnerProps) {
     }
 
     // Nähere Hügelkette
-    ctx.fillStyle = "rgba(77, 190, 243, 0.11)";
+    ctx.fillStyle = blue400(0.11);
     for (const h of st.hillsNear) {
       const hx = ((h.x - st.distance * 0.42) % (w + 400) + w + 400) % (w + 400) - 200;
       ctx.beginPath();
@@ -320,8 +321,8 @@ export function ForestRunner({ className = "" }: ForestRunnerProps) {
 
     // Nebelband über dem Grund
     const fog = ctx.createLinearGradient(0, GROUND_Y - 34, 0, GROUND_Y);
-    fog.addColorStop(0, "rgba(77, 190, 243, 0)");
-    fog.addColorStop(1, "rgba(77, 190, 243, 0.075)");
+    fog.addColorStop(0, blue400(0));
+    fog.addColorStop(1, blue400(0.075));
     ctx.fillStyle = fog;
     ctx.fillRect(0, GROUND_Y - 34, w, 34);
 
@@ -335,7 +336,7 @@ export function ForestRunner({ className = "" }: ForestRunnerProps) {
     ctx.stroke();
 
     // Bodenstriche als Tempo-Anzeige
-    ctx.strokeStyle = "rgba(77, 190, 243, 0.2)";
+    ctx.strokeStyle = blue400(0.2);
     const tickSpacing = 46;
     const offset = st.distance % tickSpacing;
     for (let i = -1; i * tickSpacing - offset < w + tickSpacing; i++) {
@@ -347,15 +348,15 @@ export function ForestRunner({ className = "" }: ForestRunnerProps) {
     }
 
     // Hindernisse
-    ctx.fillStyle = "rgba(77, 190, 243, 0.62)";
+    ctx.fillStyle = blue400(0.62);
     for (const o of st.obstacles) {
       if (o.kind === 0) drawFir(ctx, o.x + o.w / 2, GROUND_Y, o.h);
       else drawStump(ctx, o.x + o.w / 2, GROUND_Y, o.h);
     }
 
     // Reh
-    ctx.fillStyle = "#4dbef3";
-    ctx.strokeStyle = "#4dbef3";
+    ctx.fillStyle = BLUE_400;
+    ctx.strokeStyle = BLUE_400;
     drawDeer(ctx, 62, GROUND_Y + st.deerY, st.t * 0.42, !st.grounded);
 
     // Keine harte Kante, wenn ein Hügel genau am Rand endet.
@@ -651,7 +652,7 @@ export function ForestRunner({ className = "" }: ForestRunnerProps) {
         {best > 0 && (
           <div
             className={`pointer-events-none absolute top-2.5 sm:top-3 z-10 text-[11px] sm:text-[12px] 2xl:text-[13px] tabular-nums ${HUD_LEFT}`}
-            style={{ color: "rgba(170, 200, 220, 0.55)" }}
+            style={{ color: "var(--ink-300)" }}
           >
             Rekord {best}
           </div>
@@ -660,7 +661,7 @@ export function ForestRunner({ className = "" }: ForestRunnerProps) {
         {phase === "running" && (
           <div
             className={`pointer-events-none absolute top-2.5 sm:top-3 text-[14px] sm:text-[15px] 2xl:text-[16px] tabular-nums font-semibold text-right ${HUD_RIGHT}`}
-            style={{ color: "rgba(200, 228, 245, 0.85)" }}
+            style={{ color: "var(--ink-100)" }}
           >
             {score}
           </div>
@@ -671,21 +672,19 @@ export function ForestRunner({ className = "" }: ForestRunnerProps) {
           <div className="pointer-events-none absolute inset-0 z-[2] flex flex-col items-center justify-center text-center px-3 sm:px-4">
             <div
               className="absolute inset-0"
-              style={{ background: "rgba(10, 15, 20, 0.55)" }}
+              style={{ background: "rgb(var(--ink-950-rgb) / 0.55)" }}
             />
             <div className="relative max-w-[16rem] sm:max-w-md">
               {phase === "over" && (
                 <p
-                  className="text-[14px] sm:text-[16px] font-semibold mb-1 leading-snug text-balance"
-                  style={{ color: "rgba(215, 236, 250, 0.95)" }}
+                  className="text-[14px] sm:text-[16px] font-semibold mb-1 leading-snug text-balance text-ink-100"
                 >
                   {score} Punkte
                   {score > 0 && score >= best ? " — neuer Rekord" : ""}
                 </p>
               )}
               <p
-                className="text-[12px] sm:text-[14px] leading-snug text-balance"
-                style={{ color: "rgba(170, 200, 220, 0.72)" }}
+                className="text-[12px] sm:text-[14px] leading-snug text-balance text-ink-300"
               >
                 {hint}
               </p>

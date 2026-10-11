@@ -14,9 +14,9 @@ function ModelSkeleton() {
           className="relative aspect-[3/4] flex items-center justify-center"
         >
           {/* Sanftes Glow-Platzhalter in Markenblau */}
-          <div className="absolute h-2/3 w-2/3 rounded-full bg-gradient-to-b from-[#4dbef3]/15 to-transparent blur-2xl animate-pulse" />
+          <div className="absolute h-2/3 w-2/3 rounded-full bg-gradient-to-b from-blue-400/15 to-transparent blur-2xl animate-pulse" />
           {/* Lade-Spinner */}
-          <div className="h-9 w-9 rounded-full border-2 border-[#4dbef3]/20 border-t-[#4dbef3]/70 animate-spin" />
+          <div className="h-9 w-9 rounded-full border-2 border-blue-400/20 border-t-blue-400/70 animate-spin" />
         </div>
       ))}
     </div>

@@ -38,9 +38,9 @@ export function CookieBanner() {
         >
           <div
             className="rounded-2xl border border-white/10 shadow-2xl p-5"
-            style={{ background: "rgb(16, 22, 28)" }}
+            style={{ background: "var(--ink-900)" }}
           >
-            <p className="text-slate-300 text-[13px] leading-relaxed mb-4">
+            <p className="text-ink-200 text-[13px] leading-relaxed mb-4">
               Mit deiner Einwilligung nutzen wir{" "}
               <strong className="text-slate-100">Google Analytics</strong> mit
               Cookies, um die Nutzung pseudonym auszuwerten und das Angebot zu
@@ -59,17 +59,17 @@ export function CookieBanner() {
                 onClick={decline}
                 className="px-4 py-2 rounded-xl text-[13px] font-medium transition-all duration-300 cursor-pointer"
                 style={{
-                  background: "rgba(77, 190, 243, 0.07)",
-                  border: "1px solid rgba(77, 190, 243, 0.2)",
-                  color: "rgba(200, 235, 255, 0.85)",
+                  background: "rgb(var(--blue-400-rgb) / 0.07)",
+                  border: "1px solid rgb(var(--blue-400-rgb) / 0.2)",
+                  color: "var(--ink-100)",
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.background = "rgba(77, 190, 243, 0.13)";
-                  e.currentTarget.style.borderColor = "rgba(77, 190, 243, 0.4)";
+                  e.currentTarget.style.background = "rgb(var(--blue-400-rgb) / 0.13)";
+                  e.currentTarget.style.borderColor = "rgb(var(--blue-400-rgb) / 0.4)";
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.background = "rgba(77, 190, 243, 0.07)";
-                  e.currentTarget.style.borderColor = "rgba(77, 190, 243, 0.2)";
+                  e.currentTarget.style.background = "rgb(var(--blue-400-rgb) / 0.07)";
+                  e.currentTarget.style.borderColor = "rgb(var(--blue-400-rgb) / 0.2)";
                 }}
               >
                 Ablehnen

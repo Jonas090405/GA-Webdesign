@@ -8,6 +8,7 @@ import {
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Environment, Lightformer, useGLTF } from "@react-three/drei";
 import * as THREE from "three";
+import { BLUE_200, BLUE_400 } from "../../lib/tokens";
 
 type InputTarget = MutableRefObject<{ x: number; y: number }>;
 
@@ -332,13 +333,13 @@ function ModelCanvas({ url, target, baseYaw, onReady }: ModelProps) {
             intensity={2}
             position={[0, 2, 4]}
             scale={[6, 6, 1]}
-            color="#bfe6ff"
+            color={BLUE_200}
           />
           <Lightformer
             intensity={1.3}
             position={[-4, 0, 2]}
             scale={[4, 6, 1]}
-            color="#4dbef3"
+            color={BLUE_400}
           />
           <Lightformer
             intensity={1}

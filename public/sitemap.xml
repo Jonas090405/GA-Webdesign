@@ -16,7 +16,13 @@
     <loc>https://ga-webdesign.de/projekte</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
-    <lastmod>2026-05-31</lastmod>
+    <lastmod>2026-10-11</lastmod>
+  </url>
+  <url>
+    <loc>https://ga-webdesign.de/projekte/gcn-fahrzeughandel</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <lastmod>2026-10-11</lastmod>
   </url>
   <url>
     <loc>https://ga-webdesign.de/ablauf</loc>

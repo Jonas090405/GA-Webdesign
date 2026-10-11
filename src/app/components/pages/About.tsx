@@ -1,6 +1,5 @@
 import { usePageMeta } from "../../hooks/usePageMeta";
 import { motion } from "motion/react";
-import { SectionLabel } from "../SectionLabel";
 import { Card } from "../Card";
 import { PrimaryButton } from "../Button";
 import { FadeIn } from "../FadeIn";
@@ -22,7 +21,7 @@ const ANSATZ: { poster: string; clip: string; t: string; d: string }[] = [
     poster: tileZapPoster,
     clip: tileZapClip,
     t: "Einfach & klar",
-    d: "Ein modernes Design, bei dem eure Kunden sofort verstehen, was ihr anbietet. Ganz ohne suchen zu müssen.",
+    d: "Ein modernes Design, bei dem deine Kunden sofort verstehen, was du anbietest. Ganz ohne suchen zu müssen.",
   },
   {
     poster: tileLayersPoster,
@@ -34,7 +33,7 @@ const ANSATZ: { poster: string; clip: string; t: string; d: string }[] = [
     poster: tileUsersPoster,
     clip: tileUsersClip,
     t: "Persönliche Betreuung",
-    d: "Ihr habt feste Ansprechpartner. Kein Callcenter, kein Ping-Pong – direkt, schnell und auf Augenhöhe.",
+    d: "Du hast feste Ansprechpartner. Kein Callcenter, kein Ping-Pong – direkt, schnell und auf Augenhöhe.",
   },
 ];
 
@@ -55,7 +54,7 @@ function AnsatzCard({
             className="mb-4 w-full aspect-[16/9]"
           />
           <h3 className="text-white text-[18px] sm:text-[20px] 2xl:text-[23px] mb-2">{t}</h3>
-          <p className="text-[14px] 2xl:text-[16px] leading-relaxed" style={{ color: "rgba(180, 210, 230, 0.6)" }}>
+          <p className="text-[14px] 2xl:text-[16px] leading-relaxed text-ink-300">
             {d}
           </p>
         </Card>
@@ -73,9 +72,6 @@ export function About() {
   const navigate = useNavigate();
   return (
     <main id="main-content" className="mx-auto max-w-6xl xl:max-w-7xl 2xl:max-w-[1440px] px-5 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 pt-36 sm:pt-44 lg:pt-52 xl:pt-60 2xl:pt-72 pb-12 xl:pb-20 2xl:pb-28">
-      <FadeIn>
-        <SectionLabel>Über uns</SectionLabel>
-      </FadeIn>
 
       {/* ── Jonas ── */}
       <div className="mt-4 grid gap-10 md:gap-16 2xl:gap-24 md:grid-cols-5 items-center">
@@ -83,39 +79,34 @@ export function About() {
           <h1 className="text-white text-[clamp(36px,6vw,80px)] tracking-tight leading-[1.05]">
             Hi, ich bin{" "}
             <span
-              className="bg-clip-text text-transparent"
-              style={{ backgroundImage: "linear-gradient(135deg, #4dbef3 0%, #006999 100%)" }}
+              className="text-blue-400"
             >
               Jonas.
             </span>
           </h1>
           <p
-            className="mt-2 text-[12px] sm:text-[13px] tracking-[0.2em]"
-            style={{ color: "#4dbef3" }}
+            className="mt-2 text-[12px] sm:text-[13px] tracking-[0.2em] text-blue-400"
           >
             Design & Frontend
           </p>
           <p
-            className="mt-7 text-[16px] sm:text-[17px] xl:text-[19px] 2xl:text-[21px] leading-relaxed"
-            style={{ color: "rgba(200, 225, 240, 0.8)" }}
+            className="mt-7 text-[16px] sm:text-[17px] xl:text-[19px] 2xl:text-[21px] leading-relaxed text-ink-100"
           >
             Ich bin 21 Jahre alt und komme aus Triberg im Schwarzwald.
-            Ich gestalte eure Webseite und setze sie im Frontend um – also alles,
-            was eure Kunden später sehen und anklicken. Auf Wunsch auch euren
+            Ich gestalte deine Webseite und setze sie im Frontend um – also alles,
+            was deine Kunden später sehen und anklicken. Auf Wunsch auch deinen
             kompletten Markenauftritt, vom Logo bis zu den Farben.
           </p>
           <p
-            className="mt-4 text-[15px] xl:text-[17px] 2xl:text-[18px] leading-relaxed"
-            style={{ color: "rgba(180, 210, 230, 0.6)" }}
+            className="mt-4 text-[15px] xl:text-[17px] 2xl:text-[18px] leading-relaxed text-ink-300"
           >
             Aktuell bin ich im 7. Semester Medienkonzeption an der Hochschule Furtwangen,
             mit Schwerpunkt auf UX/UI-Design und Frontend-Entwicklung. Nebenbei arbeite ich
             als zertifizierter Softwaredesigner bei M&amp;M Software. Mein Fachwissen aus
-            Studium und Beruf bringe ich direkt in euer Projekt ein.
+            Studium und Beruf bringe ich direkt in dein Projekt ein.
           </p>
           <p
-            className="mt-4 text-[15px] xl:text-[17px] 2xl:text-[18px] leading-relaxed"
-            style={{ color: "rgba(180, 210, 230, 0.6)" }}
+            className="mt-4 text-[15px] xl:text-[17px] 2xl:text-[18px] leading-relaxed text-ink-300"
           >
             Entworfen wird in Figma – von der Webseite bis zu Logo und Markenauftritt.
             Gebaut wird mit Astro oder Next.js, React, TypeScript und
@@ -127,10 +118,7 @@ export function About() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Jonas Gissler auf LinkedIn (öffnet in neuem Tab)"
-            className="mt-6 inline-flex items-center gap-2.5 text-[14px] xl:text-[15px] font-medium transition-colors duration-200"
-            style={{ color: "rgba(150, 190, 220, 0.6)" }}
-            onMouseEnter={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = "#4dbef3")}
-            onMouseLeave={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = "rgba(150, 190, 220, 0.6)")}
+            className="mt-6 inline-flex items-center gap-2.5 text-[14px] xl:text-[15px] font-medium transition-colors duration-200 text-ink-400 hover:text-blue-400 focus-visible:text-blue-400"
           >
             <Linkedin size={16} aria-hidden="true" />
             LinkedIn
@@ -148,42 +136,37 @@ export function About() {
           <h2 className="text-white text-[clamp(36px,6vw,80px)] tracking-tight leading-[1.05]">
             Hi, ich bin{" "}
             <span
-              className="bg-clip-text text-transparent"
-              style={{ backgroundImage: "linear-gradient(135deg, #4dbef3 0%, #006999 100%)" }}
+              className="text-blue-400"
             >
               Berkant.
             </span>
           </h2>
           <p
-            className="mt-2 text-[12px] sm:text-[13px] tracking-[0.2em]"
-            style={{ color: "#4dbef3" }}
+            className="mt-2 text-[12px] sm:text-[13px] tracking-[0.2em] text-blue-400"
           >
             Backend & Kundenkontakt
           </p>
           <p
-            className="mt-7 text-[16px] sm:text-[17px] xl:text-[19px] 2xl:text-[21px] leading-relaxed"
-            style={{ color: "rgba(200, 225, 240, 0.8)" }}
+            className="mt-7 text-[16px] sm:text-[17px] xl:text-[19px] 2xl:text-[21px] leading-relaxed text-ink-100"
           >
-            Ich komme wie Jonas aus Triberg und bin euer Ansprechpartner – von der
-            ersten Anfrage bis zum Livegang. Und ich sorge dafür, dass hinter eurer
+            Ich komme wie Jonas aus Triberg und bin dein Ansprechpartner – von der
+            ersten Anfrage bis zum Livegang. Und ich sorge dafür, dass hinter deiner
             Webseite alles zuverlässig läuft.
           </p>
           <p
-            className="mt-4 text-[15px] xl:text-[17px] 2xl:text-[18px] leading-relaxed"
-            style={{ color: "rgba(180, 210, 230, 0.6)" }}
+            className="mt-4 text-[15px] xl:text-[17px] 2xl:text-[18px] leading-relaxed text-ink-300"
           >
             Ich studiere Wirtschaftsinformatik an der Hochschule Furtwangen, ebenfalls im
             7. Semester, mit Schwerpunkt Projektmanagement und Digital Business. Praxis
             dazu kommt aus dem Projektmanagement bei Mercedes-Benz.
           </p>
           <p
-            className="mt-4 text-[15px] xl:text-[17px] 2xl:text-[18px] leading-relaxed"
-            style={{ color: "rgba(180, 210, 230, 0.6)" }}
+            className="mt-4 text-[15px] xl:text-[17px] 2xl:text-[18px] leading-relaxed text-ink-300"
           >
             Technisch kümmere ich mich um das Backend: Kontaktformulare und E-Mail-Versand,
-            Datenbanken, Schnittstellen und das Redaktionssystem, über das ihr eure Inhalte
+            Datenbanken, Schnittstellen und das Redaktionssystem, über das du deine Inhalte
             selbst pflegt – mit Node.js, Supabase und Sanity. Dazu Hosting, Domain und
-            Deployment. Und bei Angebot, Terminen und Abstimmung bin ich euer direkter Draht
+            Deployment. Und bei Angebot, Terminen und Abstimmung bin ich dein direkter Draht
             zu uns.
           </p>
           <a
@@ -191,10 +174,7 @@ export function About() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Berkant Agyar auf LinkedIn (öffnet in neuem Tab)"
-            className="mt-6 inline-flex items-center gap-2.5 text-[14px] xl:text-[15px] font-medium transition-colors duration-200"
-            style={{ color: "rgba(150, 190, 220, 0.6)" }}
-            onMouseEnter={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = "#4dbef3")}
-            onMouseLeave={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = "rgba(150, 190, 220, 0.6)")}
+            className="mt-6 inline-flex items-center gap-2.5 text-[14px] xl:text-[15px] font-medium transition-colors duration-200 text-ink-400 hover:text-blue-400 focus-visible:text-blue-400"
           >
             <Linkedin size={16} aria-hidden="true" />
             LinkedIn
@@ -209,7 +189,6 @@ export function About() {
       {/* ── Unser Ansatz ── */}
       <div className="mt-24 sm:mt-28 xl:mt-32 2xl:mt-40">
         <FadeIn>
-          <SectionLabel>Unser Ansatz</SectionLabel>
           <h2 className="text-white text-[clamp(26px,4vw,52px)] tracking-tight max-w-2xl 2xl:max-w-3xl mb-10 2xl:mb-14">
             Was uns bei jeder Webseite wichtig ist.
           </h2>
@@ -228,8 +207,7 @@ export function About() {
             Lass uns miteinander reden.
           </h2>
           <p
-            className="text-[15px] xl:text-[16px] 2xl:text-[18px] mb-8"
-            style={{ color: "rgba(180, 210, 230, 0.6)" }}
+            className="text-[15px] xl:text-[16px] 2xl:text-[18px] mb-8 text-ink-300"
           >
             Unverbindlich, entspannt — Berkant meldet sich in der Regel innerhalb von 24 Stunden bei dir.
           </p>

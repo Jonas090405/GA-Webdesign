@@ -82,9 +82,7 @@ export function TertiaryButton({
   external?: boolean;
 }) {
   const cls =
-    "group/btn inline-flex cursor-pointer items-center gap-1.5 text-[14px] xl:text-[15px] 2xl:text-[16px] font-medium transition-colors duration-200 whitespace-nowrap";
-  const color = "rgba(152, 220, 252, 0.85)";
-  const colorHover = "rgba(186, 230, 253, 1)";
+    "group/btn inline-flex cursor-pointer items-center gap-1.5 text-[14px] xl:text-[15px] 2xl:text-[16px] font-medium whitespace-nowrap text-blue-200 transition-colors duration-200 hover:text-blue-100 focus-visible:text-blue-100";
   const icon = (
     <ArrowUpRight
       size={14}
@@ -100,9 +98,6 @@ export function TertiaryButton({
         target={external ? "_blank" : "_self"}
         rel={external ? "noreferrer" : undefined}
         className={cls}
-        style={{ color }}
-        onMouseEnter={(e) => { e.currentTarget.style.color = colorHover; }}
-        onMouseLeave={(e) => { e.currentTarget.style.color = color; }}
       >
         {children}
         {icon}
@@ -111,13 +106,7 @@ export function TertiaryButton({
   }
 
   return (
-    <button
-      onClick={onClick}
-      className={cls}
-      style={{ color }}
-      onMouseEnter={(e) => { e.currentTarget.style.color = colorHover; }}
-      onMouseLeave={(e) => { e.currentTarget.style.color = color; }}
-    >
+    <button onClick={onClick} className={cls}>
       {children}
       {icon}
     </button>
@@ -134,22 +123,7 @@ export function GhostButton({
   return (
     <button
       onClick={onClick}
-      className="group/btn inline-flex cursor-pointer items-center gap-2 rounded-full px-6 py-3 xl:px-7 xl:py-3.5 2xl:px-9 2xl:py-4 text-[15px] 2xl:text-[17px] font-medium transition-all duration-300 whitespace-nowrap"
-      style={{
-        background: "rgba(77, 190, 243, 0.07)",
-        border: "1px solid rgba(77, 190, 243, 0.2)",
-        color: "rgba(200, 235, 255, 0.85)",
-      }}
-      onMouseEnter={(e) => {
-        const el = e.currentTarget;
-        el.style.background = "rgba(77, 190, 243, 0.13)";
-        el.style.borderColor = "rgba(77, 190, 243, 0.4)";
-      }}
-      onMouseLeave={(e) => {
-        const el = e.currentTarget;
-        el.style.background = "rgba(77, 190, 243, 0.07)";
-        el.style.borderColor = "rgba(77, 190, 243, 0.2)";
-      }}
+      className="group/btn inline-flex cursor-pointer items-center gap-2 rounded-full border border-blue-400/20 bg-blue-400/[0.07] px-6 py-3 xl:px-7 xl:py-3.5 2xl:px-9 2xl:py-4 text-[15px] 2xl:text-[17px] font-medium text-ink-100 whitespace-nowrap transition-colors duration-300 hover:border-blue-400/40 hover:bg-blue-400/[0.13] focus-visible:border-blue-400/40 focus-visible:bg-blue-400/[0.13]"
     >
       <span className="relative z-10 inline-flex items-center gap-2">
         {children}

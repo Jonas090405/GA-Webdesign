@@ -2,11 +2,31 @@ import { useState, useRef, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { motion } from "motion/react";
 import { usePageMeta } from "../../hooks/usePageMeta";
-import { SectionLabel } from "../SectionLabel";
 import { Card } from "../Card";
 import { PrimaryButton } from "../Button";
 import { FadeIn } from "../FadeIn";
-import { Check, Minus, Server, Wrench } from "lucide-react";
+import {
+  Blocks,
+  BriefcaseBusiness,
+  CalendarCheck,
+  Camera,
+  ChartLine,
+  Check,
+  Clapperboard,
+  FilePen,
+  Languages,
+  LayoutDashboard,
+  Megaphone,
+  Minus,
+  Newspaper,
+  Palette,
+  Plus,
+  Server,
+  ShoppingCart,
+  Wrench,
+  type LucideIcon,
+} from "lucide-react";
+import { TechIcon, hasTechIcon } from "../TechIcon";
 import { useNavigate } from "react-router-dom";
 import { FAQSection } from "../FAQSection";
 import { TileMedia } from "../TileMedia";
@@ -99,10 +119,10 @@ function LeistungenCard({
             />
             <div className="flex flex-col flex-1">
               <h3 className="text-white text-[22px] 2xl:text-[26px] mb-1">{title}</h3>
-              <p className="text-slate-400 text-[14px] 2xl:text-[16px] mb-5">{lead}</p>
+              <p className="text-ink-300 text-[14px] 2xl:text-[16px] mb-5">{lead}</p>
               <ul className="space-y-2.5">
                 {points.map((p) => (
-                  <CheckItem key={p} className="text-slate-300 text-[14px] 2xl:text-[16px]">
+                  <CheckItem key={p} className="text-ink-200 text-[14px] 2xl:text-[16px]">
                     {p}
                   </CheckItem>
                 ))}
@@ -187,9 +207,9 @@ function InfoTooltip({ text, onGradient = false }: { text: string; onGradient?: 
             : {
                 width: 15,
                 height: 15,
-                background: "rgba(77,190,243,0.12)",
-                border: "1px solid rgba(77,190,243,0.28)",
-                color: "#4dbef3",
+                background: "rgb(var(--blue-400-rgb) / 0.12)",
+                border: "1px solid rgb(var(--blue-400-rgb) / 0.28)",
+                color: "var(--blue-400)",
                 fontSize: 9,
                 fontWeight: 700,
                 lineHeight: 1,
@@ -205,14 +225,14 @@ function InfoTooltip({ text, onGradient = false }: { text: string; onGradient?: 
         createPortal(
           <span
             role="tooltip"
-            className="z-[9999] w-56 rounded-xl px-3 py-2.5 text-[12px] text-slate-300 leading-relaxed pointer-events-none"
+            className="z-[9999] w-56 rounded-xl px-3 py-2.5 text-[12px] text-ink-200 leading-relaxed pointer-events-none"
             style={{
               position: "fixed",
               left: pos.x,
               top: pos.y - 8,
               transform: "translateX(-50%) translateY(-100%)",
-              background: "rgba(8,16,22,0.97)",
-              border: "1px solid rgba(77,190,243,0.18)",
+              background: "rgb(var(--ink-950-rgb) / 0.97)",
+              border: "1px solid rgb(var(--blue-400-rgb) / 0.18)",
               backdropFilter: "blur(12px)",
               boxShadow: "0 8px 32px rgba(0,0,0,0.5)",
             }}
@@ -266,9 +286,9 @@ function WebseitePreisCard({ onContact }: { onContact: () => void }) {
     const rect = el.getBoundingClientRect();
     const mx = e.clientX - rect.left;
     const my = e.clientY - rect.top;
-    el.style.background = `radial-gradient(520px circle at ${mx}px ${my}px, rgba(77,190,243,0.55), rgba(77,190,243,0.06) 70%)`;
+    el.style.background = `radial-gradient(520px circle at ${mx}px ${my}px, rgb(var(--blue-400-rgb) / 0.55), rgb(var(--blue-400-rgb) / 0.06) 70%)`;
     if (spotRef.current) {
-      spotRef.current.style.background = `radial-gradient(600px circle at ${mx}px ${my}px, rgba(77,190,243,0.07), transparent 70%)`;
+      spotRef.current.style.background = `radial-gradient(600px circle at ${mx}px ${my}px, rgb(var(--blue-400-rgb) / 0.07), transparent 70%)`;
       spotRef.current.style.opacity = "1";
     }
   }
@@ -276,7 +296,7 @@ function WebseitePreisCard({ onContact }: { onContact: () => void }) {
   function handleLeave() {
     const el = outerRef.current;
     if (!el) return;
-    el.style.background = "rgba(77,190,243,0.14)";
+    el.style.background = "rgb(var(--blue-400-rgb) / 0.14)";
     if (spotRef.current) spotRef.current.style.opacity = "0";
   }
 
@@ -286,7 +306,7 @@ function WebseitePreisCard({ onContact }: { onContact: () => void }) {
       onMouseMove={handleMove}
       onMouseLeave={handleLeave}
       className="h-full rounded-2xl"
-      style={{ background: "rgba(77,190,243,0.14)", padding: "1px" }}
+      style={{ background: "rgb(var(--blue-400-rgb) / 0.14)", padding: "1px" }}
     >
       <div
         className="relative overflow-hidden flex flex-col h-full rounded-2xl p-7 xl:p-9 2xl:p-11"
@@ -309,34 +329,33 @@ function WebseitePreisCard({ onContact }: { onContact: () => void }) {
             <h3 className="text-white text-[26px] xl:text-[30px] 2xl:text-[34px] tracking-tight leading-tight mb-1">
               Deine Webseite
             </h3>
-            <p className="text-slate-400 text-[14px] 2xl:text-[15px]">Komplett. Fertig. Persönlich.</p>
+            <p className="text-ink-300 text-[14px] 2xl:text-[15px]">Komplett. Fertig. Persönlich.</p>
           </div>
 
           {/* Preis */}
           <div className="mb-6">
             <div className="flex items-baseline gap-2">
               <span
-                className="text-[42px] xl:text-[50px] font-light tracking-tight"
-                style={{ color: "#4dbef3" }}
+                className="text-[42px] xl:text-[50px] font-light tracking-tight text-blue-400"
               >
                 auf Anfrage
               </span>
             </div>
-            <p className="text-slate-500 text-[12px] mt-0.5">Individuelles Angebot nach Erstgespräch & Anforderungsanalyse</p>
+            <p className="text-ink-400 text-[12px] mt-0.5">Individuelles Angebot nach Erstgespräch & Anforderungsanalyse</p>
           </div>
 
-          <div className="h-px mb-6" style={{ background: "rgba(77,190,243,0.1)" }} />
+          <div className="h-px mb-6" style={{ background: "rgb(var(--blue-400-rgb) / 0.1)" }} />
 
           {/* Features – gestaffelt nach Design / Technik / Deployment */}
           <div className="space-y-4 mb-6">
             {websiteFeatureGroups.map((group) => (
               <div key={group.label}>
-                <p className="text-[10px] tracking-[0.18em] font-medium text-slate-500 mb-2">
+                <p className="text-[10px] tracking-[0.18em] font-medium text-ink-400 mb-2">
                   {group.label}
                 </p>
                 <ul className="space-y-2">
                   {group.points.map((p) => (
-                    <CheckItem key={p} className="text-slate-300 text-[13px] xl:text-[14px]">
+                    <CheckItem key={p} className="text-ink-200 text-[13px] xl:text-[14px]">
                       {p}
                     </CheckItem>
                   ))}
@@ -368,37 +387,37 @@ function HostingCard() {
         <div className="flex items-center gap-2 mb-3">
           <div
             className="inline-flex h-9 w-9 items-center justify-center rounded-lg"
-            style={{ background: "rgba(77,190,243,0.1)", border: "1px solid rgba(77,190,243,0.18)" }}
+            style={{ background: "rgb(var(--blue-400-rgb) / 0.1)", border: "1px solid rgb(var(--blue-400-rgb) / 0.18)" }}
           >
-            <Server size={16} style={{ color: "#4dbef3" }} />
+            <Server size={16} style={{ color: "var(--blue-400)" }} />
           </div>
           <h3 className="text-white text-[17px] xl:text-[19px] 2xl:text-[21px] font-medium">Hosting & Domain</h3>
         </div>
-        <p className="text-slate-400 text-[13px] 2xl:text-[14px] leading-relaxed mb-5">
+        <p className="text-ink-300 text-[13px] 2xl:text-[14px] leading-relaxed mb-5">
           Wir kümmern uns um alles – Hosting, Domain-Beschaffung und Einrichtung. Du musst dich um nichts kümmern.
         </p>
         <div className="space-y-2">
           {/* Hosting bei vorhandener Domain */}
           <div
             className="flex items-center justify-between rounded-lg px-3 py-2"
-            style={{ background: "rgba(77,190,243,0.05)", border: "1px solid rgba(77,190,243,0.1)" }}
+            style={{ background: "rgb(var(--blue-400-rgb) / 0.05)", border: "1px solid rgb(var(--blue-400-rgb) / 0.1)" }}
           >
-            <span className="text-slate-300 text-[12px]">Hosting bei vorhandener Domain</span>
-            <span className="text-[12px] font-semibold ml-3 shrink-0" style={{ color: "#4dbef3" }}>
+            <span className="text-ink-200 text-[12px]">Hosting bei vorhandener Domain</span>
+            <span className="text-[12px] font-semibold ml-3 shrink-0 text-blue-400">
               5 €/Monat
             </span>
           </div>
           {/* Domain-Beschaffung & Einrichtung */}
           <div
             className="rounded-lg px-3 py-2.5"
-            style={{ background: "rgba(77,190,243,0.05)", border: "1px solid rgba(77,190,243,0.1)" }}
+            style={{ background: "rgb(var(--blue-400-rgb) / 0.05)", border: "1px solid rgb(var(--blue-400-rgb) / 0.1)" }}
           >
             <div className="flex items-start justify-between gap-3">
-              <span className="text-slate-300 text-[12px]">Domain-Beschaffung & Einrichtung</span>
+              <span className="text-ink-200 text-[12px]">Domain-Beschaffung & Einrichtung</span>
               <div className="text-right shrink-0">
-                <p className="text-[12px] font-semibold" style={{ color: "#4dbef3" }}>5 €/Monat</p>
-                <p className="text-[11px] font-medium mt-0.5" style={{ color: "#4dbef3" }}>+ Domainkosten je nach Wunschdomain</p>
-                <p className="text-[11px] font-medium mt-0.5" style={{ color: "#4dbef3" }}>+ 60 € Einrichtung (einmalig)</p>
+                <p className="text-[12px] font-semibold text-blue-400">5 €/Monat</p>
+                <p className="text-[11px] font-medium mt-0.5 text-blue-400">+ Domainkosten je nach Wunschdomain</p>
+                <p className="text-[11px] font-medium mt-0.5 text-blue-400">+ 60 € Einrichtung (einmalig)</p>
               </div>
             </div>
           </div>
@@ -512,7 +531,7 @@ function WartungTabBtn({
       type="button"
       onClick={onClick}
       className="relative flex-1 rounded-lg px-3 py-2 text-[12px] font-medium tracking-wide cursor-pointer transition-colors duration-200 inline-flex items-center justify-center gap-1"
-      style={{ color: active ? "#fff" : "rgba(150,190,220,0.6)" }}
+      style={{ color: active ? "#fff" : "var(--ink-400)" }}
     >
       {active && (
         <motion.div
@@ -540,13 +559,13 @@ function WartungCard() {
       <div className="flex items-center gap-2 mb-5">
         <div
           className="inline-flex h-9 w-9 items-center justify-center rounded-lg"
-          style={{ background: "rgba(77,190,243,0.1)", border: "1px solid rgba(77,190,243,0.18)" }}
+          style={{ background: "rgb(var(--blue-400-rgb) / 0.1)", border: "1px solid rgb(var(--blue-400-rgb) / 0.18)" }}
         >
-          <Wrench size={16} style={{ color: "#4dbef3" }} />
+          <Wrench size={16} style={{ color: "var(--blue-400)" }} />
         </div>
         <h3 className="text-white text-[17px] xl:text-[19px] 2xl:text-[21px] font-medium">Wartung</h3>
       </div>
-      <p className="text-slate-400 text-[13px] 2xl:text-[14px] leading-relaxed mb-4">
+      <p className="text-ink-300 text-[13px] 2xl:text-[14px] leading-relaxed mb-4">
         Damit deine Webseite dauerhaft sicher und aktuell bleibt. Wähle klassische Wartung oder die CMS-Option, bei der du Inhalte selbst bearbeitest.
       </p>
 
@@ -554,8 +573,8 @@ function WartungCard() {
       <div
         className="flex mb-5 p-1 rounded-xl gap-1"
         style={{
-          background: "rgba(10,19,30,0.7)",
-          border: "1px solid rgba(77,190,243,0.12)",
+          background: "rgb(var(--ink-950-rgb) / 0.7)",
+          border: "1px solid rgb(var(--blue-400-rgb) / 0.12)",
         }}
       >
         <WartungTabBtn active={tab === "ohneCMS"} onClick={() => switchTab("ohneCMS")}>
@@ -581,16 +600,16 @@ function WartungCard() {
           animate={{ opacity: tab === "ohneCMS" ? 1 : 0, x: tab === "ohneCMS" ? 0 : -32 }}
           transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
         >
-          <div className="space-y-0 divide-y" style={{ borderColor: "rgba(77,190,243,0.07)" }}>
+          <div className="space-y-0 divide-y" style={{ borderColor: "rgb(var(--blue-400-rgb) / 0.07)" }}>
             {wartungTiers.map((tier) => (
               <div key={tier.name} className="py-4 first:pt-0 last:pb-0">
                 <div className="flex items-center justify-between mb-2.5">
                   <span className="text-[15px] xl:text-[16px] font-semibold text-white">{tier.name}</span>
-                  <span className="text-[13px] font-semibold" style={{ color: "#4dbef3" }}>{tier.price}</span>
+                  <span className="text-[13px] font-semibold text-blue-400">{tier.price}</span>
                 </div>
                 <ul className="space-y-1.5">
                   {tier.features.map((f, idx) => (
-                    <CheckItem key={idx} className="text-slate-400 text-[12px] xl:text-[13px]">
+                    <CheckItem key={idx} className="text-ink-300 text-[12px] xl:text-[13px]">
                       {f.label}
                     </CheckItem>
                   ))}
@@ -604,16 +623,16 @@ function WartungCard() {
           animate={{ opacity: tab === "mitCMS" ? 1 : 0, x: tab === "mitCMS" ? 0 : 32 }}
           transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
         >
-          <div className="space-y-0 divide-y" style={{ borderColor: "rgba(77,190,243,0.07)" }}>
+          <div className="space-y-0 divide-y" style={{ borderColor: "rgb(var(--blue-400-rgb) / 0.07)" }}>
             {wartungCmsTiers.map((tier) => (
               <div key={tier.name} className="py-4 first:pt-0 last:pb-0">
                 <div className="flex items-center justify-between mb-2.5">
                   <span className="text-[15px] xl:text-[16px] font-semibold text-white">{tier.name}</span>
-                  <span className="text-[13px] font-semibold" style={{ color: "#4dbef3" }}>{tier.price}</span>
+                  <span className="text-[13px] font-semibold text-blue-400">{tier.price}</span>
                 </div>
                 <ul className="space-y-1.5">
                   {tier.features.map((f, idx) => (
-                    <CheckItem key={idx} className="text-slate-400 text-[12px] xl:text-[13px]">
+                    <CheckItem key={idx} className="text-ink-300 text-[12px] xl:text-[13px]">
                       {f.label}
                     </CheckItem>
                   ))}
@@ -629,6 +648,22 @@ function WartungCard() {
 
 // ─── Konzept: individuell statt Baukasten ──────────────────────────────────────
 const STACK = ["Astro", "Next.js", "React", "TypeScript", "Tailwind CSS", "Headless CMS"];
+
+/** Zusatzleistungen mit passendem Icon („Du brauchst noch etwas anderes?“). */
+const EXTRAS: { label: string; Icon: LucideIcon }[] = [
+  { label: "Corporate Design (Logo, Markenfarben, Schriften)", Icon: Palette },
+  { label: "Google Analytics Tracking", Icon: ChartLine },
+  { label: "Content Management System", Icon: FilePen },
+  { label: "Admin Panel", Icon: LayoutDashboard },
+  { label: "Bewerbungsportal", Icon: BriefcaseBusiness },
+  { label: "Mehrsprachigkeit", Icon: Languages },
+  { label: "Online-Shop", Icon: ShoppingCart },
+  { label: "Buchungssystem", Icon: CalendarCheck },
+  { label: "Newsletter-Integration", Icon: Newspaper },
+  { label: "Videoproduktion", Icon: Clapperboard },
+  { label: "Fotoproduktion", Icon: Camera },
+  { label: "SEA (Google Ads)", Icon: Megaphone },
+];
 
 const VERGLEICH: { topic: string; ours: string; wp: string; wpGood?: boolean }[] = [
   {
@@ -669,20 +704,18 @@ function KonzeptSection() {
     <section aria-labelledby="konzept-heading" className="mt-24 2xl:mt-32">
       <div className="grid gap-12 lg:gap-16 2xl:gap-24 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] items-start">
         <FadeIn className="lg:sticky lg:top-32">
-          <SectionLabel>Unser Konzept</SectionLabel>
           <h2
             id="konzept-heading"
             className="text-white text-[clamp(26px,4vw,52px)] tracking-tight leading-[1.08] text-balance"
           >
             Handgebaut{" "}
             <span
-              className="bg-clip-text text-transparent"
-              style={{ backgroundImage: "linear-gradient(135deg, #4dbef3 0%, #006999 100%)" }}
+              className="text-blue-400"
             >
               statt Baukasten.
             </span>
           </h2>
-          <p className="mt-5 text-slate-400 text-[15px] xl:text-[16px] 2xl:text-[18px] leading-relaxed max-w-md 2xl:max-w-lg">
+          <p className="mt-5 text-ink-300 text-[15px] xl:text-[16px] 2xl:text-[18px] leading-relaxed max-w-md 2xl:max-w-lg">
             Wir nutzen keine fertige Vorlage aus dem Baukasten, sondern programmieren
             jede Webseite individuell – mit Astro oder Next.js. Das Ergebnis: schneller, sicherer und
             genau so, wie du es dir vorstellst.
@@ -691,12 +724,13 @@ function KonzeptSection() {
             {STACK.map((tech) => (
               <li
                 key={tech}
-                className="rounded-full px-3.5 py-1 text-[12px] xl:text-[13px] 2xl:text-[14px] text-brand-light"
-                style={{
-                  background: "rgba(77, 190, 243, 0.07)",
-                  border: "1px solid rgba(77, 190, 243, 0.18)",
-                }}
+                className="inline-flex items-center gap-2 rounded-full border border-blue-400/[0.18] bg-blue-400/[0.07] py-1 pl-2.5 pr-3.5 text-[12px] xl:text-[13px] 2xl:text-[14px] text-brand-light"
               >
+                {hasTechIcon(tech) ? (
+                  <TechIcon name={tech} className="h-3.5 w-3.5 shrink-0 text-blue-400" />
+                ) : (
+                  <Blocks size={14} strokeWidth={1.75} aria-hidden className="shrink-0 text-blue-400" />
+                )}
                 {tech}
               </li>
             ))}
@@ -707,19 +741,19 @@ function KonzeptSection() {
           <div
             className="rounded-2xl"
             style={{
-              background: "linear-gradient(135deg, rgba(16,24,27,0.97) 0%, rgba(10,17,22,0.99) 100%)",
-              border: "1px solid rgba(77,190,243,0.1)",
+              background: "linear-gradient(135deg, rgb(var(--ink-900-rgb) / 0.97) 0%, rgb(var(--ink-950-rgb) / 0.99) 100%)",
+              border: "1px solid rgb(var(--blue-400-rgb) / 0.1)",
             }}
           >
             {/* Spaltenköpfe – ab sm, mobil trägt jede Zeile ihre eigenen Labels */}
             <div
               aria-hidden
               className="hidden sm:grid grid-cols-[120px_1fr_1fr] xl:grid-cols-[140px_1fr_1fr] gap-6 px-6 xl:px-8 pt-6 xl:pt-7 pb-4 text-[11px] xl:text-[12px] tracking-[0.18em] font-medium"
-              style={{ borderBottom: "1px solid rgba(77,190,243,0.1)" }}
+              style={{ borderBottom: "1px solid rgb(var(--blue-400-rgb) / 0.1)" }}
             >
               <span />
               <span className="text-brand">Astro / Next.js</span>
-              <span className="text-slate-500">Baukastensysteme</span>
+              <span className="text-ink-400">Baukastensysteme</span>
             </div>
 
             <ul>
@@ -727,12 +761,12 @@ function KonzeptSection() {
                 <li
                   key={row.topic}
                   className="grid gap-3 sm:gap-6 sm:grid-cols-[120px_1fr_1fr] xl:grid-cols-[140px_1fr_1fr] px-6 xl:px-8 py-5 xl:py-6 border-t first:border-t-0"
-                  style={{ borderColor: "rgba(77,190,243,0.07)" }}
+                  style={{ borderColor: "rgb(var(--blue-400-rgb) / 0.07)" }}
                 >
                   <h3 className="text-white text-[15px] xl:text-[16px] 2xl:text-[17px] font-medium leading-normal">
                     {row.topic}
                   </h3>
-                  <p className="flex items-start gap-2.5 text-slate-200 text-[14px] 2xl:text-[15px] leading-normal">
+                  <p className="flex items-start gap-2.5 text-ink-100 text-[14px] 2xl:text-[15px] leading-normal">
                     <span className="flex shrink-0 items-center" style={{ height: "1.5em" }} aria-hidden>
                       <Check size={15} strokeWidth={2.5} className="text-brand" />
                     </span>
@@ -743,16 +777,16 @@ function KonzeptSection() {
                       {row.ours}
                     </span>
                   </p>
-                  <p className="flex items-start gap-2.5 text-slate-400 text-[14px] 2xl:text-[15px] leading-normal">
+                  <p className="flex items-start gap-2.5 text-ink-300 text-[14px] 2xl:text-[15px] leading-normal">
                     <span className="flex shrink-0 items-center" style={{ height: "1.5em" }} aria-hidden>
                       {row.wpGood ? (
-                        <Check size={15} strokeWidth={2.5} className="text-slate-400" />
+                        <Check size={15} strokeWidth={2.5} className="text-ink-300" />
                       ) : (
-                        <Minus size={15} strokeWidth={2.5} className="text-slate-500" />
+                        <Minus size={15} strokeWidth={2.5} className="text-ink-400" />
                       )}
                     </span>
                     <span>
-                      <span className="sm:sr-only text-slate-500 text-[11px] tracking-[0.14em] block mb-0.5">
+                      <span className="sm:sr-only text-ink-400 text-[11px] tracking-[0.14em] block mb-0.5">
                         Baukastensysteme
                       </span>
                       {row.wp}
@@ -773,18 +807,16 @@ function PreiseSection({ onContact }: { onContact: () => void }) {
   return (
     <section className="mt-24 2xl:mt-32">
       <FadeIn>
-        <SectionLabel>Preise</SectionLabel>
         <h2 className="text-white text-[clamp(26px,4vw,52px)] tracking-tight leading-tight max-w-2xl 2xl:max-w-3xl mb-3">
           Transparent.{" "}
           <span
-            className="bg-clip-text text-transparent"
-            style={{ backgroundImage: "linear-gradient(135deg, #4dbef3 0%, #006999 100%)" }}
+            className="text-blue-400"
           >
             Fair.
           </span>{" "}
           Klar.
         </h2>
-        <p className="text-slate-400 text-[15px] xl:text-[16px] 2xl:text-[17px] leading-relaxed max-w-xl 2xl:max-w-2xl">
+        <p className="text-ink-300 text-[15px] xl:text-[16px] 2xl:text-[17px] leading-relaxed max-w-xl 2xl:max-w-2xl">
           Kein verstecktes Kleingedrucktes – du weißt von Anfang an, was du bekommst und was es kostet.
         </p>
       </FadeIn>
@@ -820,20 +852,15 @@ export function Leistungen() {
   return (
     <main id="main-content" className="mx-auto max-w-6xl xl:max-w-7xl 2xl:max-w-[1440px] px-5 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 pt-36 sm:pt-44 lg:pt-52 xl:pt-60 2xl:pt-72 pb-12 xl:pb-20 2xl:pb-28">
       <FadeIn>
-        <SectionLabel>Leistungen</SectionLabel>
         <h1 className="text-white text-[clamp(36px,6vw,84px)] tracking-tight leading-[1.05] max-w-4xl 2xl:max-w-5xl">
           <span
-            className="bg-clip-text text-transparent"
-            style={{
-              backgroundImage:
-                "linear-gradient(135deg, #4dbef3 0%, #006999 100%)",
-            }}
+            className="text-blue-400"
           >
             Deine Webseite
           </span>{" "}
           – fertig, ohne Stress.
         </h1>
-        <p className="mt-6 max-w-2xl 2xl:max-w-3xl text-[16px] xl:text-[18px] 2xl:text-[20px] text-slate-400 leading-relaxed">
+        <p className="mt-6 max-w-2xl 2xl:max-w-3xl text-[16px] xl:text-[18px] 2xl:text-[20px] text-ink-300 leading-relaxed">
           Du bekommst alles aus einer Hand: von der Gestaltung über die technische Umsetzung bis hin zur Veröffentlichung. Wir kümmern uns um den gesamten Ablauf für dich.</p>
       </FadeIn>
 
@@ -853,45 +880,24 @@ export function Leistungen() {
           <h2 className="text-white text-[clamp(22px,3vw,40px)] tracking-tight max-w-xl 2xl:max-w-2xl mb-3">
             Du brauchst noch etwas anderes?
           </h2>
-          <p className="text-slate-400 text-[15px] 2xl:text-[17px] leading-relaxed max-w-xl 2xl:max-w-2xl mb-7">
+          <p className="text-ink-300 text-[15px] 2xl:text-[17px] leading-relaxed max-w-xl 2xl:max-w-2xl mb-7">
             Kein Problem – sag uns, was du brauchst, und wir finden gemeinsam eine Lösung.
           </p>
-          <div className="flex flex-wrap gap-2.5">
-            {[
-              "Corporate Design (Logo, Markenfarben, Schriften)",
-              "Google Analytics Tracking",
-              "Content Management System",
-              "Admin Panel",
-              "Bewerbungsportal",
-              "Mehrsprachigkeit",
-              "Online-Shop",
-              "Buchungssystem",
-              "Newsletter-Integration",
-              "Videoproduktion",
-              "Fotoproduktion",
-              "SEA (Google Ads)",
-            ].map((item) => (
-              <span
-                key={item}
-                className="tag-pill rounded-full px-4 py-1.5 xl:px-5 2xl:px-6 2xl:py-2 text-[13px] 2xl:text-[15px] text-brand-light"
-                style={{
-                  background: "rgba(77, 190, 243, 0.07)",
-                  border: "1px solid rgba(77, 190, 243, 0.18)",
-                }}
+          <ul className="flex flex-wrap gap-2.5" aria-label="Weitere Leistungen">
+            {EXTRAS.map(({ label, Icon }) => (
+              <li
+                key={label}
+                className="tag-pill inline-flex items-center gap-2 rounded-full border border-blue-400/[0.18] bg-blue-400/[0.07] py-1.5 pl-3 pr-4 xl:pr-5 2xl:py-2 2xl:pl-4 2xl:pr-6 text-[13px] 2xl:text-[15px] text-brand-light"
               >
-                {item}
-              </span>
+                <Icon size={15} strokeWidth={1.75} aria-hidden className="shrink-0 text-blue-400" />
+                {label}
+              </li>
             ))}
-            <span
-              className="rounded-full px-4 py-1.5 text-[13px] text-slate-500"
-              style={{
-                background: "rgba(255,255,255,0.03)",
-                border: "1px solid rgba(255,255,255,0.07)",
-              }}
-            >
-              & vieles mehr …
-            </span>
-          </div>
+            <li className="inline-flex items-center gap-2 rounded-full border border-white/[0.07] bg-white/[0.03] py-1.5 pl-3 pr-4 text-[13px] text-ink-400">
+              <Plus size={15} strokeWidth={1.75} aria-hidden className="shrink-0" />
+              vieles mehr
+            </li>
+          </ul>
         </div>
       </FadeIn>
 
@@ -907,7 +913,7 @@ export function Leistungen() {
           <h2 className="text-white text-[28px] xl:text-[34px] 2xl:text-[42px] mb-3">
             Wie läuft die Zusammenarbeit ab?
           </h2>
-          <p className="text-slate-400 text-[15px] xl:text-[16px] 2xl:text-[18px] mb-8 max-w-xl 2xl:max-w-2xl mx-auto">
+          <p className="text-ink-300 text-[15px] xl:text-[16px] 2xl:text-[18px] mb-8 max-w-xl 2xl:max-w-2xl mx-auto">
             Von der ersten Anfrage bis zur fertigen Webseite – in 7 transparenten Schritten.
           </p>
           <PrimaryButton onClick={() => navigate("/ablauf")}>

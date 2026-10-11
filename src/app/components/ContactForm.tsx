@@ -251,18 +251,17 @@ export function ContactForm({ subject }: { subject: string }) {
                   style={{
                     width: active ? 28 : 8,
                     background: active
-                      ? "linear-gradient(135deg, #006999 0%, #4dbef3 100%)"
+                      ? "linear-gradient(135deg, var(--blue-700) 0%, var(--blue-400) 100%)"
                       : done
-                        ? "rgba(77,190,243,0.55)"
-                        : "rgba(77,190,243,0.15)",
+                        ? "rgb(var(--blue-400-rgb) / 0.55)"
+                        : "rgb(var(--blue-400-rgb) / 0.15)",
                   }}
                 />
               );
             })}
           </div>
           <span
-            className="text-[11px] tracking-[0.2em] tabular-nums"
-            style={{ color: "rgba(150,190,220,0.5)" }}
+            className="text-[11px] tracking-[0.2em] tabular-nums text-ink-400"
             aria-hidden
           >
             {step + 1} / {STEPS.length}
@@ -324,7 +323,7 @@ export function ContactForm({ subject }: { subject: string }) {
             <button
               type="button"
               onClick={() => goTo(step - 1)}
-              className="inline-flex items-center gap-1.5 cursor-pointer bg-transparent border-none p-0 text-[13px] font-medium text-slate-500 hover:text-slate-300 transition-colors"
+              className="inline-flex items-center gap-1.5 cursor-pointer bg-transparent border-none p-0 text-[13px] font-medium text-ink-400 hover:text-ink-200 transition-colors"
             >
               <ArrowLeft size={15} aria-hidden />
               Zurück
@@ -334,7 +333,7 @@ export function ContactForm({ subject }: { subject: string }) {
           )}
           <div className="flex items-center gap-4 ml-auto">
             {!isLast && (
-              <span className="hidden sm:inline text-[12px]" style={{ color: "rgba(150,190,220,0.35)" }}>
+              <span className="hidden sm:inline text-[12px] text-ink-400">
                 oder Enter ↵
               </span>
             )}
@@ -365,7 +364,7 @@ function SuccessState({ onReset }: { onReset?: () => void }) {
       <CheckCircle2 size={40} className="text-brand" />
       <div className="text-brand text-[11px] tracking-[0.25em]">Gesendet</div>
       <h3 className="text-white text-[22px]">Danke für deine Nachricht!</h3>
-      <p className="text-slate-400 text-[14px] max-w-sm leading-relaxed">
+      <p className="text-ink-300 text-[14px] max-w-sm leading-relaxed">
         Wir haben deine Anfrage erhalten und melden uns so schnell wie möglich bei dir.
       </p>
       {onReset && (
@@ -400,7 +399,7 @@ function StepField({
     "w-full rounded-xl px-4 py-3.5 text-white placeholder:text-slate-600 transition-all text-[15px]";
   const borderStyle = error
     ? "1px solid rgba(248,113,113,0.6)"
-    : "1px solid rgba(77,190,243,0.15)";
+    : "1px solid rgb(var(--blue-400-rgb) / 0.15)";
   const errorId = `${step.field}-error`;
 
   const sharedProps = {
@@ -418,15 +417,15 @@ function StepField({
     onFocus: (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
       e.currentTarget.style.borderColor = error
         ? "rgba(248,113,113,0.8)"
-        : "rgba(77,190,243,0.5)";
+        : "rgb(var(--blue-400-rgb) / 0.5)";
       e.currentTarget.style.boxShadow = error
         ? "0 0 0 3px rgba(248,113,113,0.1)"
-        : "0 0 0 3px rgba(77,190,243,0.1)";
+        : "0 0 0 3px rgb(var(--blue-400-rgb) / 0.1)";
     },
     onBlur: (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
       e.currentTarget.style.borderColor = error
         ? "rgba(248,113,113,0.6)"
-        : "rgba(77,190,243,0.15)";
+        : "rgb(var(--blue-400-rgb) / 0.15)";
       e.currentTarget.style.boxShadow = "none";
     },
   };
@@ -437,14 +436,13 @@ function StepField({
         {step.question}
         {step.optional && (
           <span
-            className="ml-2.5 align-middle text-[11px] tracking-[0.15em]"
-            style={{ color: "rgba(150,190,220,0.5)" }}
+            className="ml-2.5 align-middle text-[11px] tracking-[0.15em] text-ink-400"
           >
             Optional
           </span>
         )}
       </span>
-      <span className="block text-[13px] text-slate-500 leading-relaxed mb-5">
+      <span className="block text-[13px] text-ink-400 leading-relaxed mb-5">
         {step.hint}
       </span>
       {step.textarea ? (

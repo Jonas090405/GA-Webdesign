@@ -1,4 +1,3 @@
-import { SectionLabel } from "../SectionLabel";
 import { Card } from "../Card";
 import { FadeIn } from "../FadeIn";
 import { usePageMeta } from "../../hooks/usePageMeta";
@@ -11,11 +10,10 @@ export function Impressum() {
   return (
     <main id="main-content" className="mx-auto max-w-3xl px-5 sm:px-6 pt-28 sm:pt-32 pb-12">
       <FadeIn>
-        <SectionLabel>Rechtliches</SectionLabel>
         <h1 className="text-white text-[clamp(32px,6vw,64px)] tracking-tight leading-[1.05]">
           Impressum
         </h1>
-        <p className="mt-4 text-slate-400 text-[14px]">
+        <p className="mt-4 text-ink-300 text-[14px]">
           Angaben gemäß § 5 DDG
         </p>
       </FadeIn>
@@ -26,7 +24,7 @@ export function Impressum() {
             <div className="text-brand text-[12px] tracking-[0.25em] mb-4">
               Anbieter
             </div>
-            <div className="text-slate-200 text-[15px] leading-[1.9]">
+            <div className="text-ink-100 text-[15px] leading-[1.9]">
               G&amp;A Webdesign GbR
               <br /><br />
               Jonas Gissler
@@ -49,7 +47,7 @@ export function Impressum() {
             <div className="text-brand text-[12px] tracking-[0.25em] mb-4">
               Unternehmensform
             </div>
-            <div className="text-slate-200 text-[15px] leading-[1.9]">
+            <div className="text-ink-100 text-[15px] leading-[1.9]">
               Gesellschaft bürgerlichen Rechts (GbR)
               <br />
               Gewerbliche Tätigkeit: Webdesign, Webentwicklung, Hosting und SEO
@@ -62,7 +60,7 @@ export function Impressum() {
             <div className="text-brand text-[12px] tracking-[0.25em] mb-4">
               Kontakt
             </div>
-            <div className="text-slate-200 text-[15px] leading-[1.9] break-all">
+            <div className="text-ink-100 text-[15px] leading-[1.9] break-all">
               E-Mail: Jonas@ga-webdesign.de
               <br />
               E-Mail: berkant@ga-webdesign.de
@@ -104,7 +102,7 @@ export function Impressum() {
             <div className="text-brand text-[12px] tracking-[0.25em] mb-4">
               Steuer
             </div>
-            <div className="text-slate-200 text-[15px] leading-[1.9]">
+            <div className="text-ink-100 text-[15px] leading-[1.9]">
               Steuernummer: 22191 / 13770
               <br />
               Umsatzsteuer-ID: DE462788107
@@ -117,7 +115,7 @@ export function Impressum() {
             <div className="text-brand text-[12px] tracking-[0.25em] mb-4">
               Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV
             </div>
-            <div className="text-slate-200 text-[15px] leading-[1.9]">
+            <div className="text-ink-100 text-[15px] leading-[1.9]">
               Jonas Gissler
               <br />
               Altenbergweg 12
@@ -132,7 +130,7 @@ export function Impressum() {
             <div className="text-brand text-[12px] tracking-[0.25em] mb-4">
               Streitbeilegung
             </div>
-            <p className="text-slate-300 text-[14px] leading-relaxed">
+            <p className="text-ink-200 text-[14px] leading-relaxed">
               Wir sind nicht bereit oder verpflichtet, an
               Streitbeilegungsverfahren vor einer
               Verbraucherschlichtungsstelle teilzunehmen.
@@ -145,7 +143,7 @@ export function Impressum() {
             <div className="text-brand text-[12px] tracking-[0.25em] mb-4">
               Haftungsausschluss
             </div>
-            <p className="text-slate-300 text-[14px] leading-relaxed">
+            <p className="text-ink-200 text-[14px] leading-relaxed">
               Die Inhalte dieser Webseite wurden mit größtmöglicher Sorgfalt
               erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität
               der Inhalte kann jedoch keine Gewähr übernommen werden. Für
@@ -161,7 +159,7 @@ export function Impressum() {
             <div className="text-brand text-[12px] tracking-[0.25em] mb-4">
               Bildnachweise
             </div>
-            <p className="text-slate-300 text-[14px] leading-relaxed">
+            <p className="text-ink-200 text-[14px] leading-relaxed">
               Die 3D-Modelle auf der Startseite wurden mit{" "}
               <a
                 href="https://www.meshy.ai"

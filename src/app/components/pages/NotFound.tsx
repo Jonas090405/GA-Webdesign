@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { SectionLabel } from "../SectionLabel";
 import { FadeIn } from "../FadeIn";
 import { PrimaryButton, GhostButton } from "../Button";
 import { HeroModels } from "../HeroModels";
@@ -36,14 +35,10 @@ export function NotFound() {
         {/* Text + Auswege */}
         <div>
           <FadeIn>
-            <SectionLabel>Fehler 404</SectionLabel>
             <h1 className="text-white text-[clamp(56px,12vw,140px)] tracking-tight leading-[0.95]">
               4
               <span
-                className="bg-clip-text text-transparent"
-                style={{
-                  backgroundImage: "linear-gradient(135deg, #4dbef3 0%, #006999 100%)",
-                }}
+                className="text-blue-400"
               >
                 0
               </span>
@@ -53,8 +48,7 @@ export function NotFound() {
 
           <FadeIn delay={0.1}>
             <p
-              className="mt-6 max-w-xl text-[16px] sm:text-[18px] leading-relaxed"
-              style={{ color: "rgba(200, 225, 240, 0.75)" }}
+              className="mt-6 max-w-xl text-[16px] sm:text-[18px] leading-relaxed text-ink-200"
             >
               Diese Seite gibt es nicht — vielleicht wurde sie verschoben oder
               der Link enthält einen Tippfehler. Immerhin hast du uns beide

@@ -7,7 +7,6 @@
 import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import berkantImg from "../../imports/Berkant_agyar.jpeg";
-import { SectionLabel } from "./SectionLabel";
 import { FadeIn } from "./FadeIn";
 import { Plus, ChevronLeft, ChevronRight, Mail, Phone } from "lucide-react";
 
@@ -90,16 +89,16 @@ function DesktopFAQCard({ faq }: { faq: (typeof faqs)[0] }) {
     const rect = el.getBoundingClientRect();
     const mx = e.clientX - rect.left;
     const my = e.clientY - rect.top;
-    el.style.background = `radial-gradient(520px circle at ${mx}px ${my}px, rgba(77,190,243,0.55), rgba(77,190,243,0.06) 70%)`;
+    el.style.background = `radial-gradient(520px circle at ${mx}px ${my}px, rgb(var(--blue-400-rgb) / 0.55), rgb(var(--blue-400-rgb) / 0.06) 70%)`;
     if (spotRef.current) {
-      spotRef.current.style.background = `radial-gradient(600px circle at ${mx}px ${my}px, rgba(77,190,243,0.07), transparent 70%)`;
+      spotRef.current.style.background = `radial-gradient(600px circle at ${mx}px ${my}px, rgb(var(--blue-400-rgb) / 0.07), transparent 70%)`;
       spotRef.current.style.opacity = "1";
     }
   }
 
   function handleLeave() {
     setHovered(false);
-    if (outerRef.current) outerRef.current.style.background = "rgba(77,190,243,0.1)";
+    if (outerRef.current) outerRef.current.style.background = "rgb(var(--blue-400-rgb) / 0.1)";
     if (spotRef.current)  spotRef.current.style.opacity  = "0";
   }
 
@@ -118,17 +117,17 @@ function DesktopFAQCard({ faq }: { faq: (typeof faqs)[0] }) {
       onMouseLeave={handleLeave}
       onClick={handleClick}
       onFocus={() => setHovered(true)}
-      onBlur={() => { setHovered(false); if (outerRef.current) outerRef.current.style.background = "rgba(77,190,243,0.1)"; }}
+      onBlur={() => { setHovered(false); if (outerRef.current) outerRef.current.style.background = "rgb(var(--blue-400-rgb) / 0.1)"; }}
       tabIndex={0}
       role="button"
       aria-expanded={hovered}
       aria-label={faq.q}
       className="rounded-2xl"
-      style={{ background: "rgba(77,190,243,0.1)", padding: "1px", cursor: "default" }}
+      style={{ background: "rgb(var(--blue-400-rgb) / 0.1)", padding: "1px", cursor: "default" }}
     >
         <div
         className="relative overflow-hidden rounded-2xl h-[320px] xl:h-[340px] 2xl:h-[360px]"
-        style={{ background: "linear-gradient(135deg, rgba(16,24,27,0.97) 0%, rgba(10,17,22,0.99) 100%)" }}
+        style={{ background: "linear-gradient(135deg, rgb(var(--ink-900-rgb) / 0.97) 0%, rgb(var(--ink-950-rgb) / 0.99) 100%)" }}
       >
         {/* Spotlight */}
         <div
@@ -158,7 +157,7 @@ function DesktopFAQCard({ faq }: { faq: (typeof faqs)[0] }) {
           <AnimatePresence>
             {hovered && (
               <motion.p
-                className="text-slate-400 text-[12px] xl:text-[13px] leading-relaxed overflow-y-auto max-h-[195px] xl:max-h-[205px] 2xl:max-h-[220px] pr-1 [&::-webkit-scrollbar]:w-[3px] [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-[rgba(77,190,243,0.3)] [&::-webkit-scrollbar-track]:bg-transparent"
+                className="text-ink-300 text-[12px] xl:text-[13px] leading-relaxed overflow-y-auto max-h-[195px] xl:max-h-[205px] 2xl:max-h-[220px] pr-1 [&::-webkit-scrollbar]:w-[3px] [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-blue-400/30 [&::-webkit-scrollbar-track]:bg-transparent"
                 initial={{ opacity: 0, y: 6 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 6 }}
@@ -182,8 +181,8 @@ function MobileAccordionItem({ faq }: { faq: (typeof faqs)[0] }) {
     <div
       className="rounded-xl overflow-hidden"
       style={{
-        background: "linear-gradient(135deg, rgba(14,22,28,0.98) 0%, rgba(9,16,22,0.99) 100%)",
-        border: open ? "1px solid rgba(77,190,243,0.22)" : "1px solid rgba(77,190,243,0.1)",
+        background: "linear-gradient(135deg, rgba(14,22,28,0.98) 0%, rgb(var(--ink-950-rgb) / 0.99) 100%)",
+        border: open ? "1px solid rgb(var(--blue-400-rgb) / 0.22)" : "1px solid rgb(var(--blue-400-rgb) / 0.1)",
         transition: "border-color 0.2s",
       }}
     >
@@ -194,7 +193,7 @@ function MobileAccordionItem({ faq }: { faq: (typeof faqs)[0] }) {
       >
         <span
           className="text-[14px] sm:text-[15px] font-medium leading-snug"
-          style={{ color: open ? "#e2e8f0" : "rgba(226,232,240,0.75)" }}
+          style={{ color: open ? "#e2e8f0" : "var(--ink-200)" }}
         >
           {faq.q}
         </span>
@@ -202,8 +201,7 @@ function MobileAccordionItem({ faq }: { faq: (typeof faqs)[0] }) {
           animate={{ rotate: open ? 45 : 0 }}
           transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
           aria-hidden="true"
-          className="shrink-0"
-          style={{ color: "#4dbef3" }}
+          className="shrink-0 text-blue-400"
         >
           <Plus size={18} />
         </motion.span>
@@ -217,7 +215,7 @@ function MobileAccordionItem({ faq }: { faq: (typeof faqs)[0] }) {
             transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
             className="overflow-hidden"
           >
-            <p className="px-5 pb-5 text-slate-400 text-[13px] sm:text-[14px] leading-relaxed">
+            <p className="px-5 pb-5 text-ink-300 text-[13px] sm:text-[14px] leading-relaxed">
               {faq.a}
             </p>
           </motion.div>
@@ -263,22 +261,19 @@ export function FAQSection({
       <FadeIn>
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-5 mb-10 2xl:mb-14">
           <div>
-            <SectionLabel>FAQ</SectionLabel>
             <h2 className="text-white text-[clamp(26px,4vw,52px)] tracking-tight leading-tight max-w-xl mb-3">
               Häufige{" "}
               <span
-                className="bg-clip-text text-transparent"
-                style={{ backgroundImage: "linear-gradient(135deg, #4dbef3 0%, #006999 100%)" }}
+                className="text-blue-400"
               >
                 Fragen
               </span>
             </h2>
-            <p className="text-slate-400 text-[15px] xl:text-[16px] 2xl:text-[17px] leading-relaxed max-w-lg">
+            <p className="text-ink-300 text-[15px] xl:text-[16px] 2xl:text-[17px] leading-relaxed max-w-lg">
               Antworten auf die Fragen, die uns am häufigsten gestellt werden. Etwas fehlt?{" "}
               <a
                 href={`mailto:${FAQ_EMAIL}`}
-                className="cursor-pointer transition-colors duration-200 underline-offset-2 hover:underline"
-                style={{ color: "#4dbef3" }}
+                className="cursor-pointer transition-colors duration-200 underline-offset-2 hover:underline text-blue-400"
               >
                 Schreib uns einfach.
               </a>
@@ -292,10 +287,7 @@ export function FAQSection({
                 <button
                   key={i}
                   onClick={action}
-                  className="flex items-center justify-center w-10 h-10 xl:w-11 xl:h-11 rounded-full transition-all duration-200"
-                  style={{ background: "rgba(77,190,243,0.07)", border: "1px solid rgba(77,190,243,0.2)", color: "rgba(152,220,252,0.8)" }}
-                  onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(77,190,243,0.13)"; e.currentTarget.style.borderColor = "rgba(77,190,243,0.4)"; }}
-                  onMouseLeave={(e) => { e.currentTarget.style.background = "rgba(77,190,243,0.07)"; e.currentTarget.style.borderColor = "rgba(77,190,243,0.2)"; }}
+                  className="flex items-center justify-center w-10 h-10 xl:w-11 xl:h-11 rounded-full border border-blue-400/20 bg-blue-400/[0.07] text-blue-200 transition-colors duration-200 hover:border-blue-400/40 hover:bg-blue-400/[0.13]"
                   aria-label={i === 0 ? "Vorherige Frage" : "Nächste Frage"}
                 >
                   <Icon size={18} />
@@ -358,7 +350,7 @@ export function FAQSection({
                 style={{
                   height: 5,
                   width: i === startIdx ? 20 : 5,
-                  background: i === startIdx ? "#4dbef3" : "rgba(77,190,243,0.25)",
+                  background: i === startIdx ? "var(--blue-400)" : "rgb(var(--blue-400-rgb) / 0.25)",
                 }}
               />
             </button>
@@ -380,7 +372,7 @@ export function FAQSection({
           <div className="flex items-center gap-3.5">
             <div
               className="shrink-0 h-10 w-10 rounded-full overflow-hidden"
-              style={{ border: "1.5px solid rgba(77,190,243,0.38)" }}
+              style={{ border: "1.5px solid rgb(var(--blue-400-rgb) / 0.38)" }}
             >
               <img src={berkantImg} alt="Berkant Agyar" loading="lazy" decoding="async" className="h-full w-full object-cover object-top" />
             </div>
@@ -388,7 +380,7 @@ export function FAQSection({
               <div className="text-white font-semibold text-[14px] xl:text-[15px] leading-tight">
                 Berkant Agyar
               </div>
-              <div className="text-[12px] xl:text-[13px] mt-0.5" style={{ color: "rgba(170,210,235,0.72)" }}>
+              <div className="text-[12px] xl:text-[13px] mt-0.5 text-ink-300">
                 Noch eine andere Frage? Meld dich gerne.
               </div>
             </div>
@@ -400,14 +392,7 @@ export function FAQSection({
             <a
               href={`mailto:${FAQ_EMAIL}`}
               aria-label="E-Mail an Berkant Agyar schreiben"
-              className="cursor-pointer inline-flex items-center gap-2 rounded-full px-4 py-2 text-[13px] xl:text-[14px] font-medium transition-all duration-200 whitespace-nowrap"
-              style={{
-                background: "rgba(77,190,243,0.09)",
-                border: "1px solid rgba(77,190,243,0.2)",
-                color: "rgba(152,220,252,0.9)",
-              }}
-              onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(77,190,243,0.16)"; e.currentTarget.style.borderColor = "rgba(77,190,243,0.38)"; }}
-              onMouseLeave={(e) => { e.currentTarget.style.background = "rgba(77,190,243,0.09)"; e.currentTarget.style.borderColor = "rgba(77,190,243,0.2)"; }}
+              className="cursor-pointer inline-flex items-center gap-2 rounded-full border border-blue-400/20 bg-blue-400/[0.09] px-4 py-2 text-[13px] xl:text-[14px] font-medium text-blue-200 transition-colors duration-200 whitespace-nowrap hover:border-blue-400/40 hover:bg-blue-400/[0.16] focus-visible:border-blue-400/40 focus-visible:bg-blue-400/[0.16]"
             >
               <Mail size={14} aria-hidden="true" />
               E-Mail schreiben
@@ -416,14 +401,7 @@ export function FAQSection({
             <a
               href={`tel:${FAQ_PHONE.replace(/[\s]/g, "")}`}
               aria-label="Berkant Agyar anrufen"
-              className="inline-flex items-center gap-2 rounded-full px-4 py-2 text-[13px] xl:text-[14px] font-medium transition-all duration-200 whitespace-nowrap"
-              style={{
-                background: "rgba(77,190,243,0.09)",
-                border: "1px solid rgba(77,190,243,0.2)",
-                color: "rgba(152,220,252,0.9)",
-              }}
-              onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(77,190,243,0.16)"; e.currentTarget.style.borderColor = "rgba(77,190,243,0.38)"; }}
-              onMouseLeave={(e) => { e.currentTarget.style.background = "rgba(77,190,243,0.09)"; e.currentTarget.style.borderColor = "rgba(77,190,243,0.2)"; }}
+              className="inline-flex items-center gap-2 rounded-full border border-blue-400/20 bg-blue-400/[0.09] px-4 py-2 text-[13px] xl:text-[14px] font-medium text-blue-200 transition-colors duration-200 whitespace-nowrap hover:border-blue-400/40 hover:bg-blue-400/[0.16] focus-visible:border-blue-400/40 focus-visible:bg-blue-400/[0.16]"
             >
               <Phone size={14} aria-hidden="true" />
               Anrufen

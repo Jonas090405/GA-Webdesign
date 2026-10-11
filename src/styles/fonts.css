@@ -1,6 +1,6 @@
 /* ============================================================
    FONTS – vollständig self-hosted, kein externer Request
-   Body: Segoe UI (Windows-System) → Inter Variable
+   Body: Inter Variable (überall gleich, kein System-Font vorne)
    Display (h1–h3): Bricolage Grotesque Variable
    (beide lokal gebündelt via @fontsource-variable, DSGVO-konform)
    ============================================================ */
@@ -10,7 +10,7 @@
 
 /* ── Globale Font-Families ───────────────────────────────── */
 :root {
-  --font-sans: 'Segoe UI', 'Inter Variable', Inter, system-ui, sans-serif;
+  --font-sans: 'Inter Variable', Inter, system-ui, sans-serif;
   --font-display: 'Bricolage Grotesque Variable', 'Inter Variable', system-ui, sans-serif;
 }
 

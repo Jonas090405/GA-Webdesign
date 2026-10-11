@@ -47,7 +47,7 @@ export function Navbar() {
       <a
         href="#main-content"
         className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[200] focus:px-4 focus:py-2 focus:rounded-lg focus:font-medium focus:text-sm"
-        style={{ background: "#4dbef3", color: "#0d1115" }}
+        style={{ background: "var(--blue-400)", color: "#0d1115" }}
       >
         Zum Inhalt springen
       </a>
@@ -62,10 +62,10 @@ export function Navbar() {
         <div
           className="transition-all duration-300"
           style={{
-            background: scrolled ? "rgba(13, 17, 21, 0.80)" : "transparent",
+            background: scrolled ? "rgb(var(--ink-950-rgb) / 0.80)" : "transparent",
             backdropFilter: scrolled ? "blur(14px)" : "none",
             WebkitBackdropFilter: scrolled ? "blur(14px)" : "none",
-            borderBottom: scrolled ? "1px solid rgba(77, 190, 243, 0.08)" : "1px solid transparent",
+            borderBottom: scrolled ? "1px solid rgb(var(--blue-400-rgb) / 0.08)" : "1px solid transparent",
             boxShadow: scrolled ? "0 4px 30px rgba(0,0,0,0.35)" : "none",
           }}
         >
@@ -101,7 +101,7 @@ export function Navbar() {
                     to={id}
                     aria-current={active ? "page" : undefined}
                     className="nav-item group flex items-center gap-2.5 font-medium cursor-pointer relative py-1.5 whitespace-nowrap pointer-events-auto no-underline"
-                    style={{ color: active ? "#ffffff" : "rgba(200,220,235,0.65)", fontSize: scrolled ? "15px" : "17px", transition: "color 0.2s, font-size 0.35s ease", textDecoration: "none" }}
+                    style={{ color: active ? "#ffffff" : "var(--ink-200)", fontSize: scrolled ? "15px" : "17px", transition: "color 0.2s, font-size 0.35s ease", textDecoration: "none" }}
                     onMouseEnter={(e) => {
                       (e.currentTarget as HTMLAnchorElement).style.color = "#ffffff";
                       const bar = e.currentTarget.querySelector(".underline-bar") as HTMLElement | null;
@@ -109,7 +109,7 @@ export function Navbar() {
                     }}
                     onMouseLeave={(e) => {
                       if (!active) {
-                        (e.currentTarget as HTMLAnchorElement).style.color = "rgba(200,220,235,0.65)";
+                        (e.currentTarget as HTMLAnchorElement).style.color = "var(--ink-200)";
                         const bar = e.currentTarget.querySelector(".underline-bar") as HTMLElement | null;
                         if (bar) bar.style.width = "0%";
                       }
@@ -117,7 +117,7 @@ export function Navbar() {
                   >
                     <Icon
                       size={16}
-                      style={{ color: active ? "#4dbef3" : "inherit", transition: "color 0.2s" }}
+                      style={{ color: active ? "var(--blue-400)" : "inherit", transition: "color 0.2s" }}
                     />
                     <span className="relative">
                       {label}
@@ -125,7 +125,7 @@ export function Navbar() {
                         className="absolute -bottom-0.5 left-0 h-[1.5px] rounded-full transition-all duration-200 underline-bar"
                         style={{
                           width: active ? "100%" : "0%",
-                          background: "#4dbef3",
+                          background: "var(--blue-400)",
                         }}
                       />
                     </span>
@@ -142,10 +142,10 @@ export function Navbar() {
         className="fixed top-0 left-0 right-0 z-50 xl:hidden flex items-center justify-between px-4 transition-all duration-300"
         style={{
           height: "60px",
-          background: scrolled ? "rgba(13, 17, 21, 0.80)" : "transparent",
+          background: scrolled ? "rgb(var(--ink-950-rgb) / 0.80)" : "transparent",
           backdropFilter: scrolled ? "blur(14px)" : "none",
           WebkitBackdropFilter: scrolled ? "blur(14px)" : "none",
-          borderBottom: scrolled ? "1px solid rgba(77, 190, 243, 0.08)" : "1px solid transparent",
+          borderBottom: scrolled ? "1px solid rgb(var(--blue-400-rgb) / 0.08)" : "1px solid transparent",
           boxShadow: scrolled ? "0 4px 30px rgba(0,0,0,0.35)" : "none",
         }}
       >
@@ -160,7 +160,7 @@ export function Navbar() {
         <button
           onClick={() => setIsOpen(true)}
           aria-label="Hauptmenü öffnen"
-          className="p-2 text-white hover:text-[#4dbef3] transition-colors cursor-pointer"
+          className="p-2 text-white hover:text-blue-400 transition-colors cursor-pointer"
         >
           <Menu size={26} />
         </button>
@@ -188,8 +188,8 @@ export function Navbar() {
               aria-label="Hauptmenü"
               className="fixed top-0 right-0 bottom-0 w-[300px] z-[70] flex flex-col shadow-[-16px_0_48px_rgba(0,0,0,0.6)]"
               style={{
-                background: "linear-gradient(160deg, rgb(16,24,28) 0%, rgb(11,15,19) 100%)",
-                borderLeft: "1px solid rgba(77,190,243,0.12)",
+                background: "linear-gradient(160deg, var(--ink-900) 0%, rgb(11,15,19) 100%)",
+                borderLeft: "1px solid rgb(var(--blue-400-rgb) / 0.12)",
               }}
             >
               <div className="flex items-center justify-between px-6 pt-6 pb-4">
@@ -212,7 +212,7 @@ export function Navbar() {
 
               <div
                 className="mx-6 mb-4"
-                style={{ height: "1px", background: "rgba(77,190,243,0.08)" }}
+                style={{ height: "1px", background: "rgb(var(--blue-400-rgb) / 0.08)" }}
               />
 
               <nav aria-label="Mobilnavigation">
@@ -232,9 +232,9 @@ export function Navbar() {
                           textDecoration: "none",
                           ...(active
                             ? {
-                                background: "rgba(77,190,243,0.1)",
-                                color: "#4dbef3",
-                                border: "1px solid rgba(77,190,243,0.2)",
+                                background: "rgb(var(--blue-400-rgb) / 0.1)",
+                                color: "var(--blue-400)",
+                                border: "1px solid rgb(var(--blue-400-rgb) / 0.2)",
                               }
                             : {
                                 color: "rgba(210,230,245,0.75)",
@@ -242,7 +242,7 @@ export function Navbar() {
                               }),
                         }}
                       >
-                        <Icon size={22} style={{ color: active ? "#4dbef3" : "rgba(200,220,235,0.55)" }} />
+                        <Icon size={22} style={{ color: active ? "var(--blue-400)" : "var(--ink-200)" }} />
                         <span>{label}</span>
                       </Link>
                     );

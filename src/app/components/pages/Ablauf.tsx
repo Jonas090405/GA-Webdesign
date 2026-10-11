@@ -1,6 +1,5 @@
 import { useRef } from "react";
 import { usePageMeta } from "../../hooks/usePageMeta";
-import { SectionLabel } from "../SectionLabel";
 import { PrimaryButton } from "../Button";
 import { FadeIn } from "../FadeIn";
 import { MessageCircle, PenTool, RefreshCw, Globe, Code2 } from "lucide-react";
@@ -92,15 +91,15 @@ function TimelineDot({
         style={{ transform: "rotate(-90deg)" }}>
 
         {/* Grauer Hintergrundring */}
-        <circle cx="24" cy="24" r={r} fill="none" stroke="rgba(100,115,130,0.45)" strokeWidth="1.5" />
+        <circle cx="24" cy="24" r={r} fill="none" className="stroke-ink-600" strokeWidth="1.5" />
 
         {/* Rechte Hälfte — 12 Uhr → im Uhrzeigersinn → 6 Uhr */}
-        <motion.circle cx="24" cy="24" r={r} fill="none" stroke="#4dbef3"
+        <motion.circle cx="24" cy="24" r={r} fill="none" className="stroke-blue-400"
           strokeWidth="1.5" strokeLinecap="butt"
           style={{ pathLength: halfPath }} />
 
         {/* Linke Hälfte — 12 Uhr → gegen Uhrzeigersinn → 6 Uhr */}
-        <motion.circle cx="24" cy="24" r={r} fill="none" stroke="#4dbef3"
+        <motion.circle cx="24" cy="24" r={r} fill="none" className="stroke-blue-400"
           strokeWidth="1.5" strokeLinecap="butt"
           style={{ pathLength: leftLength, pathOffset: leftOffset }} />
       </svg>
@@ -111,12 +110,12 @@ function TimelineDot({
 
       {/* Graues Icon */}
       <motion.div className="absolute inset-0 flex items-center justify-center" style={{ opacity: grayOpacity }}>
-        <Icon size={18} className="xl:!w-5 xl:!h-5" style={{ color: "rgba(90,110,130,0.5)" }} />
+        <Icon size={18} className="xl:!w-5 xl:!h-5 text-ink-400" />
       </motion.div>
 
       {/* Blaues Icon */}
       <motion.div className="absolute inset-0 flex items-center justify-center" style={{ opacity: activated }}>
-        <Icon size={18} className="xl:!w-5 xl:!h-5" style={{ color: "#4dbef3" }} />
+        <Icon size={18} className="xl:!w-5 xl:!h-5 text-blue-400" />
       </motion.div>
     </div>
   );
@@ -137,7 +136,7 @@ function ContentBlock({
         </span>
         <span
           className="rounded-full px-2.5 py-0.5 text-[11px] 2xl:text-[12px] text-brand-light"
-          style={{ background: "rgba(77,190,243,0.08)", border: "1px solid rgba(77,190,243,0.2)" }}
+          style={{ background: "rgb(var(--blue-400-rgb) / 0.08)", border: "1px solid rgb(var(--blue-400-rgb) / 0.2)" }}
         >
           {tag}
         </span>
@@ -145,7 +144,7 @@ function ContentBlock({
       <h3 className={`text-white text-[20px] sm:text-[23px] xl:text-[25px] 2xl:text-[28px] mb-3 tracking-tight leading-snug ${right ? "text-right" : ""}`}>
         {title}
       </h3>
-      <p className={`text-slate-400 text-[14px] sm:text-[15px] 2xl:text-[16px] leading-relaxed text-pretty ${right ? "text-right" : ""}`}>
+      <p className={`text-ink-300 text-[14px] sm:text-[15px] 2xl:text-[16px] leading-relaxed text-pretty ${right ? "text-right" : ""}`}>
         {desc}
       </p>
     </div>
@@ -241,7 +240,7 @@ function ProcessTimeline() {
           left: "24px",
           height: "calc(100% - 48px)",
           scaleY: scrollYProgress,
-          background: "linear-gradient(to bottom, #4dbef3, #006999)",
+          background: "linear-gradient(to bottom, var(--blue-400), var(--blue-700))",
         }} />
       <motion.div className="absolute top-6 w-px origin-top hidden md:block"
         style={{
@@ -249,7 +248,7 @@ function ProcessTimeline() {
           transform: "translateX(-50%)",
           height: "calc(100% - 48px)",
           scaleY: scrollYProgress,
-          background: "linear-gradient(to bottom, #4dbef3, #006999)",
+          background: "linear-gradient(to bottom, var(--blue-400), var(--blue-700))",
         }} />
 
       {/* Steps — alle bekommen denselben scrollYProgress */}
@@ -285,17 +284,15 @@ export function Ablauf() {
   return (
     <main id="main-content" className="mx-auto max-w-6xl xl:max-w-7xl 2xl:max-w-[1440px] px-5 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 pt-36 sm:pt-44 lg:pt-52 xl:pt-60 2xl:pt-72 pb-12 xl:pb-20 2xl:pb-28">
       <FadeIn>
-        <SectionLabel>So läuft es ab</SectionLabel>
         <h1 className="text-white text-[clamp(36px,6vw,84px)] tracking-tight leading-[1.05] max-w-4xl 2xl:max-w-5xl">
           Von der ersten Idee bis zur{" "}
           <span
-            className="bg-clip-text text-transparent"
-            style={{ backgroundImage: "linear-gradient(135deg, #4dbef3 0%, #006999 100%)" }}
+            className="text-blue-400"
           >
             fertigen Webseite.
           </span>
         </h1>
-        <p className="mt-6 max-w-2xl 2xl:max-w-3xl text-[16px] xl:text-[18px] 2xl:text-[20px] text-slate-400 leading-relaxed">
+        <p className="mt-6 max-w-2xl 2xl:max-w-3xl text-[16px] xl:text-[18px] 2xl:text-[20px] text-ink-300 leading-relaxed">
           Du weißt jederzeit, wo wir stehen. Regelmäßige Feedbackschleifen stellen sicher,
           dass wir am Ende genau das Ergebnis haben, das du dir vorstellst.
         </p>
@@ -309,7 +306,7 @@ export function Ablauf() {
           <h2 className="text-white text-[28px] xl:text-[34px] 2xl:text-[42px] mb-3">
             Bereit loszulegen?
           </h2>
-          <p className="text-slate-400 text-[15px] xl:text-[16px] 2xl:text-[18px] mb-8 max-w-xl 2xl:max-w-2xl mx-auto">
+          <p className="text-ink-300 text-[15px] xl:text-[16px] 2xl:text-[18px] mb-8 max-w-xl 2xl:max-w-2xl mx-auto">
             Erzähl uns kurz von deinem Projekt – das Erstgespräch ist kostenlos und unverbindlich.
           </p>
           <PrimaryButton onClick={() => navigate("/kontakt")}>

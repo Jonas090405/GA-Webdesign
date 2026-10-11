@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { usePageMeta } from "../../hooks/usePageMeta";
 import { motion, AnimatePresence } from "motion/react";
-import { SectionLabel } from "../SectionLabel";
 import { Card } from "../Card";
 import { FadeIn } from "../FadeIn";
 import { Mail, MapPin, Phone } from "lucide-react";
@@ -30,12 +29,10 @@ export function Kontakt() {
   return (
     <main id="main-content" className="mx-auto max-w-5xl xl:max-w-6xl 2xl:max-w-7xl px-5 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 pt-36 sm:pt-44 lg:pt-52 xl:pt-60 2xl:pt-72 pb-24 2xl:pb-32">
       <FadeIn>
-        <SectionLabel>Kontakt</SectionLabel>
         <h1 className="text-white text-[clamp(32px,6vw,76px)] leading-[1.05] tracking-tight max-w-2xl 2xl:max-w-3xl mb-4">
           Erzähl uns von{" "}
           <span
-            className="bg-clip-text text-transparent"
-            style={{ backgroundImage: "linear-gradient(135deg, #4dbef3 0%, #006999 100%)" }}
+            className="text-blue-400"
           >
             deinem Projekt.
           </span>
@@ -45,17 +42,17 @@ export function Kontakt() {
         <div className="flex items-center gap-3 mb-6 2xl:mb-8">
           <div
             className="shrink-0 h-9 w-9 rounded-full overflow-hidden"
-            style={{ border: "1.5px solid rgba(77,190,243,0.4)" }}
+            style={{ border: "1.5px solid rgb(var(--blue-400-rgb) / 0.4)" }}
           >
             <img src={berkantImg} alt="Berkant Agyar" className="h-full w-full object-cover object-top" />
           </div>
           <div>
-            <div className="text-[11px]" style={{ color: "rgba(150,190,220,0.5)" }}>Dein Ansprechpartner</div>
+            <div className="text-[11px] text-ink-400">Dein Ansprechpartner</div>
             <div className="text-[13px] text-white font-medium leading-tight">Berkant Agyar</div>
           </div>
         </div>
 
-        <p className="text-slate-400 text-[15px] sm:text-[16px] 2xl:text-[18px] leading-relaxed max-w-xl 2xl:max-w-2xl mb-14 2xl:mb-20">
+        <p className="text-ink-300 text-[15px] sm:text-[16px] 2xl:text-[18px] leading-relaxed max-w-xl 2xl:max-w-2xl mb-14 2xl:mb-20">
           Wir melden uns innerhalb von 24 Stunden
           mit einer ersten Einschätzung und einem unverbindlichen Termin.
         </p>
@@ -85,8 +82,8 @@ export function Kontakt() {
           <div
             className="flex mb-5 p-1 rounded-xl gap-1"
             style={{
-              background: "rgba(10,19,30,0.7)",
-              border: "1px solid rgba(77,190,243,0.12)",
+              background: "rgb(var(--ink-950-rgb) / 0.7)",
+              border: "1px solid rgb(var(--blue-400-rgb) / 0.12)",
             }}
           >
             <TabBtn active={mode === "form"} onClick={() => { setDirection(-1); setMode("form"); }}>
@@ -142,7 +139,7 @@ function TabBtn({
       type="button"
       onClick={onClick}
       className="relative flex-1 rounded-lg px-4 py-2.5 text-[13px] font-medium tracking-wide cursor-pointer transition-colors duration-200"
-      style={{ color: active ? "#fff" : "rgba(150,190,220,0.6)" }}
+      style={{ color: active ? "#fff" : "var(--ink-400)" }}
     >
       {active && (
         <motion.div
@@ -164,14 +161,14 @@ function CallCard({ phone }: { phone: string }) {
         <div
           className="h-20 w-20 rounded-full flex items-center justify-center"
           style={{
-            background: "linear-gradient(135deg, rgba(0,105,153,0.3) 0%, rgba(77,190,243,0.15) 100%)",
-            border: "1px solid rgba(77,190,243,0.3)",
+            background: "linear-gradient(135deg, rgb(var(--blue-700-rgb) / 0.3) 0%, rgb(var(--blue-400-rgb) / 0.15) 100%)",
+            border: "1px solid rgb(var(--blue-400-rgb) / 0.3)",
           }}
         >
-          <Phone size={32} style={{ color: "#4dbef3" }} />
+          <Phone size={32} style={{ color: "var(--blue-400)" }} />
         </div>
         <div>
-          <p className="text-slate-400 text-[14px] mb-2">Ruf uns einfach direkt an:</p>
+          <p className="text-ink-300 text-[14px] mb-2">Ruf uns einfach direkt an:</p>
           <a
             href={`tel:${phone.replace(/[\s\-\(\)]/g, "")}`}
             className="text-white text-[28px] sm:text-[34px] font-semibold tracking-tight hover:text-brand-light transition-colors"
@@ -179,7 +176,7 @@ function CallCard({ phone }: { phone: string }) {
             {phone}
           </a>
         </div>
-        <p className="text-slate-500 text-[13px] max-w-xs leading-relaxed">
+        <p className="text-ink-400 text-[13px] max-w-xs leading-relaxed">
           Falls wir nicht erreichbar sind, hinterlasse eine Nachricht mit deinem Namen und deiner Telefonnummer. Wir melden uns schnellstmöglich zurück.
         </p>
         <a

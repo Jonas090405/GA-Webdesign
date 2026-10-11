@@ -114,7 +114,7 @@ export function PortfolioSlider({ projects }: { projects: Project[] }) {
                     <h3 className="text-white text-[22px] sm:text-[28px] xl:text-[34px] 2xl:text-[40px] mb-3 xl:mb-4 tracking-tight">
                       {project.title}
                     </h3>
-                    <p className="text-slate-400 text-[14px] sm:text-[15px] xl:text-[16px] 2xl:text-[18px] leading-relaxed">
+                    <p className="text-ink-300 text-[14px] sm:text-[15px] xl:text-[16px] 2xl:text-[18px] leading-relaxed">
                       {project.desc}
                     </p>
 
@@ -142,17 +142,17 @@ export function PortfolioSlider({ projects }: { projects: Project[] }) {
                         rel="noreferrer"
                         className="group/btn mt-6 xl:mt-8 inline-flex w-fit cursor-pointer items-center gap-2 rounded-full px-4 xl:px-5 2xl:px-6 py-2 2xl:py-3 text-[13px] xl:text-[14px] 2xl:text-[16px] font-medium transition-all duration-300"
                         style={{
-                          background: "rgba(77, 190, 243, 0.07)",
-                          border: "1px solid rgba(77, 190, 243, 0.2)",
-                          color: "rgba(200, 235, 255, 0.85)",
+                          background: "rgb(var(--blue-400-rgb) / 0.07)",
+                          border: "1px solid rgb(var(--blue-400-rgb) / 0.2)",
+                          color: "var(--ink-100)",
                         }}
                         onMouseEnter={(e) => {
-                          e.currentTarget.style.background = "rgba(77, 190, 243, 0.13)";
-                          e.currentTarget.style.borderColor = "rgba(77, 190, 243, 0.4)";
+                          e.currentTarget.style.background = "rgb(var(--blue-400-rgb) / 0.13)";
+                          e.currentTarget.style.borderColor = "rgb(var(--blue-400-rgb) / 0.4)";
                         }}
                         onMouseLeave={(e) => {
-                          e.currentTarget.style.background = "rgba(77, 190, 243, 0.07)";
-                          e.currentTarget.style.borderColor = "rgba(77, 190, 243, 0.2)";
+                          e.currentTarget.style.background = "rgb(var(--blue-400-rgb) / 0.07)";
+                          e.currentTarget.style.borderColor = "rgb(var(--blue-400-rgb) / 0.2)";
                         }}
                       >
                         {project.urlLabel ?? "Webseite öffnen"}
@@ -238,15 +238,15 @@ export function PortfolioSlider({ projects }: { projects: Project[] }) {
               }}
               className="relative w-full max-w-md rounded-2xl p-5"
               style={{
-                background: "linear-gradient(135deg, rgba(16,24,27,0.98) 0%, rgba(10,17,22,0.99) 100%)",
-                border: "1px solid rgba(77,190,243,0.18)",
+                background: "linear-gradient(135deg, rgb(var(--ink-900-rgb) / 0.98) 0%, rgb(var(--ink-950-rgb) / 0.99) 100%)",
+                border: "1px solid rgb(var(--blue-400-rgb) / 0.18)",
               }}
               onClick={(e) => e.stopPropagation()}
             >
               <button
                 onClick={() => setTestimonialOpen(false)}
                 aria-label="Kundenstimme schließen"
-                className="absolute top-4 right-4 flex h-7 w-7 items-center justify-center rounded-full text-slate-400 transition-colors"
+                className="absolute top-4 right-4 flex h-7 w-7 items-center justify-center rounded-full text-ink-300 transition-colors"
                 style={{ background: "rgba(255,255,255,0.06)" }}
               >
                 <X size={15} aria-hidden />
@@ -273,16 +273,16 @@ function TestimonialContent({ t }: { t: Testimonial }) {
           decoding="async"
           className="shrink-0 w-11 h-11 xl:w-13 xl:h-13 2xl:w-15 2xl:h-15 rounded-full object-cover object-top"
           style={{
-            border: "1.5px solid rgba(77,190,243,0.35)",
-            boxShadow: "0 0 0 3px rgba(77,190,243,0.08)",
+            border: "1.5px solid rgb(var(--blue-400-rgb) / 0.35)",
+            boxShadow: "0 0 0 3px rgb(var(--blue-400-rgb) / 0.08)",
           }}
         />
       )}
       <div>
-        <p className="text-slate-300 text-[13px] xl:text-[14px] 2xl:text-[16px] leading-relaxed italic">
+        <p className="text-ink-200 text-[13px] xl:text-[14px] 2xl:text-[16px] leading-relaxed italic">
           „{t.quote}"
         </p>
-        <p className="mt-2 text-[11px] xl:text-[12px] 2xl:text-[13px] text-slate-500">
+        <p className="mt-2 text-[11px] xl:text-[12px] 2xl:text-[13px] text-ink-400">
           — {t.name}, {t.role} · {t.company}
         </p>
       </div>
@@ -329,7 +329,7 @@ function MacOSBrowserFrame({
         {/* URL-Leiste */}
         <div className="flex-1 flex justify-center">
           <div
-            className="px-3 py-[3px] rounded-md text-[11px] text-slate-400 max-w-[220px] truncate text-center"
+            className="px-3 py-[3px] rounded-md text-[11px] text-ink-300 max-w-[220px] truncate text-center"
             style={{
               background: "rgba(0,0,0,0.28)",
               border: "1px solid rgba(255,255,255,0.07)",
@@ -360,7 +360,7 @@ function SliderBtn({
     <button
       onClick={onClick}
       aria-label={aria}
-      className="inline-flex h-12 w-12 sm:h-10 sm:w-10 xl:h-12 xl:w-12 2xl:h-14 2xl:w-14 cursor-pointer items-center justify-center rounded-full border border-white/10 bg-white/5 text-slate-200 transition-all duration-300 hover:border-brand/40 hover:text-brand-light active:scale-95"
+      className="inline-flex h-12 w-12 sm:h-10 sm:w-10 xl:h-12 xl:w-12 2xl:h-14 2xl:w-14 cursor-pointer items-center justify-center rounded-full border border-white/10 bg-white/5 text-ink-100 transition-all duration-300 hover:border-brand/40 hover:text-brand-light active:scale-95"
     >
       {children}
     </button>

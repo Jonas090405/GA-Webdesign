@@ -3,7 +3,13 @@ import { createServer } from 'http';
 import { readFileSync, writeFileSync, mkdirSync } from 'fs';
 import { join, extname } from 'path';
 
-const ROUTES = ['/', '/projekte', '/leistungen', '/ablauf', '/ueber-uns', '/kontakt', '/impressum', '/datenschutz', '/agb'];
+// Case Studies: alle Einträge aus src/content/projects.ts, bei denen
+// `published: true` direkt unter `slug` steht.
+const projectsSrc = readFileSync(join(process.cwd(), 'src/content/projects.ts'), 'utf-8');
+const CASE_STUDY_ROUTES = [...projectsSrc.matchAll(/slug:\s*"([^"]+)",\s*\n\s*published:\s*true/g)]
+  .map((m) => `/projekte/${m[1]}`);
+
+const ROUTES = ['/', '/projekte', ...CASE_STUDY_ROUTES, '/leistungen', '/ablauf', '/ueber-uns', '/kontakt', '/impressum', '/datenschutz', '/agb'];
 const PORT = 3033;
 const distDir = join(process.cwd(), 'dist');
 

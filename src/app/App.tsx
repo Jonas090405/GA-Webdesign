@@ -6,6 +6,7 @@ import { Footer } from "./components/Footer";
 import { ScrollProgress } from "./components/ScrollProgress";
 import { Home } from "./components/pages/Home";
 import { Portfolio } from "./components/pages/Portfolio";
+import { CaseStudy } from "./components/pages/CaseStudy";
 import { Leistungen } from "./components/pages/Leistungen";
 import { Ablauf } from "./components/pages/Ablauf";
 import { About } from "./components/pages/About";
@@ -20,7 +21,7 @@ export default function App() {
   const location = useLocation();
 
   useEffect(() => {
-    document.body.style.background = "rgb(13, 17, 21)";
+    document.body.style.background = "var(--ink-950)";
   }, []);
 
   useEffect(() => {
@@ -41,7 +42,7 @@ export default function App() {
   return (
     // overflow-x-clip statt -hidden: `hidden` würde diesen Container zum
     // Scroll-Container machen und damit `position: sticky` im Hero aushebeln.
-    <div className="min-h-screen text-white relative overflow-x-clip" style={{ background: "linear-gradient(160deg, rgb(13,17,21) 0%, rgb(16,24,28) 60%, rgb(13,17,21) 100%)" }}>
+    <div className="min-h-screen text-white relative overflow-x-clip" style={{ background: "var(--page-gradient)" }}>
       <ScrollProgress />
       <Navbar />
 
@@ -55,6 +56,11 @@ export default function App() {
           <Route path="/projekte" element={
             <motion.div initial="initial" animate="animate" exit="exit" variants={pageVariants} transition={pageTransition}>
               <Portfolio />
+            </motion.div>
+          } />
+          <Route path="/projekte/:slug" element={
+            <motion.div initial="initial" animate="animate" exit="exit" variants={pageVariants} transition={pageTransition}>
+              <CaseStudy />
             </motion.div>
           } />
           <Route path="/leistungen" element={
