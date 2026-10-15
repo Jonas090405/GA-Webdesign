@@ -21,7 +21,12 @@ let scriptInjected = false;
 function ensureGtag() {
   window.dataLayer = window.dataLayer || [];
   if (typeof window.gtag !== "function") {
-    window.gtag = (...args: unknown[]) => window.dataLayer.push(args);
+    // Muss das `arguments`-Objekt pushen: gtag.js ignoriert echte Arrays
+    // (Rest-Parameter) und sendet dann keinerlei Hits.
+    window.gtag = function gtag() {
+      // eslint-disable-next-line prefer-rest-params
+      window.dataLayer.push(arguments);
+    };
   }
 }
 
@@ -30,13 +35,16 @@ function injectGtagScript() {
   if (scriptInjected || !GA_ID) return;
   scriptInjected = true;
   ensureGtag();
+  // Befehle sofort in die Queue – gtag.js arbeitet sie nach dem Laden ab.
+  window.gtag("consent", "default", {
+    ad_storage: "denied",
+    ad_user_data: "denied",
+    ad_personalization: "denied",
+    analytics_storage: "denied",
+  });
   const s = document.createElement("script");
   s.async = true;
   s.src = `https://www.googletagmanager.com/gtag/js?id=${GA_ID}`;
-  s.onload = () => {
-    window.gtag("js", new Date());
-    window.gtag("config", GA_ID);
-  };
   document.head.appendChild(s);
 }
 
@@ -45,8 +53,9 @@ function injectGtagScript() {
  * Das Banner fragt nur nach Analyse – Werbesignale bleiben daher immer aus.
  */
 export function grantConsent() {
+  if (!GA_ID) return;
+  const firstLoad = !scriptInjected;
   injectGtagScript();
-  ensureGtag();
   (window as unknown as Record<string, boolean>)[`ga-disable-${GA_ID}`] = false;
   window.gtag("consent", "update", {
     ad_storage: "denied",
@@ -54,6 +63,11 @@ export function grantConsent() {
     ad_personalization: "denied",
     analytics_storage: "granted",
   });
+  // config erst nach dem Consent-Update, damit der erste page_view mit Cookies läuft.
+  if (firstLoad) {
+    window.gtag("js", new Date());
+    window.gtag("config", GA_ID);
+  }
 }
 
 /** Consent verweigert → kein Skript, kein Tracking. */
