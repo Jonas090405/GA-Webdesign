@@ -315,6 +315,13 @@ export function AGB() {
               Funktionalität und es wird kein erhöhter Betrag berechnet.
             </p>
             <p className="text-ink-200 text-[14px] leading-relaxed mt-3">
+              Der im Angebot ausgewiesene Betrag deckt die dort angegebene Nutzung (z. B. Anzahl versendeter
+              E-Mails, Kontakte oder Speicherplatz). Überschreitet die Nutzung durch den Auftraggeber dieses
+              Kontingent dauerhaft und wird dadurch ein höherer Tarif des Drittanbieters erforderlich, gilt die
+              vorstehende Preisanpassung entsprechend. Einmalige Überschreitungen werden in tatsächlicher Höhe
+              nachberechnet.
+            </p>
+            <p className="text-ink-200 text-[14px] leading-relaxed mt-3">
               Domains werden grundsätzlich auf den Auftraggeber als Domaininhaber registriert. Domainkosten
               werden in tatsächlicher Höhe weiterberechnet. Die Herausgabe der Domain bei Vertragsende regelt
               Abschnitt 20.
@@ -497,8 +504,10 @@ export function AGB() {
               13. Vergütung und Zahlungsbedingungen
             </div>
             <p className="text-ink-200 text-[14px] leading-relaxed">
-              Alle genannten Preise verstehen sich als Nettopreise zuzüglich der jeweils geltenden
-              gesetzlichen Umsatzsteuer.
+              Die G&amp;A Webdesign GbR ist Kleinunternehmer im Sinne von § 19 UStG; Umsatzsteuer wird daher
+              nicht berechnet. Entfallen die Voraussetzungen der Kleinunternehmerregelung, verstehen sich alle
+              Preise ab diesem Zeitpunkt als Nettopreise zuzüglich der gesetzlichen Umsatzsteuer. Die G&amp;A
+              Webdesign GbR teilt dies dem Auftraggeber vorab in Textform mit.
             </p>
             <p className="text-ink-200 text-[14px] leading-relaxed mt-3">
               Für die Erstellung von Webseiten gilt, sofern nicht anders vereinbart, folgende Zahlungsregelung
@@ -527,8 +536,14 @@ export function AGB() {
               fällig.
             </p>
             <p className="text-ink-200 text-[14px] leading-relaxed mt-3">
-              Monatliche Gebühren für Hosting, Wartung, CMS oder sonstige laufende Leistungen sind jeweils im
-              Voraus bis zum 3. Werktag eines Kalendermonats fällig.
+              Laufende Leistungen, insbesondere Hosting, Wartungs- und CMS-Pakete sowie weiterberechnete
+              Drittkosten nach Abschnitt 9, werden monatlich im Voraus abgerechnet. Die Rechnung wird jeweils
+              zum 25. des Vormonats gestellt und ist innerhalb von 7 Tagen ab Rechnungsdatum ohne Abzug zur
+              Zahlung fällig. Beginnt eine laufende Leistung im Laufe eines Monats, wird dieser Monat anteilig
+              nach Kalendertagen berechnet. Die G&amp;A Webdesign GbR kann alle laufenden Leistungen eines
+              Auftraggebers in einer Rechnung zusammenfassen. Vergütungen nach Aufwand oder Verbrauch (z. B.
+              Zusatzstunden oder Mehrverbrauch nach Abschnitt 9) werden mit der nächsten Monatsrechnung
+              abgerechnet.
             </p>
             <p className="text-ink-200 text-[14px] leading-relaxed mt-3">
               Wird ein Projekt durch den Auftraggeber vorzeitig beendet oder abgebrochen, ist die G&amp;A
@@ -537,10 +552,24 @@ export function AGB() {
               Anspruch nach § 648 BGB bleibt unberührt.
             </p>
             <p className="text-ink-200 text-[14px] leading-relaxed mt-3">
-              Preise für laufende monatliche Leistungen (Hosting, Wartungspakete, CMS-Pakete) können von der
-              G&amp;A Webdesign GbR mit einer Ankündigungsfrist von sechs Wochen in Textform angepasst werden.
-              Der Auftraggeber ist berechtigt, den betroffenen Vertrag in diesem Fall mit Wirkung zum
-              Inkrafttreten der Preisänderung zu kündigen.
+              <strong className="text-ink-100">Preisanpassung laufender Leistungen.</strong> Die G&amp;A
+              Webdesign GbR kann die Preise für Hosting, Wartungs- und CMS-Pakete nach billigem Ermessen
+              (§ 315 BGB) anpassen, wenn sich die Kosten ihrer Erbringung seit Vertragsschluss oder der letzten
+              Anpassung verändert haben. Maßgeblich sind insbesondere die Kosten für Personal und Arbeitszeit,
+              für Software, Lizenzen und Infrastruktur sowie die allgemeine Preisentwicklung. Steigende Kosten
+              in einem Bereich dürfen nur weitergegeben werden, soweit sie nicht durch sinkende Kosten in
+              anderen Bereichen ausgeglichen werden. Sinken die Kosten insgesamt, senkt die G&amp;A Webdesign
+              GbR die Preise entsprechend. Eine Anpassung erfolgt höchstens einmal je Kalenderjahr und jeweils
+              zum Beginn eines Kalendermonats.
+            </p>
+            <p className="text-ink-200 text-[14px] leading-relaxed mt-3">
+              Die G&amp;A Webdesign GbR teilt eine Anpassung mindestens sechs Wochen vor ihrem Wirksamwerden in
+              Textform mit, unter Angabe des bisherigen und des neuen Preises. Der Auftraggeber kann den
+              betroffenen Vertrag bis zum Wirksamwerden mit Wirkung zu diesem Zeitpunkt kündigen; hierauf wird
+              in der Mitteilung hingewiesen.
+            </p>
+            <p className="text-ink-200 text-[14px] leading-relaxed mt-3">
+              Die Weitergabe von Drittkosten richtet sich ausschließlich nach Abschnitt 9.
             </p>
           </Card>
         </FadeIn>
@@ -681,6 +710,13 @@ export function AGB() {
               Kundendaten werden in diesem Rahmen nur in dem Umfang verarbeitet, der für die jeweilige
               Entwicklungsaufgabe erforderlich ist; Abschnitt 18 gilt entsprechend.
             </p>
+            <p className="text-ink-200 text-[14px] leading-relaxed mt-3">
+              Für Aufgaben, bei denen personenbezogene Daten von Auftraggebern verarbeitet werden, nutzt die
+              G&amp;A Webdesign GbR KI-Dienste nur in Geschäftskundentarifen oder über Schnittstellen, für die
+              ein Auftragsverarbeitungsvertrag besteht und bei denen Eingaben nicht zum Training der Modelle
+              verwendet werden. Schließt der AVV mit einem Auftraggeber die Eingabe personenbezogener Daten in
+              KI-Dienste aus, gilt dieser Ausschluss.
+            </p>
           </Card>
         </FadeIn>
 
@@ -694,7 +730,9 @@ export function AGB() {
               sonstigen Leistungen personenbezogene Daten im Auftrag des Auftraggebers verarbeitet – etwa Daten
               der Besucher der Webseite oder über Formulare übermittelte Anfragen –, schließen die Parteien einen
               Vertrag über die Auftragsverarbeitung nach Art. 28 DSGVO (AVV). Die G&amp;A Webdesign GbR stellt
-              diesen mit dem Angebot bzw. auf Anfrage bereit. Bei Widersprüchen geht der AVV diesen AGB vor.
+              diesen mit dem Angebot bzw. auf Anfrage bereit. Bei Widersprüchen geht der AVV diesen AGB vor, soweit es um den
+              Schutz personenbezogener Daten geht. Vergütung, Nutzungsrechte und Projektübergabe richten sich
+              ausschließlich nach diesen AGB und dem Angebot.
             </p>
             <p className="text-ink-200 text-[14px] leading-relaxed mt-3">
               Der Auftraggeber stimmt dem Einsatz folgender Unterauftragsverarbeiter zu, soweit diese im
@@ -714,9 +752,8 @@ export function AGB() {
               Übermittlungen in Länder außerhalb der EU bzw. des EWR erfolgen nur auf Grundlage eines
               Angemessenheitsbeschlusses der EU-Kommission (z. B. EU-US Data Privacy Framework) oder geeigneter
               Garantien wie Standardvertragsklauseln. Über die Hinzuziehung oder den Austausch von
-              Unterauftragsverarbeitern informiert die G&amp;A Webdesign GbR den Auftraggeber vorab in Textform;
-              der Auftraggeber kann der Änderung innerhalb von 14 Tagen aus wichtigem datenschutzrechtlichem
-              Grund widersprechen.
+              Unterauftragsverarbeitern informiert die G&amp;A Webdesign GbR den Auftraggeber mindestens 30 Tage
+              vorab in Textform; Einzelheiten, insbesondere das Widerspruchsrecht, regelt der AVV.
             </p>
             <p className="text-ink-200 text-[14px] leading-relaxed mt-3">
               Für die Datenschutzerklärung seiner Webseite und die Rechtmäßigkeit der Datenverarbeitung bleibt
