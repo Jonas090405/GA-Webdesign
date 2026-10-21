@@ -8,6 +8,8 @@ import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import berkantImg from "../../imports/Berkant_agyar.jpeg";
 import { FadeIn } from "./FadeIn";
+import { WhatsAppIcon } from "./WhatsAppIcon";
+import { BERKANT_WHATSAPP } from "./ContactForm";
 import { Plus, ChevronLeft, ChevronRight, Mail, Phone } from "lucide-react";
 
 // ─── Daten ────────────────────────────────────────────────────────────────────
@@ -387,7 +389,7 @@ export function FAQSection({
           </div>
 
           {/* Kontakt-Buttons – visuell identisch */}
-          <div className="flex gap-2.5 shrink-0">
+          <div className="flex flex-wrap gap-2.5 shrink-0">
             {/* E-Mail → direkt Mailprogramm öffnen */}
             <a
               href={`mailto:${FAQ_EMAIL}`}
@@ -396,6 +398,17 @@ export function FAQSection({
             >
               <Mail size={14} aria-hidden="true" />
               E-Mail schreiben
+            </a>
+            {/* WhatsApp → vor Anruf priorisiert */}
+            <a
+              href={BERKANT_WHATSAPP}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Berkant Agyar auf WhatsApp schreiben (öffnet WhatsApp)"
+              className="inline-flex items-center gap-2 rounded-full border border-blue-400/20 bg-blue-400/[0.09] px-4 py-2 text-[13px] xl:text-[14px] font-medium text-blue-200 transition-colors duration-200 whitespace-nowrap hover:border-blue-400/40 hover:bg-blue-400/[0.16] focus-visible:border-blue-400/40 focus-visible:bg-blue-400/[0.16]"
+            >
+              <WhatsAppIcon size={14} />
+              WhatsApp
             </a>
             {/* Anrufen → direkt tel: öffnen */}
             <a

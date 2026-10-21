@@ -3,7 +3,6 @@ import { AnimatePresence, motion } from "motion/react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
-import { ScrollProgress } from "./components/ScrollProgress";
 import { Home } from "./components/pages/Home";
 import { Portfolio } from "./components/pages/Portfolio";
 import { CaseStudy } from "./components/pages/CaseStudy";
@@ -43,7 +42,6 @@ export default function App() {
     // overflow-x-clip statt -hidden: `hidden` würde diesen Container zum
     // Scroll-Container machen und damit `position: sticky` im Hero aushebeln.
     <div className="min-h-screen text-white relative overflow-x-clip" style={{ background: "var(--page-gradient)" }}>
-      <ScrollProgress />
       <Navbar />
 
       <AnimatePresence mode="wait">

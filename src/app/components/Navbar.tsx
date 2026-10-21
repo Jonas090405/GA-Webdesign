@@ -3,6 +3,27 @@ import { Briefcase, Layers, User, Mail, Menu, X, Route } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import { useLocation, Link } from "react-router-dom";
 import logoUrl from "../../imports/Logo_GA_Webdesign.svg";
+import { WhatsAppIcon } from "./WhatsAppIcon";
+import { BERKANT_WHATSAPP } from "./ContactForm";
+
+const WA_LABEL = "Berkant Agyar auf WhatsApp schreiben (öffnet WhatsApp)";
+
+/** WhatsApp-CTA im Header – gleicher Verlauf wie die übrigen Primär-Buttons. */
+function WhatsAppCta({ className = "", style }: { className?: string; style?: React.CSSProperties }) {
+  return (
+    <a
+      href={BERKANT_WHATSAPP}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={WA_LABEL}
+      className={`inline-flex items-center justify-center gap-2 rounded-full font-medium text-white whitespace-nowrap no-underline cursor-pointer transition-[filter,padding,font-size] duration-300 hover:brightness-110 active:brightness-95 ${className}`}
+      style={{ background: "var(--gradient-cta)", ...style }}
+    >
+      <WhatsAppIcon size={16} />
+      Nachricht schreiben
+    </a>
+  );
+}
 
 const items = [
   { id: "/projekte", label: "Projekte", Icon: Briefcase },
@@ -133,6 +154,14 @@ export function Navbar() {
                 );
               })}
             </nav>
+
+            {/* WhatsApp-CTA – rechts gegenüber vom Logo */}
+            <div className="absolute inset-y-0 right-6 lg:right-8 flex items-center">
+              <WhatsAppCta
+                className={scrolled ? "px-4 py-2" : "px-5 py-2.5"}
+                style={{ fontSize: scrolled ? "14px" : "15px" }}
+              />
+            </div>
           </div>
         </div>
       </motion.header>
@@ -157,13 +186,16 @@ export function Navbar() {
           <img src={logoUrl} alt="G&A Webdesign Logo" className="h-9 w-auto" />
         </Link>
 
-        <button
-          onClick={() => setIsOpen(true)}
-          aria-label="Hauptmenü öffnen"
-          className="p-2 text-white hover:text-blue-400 transition-colors cursor-pointer"
-        >
-          <Menu size={26} />
-        </button>
+        <div className="flex items-center gap-1.5">
+          <WhatsAppCta className="px-3.5 py-2 text-[13px]" />
+          <button
+            onClick={() => setIsOpen(true)}
+            aria-label="Hauptmenü öffnen"
+            className="p-2 text-white hover:text-blue-400 transition-colors cursor-pointer"
+          >
+            <Menu size={26} />
+          </button>
+        </div>
       </div>
 
       {/* Sidebar overlay */}
@@ -186,7 +218,7 @@ export function Navbar() {
               role="dialog"
               aria-modal="true"
               aria-label="Hauptmenü"
-              className="fixed top-0 right-0 bottom-0 w-[300px] z-[70] flex flex-col shadow-[-16px_0_48px_rgba(0,0,0,0.6)]"
+              className="fixed top-0 right-0 bottom-0 w-[300px] z-[70] flex flex-col overflow-y-auto shadow-[-16px_0_48px_rgba(0,0,0,0.6)]"
               style={{
                 background: "linear-gradient(160deg, var(--ink-900) 0%, rgb(11,15,19) 100%)",
                 borderLeft: "1px solid rgb(var(--blue-400-rgb) / 0.12)",
@@ -249,6 +281,10 @@ export function Navbar() {
                   })}
                 </div>
               </nav>
+
+              <div className="mt-auto px-6 pt-6 pb-8">
+                <WhatsAppCta className="w-full px-5 py-3.5 text-[16px]" />
+              </div>
             </motion.div>
           </>
         )}

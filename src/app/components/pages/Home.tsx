@@ -18,7 +18,9 @@ import tileCodeClip from "../../../imports/tile-code.mp4";
 import tileCodePoster from "../../../imports/tile-code-poster.webp";
 import tileRocketClip from "../../../imports/tile-rocket.mp4";
 import tileRocketPoster from "../../../imports/tile-rocket-poster.webp";
-import { ContactForm, BERKANT_EMAIL, BERKANT_PHONE } from "../ContactForm";
+import { ContactForm, BERKANT_EMAIL, BERKANT_PHONE, BERKANT_TEL, BERKANT_WHATSAPP } from "../ContactForm";
+import { DirectContactCard } from "../DirectContactCard";
+import { WhatsAppIcon } from "../WhatsAppIcon";
 import { PROJECTS } from "../../../content/projects";
 import profilbild from "../../../imports/Jonas_Gissler.png";
 import berkantImg from "../../../imports/Berkant_agyar.jpeg";
@@ -263,7 +265,7 @@ const slideVariants = {
 };
 
 function Contact() {
-  const [mode, setMode] = useState<"form" | "call">("form");
+  const [mode, setMode] = useState<"form" | "direct">("form");
   const [direction, setDirection] = useState(0);
 
   return (
@@ -302,10 +304,17 @@ function Contact() {
               href={`mailto:${BERKANT_EMAIL}`}
             />
             <ContactLine
+              Icon={WhatsAppIcon}
+              label="WhatsApp"
+              value="Nachricht schreiben"
+              href={BERKANT_WHATSAPP}
+              external
+            />
+            <ContactLine
               Icon={Phone}
               label="Telefon"
               value={BERKANT_PHONE}
-              href={`tel:${BERKANT_PHONE.replace(/[\s]/g, "")}`}
+              href={BERKANT_TEL}
             />
             <ContactLine Icon={MapPin} label="Standort" value="Triberg, Schwarzwald" />
           </div>
@@ -323,8 +332,8 @@ function Contact() {
             <HomeTabBtn active={mode === "form"} onClick={() => { setDirection(-1); setMode("form"); }}>
               Anfrage senden
             </HomeTabBtn>
-            <HomeTabBtn active={mode === "call"} onClick={() => { setDirection(1); setMode("call"); }}>
-              Direkt anrufen
+            <HomeTabBtn active={mode === "direct"} onClick={() => { setDirection(1); setMode("direct"); }}>
+              Direkt kontaktieren
             </HomeTabBtn>
           </div>
 
@@ -339,42 +348,8 @@ function Contact() {
             exit="exit"
             transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
           >
-          {mode === "call" ? (
-            <Card>
-              <div className="py-8 flex flex-col items-center text-center gap-5">
-                <div
-                  className="h-16 w-16 rounded-full flex items-center justify-center"
-                  style={{
-                    background: "linear-gradient(135deg, rgb(var(--blue-700-rgb) / 0.3) 0%, rgb(var(--blue-400-rgb) / 0.15) 100%)",
-                    border: "1px solid rgb(var(--blue-400-rgb) / 0.3)",
-                  }}
-                >
-                  <Phone size={26} style={{ color: "var(--blue-400)" }} />
-                </div>
-                <div>
-                  <p className="text-[13px] mb-1 text-ink-400">
-                    Ruf uns einfach direkt an:
-                  </p>
-                  <a
-                    href={`tel:${BERKANT_PHONE.replace(/[\s]/g, "")}`}
-                    className="text-white text-[24px] font-semibold tracking-tight hover:text-brand-light transition-colors"
-                  >
-                    {BERKANT_PHONE}
-                  </a>
-                </div>
-                <p className="text-[13px] max-w-xs leading-relaxed text-ink-400">
-                  Falls wir nicht erreichbar sind, hinterlasse eine kurze Nachricht — wir melden uns schnellstmöglich.
-                </p>
-                <a
-                  href={`tel:${BERKANT_PHONE.replace(/[\s]/g, "")}`}
-                  className="inline-flex items-center gap-2 rounded-full px-6 py-3 text-white font-medium transition-all duration-200 hover:brightness-110"
-                  style={{ background: "var(--gradient-cta)" }}
-                >
-                  <Phone size={15} />
-                  Jetzt anrufen
-                </a>
-              </div>
-            </Card>
+          {mode === "direct" ? (
+            <DirectContactCard compact />
           ) : (
             <Card>
               <ContactForm subject="Anfrage über Startseite" />

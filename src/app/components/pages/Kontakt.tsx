@@ -4,12 +4,14 @@ import { motion, AnimatePresence } from "motion/react";
 import { Card } from "../Card";
 import { FadeIn } from "../FadeIn";
 import { Mail, MapPin, Phone } from "lucide-react";
+import { WhatsAppIcon } from "../WhatsAppIcon";
+import { DirectContactCard } from "../DirectContactCard";
 import { FAQSection } from "../FAQSection";
-import { ContactForm, BERKANT_EMAIL, BERKANT_PHONE } from "../ContactForm";
+import { ContactForm, BERKANT_EMAIL, BERKANT_PHONE, BERKANT_TEL, BERKANT_WHATSAPP } from "../ContactForm";
 import { ContactLine } from "../ContactLine";
 import berkantImg from "../../../imports/Berkant_agyar.jpeg";
 
-type ContactMode = "form" | "call";
+type ContactMode = "form" | "direct";
 
 const slideVariants = {
   enter: (d: number) => ({ x: d * 40, opacity: 0 }),
@@ -20,7 +22,7 @@ const slideVariants = {
 export function Kontakt() {
   usePageMeta({
     title: "Kontakt | G&A Webdesign",
-    description: "Starte dein Webprojekt. Schreib uns oder ruf uns direkt an – das Erstgespräch ist kostenlos und unverbindlich.",
+    description: "Starte dein Webprojekt. Schreib uns, per WhatsApp oder ruf direkt an – das Erstgespräch ist kostenlos und unverbindlich.",
     path: "/kontakt",
   });
   const [mode, setMode] = useState<ContactMode>("form");
@@ -68,15 +70,22 @@ export function Kontakt() {
             href={`mailto:${BERKANT_EMAIL}`}
           />
           <ContactLine
+            Icon={WhatsAppIcon}
+            label="WhatsApp"
+            value="Nachricht schreiben"
+            href={BERKANT_WHATSAPP}
+            external
+          />
+          <ContactLine
             Icon={Phone}
             label="Telefon"
             value={BERKANT_PHONE}
-            href={`tel:${BERKANT_PHONE.replace(/[\s]/g, "")}`}
+            href={BERKANT_TEL}
           />
           <ContactLine Icon={MapPin} label="Standort" value="Triberg, Schwarzwald" />
         </FadeIn>
 
-        {/* Form / Anruf */}
+        {/* Form / Direktkontakt */}
         <FadeIn delay={0.12} className="md:col-span-3">
           {/* Tab-Toggle */}
           <div
@@ -89,8 +98,8 @@ export function Kontakt() {
             <TabBtn active={mode === "form"} onClick={() => { setDirection(-1); setMode("form"); }}>
               Anfrage senden
             </TabBtn>
-            <TabBtn active={mode === "call"} onClick={() => { setDirection(1); setMode("call"); }}>
-              Direkt anrufen
+            <TabBtn active={mode === "direct"} onClick={() => { setDirection(1); setMode("direct"); }}>
+              Direkt kontaktieren
             </TabBtn>
           </div>
 
@@ -105,8 +114,8 @@ export function Kontakt() {
                 exit="exit"
                 transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
               >
-                {mode === "call" ? (
-                  <CallCard phone={BERKANT_PHONE} />
+                {mode === "direct" ? (
+                  <DirectContactCard />
                 ) : (
                   <Card>
                     <ContactForm subject="Anfrage über Kontaktseite" />
@@ -153,42 +162,3 @@ function TabBtn({
     </button>
   );
 }
-
-function CallCard({ phone }: { phone: string }) {
-  return (
-    <Card>
-      <div className="py-10 flex flex-col items-center text-center gap-6">
-        <div
-          className="h-20 w-20 rounded-full flex items-center justify-center"
-          style={{
-            background: "linear-gradient(135deg, rgb(var(--blue-700-rgb) / 0.3) 0%, rgb(var(--blue-400-rgb) / 0.15) 100%)",
-            border: "1px solid rgb(var(--blue-400-rgb) / 0.3)",
-          }}
-        >
-          <Phone size={32} style={{ color: "var(--blue-400)" }} />
-        </div>
-        <div>
-          <p className="text-ink-300 text-[14px] mb-2">Ruf uns einfach direkt an:</p>
-          <a
-            href={`tel:${phone.replace(/[\s\-\(\)]/g, "")}`}
-            className="text-white text-[28px] sm:text-[34px] font-semibold tracking-tight hover:text-brand-light transition-colors"
-          >
-            {phone}
-          </a>
-        </div>
-        <p className="text-ink-400 text-[13px] max-w-xs leading-relaxed">
-          Falls wir nicht erreichbar sind, hinterlasse eine Nachricht mit deinem Namen und deiner Telefonnummer. Wir melden uns schnellstmöglich zurück.
-        </p>
-        <a
-          href={`tel:${phone.replace(/[\s\-\(\)]/g, "")}`}
-          className="inline-flex items-center gap-2 rounded-full px-7 py-3 text-white font-medium transition-all duration-200 hover:brightness-110"
-          style={{ background: "var(--gradient-cta)" }}
-        >
-          <Phone size={16} />
-          Jetzt anrufen
-        </a>
-      </div>
-    </Card>
-  );
-}
-

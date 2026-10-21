@@ -15,6 +15,11 @@ const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY as string;
 
 export const BERKANT_EMAIL = "Berkant@ga-webdesign.de";
 export const BERKANT_PHONE = "+49 176 3464 9177";
+export const BERKANT_TEL = `tel:${BERKANT_PHONE.replace(/\s/g, "")}`;
+// WhatsApp Business läuft über dieselbe Nummer; Begrüßung ist vorausgefüllt.
+export const BERKANT_WHATSAPP = `https://wa.me/${BERKANT_PHONE.replace(/\D/g, "")}?text=${encodeURIComponent(
+  "Hallo Berkant, ich würde gerne über ein Webprojekt sprechen.",
+)}`;
 
 // ─────────────────────────────────────────────────────────────────────────────
 

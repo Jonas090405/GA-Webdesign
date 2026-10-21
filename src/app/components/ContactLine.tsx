@@ -1,4 +1,4 @@
-import { type LucideIcon } from "lucide-react";
+import { type ComponentType } from "react";
 
 /**
  * Einheitliche Kontakt-Zeile für Homepage und Kontakt-Seite:
@@ -9,12 +9,15 @@ export function ContactLine({
   label,
   value,
   href,
+  external,
   onClick,
 }: {
-  Icon: LucideIcon;
+  Icon: ComponentType<{ size?: number; className?: string; "aria-hidden"?: boolean }>;
   label: string;
   value: string;
   href?: string;
+  /** Link öffnet eine externe App/Seite (z. B. WhatsApp) in neuem Tab. */
+  external?: boolean;
   onClick?: () => void;
 }) {
   const base = "text-white text-[14px] xl:text-[16px]";
@@ -35,7 +38,11 @@ export function ContactLine({
             {value}
           </button>
         ) : href ? (
-          <a href={href} className={interactive}>
+          <a
+            href={href}
+            className={interactive}
+            {...(external && { target: "_blank", rel: "noopener noreferrer" })}
+          >
             {value}
           </a>
         ) : (

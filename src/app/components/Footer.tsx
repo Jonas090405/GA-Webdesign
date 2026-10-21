@@ -2,6 +2,8 @@ import { Linkedin, Mail, MapPin } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import logoUrl from "../../imports/Logo_GA_Webdesign.svg";
 import { ForestRunner } from "./ForestRunner";
+import { WhatsAppIcon } from "./WhatsAppIcon";
+import { BERKANT_WHATSAPP } from "./ContactForm";
 
 const BERKANT_EMAIL = "Berkant@ga-webdesign.de";
 
@@ -77,6 +79,16 @@ export function Footer() {
                 <span className="break-all">{email}</span>
               </a>
             ))}
+            <a
+              href={BERKANT_WHATSAPP}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Berkant Agyar auf WhatsApp schreiben (öffnet WhatsApp)"
+              className="mt-2 flex items-center gap-2 text-[12px] sm:text-[13px] xl:text-[14px] transition-colors duration-200 cursor-pointer text-ink-200 hover:text-blue-400 focus-visible:text-blue-400"
+            >
+              <WhatsAppIcon size={13} className="shrink-0" style={{ color: "rgb(var(--blue-400-rgb) / 0.7)" }} />
+              WhatsApp
+            </a>
             <a
               href="https://www.linkedin.com/company/g%26a-webdesign/"
               target="_blank"
