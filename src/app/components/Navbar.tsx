@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useId } from "react";
 import { Briefcase, Layers, User, Mail, Menu, X, Route } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import { useLocation, Link } from "react-router-dom";
@@ -64,6 +64,10 @@ function LanguageToggle({ wide = false, className = "" }: { wide?: boolean; clas
   const lang = useLang();
   const t = useCopy(COPY);
   const { pathname, search, hash } = useLocation();
+  // Eigene layoutId je Instanz: Desktop- und Mobil-Kopfzeile sind beide
+  // gemountet (eine nur per CSS versteckt). Mit geteilter ID würde motion
+  // die Markierung an die unsichtbare Kopie übergeben.
+  const pillId = `lang-pill-${useId()}`;
 
   return (
     <div
@@ -92,7 +96,7 @@ function LanguageToggle({ wide = false, className = "" }: { wide?: boolean; clas
           >
             {active && (
               <motion.span
-                layoutId={wide ? "lang-pill-wide" : "lang-pill"}
+                layoutId={pillId}
                 aria-hidden="true"
                 className="absolute inset-0 -z-10 rounded-full"
                 style={{
