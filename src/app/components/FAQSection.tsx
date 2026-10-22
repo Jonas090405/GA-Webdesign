@@ -274,10 +274,13 @@ export function FAQSection({
             <p className="text-ink-300 text-[15px] xl:text-[16px] 2xl:text-[17px] leading-relaxed max-w-lg">
               Antworten auf die Fragen, die uns am häufigsten gestellt werden. Etwas fehlt?{" "}
               <a
-                href={`mailto:${FAQ_EMAIL}`}
+                href={BERKANT_WHATSAPP}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Berkant Agyar auf WhatsApp schreiben (öffnet WhatsApp)"
                 className="cursor-pointer transition-colors duration-200 underline-offset-2 hover:underline text-blue-400"
               >
-                Schreib uns einfach.
+                Schreib Berkant auf WhatsApp.
               </a>
             </p>
           </div>

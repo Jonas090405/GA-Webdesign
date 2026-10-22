@@ -1,4 +1,4 @@
-import jonasImg from "../../imports/Jonas_Gissler.png";
+import jonasImg from "../../imports/Jonas_Gissler.jpg";
 import berkantImg from "../../imports/Berkant_agyar.jpeg";
 
 export function TeamBadge() {

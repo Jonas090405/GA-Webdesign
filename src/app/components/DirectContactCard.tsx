@@ -42,7 +42,7 @@ export function DirectContactCard({ compact = false }: { compact?: boolean }) {
           Auf WhatsApp schreiben
         </a>
 
-        <div className="w-full max-w-xs pt-5 border-t border-white/[0.08]">
+        <div className="w-full max-w-xs pt-2">
           <p className="text-[13px] mb-1 text-ink-400">Lieber telefonieren?</p>
           <a
             href={BERKANT_TEL}

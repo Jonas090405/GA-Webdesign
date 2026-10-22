@@ -4,7 +4,7 @@ import { Card } from "../Card";
 import { PrimaryButton } from "../Button";
 import { FadeIn } from "../FadeIn";
 import { useNavigate } from "react-router-dom";
-import profilbild from "../../../imports/Jonas_Gissler.png";
+import profilbild from "../../../imports/Jonas_Gissler.jpg";
 import berkantImg from "../../../imports/Berkant_agyar.jpeg";
 import { Linkedin } from "lucide-react";
 import { PortraitRing } from "../PortraitRing";

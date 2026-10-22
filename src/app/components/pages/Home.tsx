@@ -22,7 +22,7 @@ import { ContactForm, BERKANT_EMAIL, BERKANT_PHONE, BERKANT_TEL, BERKANT_WHATSAP
 import { DirectContactCard } from "../DirectContactCard";
 import { WhatsAppIcon } from "../WhatsAppIcon";
 import { PROJECTS } from "../../../content/projects";
-import profilbild from "../../../imports/Jonas_Gissler.png";
+import profilbild from "../../../imports/Jonas_Gissler.jpg";
 import berkantImg from "../../../imports/Berkant_agyar.jpeg";
 
 export function Home() {
