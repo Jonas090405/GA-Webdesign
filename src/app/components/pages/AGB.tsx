@@ -1,5 +1,6 @@
 import { Card } from "../Card";
 import { FadeIn } from "../FadeIn";
+import { GermanOnlyNotice } from "../GermanOnlyNotice";
 import { usePageMeta } from "../../hooks/usePageMeta";
 
 export function AGB() {
@@ -9,7 +10,7 @@ export function AGB() {
     path: "/agb",
   });
   return (
-    <main id="main-content" className="mx-auto max-w-3xl px-5 sm:px-6 pt-28 sm:pt-32 pb-12">
+    <main id="main-content" lang="de" className="mx-auto max-w-3xl px-5 sm:px-6 pt-28 sm:pt-32 pb-12">
       <FadeIn>
         <h1 className="text-white text-[clamp(32px,6vw,64px)] tracking-tight leading-[1.05]">
           Allgemeine Geschäftsbedingungen
@@ -17,6 +18,7 @@ export function AGB() {
         <p className="mt-4 text-ink-300 text-[14px]">
           G&amp;A Webdesign GbR · Stand: Oktober 2026
         </p>
+        <GermanOnlyNotice />
       </FadeIn>
 
       <div className="mt-10 sm:mt-12 space-y-5 sm:space-y-6">
@@ -28,7 +30,7 @@ export function AGB() {
             </div>
             <p className="text-ink-200 text-[14px] leading-relaxed">
               Diese Allgemeinen Geschäftsbedingungen gelten für alle Verträge zwischen der G&amp;A Webdesign GbR,
-              vertreten durch die Gesellschafter Berkant Agyar und Jonas Gissler, Altenbergweg 12, 78098 Triberg,
+              vertreten durch die Gesellschafter Berkant Agyar und Jonas Gissler, Leopoldstraße 1, 78112 St. Georgen im Schwarzwald,
               Deutschland, und ihren Auftraggebern über die Erstellung, Überarbeitung, Bereitstellung, das
               Hosting, die Wartung und die technische Betreuung von Webseiten, CMS-Lösungen sowie damit
               zusammenhängende Leistungen.
@@ -898,7 +900,7 @@ export function AGB() {
             </p>
             <p className="text-ink-200 text-[14px] leading-relaxed mt-3">
               Ist der Auftraggeber Kaufmann, juristische Person des öffentlichen Rechts oder öffentlich-rechtliches
-              Sondervermögen, ist Triberg (Sitz der G&amp;A Webdesign GbR) Gerichtsstand für alle Streitigkeiten
+              Sondervermögen, ist St. Georgen im Schwarzwald (Sitz der G&amp;A Webdesign GbR) Gerichtsstand für alle Streitigkeiten
               aus und im Zusammenhang mit dem Vertragsverhältnis, soweit gesetzlich zulässig.
             </p>
             <p className="text-ink-200 text-[14px] leading-relaxed mt-3">

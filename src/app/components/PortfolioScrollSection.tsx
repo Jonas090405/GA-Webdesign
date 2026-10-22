@@ -6,7 +6,25 @@ import { ContainerScroll } from "./ui/container-scroll-animation";
 import { LazyVideo } from "./LazyVideo";
 import { BrowserFrame } from "./BrowserFrame";
 
-import type { Project } from "../../content/projects";
+import { type Project, localizeProject } from "../../content/projects";
+import { useCopy, useLang } from "../../i18n";
+
+const COPY = {
+  de: {
+    prev: "Vorheriges Projekt",
+    next: "Nächstes Projekt",
+    project: "Projekt",
+    quoteOpen: "„",
+    quoteClose: "“",
+  },
+  en: {
+    prev: "Previous project",
+    next: "Next project",
+    project: "Project",
+    quoteOpen: "“",
+    quoteClose: "”",
+  },
+};
 
 export function PortfolioScrollSection({
   projects,
@@ -15,7 +33,9 @@ export function PortfolioScrollSection({
   projects: Project[];
   hideTag?: boolean;
 }) {
-  const mediaProjects = projects;
+  // Texte in der Sprache der URL – so kann die Startseite die deutschen Daten durchreichen.
+  const lang = useLang();
+  const mediaProjects = projects.map((p) => localizeProject(p, lang));
 
   return (
     <div>
@@ -62,6 +82,7 @@ function MobileCarousel({ projects, hideTag = false }: { projects: Project[]; hi
   const [index, setIndex] = useState(0);
   const [direction, setDirection] = useState(0);
   const touchStartX = useRef<number | null>(null);
+  const copy = useCopy(COPY);
 
   const single = projects.length <= 1;
 
@@ -131,7 +152,7 @@ function MobileCarousel({ projects, hideTag = false }: { projects: Project[]; hi
 
       {!single && (
         <div className="mt-7 flex items-center justify-center gap-5">
-          <SliderBtn onClick={() => go(-1)} aria="Vorheriges Projekt">
+          <SliderBtn onClick={() => go(-1)} aria={copy.prev}>
             <ChevronLeft size={18} />
           </SliderBtn>
           <div className="flex items-center gap-1.5">
@@ -145,11 +166,11 @@ function MobileCarousel({ projects, hideTag = false }: { projects: Project[]; hi
                 className={`h-1.5 cursor-pointer rounded-full transition-all ${
                   i === index ? "w-8 bg-brand" : "w-1.5 bg-white/20"
                 }`}
-                aria-label={`Projekt ${i + 1}`}
+                aria-label={`${copy.project} ${i + 1}`}
               />
             ))}
           </div>
-          <SliderBtn onClick={() => go(1)} aria="Nächstes Projekt">
+          <SliderBtn onClick={() => go(1)} aria={copy.next}>
             <ChevronRight size={18} />
           </SliderBtn>
         </div>
@@ -194,12 +215,13 @@ function ProjectTitle({ project, index, hideTag = false }: { project: Project; i
  */
 function ProjectPanel({ project }: { project: Project }) {
   const t = project.testimonial;
+  const { quoteOpen, quoteClose } = useCopy(COPY);
   return (
     <div className="grid gap-8 md:grid-cols-[minmax(0,1fr)_auto] md:items-end md:gap-12 xl:gap-20">
       {t ? (
         <figure>
           <blockquote className="font-[family-name:var(--font-display)] text-white text-[17px] sm:text-[19px] xl:text-[21px] leading-[1.45] tracking-tight">
-            „{t.quote}“
+            {quoteOpen}{t.quote}{quoteClose}
           </blockquote>
           <figcaption className="mt-5 flex items-center gap-3">
             {t.avatar && (

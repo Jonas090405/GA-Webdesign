@@ -4,39 +4,145 @@ import { AnimatePresence, motion } from "motion/react";
 import { useLocation, Link } from "react-router-dom";
 import logoUrl from "../../imports/Logo_GA_Webdesign.svg";
 import { WhatsAppIcon } from "./WhatsAppIcon";
-import { BERKANT_WHATSAPP } from "./ContactForm";
+import { useWhatsAppLink } from "./ContactForm";
+import { localizePath, rememberLang, useCopy, useLang, useLocalePath, type Lang } from "../../i18n";
 
-const WA_LABEL = "Berkant Agyar auf WhatsApp schreiben (öffnet WhatsApp)";
+const COPY = {
+  de: {
+    skip: "Zum Inhalt springen",
+    home: "Zur Startseite",
+    logoAlt: "G&A Webdesign Logo",
+    mainNav: "Hauptnavigation",
+    mobileNav: "Mobilnavigation",
+    menu: "Hauptmenü",
+    openMenu: "Hauptmenü öffnen",
+    closeMenu: "Hauptmenü schließen",
+    language: "Sprache",
+    waLabel: "Berkant Agyar auf WhatsApp schreiben (öffnet WhatsApp)",
+    waCta: "Nachricht schreiben",
+    nav: {
+      "/projekte": "Projekte",
+      "/leistungen": "Leistungen",
+      "/ablauf": "Ablauf",
+      "/ueber-uns": "Über uns",
+      "/kontakt": "Kontakt",
+    },
+  },
+  en: {
+    skip: "Skip to content",
+    home: "Go to homepage",
+    logoAlt: "G&A Webdesign logo",
+    mainNav: "Main navigation",
+    mobileNav: "Mobile navigation",
+    menu: "Main menu",
+    openMenu: "Open main menu",
+    closeMenu: "Close main menu",
+    language: "Language",
+    waLabel: "Message Berkant Agyar on WhatsApp (opens WhatsApp)",
+    waCta: "Send a message",
+    nav: {
+      "/projekte": "Projects",
+      "/leistungen": "Services",
+      "/ablauf": "Process",
+      "/ueber-uns": "About us",
+      "/kontakt": "Contact",
+    },
+  },
+};
+
+const LANGS: { code: Lang; short: string; name: string }[] = [
+  { code: "de", short: "DE", name: "Deutsch" },
+  { code: "en", short: "EN", name: "English" },
+];
+
+/**
+ * Sprachumschalter: zwei echte Links auf die Gegenstücke der aktuellen Seite
+ * (crawlbar, mit hreflang). Die Wahl wird gemerkt und hat dann Vorrang vor
+ * der automatischen Umleitung. Die Markierung gleitet beim Wechsel mit.
+ */
+function LanguageToggle({ wide = false, className = "" }: { wide?: boolean; className?: string }) {
+  const lang = useLang();
+  const t = useCopy(COPY);
+  const { pathname, search, hash } = useLocation();
+
+  return (
+    <div
+      role="group"
+      aria-label={t.language}
+      className={`inline-flex items-center rounded-full p-1 ${className}`}
+      style={{
+        border: "1px solid rgb(var(--blue-400-rgb) / 0.14)",
+        background: "rgb(var(--ink-950-rgb) / 0.35)",
+      }}
+    >
+      {LANGS.map(({ code, short, name }) => {
+        const active = code === lang;
+        return (
+          <Link
+            key={code}
+            to={localizePath(pathname + search + hash, code)}
+            onClick={() => rememberLang(code)}
+            hrefLang={code}
+            lang={code}
+            aria-label={wide ? undefined : name}
+            aria-current={active ? "true" : undefined}
+            className={`relative isolate flex-1 rounded-full text-center font-semibold no-underline whitespace-nowrap transition-colors duration-200 cursor-pointer ${
+              wide ? "px-4 py-2.5 text-[15px]" : "px-2.5 py-1 text-[13px] tracking-[0.06em]"
+            } ${active ? "text-white" : "text-ink-400 hover:text-ink-100"}`}
+          >
+            {active && (
+              <motion.span
+                layoutId={wide ? "lang-pill-wide" : "lang-pill"}
+                aria-hidden="true"
+                className="absolute inset-0 -z-10 rounded-full"
+                style={{
+                  background: "rgb(var(--blue-400-rgb) / 0.16)",
+                  boxShadow: "inset 0 0 0 1px rgb(var(--blue-400-rgb) / 0.22)",
+                }}
+                transition={{ type: "spring", stiffness: 420, damping: 34 }}
+              />
+            )}
+            {wide ? name : short}
+          </Link>
+        );
+      })}
+    </div>
+  );
+}
 
 /** WhatsApp-CTA im Header – gleicher Verlauf wie die übrigen Primär-Buttons. */
 function WhatsAppCta({ className = "", style }: { className?: string; style?: React.CSSProperties }) {
+  const t = useCopy(COPY);
+  const href = useWhatsAppLink();
   return (
     <a
-      href={BERKANT_WHATSAPP}
+      href={href}
       target="_blank"
       rel="noopener noreferrer"
-      aria-label={WA_LABEL}
+      aria-label={t.waLabel}
       className={`inline-flex items-center justify-center gap-2 rounded-full font-medium text-white whitespace-nowrap no-underline cursor-pointer transition-[filter,padding,font-size] duration-300 hover:brightness-110 active:brightness-95 ${className}`}
       style={{ background: "var(--gradient-cta)", ...style }}
     >
       <WhatsAppIcon size={16} />
-      Nachricht schreiben
+      {t.waCta}
     </a>
   );
 }
 
 const items = [
-  { id: "/projekte", label: "Projekte", Icon: Briefcase },
-  { id: "/leistungen", label: "Leistungen", Icon: Layers },
-  { id: "/ablauf", label: "Ablauf", Icon: Route },
-  { id: "/ueber-uns", label: "Über uns", Icon: User },
-  { id: "/kontakt", label: "Kontakt", Icon: Mail },
-];
+  { id: "/projekte", Icon: Briefcase },
+  { id: "/leistungen", Icon: Layers },
+  { id: "/ablauf", Icon: Route },
+  { id: "/ueber-uns", Icon: User },
+  { id: "/kontakt", Icon: Mail },
+] as const;
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
+  const t = useCopy(COPY);
+  const lp = useLocalePath();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 30);
@@ -70,7 +176,7 @@ export function Navbar() {
         className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[200] focus:px-4 focus:py-2 focus:rounded-lg focus:font-medium focus:text-sm"
         style={{ background: "var(--blue-400)", color: "#0d1115" }}
       >
-        Zum Inhalt springen
+        {t.skip}
       </a>
 
       {/* ── DESKTOP header bar (lg+) ───────────────────────── */}
@@ -98,28 +204,27 @@ export function Navbar() {
             {/* Logo – always pinned to viewport top-left */}
             <div className="absolute inset-y-0 left-6 lg:left-8 flex items-center">
               <Link
-                to="/"
-                aria-label="Zur Startseite"
+                to={lp("/")}
+                aria-label={t.home}
                 className="cursor-pointer hover:opacity-75 transition-opacity duration-200 shrink-0"
               >
                 <img
                   src={logoUrl}
-                  alt="G&A Webdesign Logo"
+                  alt={t.logoAlt}
                   style={{ height: scrolled ? "36px" : "44px", transition: "height 0.3s ease", width: "auto" }}
                 />
               </Link>
             </div>
 
             {/* Nav items – centered to full viewport */}
-            <nav aria-label="Hauptnavigation" className="absolute inset-0 hidden xl:flex items-center justify-center gap-10 pointer-events-none">
-              {items.map(({ id, label, Icon }) => {
-                const active =
-                  location.pathname === id ||
-                  (id !== "/" && location.pathname.startsWith(id));
+            <nav aria-label={t.mainNav} className="absolute inset-0 hidden xl:flex items-center justify-center gap-10 pointer-events-none">
+              {items.map(({ id, Icon }) => {
+                const href = lp(id);
+                const active = location.pathname === href || location.pathname.startsWith(`${href}/`);
                 return (
                   <Link
                     key={id}
-                    to={id}
+                    to={href}
                     aria-current={active ? "page" : undefined}
                     className="nav-item group flex items-center gap-2.5 font-medium cursor-pointer relative py-1.5 whitespace-nowrap pointer-events-auto no-underline"
                     style={{ color: active ? "#ffffff" : "var(--ink-200)", fontSize: scrolled ? "15px" : "17px", transition: "color 0.2s, font-size 0.35s ease", textDecoration: "none" }}
@@ -141,7 +246,7 @@ export function Navbar() {
                       style={{ color: active ? "var(--blue-400)" : "inherit", transition: "color 0.2s" }}
                     />
                     <span className="relative">
-                      {label}
+                      {t.nav[id]}
                       <span
                         className="absolute -bottom-0.5 left-0 h-[1.5px] rounded-full transition-all duration-200 underline-bar"
                         style={{
@@ -155,8 +260,9 @@ export function Navbar() {
               })}
             </nav>
 
-            {/* WhatsApp-CTA – rechts gegenüber vom Logo */}
-            <div className="absolute inset-y-0 right-6 lg:right-8 flex items-center">
+            {/* Sprache + WhatsApp-CTA – rechts gegenüber vom Logo */}
+            <div className="absolute inset-y-0 right-6 lg:right-8 flex items-center gap-3">
+              <LanguageToggle />
               <WhatsAppCta
                 className={scrolled ? "px-4 py-2" : "px-5 py-2.5"}
                 style={{ fontSize: scrolled ? "14px" : "15px" }}
@@ -179,18 +285,22 @@ export function Navbar() {
         }}
       >
         <Link
-          to="/"
-          aria-label="Zur Startseite"
+          to={lp("/")}
+          aria-label={t.home}
           className="cursor-pointer hover:opacity-75 transition-opacity duration-200"
         >
-          <img src={logoUrl} alt="G&A Webdesign Logo" className="h-9 w-auto" />
+          <img src={logoUrl} alt={t.logoAlt} className="h-9 w-auto" />
         </Link>
 
         <div className="flex items-center gap-1.5">
+          {/* Unter sm wäre kein Platz neben Logo und CTA – dort sitzt der Umschalter im Menü. */}
+          <div className="hidden sm:block mr-1.5">
+            <LanguageToggle />
+          </div>
           <WhatsAppCta className="px-3.5 py-2 text-[13px]" />
           <button
             onClick={() => setIsOpen(true)}
-            aria-label="Hauptmenü öffnen"
+            aria-label={t.openMenu}
             className="p-2 text-white hover:text-blue-400 transition-colors cursor-pointer"
           >
             <Menu size={26} />
@@ -217,7 +327,7 @@ export function Navbar() {
               transition={{ type: "spring", damping: 26, stiffness: 220 }}
               role="dialog"
               aria-modal="true"
-              aria-label="Hauptmenü"
+              aria-label={t.menu}
               className="fixed top-0 right-0 bottom-0 w-[300px] z-[70] flex flex-col overflow-y-auto shadow-[-16px_0_48px_rgba(0,0,0,0.6)]"
               style={{
                 background: "linear-gradient(160deg, var(--ink-900) 0%, rgb(11,15,19) 100%)",
@@ -226,16 +336,16 @@ export function Navbar() {
             >
               <div className="flex items-center justify-between px-6 pt-6 pb-4">
                 <Link
-                  to="/"
+                  to={lp("/")}
                   onClick={() => setIsOpen(false)}
-                  aria-label="Zur Startseite"
+                  aria-label={t.home}
                   className="cursor-pointer hover:opacity-70 transition-opacity duration-200"
                 >
-                  <img src={logoUrl} alt=" Logo" className="h-9 w-auto" />
+                  <img src={logoUrl} alt={t.logoAlt} className="h-9 w-auto" />
                 </Link>
                 <button
                   onClick={() => setIsOpen(false)}
-                  aria-label="Hauptmenü schließen"
+                  aria-label={t.closeMenu}
                   className="p-2.5 rounded-full bg-white/5 text-white cursor-pointer"
                 >
                   <X size={22} />
@@ -247,16 +357,15 @@ export function Navbar() {
                 style={{ height: "1px", background: "rgb(var(--blue-400-rgb) / 0.08)" }}
               />
 
-              <nav aria-label="Mobilnavigation">
+              <nav aria-label={t.mobileNav}>
                 <div className="flex flex-col gap-1.5 px-4 py-2">
-                  {items.map(({ id, label, Icon }) => {
-                    const active =
-                      location.pathname === id ||
-                      (id !== "/" && location.pathname.startsWith(id));
+                  {items.map(({ id, Icon }) => {
+                    const href = lp(id);
+                    const active = location.pathname === href || location.pathname.startsWith(`${href}/`);
                     return (
                       <Link
                         key={id}
-                        to={id}
+                        to={href}
                         onClick={() => setIsOpen(false)}
                         aria-current={active ? "page" : undefined}
                         className="flex items-center gap-4 rounded-2xl px-5 py-4 text-[17px] font-medium transition-colors cursor-pointer"
@@ -275,14 +384,15 @@ export function Navbar() {
                         }}
                       >
                         <Icon size={22} style={{ color: active ? "var(--blue-400)" : "var(--ink-200)" }} />
-                        <span>{label}</span>
+                        <span>{t.nav[id]}</span>
                       </Link>
                     );
                   })}
                 </div>
               </nav>
 
-              <div className="mt-auto px-6 pt-6 pb-8">
+              <div className="mt-auto px-6 pt-6 pb-8 flex flex-col gap-4">
+                <LanguageToggle wide className="w-full" />
                 <WhatsAppCta className="w-full px-5 py-3.5 text-[16px]" />
               </div>
             </motion.div>

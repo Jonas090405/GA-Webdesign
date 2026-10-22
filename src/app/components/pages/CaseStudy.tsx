@@ -11,8 +11,69 @@ import {
   type SolutionBlock,
   findProject,
   isVisible,
+  localizeProject,
   projectPath,
 } from "../../../content/projects";
+import { useCopy, useLang, useLocalePath } from "../../../i18n";
+
+const COPY = {
+  de: {
+    metaTitleSuffix: " – Case Study | G&A Webdesign",
+    metaFallbackTitle: "Projekte | G&A Webdesign",
+    client: "Kunde",
+    industry: "Branche",
+    location: "Standort",
+    year: "Jahr",
+    allProjects: "Alle Projekte",
+    viewWebsite: "Webseite ansehen",
+    challenge: "Ausgangslage",
+    challengePending: "Wie sah es vorher aus, was hat gefehlt?",
+    goal: "Ziel",
+    solution: "Was wir gebaut haben",
+    servicesLabel: "Leistungen in diesem Projekt",
+    mobileTitle: "Auf dem Smartphone",
+    mobileText: "Jede Ansicht ist für kleine Bildschirme eigens gestaltet, nicht nur verkleinert.",
+    result: "Ergebnis",
+    resultPending: "Was hat sich für den Kunden verändert?",
+    pendingPrefix: "Text folgt: ",
+    pendingNote: "Nur lokal sichtbar · einzutragen in src/content/projects.ts",
+    quoteOpen: "„",
+    quoteClose: "“",
+    nextProject: "Nächstes Projekt",
+    readCaseStudy: "Case Study lesen",
+    ctaTitle: "Dein Projekt soll das nächste sein.",
+    ctaText: "Sag uns, was du dir vorstellst – das erste Gespräch ist kostenlos und unverbindlich.",
+    ctaButton: "Projekt anfragen",
+  },
+  en: {
+    metaTitleSuffix: " – Case study | G&A Webdesign",
+    metaFallbackTitle: "Projects | G&A Webdesign",
+    client: "Client",
+    industry: "Industry",
+    location: "Location",
+    year: "Year",
+    allProjects: "All projects",
+    viewWebsite: "View website",
+    challenge: "Starting point",
+    challengePending: "What was it like before, and what was missing?",
+    goal: "Goal",
+    solution: "What we built",
+    servicesLabel: "Services in this project",
+    mobileTitle: "On mobile",
+    mobileText: "Every view is designed specifically for small screens, not just scaled down.",
+    result: "Result",
+    resultPending: "What changed for the client?",
+    pendingPrefix: "Text to come: ",
+    pendingNote: "Only visible locally · add it in src/content/projects.ts",
+    quoteOpen: "“",
+    quoteClose: "”",
+    nextProject: "Next project",
+    readCaseStudy: "Read case study",
+    ctaTitle: "Your project could be next.",
+    ctaText: "Tell us what you have in mind. The first conversation is free and comes with no obligation.",
+    ctaButton: "Start your project",
+  },
+};
 
 const CONTAINER =
   "mx-auto max-w-6xl xl:max-w-7xl 2xl:max-w-[1440px] px-5 sm:px-8 lg:px-12 xl:px-16 2xl:px-20";
@@ -25,16 +86,19 @@ const CONTAINER =
  */
 export function CaseStudy() {
   const { slug } = useParams();
-  const project = findProject(slug);
+  const lang = useLang();
+  const lp = useLocalePath();
+  const t = useCopy(COPY);
+  const found = findProject(slug);
+  const project = found ? localizeProject(found, lang) : undefined;
   const visible = project ? isVisible(project) : false;
 
   usePageMeta({
-    title: project ? `${project.title} – Case Study | G&A Webdesign` : "Projekte | G&A Webdesign",
+    title: project ? `${project.title}${t.metaTitleSuffix}` : t.metaFallbackTitle,
     description: project?.summary ?? "",
-    path: project ? projectPath(project) : "/projekte",
   });
 
-  if (!project || !visible) return <Navigate to="/projekte" replace />;
+  if (!project || !visible) return <Navigate to={lp("/projekte")} replace />;
 
   const { caseStudy: cs } = project;
   const next = nextProject(project);
@@ -61,16 +125,16 @@ export function CaseStudy() {
           </BrowserFrame>
         </FadeIn>
 
-        <ProseSection id="ausgangslage" title="Ausgangslage" text={cs.challenge} pending="Wie sah es vorher aus, was hat gefehlt?" />
-        {cs.goal && <ProseSection id="ziel" title="Ziel" text={cs.goal} />}
+        <ProseSection id="ausgangslage" title={t.challenge} text={cs.challenge} pending={t.challengePending} />
+        {cs.goal && <ProseSection id="ziel" title={t.goal} text={cs.goal} />}
 
         <section aria-labelledby="loesung" className={CONTAINER}>
           <div className="border-t border-line py-16 sm:py-24 xl:py-32">
           <FadeIn>
             <h2 id="loesung" className="text-white text-[clamp(28px,4.5vw,64px)] leading-[1.08] tracking-tight">
-              Was wir gebaut haben
+              {t.solution}
             </h2>
-            <ul className="mt-6 flex flex-wrap gap-2" aria-label="Leistungen in diesem Projekt">
+            <ul className="mt-6 flex flex-wrap gap-2" aria-label={t.servicesLabel}>
               {project.services.map((s) => (
                 <li
                   key={s}
@@ -91,10 +155,10 @@ export function CaseStudy() {
           {cs.mobile && cs.mobile.length > 0 && (
             <FadeIn className="mt-20 sm:mt-28">
               <h3 className="text-white text-[22px] sm:text-[26px] xl:text-[30px] tracking-tight">
-                Auf dem Smartphone
+                {t.mobileTitle}
               </h3>
               <p className="mt-3 max-w-xl text-[15px] xl:text-[16px] leading-relaxed text-ink-300">
-                Jede Ansicht ist für kleine Bildschirme eigens gestaltet, nicht nur verkleinert.
+                {t.mobileText}
               </p>
               {/* Mobile: horizontal wischen, ab sm nebeneinander */}
               <div className="mt-8 -mx-5 px-5 sm:mx-0 sm:px-0 flex sm:grid sm:grid-cols-3 gap-5 sm:gap-6 xl:gap-10 overflow-x-auto sm:overflow-visible snap-x snap-mandatory pb-2">
@@ -122,22 +186,24 @@ export function CaseStudy() {
 }
 
 function Header({ project }: { project: Project }) {
+  const t = useCopy(COPY);
+  const lp = useLocalePath();
   const meta: [string, string][] = [
-    ["Kunde", project.client],
-    ["Branche", project.industry],
-    ["Standort", project.location],
-    ["Jahr", project.year],
+    [t.client, project.client],
+    [t.industry, project.industry],
+    [t.location, project.location],
+    [t.year, project.year],
   ];
 
   return (
     <header className={`${CONTAINER} pt-32 sm:pt-40 lg:pt-48 xl:pt-56`}>
       <FadeIn>
         <Link
-          to="/projekte"
+          to={lp("/projekte")}
           className="group inline-flex items-center gap-2 text-[13px] xl:text-[14px] font-medium text-ink-400 transition-colors duration-200 hover:text-blue-400 focus-visible:text-blue-400"
         >
           <ArrowLeft size={14} aria-hidden className="transition-transform duration-200 group-hover:-translate-x-0.5" />
-          Alle Projekte
+          {t.allProjects}
         </Link>
 
         <h1 className="mt-8 text-white text-[clamp(36px,7vw,104px)] leading-[1.02] tracking-tight max-w-5xl">
@@ -163,7 +229,7 @@ function Header({ project }: { project: Project }) {
             rel="noreferrer"
             className="group/btn mt-10 inline-flex items-center gap-2 rounded-full border border-blue-400/20 bg-blue-400/[0.08] px-6 py-3 text-[14px] xl:text-[15px] font-medium text-ink-100 transition-colors duration-300 hover:border-blue-400/40 hover:bg-blue-400/[0.15]"
           >
-            Webseite ansehen
+            {t.viewWebsite}
             <ExternalLink
               size={14}
               aria-hidden
@@ -220,11 +286,12 @@ function Paragraphs({ text, className = "" }: { text: string; className?: string
 }
 
 function Pending({ hint }: { hint: string }) {
+  const t = useCopy(COPY);
   return (
     <div className="rounded-xl border border-dashed border-blue-400/40 bg-blue-400/[0.04] px-5 py-4 max-w-2xl">
-      <p className="text-[15px] text-blue-200">Text folgt: {hint}</p>
+      <p className="text-[15px] text-blue-200">{t.pendingPrefix}{hint}</p>
       <p className="mt-1 text-[12px] text-ink-400">
-        Nur lokal sichtbar · einzutragen in src/content/projects.ts
+        {t.pendingNote}
       </p>
     </div>
   );
@@ -277,6 +344,7 @@ function Solution({ block, index, url }: { block: SolutionBlock; index: number; 
 }
 
 function Result({ project }: { project: Project }) {
+  const copy = useCopy(COPY);
   const { result } = project.caseStudy;
   const t = project.testimonial;
   if (!result && !t && !import.meta.env.DEV) return null;
@@ -286,15 +354,15 @@ function Result({ project }: { project: Project }) {
           <div className="border-t border-line py-16 sm:py-24 xl:py-32">
       <FadeIn className="grid gap-6 lg:grid-cols-12 lg:gap-12">
         <h2 id="ergebnis" className="lg:col-span-4 text-white text-[clamp(28px,3.6vw,52px)] leading-[1.08] tracking-tight">
-          Ergebnis
+          {copy.result}
         </h2>
         <div className="lg:col-span-8">
-          {result ? <Paragraphs text={result} /> : import.meta.env.DEV && <Pending hint="Was hat sich für den Kunden verändert?" />}
+          {result ? <Paragraphs text={result} /> : import.meta.env.DEV && <Pending hint={copy.resultPending} />}
 
           {t && (
             <figure className={result || import.meta.env.DEV ? "mt-14 sm:mt-16" : ""}>
               <blockquote className="font-[family-name:var(--font-display)] text-white text-[clamp(20px,2.2vw,30px)] leading-[1.3] tracking-tight max-w-3xl">
-                „{t.quote}“
+                {copy.quoteOpen}{t.quote}{copy.quoteClose}
               </blockquote>
               <figcaption className="mt-8 flex items-center gap-3">
                 {t.avatar && (
@@ -330,17 +398,20 @@ function nextProject(current: Project): Project | null {
   return list[(i + 1) % list.length];
 }
 
-function NextProject({ project }: { project: Project }) {
+function NextProject({ project: raw }: { project: Project }) {
+  const t = useCopy(COPY);
+  const lang = useLang();
+  const project = localizeProject(raw, lang);
   return (
     <FadeIn>
-      <Link to={projectPath(project)} className="group grid gap-8 lg:grid-cols-12 lg:items-center">
+      <Link to={projectPath(project, lang)} className="group grid gap-8 lg:grid-cols-12 lg:items-center">
         <div className="lg:col-span-5">
-          <p className="text-[13px] xl:text-[14px] text-ink-400">Nächstes Projekt</p>
+          <p className="text-[13px] xl:text-[14px] text-ink-400">{t.nextProject}</p>
           <p className="mt-3 font-[family-name:var(--font-display)] text-white text-[clamp(28px,4vw,56px)] leading-[1.05] tracking-tight transition-colors duration-200 group-hover:text-blue-200">
             {project.title}
           </p>
           <span className="mt-5 inline-flex items-center gap-2 text-[14px] font-medium text-blue-200">
-            Case Study lesen
+            {t.readCaseStudy}
             <ArrowRight size={14} aria-hidden className="transition-transform duration-200 group-hover:translate-x-0.5" />
           </span>
         </div>
@@ -356,15 +427,17 @@ function NextProject({ project }: { project: Project }) {
 
 function ClosingCta() {
   const navigate = useNavigate();
+  const t = useCopy(COPY);
+  const lp = useLocalePath();
   return (
     <FadeIn className="text-center">
       <h2 className="text-white text-[28px] xl:text-[36px] 2xl:text-[44px] tracking-tight mb-3">
-        Dein Projekt soll das nächste sein.
+        {t.ctaTitle}
       </h2>
       <p className="text-ink-300 text-[15px] xl:text-[16px] 2xl:text-[18px] mb-8 max-w-xl 2xl:max-w-2xl mx-auto">
-        Sag uns, was du dir vorstellst – das erste Gespräch ist kostenlos und unverbindlich.
+        {t.ctaText}
       </p>
-      <PrimaryButton onClick={() => navigate("/kontakt")}>Projekt anfragen</PrimaryButton>
+      <PrimaryButton onClick={() => navigate(lp("/kontakt"))}>{t.ctaButton}</PrimaryButton>
     </FadeIn>
   );
 }

@@ -9,7 +9,24 @@ const projectsSrc = readFileSync(join(process.cwd(), 'src/content/projects.ts'),
 const CASE_STUDY_ROUTES = [...projectsSrc.matchAll(/slug:\s*"([^"]+)",\s*\n\s*published:\s*true/g)]
   .map((m) => `/projekte/${m[1]}`);
 
-const ROUTES = ['/', '/projekte', ...CASE_STUDY_ROUTES, '/leistungen', '/ablauf', '/ueber-uns', '/kontakt', '/impressum', '/datenschutz', '/agb'];
+const DE_ROUTES = ['/', '/projekte', ...CASE_STUDY_ROUTES, '/leistungen', '/ablauf', '/ueber-uns', '/kontakt', '/impressum', '/datenschutz', '/agb'];
+
+// Englische Fassungen – muss zur Tabelle in src/i18n/index.ts passen.
+const EN_PATHS = {
+  '/': '/en',
+  '/projekte': '/en/projects',
+  '/leistungen': '/en/services',
+  '/ablauf': '/en/process',
+  '/ueber-uns': '/en/about',
+  '/kontakt': '/en/contact',
+  '/impressum': '/en/legal-notice',
+  '/datenschutz': '/en/privacy',
+  '/agb': '/en/terms',
+};
+const toEnglish = (route) =>
+  EN_PATHS[route] ?? route.replace(/^\/projekte\//, '/en/projects/');
+
+const ROUTES = [...DE_ROUTES, ...DE_ROUTES.map(toEnglish)];
 const PORT = 3033;
 const distDir = join(process.cwd(), 'dist');
 

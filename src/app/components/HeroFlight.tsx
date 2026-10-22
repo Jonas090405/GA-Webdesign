@@ -11,6 +11,64 @@ import { useNavigate } from "react-router-dom";
 import { TeamBadge } from "./TeamBadge";
 import { PrimaryButton } from "./Button";
 import { FadeIn } from "./FadeIn";
+import { useCopy, useLocalePath } from "../../i18n";
+
+const COPY = {
+  de: {
+    welcome: "Willkommen bei G&A Webdesign",
+    h1Lead: "Webseiten,",
+    h1Accent: "die Wirkung zeigen.",
+    lead: "Modernes Webdesign für lokale Unternehmen im Schwarzwald – wir erstellen professionelle Webseiten, von der ersten Idee bis sie live ist. Du musst dich um nichts kümmern.",
+    cta: "Projekt anfragen",
+    scrollCue: "Scrollen",
+    beats: [
+      {
+        title: "Wir sind zu zweit.",
+        text: "Jonas gestaltet deine Webseite und setzt sie um. Berkant baut das Backend und ist dein Ansprechpartner – von der ersten Frage bis zum Livegang. Keine Agentur dazwischen, keine Warteschleife.",
+      },
+      {
+        title: "Alles aus einer Hand.",
+        text: "Logo, Design, Entwicklung, Hosting und SEO. Du redest mit uns – nicht mit vier Dienstleistern, die sich gegenseitig die Schuld geben.",
+      },
+      {
+        title: "Aus St. Georgen, für den Schwarzwald.",
+        text: "Von Triberg bis Villingen-Schwenningen. Wir kennen die Region und die Kunden, die du erreichen willst.",
+      },
+    ],
+    staticPoints: [
+      ["Wir sind zu zweit.", "Jonas gestaltet das Design und Frontend, Berkant das Backend – und ist dein Ansprechpartner."],
+      ["Alles aus einer Hand.", "Corporate Design, Webseite, Hosting und SEO – nicht vier Dienstleister."],
+      ["Aus St. Georgen.", "Von Triberg bis Villingen-Schwenningen."],
+    ],
+  },
+  en: {
+    welcome: "Welcome to G&A Webdesign",
+    h1Lead: "Websites",
+    h1Accent: "that get results.",
+    lead: "Modern web design for local businesses in the Black Forest. We build professional websites, from the first idea all the way to launch. You don't have to worry about a thing.",
+    cta: "Start your project",
+    scrollCue: "Scroll",
+    beats: [
+      {
+        title: "There are two of us.",
+        text: "Jonas designs and builds your website. Berkant builds the backend and is your point of contact – from your first question to launch. You deal with us directly, and nobody puts you on hold.",
+      },
+      {
+        title: "Everything from one team.",
+        text: "Logo, design, development, hosting and SEO. You talk to us – not to four different providers who keep blaming each other.",
+      },
+      {
+        title: "From St. Georgen, for the Black Forest.",
+        text: "From Triberg to Villingen-Schwenningen. We know the region and the customers you want to reach.",
+      },
+    ],
+    staticPoints: [
+      ["There are two of us.", "Jonas handles design and frontend, Berkant the backend – and he's your point of contact."],
+      ["Everything from one team.", "Corporate design, website, hosting and SEO – instead of four separate providers."],
+      ["Based in St. Georgen.", "From Triberg to Villingen-Schwenningen."],
+    ],
+  },
+};
 
 /**
  * HeroFlight — der Hero der Startseite.
@@ -358,13 +416,16 @@ const LEAD_COLOR = "var(--ink-100)";
  */
 export function HeroFlight() {
   const navigate = useNavigate();
-  return <VideoHero onCta={() => navigate("/kontakt")} />;
+  const lp = useLocalePath();
+  return <VideoHero onCta={() => navigate(lp("/kontakt"))} />;
 }
 
 /* ─────────────────────── GEPARKT: Scroll-Fahrt ───────────────────────────── */
 
 function ScrollFlightHero() {
   const navigate = useNavigate();
+  const lp = useLocalePath();
+  const t = useCopy(COPY);
   const reduce = useReducedMotion();
   const flight = useFlightCapable();
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -394,12 +455,12 @@ function ScrollFlightHero() {
   const cueOpacity = useRange(scrollYProgress, [0.02, 0.1], [1, 0]);
 
   if (reduce) return <StaticHero navigate={navigate} />;
-  if (!flight) return <VideoHero onCta={() => navigate("/kontakt")} />;
+  if (!flight) return <VideoHero onCta={() => navigate(lp("/kontakt"))} />;
 
   return (
     <section
       ref={sectionRef}
-      aria-label="Willkommen bei G&A Webdesign"
+      aria-label={t.welcome}
       className="relative h-[440svh] md:h-[490svh]"
     >
       <div
@@ -485,39 +546,19 @@ function ScrollFlightHero() {
                   Als einziger im Textfluss gibt er außerdem die Höhe vor —
                   die kürzeren Blöcke zentrieren sich darin. */}
               <Beat progress={scrollYProgress} index={HEADLINE_BEAT} flow>
-                <HeadlineCopy onCta={() => navigate("/kontakt")} />
+                <HeadlineCopy onCta={() => navigate(lp("/kontakt"))} />
               </Beat>
 
-              <Beat progress={scrollYProgress} index={0}>
-                <h2 className="text-white text-[clamp(28px,5vw,74px)] leading-[1.08] tracking-tight">
-                  Wir sind zu zweit.
-                </h2>
-                <p className={LEAD_CLASS} style={{ color: LEAD_COLOR }}>
-                  Jonas gestaltet deine Webseite und setzt sie um. Berkant baut
-                  das Backend und ist dein Ansprechpartner – von der ersten Frage
-                  bis zum Livegang. Keine Agentur dazwischen, keine Warteschleife.
-                </p>
-              </Beat>
-
-              <Beat progress={scrollYProgress} index={1}>
-                <h2 className="text-white text-[clamp(28px,5vw,74px)] leading-[1.08] tracking-tight">
-                  Alles aus einer Hand.
-                </h2>
-                <p className={LEAD_CLASS} style={{ color: LEAD_COLOR }}>
-                  Logo, Design, Entwicklung, Hosting und SEO. Du redest mit uns – nicht mit
-                  vier Dienstleistern, die sich gegenseitig die Schuld geben.
-                </p>
-              </Beat>
-
-              <Beat progress={scrollYProgress} index={2}>
-                <h2 className="text-white text-[clamp(28px,5vw,74px)] leading-[1.08] tracking-tight">
-                  Aus Triberg, für den Schwarzwald.
-                </h2>
-                <p className={LEAD_CLASS} style={{ color: LEAD_COLOR }}>
-                  Von St. Georgen bis Villingen-Schwenningen. Wir kennen die Region und
-                  die Kunden, die du erreichen willst.
-                </p>
-              </Beat>
+              {t.beats.map((b, i) => (
+                <Beat key={i} progress={scrollYProgress} index={i}>
+                  <h2 className="text-white text-[clamp(28px,5vw,74px)] leading-[1.08] tracking-tight">
+                    {b.title}
+                  </h2>
+                  <p className={LEAD_CLASS} style={{ color: LEAD_COLOR }}>
+                    {b.text}
+                  </p>
+                </Beat>
+              ))}
             </div>
           </div>
         </div>
@@ -531,7 +572,7 @@ function ScrollFlightHero() {
             className="text-[10px] tracking-[0.3em] uppercase"
             style={{ color: "rgba(160,200,225,0.55)" }}
           >
-            Scrollen
+            {t.scrollCue}
           </span>
           <motion.svg
             width="22"
@@ -557,24 +598,23 @@ function ScrollFlightHero() {
 
 /** Headline, Lead und CTA — in Fahrt und Video-Hero identisch. */
 function HeadlineCopy({ onCta }: { onCta: () => void }) {
+  const t = useCopy(COPY);
   return (
     <>
       <TeamBadge />
       <h1 className="text-white text-[clamp(34px,6.5vw,108px)] leading-[1.05] tracking-tight">
-        Webseiten,{" "}
+        {t.h1Lead}{" "}
         <span
           className="text-blue-400"
         >
-          die Wirkung zeigen.
+          {t.h1Accent}
         </span>
       </h1>
       <p className={LEAD_CLASS} style={{ color: LEAD_COLOR }}>
-        Modernes Webdesign für lokale Unternehmen im Schwarzwald – wir erstellen
-        professionelle Webseiten, von der ersten Idee bis sie live ist. Du musst
-        dich um nichts kümmern.
+        {t.lead}
       </p>
       <div className="mt-8 sm:mt-10">
-        <PrimaryButton onClick={onCta}>Projekt anfragen</PrimaryButton>
+        <PrimaryButton onClick={onCta}>{t.cta}</PrimaryButton>
       </div>
     </>
   );
@@ -596,6 +636,7 @@ function VideoHero({ onCta }: { onCta: () => void }) {
   const [videoOn, setVideoOn] = useState(false);
   const [ready, setReady] = useState(false);
   const reduce = useReducedMotion();
+  const t = useCopy(COPY);
 
   useEffect(() => {
     if (reduce) return;
@@ -633,7 +674,7 @@ function VideoHero({ onCta }: { onCta: () => void }) {
 
   return (
     <section
-      aria-label="Willkommen bei G&A Webdesign"
+      aria-label={t.welcome}
       className="relative overflow-hidden pt-28 sm:pt-36 md:pt-40 pb-4 sm:pb-8 lg:min-h-[100svh] lg:flex lg:items-center lg:pt-24 lg:pb-20"
     >
       <div aria-hidden className="pointer-events-none absolute inset-0">
@@ -691,6 +732,8 @@ function VideoHero({ onCta }: { onCta: () => void }) {
 /* ───────────────────── Variante ohne Bewegung (reduced motion) ───────────── */
 
 function StaticHero({ navigate }: { navigate: (to: string) => void }) {
+  const t = useCopy(COPY);
+  const lp = useLocalePath();
   return (
     <section className="relative pt-32 sm:pt-36 lg:pt-44 pb-16 lg:pb-24">
       <div
@@ -715,25 +758,19 @@ function StaticHero({ navigate }: { navigate: (to: string) => void }) {
         <div className="max-w-3xl">
           <TeamBadge />
           <h1 className="text-white text-[clamp(34px,6.5vw,108px)] leading-[1.05] tracking-tight">
-            Webseiten,{" "}
+            {t.h1Lead}{" "}
             <span
               className="text-blue-400"
             >
-              die Wirkung zeigen.
+              {t.h1Accent}
             </span>
           </h1>
           <p className={LEAD_CLASS} style={{ color: LEAD_COLOR }}>
-            Modernes Webdesign für lokale Unternehmen im Schwarzwald – wir erstellen
-            professionelle Webseiten, von der ersten Idee bis sie live ist. Du musst dich
-            um nichts kümmern.
+            {t.lead}
           </p>
 
           <div className="mt-10 grid gap-6 sm:grid-cols-3 max-w-3xl">
-            {[
-              ["Wir sind zu zweit.", "Jonas gestaltet das Design und Frontend, Berkant das Backend – und ist dein Ansprechpartner."],
-              ["Alles aus einer Hand.", "Corporate Design, Webseite, Hosting und SEO – nicht vier Dienstleister."],
-              ["Aus Triberg.", "Von St. Georgen bis Villingen-Schwenningen."],
-            ].map(([title, text]) => (
+            {t.staticPoints.map(([title, text]) => (
               <div key={title}>
                 <h2 className="text-white text-[17px] mb-1.5">{title}</h2>
                 <p className="text-[14px] leading-relaxed text-ink-300">
@@ -745,8 +782,8 @@ function StaticHero({ navigate }: { navigate: (to: string) => void }) {
 
           <FadeIn delay={0.2}>
             <div className="mt-10">
-              <PrimaryButton onClick={() => navigate("/kontakt")}>
-                Projekt anfragen
+              <PrimaryButton onClick={() => navigate(lp("/kontakt"))}>
+                {t.cta}
               </PrimaryButton>
             </div>
           </FadeIn>

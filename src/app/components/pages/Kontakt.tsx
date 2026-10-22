@@ -7,7 +7,8 @@ import { Mail, MapPin, Phone } from "lucide-react";
 import { WhatsAppIcon } from "../WhatsAppIcon";
 import { DirectContactCard } from "../DirectContactCard";
 import { FAQSection } from "../FAQSection";
-import { ContactForm, BERKANT_EMAIL, BERKANT_PHONE, BERKANT_TEL, BERKANT_WHATSAPP } from "../ContactForm";
+import { ContactForm, BERKANT_EMAIL, BERKANT_PHONE, BERKANT_TEL, useWhatsAppLink } from "../ContactForm";
+import { useCopy } from "../../../i18n";
 import { ContactLine } from "../ContactLine";
 import berkantImg from "../../../imports/Berkant_agyar.jpeg";
 
@@ -19,11 +20,45 @@ const slideVariants = {
   exit: (d: number) => ({ x: d * -40, opacity: 0 }),
 };
 
+const COPY = {
+  de: {
+    metaTitle: "Kontakt | G&A Webdesign",
+    metaDescription: "Starte dein Webprojekt. Schreib uns, per WhatsApp oder ruf direkt an – das Erstgespräch ist kostenlos und unverbindlich.",
+    h1Start: "Erzähl uns von",
+    h1Accent: "deinem Projekt.",
+    contactPerson: "Dein Ansprechpartner",
+    intro: "Wir melden uns innerhalb von 24 Stunden mit einer ersten Einschätzung und einem unverbindlichen Termin.",
+    emailLabel: "E-Mail",
+    whatsappValue: "Nachricht schreiben",
+    phoneLabel: "Telefon",
+    locationLabel: "Standort",
+    locationValue: "St. Georgen, Schwarzwald",
+    tabForm: "Anfrage senden",
+    tabDirect: "Direkt kontaktieren",
+  },
+  en: {
+    metaTitle: "Contact | G&A Webdesign",
+    metaDescription: "Start your web project. Email us, send a WhatsApp or give us a call – the first consultation is free and there's no commitment.",
+    h1Start: "Tell us about",
+    h1Accent: "your project.",
+    contactPerson: "Your contact",
+    intro: "We'll get back to you within 24 hours with an initial assessment and a no-obligation meeting.",
+    emailLabel: "Email",
+    whatsappValue: "Send a message",
+    phoneLabel: "Phone",
+    locationLabel: "Location",
+    locationValue: "St. Georgen, Black Forest",
+    tabForm: "Send a request",
+    tabDirect: "Contact us directly",
+  },
+};
+
 export function Kontakt() {
+  const t = useCopy(COPY);
+  const whatsAppLink = useWhatsAppLink();
   usePageMeta({
-    title: "Kontakt | G&A Webdesign",
-    description: "Starte dein Webprojekt. Schreib uns, per WhatsApp oder ruf direkt an – das Erstgespräch ist kostenlos und unverbindlich.",
-    path: "/kontakt",
+    title: t.metaTitle,
+    description: t.metaDescription,
   });
   const [mode, setMode] = useState<ContactMode>("form");
   const [direction, setDirection] = useState(0);
@@ -32,11 +67,11 @@ export function Kontakt() {
     <main id="main-content" className="mx-auto max-w-5xl xl:max-w-6xl 2xl:max-w-7xl px-5 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 pt-36 sm:pt-44 lg:pt-52 xl:pt-60 2xl:pt-72 pb-24 2xl:pb-32">
       <FadeIn>
         <h1 className="text-white text-[clamp(32px,6vw,76px)] leading-[1.05] tracking-tight max-w-2xl 2xl:max-w-3xl mb-4">
-          Erzähl uns von{" "}
+          {t.h1Start}{" "}
           <span
             className="text-blue-400"
           >
-            deinem Projekt.
+            {t.h1Accent}
           </span>
         </h1>
 
@@ -49,14 +84,13 @@ export function Kontakt() {
             <img src={berkantImg} alt="Berkant Agyar" className="h-full w-full object-cover object-top" />
           </div>
           <div>
-            <div className="text-[11px] text-ink-400">Dein Ansprechpartner</div>
+            <div className="text-[11px] text-ink-400">{t.contactPerson}</div>
             <div className="text-[13px] text-white font-medium leading-tight">Berkant Agyar</div>
           </div>
         </div>
 
         <p className="text-ink-300 text-[15px] sm:text-[16px] 2xl:text-[18px] leading-relaxed max-w-xl 2xl:max-w-2xl mb-14 2xl:mb-20">
-          Wir melden uns innerhalb von 24 Stunden
-          mit einer ersten Einschätzung und einem unverbindlichen Termin.
+          {t.intro}
         </p>
       </FadeIn>
 
@@ -65,24 +99,24 @@ export function Kontakt() {
         <FadeIn className="md:col-span-2 space-y-4">
           <ContactLine
             Icon={Mail}
-            label="E-Mail"
+            label={t.emailLabel}
             value={BERKANT_EMAIL}
             href={`mailto:${BERKANT_EMAIL}`}
           />
           <ContactLine
             Icon={WhatsAppIcon}
             label="WhatsApp"
-            value="Nachricht schreiben"
-            href={BERKANT_WHATSAPP}
+            value={t.whatsappValue}
+            href={whatsAppLink}
             external
           />
           <ContactLine
             Icon={Phone}
-            label="Telefon"
+            label={t.phoneLabel}
             value={BERKANT_PHONE}
             href={BERKANT_TEL}
           />
-          <ContactLine Icon={MapPin} label="Standort" value="Triberg, Schwarzwald" />
+          <ContactLine Icon={MapPin} label={t.locationLabel} value={t.locationValue} />
         </FadeIn>
 
         {/* Form / Direktkontakt */}
@@ -96,10 +130,10 @@ export function Kontakt() {
             }}
           >
             <TabBtn active={mode === "form"} onClick={() => { setDirection(-1); setMode("form"); }}>
-              Anfrage senden
+              {t.tabForm}
             </TabBtn>
             <TabBtn active={mode === "direct"} onClick={() => { setDirection(1); setMode("direct"); }}>
-              Direkt kontaktieren
+              {t.tabDirect}
             </TabBtn>
           </div>
 

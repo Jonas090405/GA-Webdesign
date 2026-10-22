@@ -1,13 +1,37 @@
 import { Phone } from "lucide-react";
 import { Card } from "./Card";
 import { WhatsAppIcon } from "./WhatsAppIcon";
-import { BERKANT_PHONE, BERKANT_TEL, BERKANT_WHATSAPP } from "./ContactForm";
+import { BERKANT_PHONE, BERKANT_TEL, useWhatsAppLink } from "./ContactForm";
+import { useCopy } from "../../i18n";
+
+const COPY = {
+  de: {
+    title: "Schreib Berkant auf WhatsApp",
+    text: "Schick uns kurz, worum es geht – wir antworten dir direkt im Chat.",
+    whatsappLabel: "Berkant Agyar auf WhatsApp schreiben (öffnet WhatsApp)",
+    whatsappButton: "Auf WhatsApp schreiben",
+    callPrompt: "Lieber telefonieren?",
+    callLabel: (phone: string) => `Berkant Agyar anrufen: ${phone}`,
+    voicemail: "Nicht erreichbar? Hinterlass eine kurze Nachricht – wir melden uns schnellstmöglich.",
+  },
+  en: {
+    title: "Message Berkant on WhatsApp",
+    text: "Send us a quick note about what you need – we'll reply right in the chat.",
+    whatsappLabel: "Message Berkant Agyar on WhatsApp (opens WhatsApp)",
+    whatsappButton: "Message on WhatsApp",
+    callPrompt: "Prefer to call?",
+    callLabel: (phone: string) => `Call Berkant Agyar: ${phone}`,
+    voicemail: "Can't reach us? Leave a short message – we'll get back to you as soon as we can.",
+  },
+};
 
 /**
  * „Direkt kontaktieren“-Karte für Homepage und Kontakt-Seite:
  * WhatsApp als Hauptweg, Anruf als zweite Option darunter.
  */
 export function DirectContactCard({ compact = false }: { compact?: boolean }) {
+  const t = useCopy(COPY);
+  const whatsappLink = useWhatsAppLink();
   return (
     <Card>
       <div className={`flex flex-col items-center text-center ${compact ? "py-8 gap-5" : "py-10 gap-6"}`}>
@@ -23,37 +47,37 @@ export function DirectContactCard({ compact = false }: { compact?: boolean }) {
 
         <div>
           <p className={`text-white font-semibold tracking-tight ${compact ? "text-[20px]" : "text-[22px] sm:text-[26px]"}`}>
-            Schreib Berkant auf WhatsApp
+            {t.title}
           </p>
           <p className="mt-2 text-[13px] max-w-xs mx-auto leading-relaxed text-ink-400">
-            Schick uns kurz, worum es geht – wir antworten dir direkt im Chat.
+            {t.text}
           </p>
         </div>
 
         <a
-          href={BERKANT_WHATSAPP}
+          href={whatsappLink}
           target="_blank"
           rel="noopener noreferrer"
-          aria-label="Berkant Agyar auf WhatsApp schreiben (öffnet WhatsApp)"
+          aria-label={t.whatsappLabel}
           className={`inline-flex items-center gap-2 rounded-full ${compact ? "px-6" : "px-7"} py-3 text-white font-medium transition-all duration-200 hover:brightness-110 active:brightness-95`}
           style={{ background: "var(--gradient-cta)" }}
         >
           <WhatsAppIcon size={compact ? 16 : 17} />
-          Auf WhatsApp schreiben
+          {t.whatsappButton}
         </a>
 
         <div className="w-full max-w-xs pt-2">
-          <p className="text-[13px] mb-1 text-ink-400">Lieber telefonieren?</p>
+          <p className="text-[13px] mb-1 text-ink-400">{t.callPrompt}</p>
           <a
             href={BERKANT_TEL}
-            aria-label={`Berkant Agyar anrufen: ${BERKANT_PHONE}`}
+            aria-label={t.callLabel(BERKANT_PHONE)}
             className="inline-flex items-center gap-2 text-white text-[17px] font-semibold tracking-tight hover:text-brand-light transition-colors"
           >
             <Phone size={15} className="text-blue-400" aria-hidden />
             {BERKANT_PHONE}
           </a>
           <p className="mt-2 text-[12px] leading-relaxed text-ink-400">
-            Nicht erreichbar? Hinterlass eine kurze Nachricht – wir melden uns schnellstmöglich.
+            {t.voicemail}
           </p>
         </div>
       </div>

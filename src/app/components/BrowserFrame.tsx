@@ -1,3 +1,8 @@
+import { useCopy } from "../../i18n";
+
+/** Platzhalter in der Adressleiste, wenn ein Projekt keine URL hat. */
+const PREVIEW = { de: "vorschau", en: "preview" };
+
 /**
  * macOS-Browserfenster um einen Screenshot oder ein Video.
  * Gemeinsam genutzt von Startseite, Projektübersicht und Case Study.
@@ -11,9 +16,10 @@ export function BrowserFrame({
   url?: string;
   className?: string;
 }) {
+  const preview = useCopy(PREVIEW);
   const displayUrl = url
     ? url.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, "")
-    : "vorschau";
+    : preview;
 
   return (
     <div

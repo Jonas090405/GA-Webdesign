@@ -1,14 +1,15 @@
 import { Card } from "../Card";
 import { FadeIn } from "../FadeIn";
+import { GermanOnlyNotice } from "../GermanOnlyNotice";
 import { usePageMeta } from "../../hooks/usePageMeta";
 export function Impressum() {
   usePageMeta({
     title: "Impressum | G&A Webdesign",
-    description: "Impressum und Anbieterkennzeichnung der G&A Webdesign GbR aus Triberg im Schwarzwald gemäß § 5 DDG.",
+    description: "Impressum und Anbieterkennzeichnung der G&A Webdesign GbR aus St. Georgen im Schwarzwald gemäß § 5 DDG.",
     path: "/impressum",
   });
   return (
-    <main id="main-content" className="mx-auto max-w-3xl px-5 sm:px-6 pt-28 sm:pt-32 pb-12">
+    <main id="main-content" lang="de" className="mx-auto max-w-3xl px-5 sm:px-6 pt-28 sm:pt-32 pb-12">
       <FadeIn>
         <h1 className="text-white text-[clamp(32px,6vw,64px)] tracking-tight leading-[1.05]">
           Impressum
@@ -16,6 +17,7 @@ export function Impressum() {
         <p className="mt-4 text-ink-300 text-[14px]">
           Angaben gemäß § 5 DDG
         </p>
+        <GermanOnlyNotice />
       </FadeIn>
 
       <div className="mt-10 sm:mt-12 space-y-5 sm:space-y-6">
@@ -26,18 +28,14 @@ export function Impressum() {
             </div>
             <div className="text-ink-100 text-[15px] leading-[1.9]">
               G&amp;A Webdesign GbR
+              <br />
+              Leopoldstraße 1
+              <br />
+              78112 St. Georgen im Schwarzwald, Deutschland
               <br /><br />
-              Jonas Gissler
+              Vertreten durch die Gesellschafter
               <br />
-              Altenbergweg 12
-              <br />
-              78098 Triberg, Deutschland
-              <br /><br />
-              Berkant Agyar
-              <br />
-              Bergstraße 54
-              <br />
-              78098 Triberg, Deutschland
+              Jonas Gissler und Berkant Agyar
             </div>
           </Card>
         </FadeIn>
@@ -118,9 +116,9 @@ export function Impressum() {
             <div className="text-ink-100 text-[15px] leading-[1.9]">
               Jonas Gissler
               <br />
-              Altenbergweg 12
+              Leopoldstraße 1
               <br />
-              78098 Triberg
+              78112 St. Georgen im Schwarzwald
             </div>
           </Card>
         </FadeIn>

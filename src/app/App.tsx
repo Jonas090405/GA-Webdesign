@@ -15,9 +15,26 @@ import { AGB } from "./components/pages/AGB";
 import { Kontakt } from "./components/pages/Kontakt";
 import { NotFound } from "./components/pages/NotFound";
 import { CookieBanner } from "./components/CookieBanner";
+import { localizePath } from "../i18n";
+import { useLanguageRedirect } from "../i18n/useLanguageRedirect";
+
+/** Jede Seite hängt unter ihrem deutschen Pfad und dem englischen Gegenstück (/en/…). */
+const PAGES = [
+  { path: "/", Page: Home },
+  { path: "/projekte", Page: Portfolio },
+  { path: "/projekte/:slug", Page: CaseStudy },
+  { path: "/leistungen", Page: Leistungen },
+  { path: "/ablauf", Page: Ablauf },
+  { path: "/ueber-uns", Page: About },
+  { path: "/kontakt", Page: Kontakt },
+  { path: "/impressum", Page: Impressum },
+  { path: "/datenschutz", Page: Datenschutz },
+  { path: "/agb", Page: AGB },
+];
 
 export default function App() {
   const location = useLocation();
+  useLanguageRedirect();
 
   useEffect(() => {
     document.body.style.background = "var(--ink-950)";
@@ -46,56 +63,15 @@ export default function App() {
 
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
-          <Route path="/" element={
-            <motion.div initial="initial" animate="animate" exit="exit" variants={pageVariants} transition={pageTransition}>
-              <Home />
-            </motion.div>
-          } />
-          <Route path="/projekte" element={
-            <motion.div initial="initial" animate="animate" exit="exit" variants={pageVariants} transition={pageTransition}>
-              <Portfolio />
-            </motion.div>
-          } />
-          <Route path="/projekte/:slug" element={
-            <motion.div initial="initial" animate="animate" exit="exit" variants={pageVariants} transition={pageTransition}>
-              <CaseStudy />
-            </motion.div>
-          } />
-          <Route path="/leistungen" element={
-            <motion.div initial="initial" animate="animate" exit="exit" variants={pageVariants} transition={pageTransition}>
-              <Leistungen />
-            </motion.div>
-          } />
-          <Route path="/ablauf" element={
-            <motion.div initial="initial" animate="animate" exit="exit" variants={pageVariants} transition={pageTransition}>
-              <Ablauf />
-            </motion.div>
-          } />
-          <Route path="/ueber-uns" element={
-            <motion.div initial="initial" animate="animate" exit="exit" variants={pageVariants} transition={pageTransition}>
-              <About />
-            </motion.div>
-          } />
-          <Route path="/kontakt" element={
-            <motion.div initial="initial" animate="animate" exit="exit" variants={pageVariants} transition={pageTransition}>
-              <Kontakt />
-            </motion.div>
-          } />
-          <Route path="/impressum" element={
-            <motion.div initial="initial" animate="animate" exit="exit" variants={pageVariants} transition={pageTransition}>
-              <Impressum />
-            </motion.div>
-          } />
-          <Route path="/datenschutz" element={
-            <motion.div initial="initial" animate="animate" exit="exit" variants={pageVariants} transition={pageTransition}>
-              <Datenschutz />
-            </motion.div>
-          } />
-          <Route path="/agb" element={
-            <motion.div initial="initial" animate="animate" exit="exit" variants={pageVariants} transition={pageTransition}>
-              <AGB />
-            </motion.div>
-          } />
+          {PAGES.flatMap(({ path, Page }) =>
+            [path, localizePath(path, "en")].map((p) => (
+              <Route key={p} path={p} element={
+                <motion.div initial="initial" animate="animate" exit="exit" variants={pageVariants} transition={pageTransition}>
+                  <Page />
+                </motion.div>
+              } />
+            ))
+          )}
           <Route path="*" element={
             <motion.div initial="initial" animate="animate" exit="exit" variants={pageVariants} transition={pageTransition}>
               <NotFound />

@@ -1,9 +1,31 @@
 import { useState, useEffect } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { grantConsent, denyConsent } from "../../lib/analytics";
+import { useCopy, useLocalePath } from "../../i18n";
+
+const COPY = {
+  de: {
+    before: "Mit deiner Einwilligung nutzen wir",
+    after:
+      "mit Cookies, um die Nutzung pseudonym auszuwerten und das Angebot zu verbessern. Dabei können Daten an Google in die USA übermittelt werden. Deine Einwilligung ist freiwillig und jederzeit widerrufbar.",
+    more: "Mehr erfahren",
+    decline: "Ablehnen",
+    accept: "Akzeptieren",
+  },
+  en: {
+    before: "With your consent, we use",
+    after:
+      "with cookies to analyze site usage under a pseudonym and improve what we offer. This may involve transferring data to Google in the USA. Your consent is voluntary and you can withdraw it at any time.",
+    more: "Learn more",
+    decline: "Decline",
+    accept: "Accept",
+  },
+};
 
 export function CookieBanner() {
   const [visible, setVisible] = useState(false);
+  const t = useCopy(COPY);
+  const lp = useLocalePath();
 
   useEffect(() => {
     const consent = localStorage.getItem("cookie-consent");
@@ -41,17 +63,14 @@ export function CookieBanner() {
             style={{ background: "var(--ink-900)" }}
           >
             <p className="text-ink-200 text-[13px] leading-relaxed mb-4">
-              Mit deiner Einwilligung nutzen wir{" "}
-              <strong className="text-slate-100">Google Analytics</strong> mit
-              Cookies, um die Nutzung pseudonym auszuwerten und das Angebot zu
-              verbessern. Dabei können Daten an Google in die USA übermittelt
-              werden. Deine Einwilligung ist freiwillig und jederzeit
-              widerrufbar.{" "}
+              {t.before}{" "}
+              <strong className="text-slate-100">Google Analytics</strong>{" "}
+              {t.after}{" "}
               <a
-                href="/datenschutz"
+                href={lp("/datenschutz")}
                 className="text-brand underline hover:text-brand-light transition-colors"
               >
-                Mehr erfahren
+                {t.more}
               </a>
             </p>
             <div className="flex gap-3 justify-end">
@@ -72,7 +91,7 @@ export function CookieBanner() {
                   e.currentTarget.style.borderColor = "rgb(var(--blue-400-rgb) / 0.2)";
                 }}
               >
-                Ablehnen
+                {t.decline}
               </button>
               <button
                 onClick={accept}
@@ -81,7 +100,7 @@ export function CookieBanner() {
                   background: "var(--gradient-cta)",
                 }}
               >
-                Akzeptieren
+                {t.accept}
               </button>
             </div>
           </div>

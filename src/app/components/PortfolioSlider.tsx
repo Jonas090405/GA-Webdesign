@@ -5,6 +5,34 @@ import { ImageWithFallback } from "./figma/ImageWithFallback";
 import { LazyVideo } from "./LazyVideo";
 import { Card } from "./Card";
 import { TertiaryButton } from "./Button";
+import { useCopy } from "../../i18n";
+
+const COPY = {
+  de: {
+    prev: "Vorheriges Projekt",
+    next: "Nächstes Projekt",
+    project: "Projekt",
+    readTestimonial: "Kundenstimme lesen",
+    website: "Webseite öffnen",
+    closeTestimonial: "Kundenstimme schließen",
+    testimonial: "Kundenstimme",
+    preview: "vorschau",
+    quoteOpen: "„",
+    quoteClose: '"',
+  },
+  en: {
+    prev: "Previous project",
+    next: "Next project",
+    project: "Project",
+    readTestimonial: "Read client review",
+    website: "Visit website",
+    closeTestimonial: "Close client review",
+    testimonial: "Client review",
+    preview: "preview",
+    quoteOpen: "“",
+    quoteClose: "”",
+  },
+};
 
 type Testimonial = {
   show: boolean; // ← false = Testimonial ausblenden
@@ -32,6 +60,7 @@ export function PortfolioSlider({ projects }: { projects: Project[] }) {
   const [index, setIndex] = useState(0);
   const [direction, setDirection] = useState(0);
   const [testimonialOpen, setTestimonialOpen] = useState(false);
+  const copy = useCopy(COPY);
   const touchStartX = useRef<number | null>(null);
 
   const go = (delta: number) => {
@@ -60,10 +89,10 @@ export function PortfolioSlider({ projects }: { projects: Project[] }) {
       <div>
         {!single && (
           <div className="mb-6 flex justify-end gap-3">
-            <SliderBtn onClick={() => go(-1)} aria="Vorheriges Projekt">
+            <SliderBtn onClick={() => go(-1)} aria={copy.prev}>
               <ChevronLeft size={18} className="xl:!h-5 xl:!w-5 2xl:!h-6 2xl:!w-6" />
             </SliderBtn>
-            <SliderBtn onClick={() => go(1)} aria="Nächstes Projekt">
+            <SliderBtn onClick={() => go(1)} aria={copy.next}>
               <ChevronRight size={18} className="xl:!h-5 xl:!w-5 2xl:!h-6 2xl:!w-6" />
             </SliderBtn>
           </div>
@@ -124,7 +153,7 @@ export function PortfolioSlider({ projects }: { projects: Project[] }) {
                         <div className="md:hidden mt-4">
                           <TertiaryButton onClick={() => setTestimonialOpen(true)}>
                             <Quote size={13} className="mr-0.5" />
-                            Kundenstimme lesen
+                            {copy.readTestimonial}
                           </TertiaryButton>
                         </div>
 
@@ -155,7 +184,7 @@ export function PortfolioSlider({ projects }: { projects: Project[] }) {
                           e.currentTarget.style.borderColor = "rgb(var(--blue-400-rgb) / 0.2)";
                         }}
                       >
-                        {project.urlLabel ?? "Webseite öffnen"}
+                        {project.urlLabel ?? copy.website}
                         <ExternalLink
                           size={13}
                           className="xl:!h-4 xl:!w-4 transition-transform duration-200 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5"
@@ -202,7 +231,7 @@ export function PortfolioSlider({ projects }: { projects: Project[] }) {
                 className={`h-1.5 2xl:h-2 cursor-pointer rounded-full transition-all ${
                   i === index ? "w-8 2xl:w-10 bg-brand" : "w-1.5 2xl:w-2 bg-white/20"
                 }`}
-                aria-label={`Projekt ${i + 1}`}
+                aria-label={`${copy.project} ${i + 1}`}
               />
             ))}
           </div>
@@ -245,14 +274,14 @@ export function PortfolioSlider({ projects }: { projects: Project[] }) {
             >
               <button
                 onClick={() => setTestimonialOpen(false)}
-                aria-label="Kundenstimme schließen"
+                aria-label={copy.closeTestimonial}
                 className="absolute top-4 right-4 flex h-7 w-7 items-center justify-center rounded-full text-ink-300 transition-colors"
                 style={{ background: "rgba(255,255,255,0.06)" }}
               >
                 <X size={15} aria-hidden />
               </button>
 
-              <p className="text-[11px] tracking-[0.2em] text-brand mb-4">Kundenstimme</p>
+              <p className="text-[11px] tracking-[0.2em] text-brand mb-4">{copy.testimonial}</p>
               <TestimonialContent t={t} />
             </motion.div>
           </motion.div>
@@ -263,6 +292,7 @@ export function PortfolioSlider({ projects }: { projects: Project[] }) {
 }
 
 function TestimonialContent({ t }: { t: Testimonial }) {
+  const { quoteOpen, quoteClose } = useCopy(COPY);
   return (
     <div className="flex items-start gap-3 xl:gap-4">
       {t.avatar && (
@@ -280,7 +310,7 @@ function TestimonialContent({ t }: { t: Testimonial }) {
       )}
       <div>
         <p className="text-ink-200 text-[13px] xl:text-[14px] 2xl:text-[16px] leading-relaxed italic">
-          „{t.quote}"
+          {quoteOpen}{t.quote}{quoteClose}
         </p>
         <p className="mt-2 text-[11px] xl:text-[12px] 2xl:text-[13px] text-ink-400">
           — {t.name}, {t.role} · {t.company}
@@ -297,9 +327,10 @@ function MacOSBrowserFrame({
   children: React.ReactNode;
   url?: string;
 }) {
+  const { preview } = useCopy(COPY);
   const displayUrl = url
     ? url.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, "")
-    : "vorschau";
+    : preview;
 
   return (
     <div

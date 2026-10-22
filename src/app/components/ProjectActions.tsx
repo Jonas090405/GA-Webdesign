@@ -1,6 +1,12 @@
 import { ArrowRight, ExternalLink } from "lucide-react";
 import { Link } from "react-router-dom";
 import { type Project, isVisible, projectPath } from "../../content/projects";
+import { useCopy, useLang } from "../../i18n";
+
+const COPY = {
+  de: { caseStudy: "Case Study lesen", website: "Webseite öffnen" },
+  en: { caseStudy: "Read case study", website: "Visit website" },
+};
 
 /** „Case Study lesen“ (wenn sichtbar) und „Webseite öffnen“. */
 export function ProjectActions({
@@ -16,6 +22,8 @@ export function ProjectActions({
   /** Untereinander und gleich breit, z. B. in der Projekt-Karte. */
   stacked?: boolean;
 }) {
+  const t = useCopy(COPY);
+  const lang = useLang();
   const caseStudy = isVisible(project);
   if (!caseStudy && !project.url) return null;
   return (
@@ -28,11 +36,11 @@ export function ProjectActions({
     >
       {caseStudy && (
         <Link
-          to={projectPath(project)}
+          to={projectPath(project, lang)}
           className="group/btn inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-[13px] sm:text-[14px] font-medium text-white transition-[filter] duration-200 hover:brightness-110"
           style={{ background: "var(--gradient-cta)" }}
         >
-          Case Study lesen
+          {t.caseStudy}
           <ArrowRight size={14} className="transition-transform duration-200 group-hover/btn:translate-x-0.5" aria-hidden />
         </Link>
       )}
@@ -43,7 +51,7 @@ export function ProjectActions({
           rel="noreferrer"
           className="group/btn inline-flex items-center justify-center gap-2 rounded-full border border-blue-400/20 bg-blue-400/[0.08] px-5 py-2.5 text-[13px] sm:text-[14px] font-medium text-ink-100 transition-colors duration-300 hover:border-blue-400/40 hover:bg-blue-400/[0.15]"
         >
-          Webseite öffnen
+          {t.website}
           <ExternalLink
             size={13}
             aria-hidden

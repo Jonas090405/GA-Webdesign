@@ -4,62 +4,141 @@ import { PrimaryButton } from "../Button";
 import { FadeIn } from "../FadeIn";
 import { MessageCircle, PenTool, RefreshCw, Globe, Code2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useCopy, useLocalePath } from "../../../i18n";
 import { useScroll, useTransform, motion } from "motion/react";
 import type { MotionValue } from "motion/react";
 
-const timelineSteps = [
-  {
-    icon: MessageCircle,
-    step: "1",
-    title: "Kennenlerngespräch",
-    desc: "Wir lernen uns kennen – und gehen dabei direkt ins Detail. Du erzählst uns, wer du bist, was du machst und was du dir für deine Webseite vorstellst. Gemeinsam klären wir, welche Seiten, Funktionen und Inhalte du brauchst, und definieren den genauen Umfang – damit am Ende keine Überraschungen entstehen. Kein Fachwissen nötig: Wir stellen die richtigen Fragen und hören erst mal zu.",
-    tag: "kostenlos & unverbindlich",
-  },
-  {
-    icon: PenTool,
-    step: "2",
-    title: "Design & Konzept",
-    desc: "Nachdem alle vertraglichen Details geklärt sind, entwickeln wir auf Basis der Anforderungen ein individuelles Designkonzept. In diesem Schritt liegt die visuelle Gestaltung im Vordergrund – wir definieren, wie dein Unternehmen nach außen wirkt.",
-    tag: "individuelles Design",
-  },
-  {
-    icon: MessageCircle,
-    step: "3",
-    title: "1. Feedbackrunde",
-    desc: "Wir zeigen dir, wie deine Seite aussehen wird und wie sie strukturiert ist. Du sagst uns direkt, was dir gefällt und was du gerne anders hättest. Hier zählt dein Gefühl.",
-    tag: "deine Meinung ist wichtig",
-  },
-  {
-    icon: Code2,
-    step: "4",
-    title: "Technische Umsetzung",
-    desc: "Wir setzen dein Feedback direkt um und integrieren alle gewünschten Funktionen. In diesem Schritt liegt der Fokus auf der Funktionalität, Schnelligkeit und Sichtbarkeit deiner Webseite.",
-    tag: "sauber & modern",
-  },
-  {
-    icon: MessageCircle,
-    step: "5",
-    title: "2. Feedbackrunde",
-    desc: "Wir gehen gemeinsam die fertige Webseite durch. Wir testen alle Funktionen, prüfen die Texte auf dem Handy und am PC und schauen uns das Gesamtergebnis im Detail an.",
-    tag: "alles unter Kontrolle",
-  },
-  {
-    icon: RefreshCw,
-    step: "6",
-    title: "Feinschliff & Korrekturen",
-    desc: "Hier kümmern wir uns um den letzten Feinschliff. Deine finalen Wünsche aus dem letzten Check werden punktgenau umgesetzt, damit alles bereit für den Start ist.",
-    tag: "der letzte Feinschliff",
-  },
-  {
-    icon: Globe,
-    step: "7",
-    title: "Fertig – deine Webseite ist live",
-    desc: "Deine Webseite geht online – fertig eingerichtet, auf deiner Domain, direkt nutzbar. Wir kümmern uns um Hosting, Domain und alles Technische. Du bekommst ein fertiges Ergebnis.",
-    tag: "komplett fertig & gehostet",
-  },
-];
+const TIMELINE_STEPS = {
+  de: [
+    {
+      icon: MessageCircle,
+      step: "1",
+      title: "Kennenlerngespräch",
+      desc: "Wir lernen uns kennen – und gehen dabei direkt ins Detail. Du erzählst uns, wer du bist, was du machst und was du dir für deine Webseite vorstellst. Gemeinsam klären wir, welche Seiten, Funktionen und Inhalte du brauchst, und definieren den genauen Umfang – damit am Ende keine Überraschungen entstehen. Kein Fachwissen nötig: Wir stellen die richtigen Fragen und hören erst mal zu.",
+      tag: "kostenlos & unverbindlich",
+    },
+    {
+      icon: PenTool,
+      step: "2",
+      title: "Design & Konzept",
+      desc: "Nachdem alle vertraglichen Details geklärt sind, entwickeln wir auf Basis der Anforderungen ein individuelles Designkonzept. In diesem Schritt liegt die visuelle Gestaltung im Vordergrund – wir definieren, wie dein Unternehmen nach außen wirkt.",
+      tag: "individuelles Design",
+    },
+    {
+      icon: MessageCircle,
+      step: "3",
+      title: "1. Feedbackrunde",
+      desc: "Wir zeigen dir, wie deine Seite aussehen wird und wie sie strukturiert ist. Du sagst uns direkt, was dir gefällt und was du gerne anders hättest. Hier zählt dein Gefühl.",
+      tag: "deine Meinung ist wichtig",
+    },
+    {
+      icon: Code2,
+      step: "4",
+      title: "Technische Umsetzung",
+      desc: "Wir setzen dein Feedback direkt um und integrieren alle gewünschten Funktionen. In diesem Schritt liegt der Fokus auf der Funktionalität, Schnelligkeit und Sichtbarkeit deiner Webseite.",
+      tag: "sauber & modern",
+    },
+    {
+      icon: MessageCircle,
+      step: "5",
+      title: "2. Feedbackrunde",
+      desc: "Wir gehen gemeinsam die fertige Webseite durch. Wir testen alle Funktionen, prüfen die Texte auf dem Handy und am PC und schauen uns das Gesamtergebnis im Detail an.",
+      tag: "alles unter Kontrolle",
+    },
+    {
+      icon: RefreshCw,
+      step: "6",
+      title: "Feinschliff & Korrekturen",
+      desc: "Hier kümmern wir uns um den letzten Feinschliff. Deine finalen Wünsche aus dem letzten Check werden punktgenau umgesetzt, damit alles bereit für den Start ist.",
+      tag: "der letzte Feinschliff",
+    },
+    {
+      icon: Globe,
+      step: "7",
+      title: "Fertig – deine Webseite ist live",
+      desc: "Deine Webseite geht online – fertig eingerichtet, auf deiner Domain, direkt nutzbar. Wir kümmern uns um Hosting, Domain und alles Technische. Du bekommst ein fertiges Ergebnis.",
+      tag: "komplett fertig & gehostet",
+    },
+  ],
+  en: [
+    {
+      icon: MessageCircle,
+      step: "1",
+      title: "Intro call",
+      desc: "We get to know each other and get straight into the details. Tell us who you are, what you do and what you have in mind for your website. Together we work out which pages, features and content you need and pin down the exact scope, so there are no surprises at the end. You don't need any tech know-how: we ask the right questions and listen first.",
+      tag: "free & no obligation",
+    },
+    {
+      icon: PenTool,
+      step: "2",
+      title: "Design & concept",
+      desc: "Once all the contract details are settled, we create a custom design concept based on your requirements. This step is all about the look – we define how your business comes across to the outside world.",
+      tag: "custom design",
+    },
+    {
+      icon: MessageCircle,
+      step: "3",
+      title: "Feedback round 1",
+      desc: "We show you what your site will look like and how it's structured. You tell us straight away what you like and what you'd change. Here, your gut feeling counts.",
+      tag: "your opinion matters",
+    },
+    {
+      icon: Code2,
+      step: "4",
+      title: "Development",
+      desc: "We put your feedback into practice right away and build in every feature you want. This step focuses on how well your website works, how fast it loads and how easily people find it.",
+      tag: "clean & modern",
+    },
+    {
+      icon: MessageCircle,
+      step: "5",
+      title: "Feedback round 2",
+      desc: "We go through the finished website together. We test every feature, check the copy on phone and desktop and take a close look at the result as a whole.",
+      tag: "everything in check",
+    },
+    {
+      icon: RefreshCw,
+      step: "6",
+      title: "Fine-tuning & fixes",
+      desc: "This is where we add the final polish. Your last requests from the final check get done exactly as you asked, so everything is ready for launch.",
+      tag: "the final polish",
+    },
+    {
+      icon: Globe,
+      step: "7",
+      title: "Done – your website is live",
+      desc: "Your website goes online: fully set up, on your domain and ready to use. We take care of hosting, the domain and all the technical stuff. You get a finished result.",
+      tag: "fully done & hosted",
+    },
+  ],
+};
 
-const TOTAL = timelineSteps.length;
+const TOTAL = TIMELINE_STEPS.de.length;
+
+const COPY = {
+  de: {
+    metaTitle: "Ablauf | G&A Webdesign",
+    metaDescription: "So läuft die Zusammenarbeit ab – von der ersten Idee bis zur fertigen Webseite. 7 klare Schritte, transparenter Prozess.",
+    step: "Schritt",
+    h1: "Von der ersten Idee bis zur",
+    h1Accent: "fertigen Webseite.",
+    lead: "Du weißt jederzeit, wo wir stehen. Regelmäßige Feedbackschleifen stellen sicher, dass wir am Ende genau das Ergebnis haben, das du dir vorstellst.",
+    ctaTitle: "Bereit loszulegen?",
+    ctaText: "Erzähl uns kurz von deinem Projekt – das Erstgespräch ist kostenlos und unverbindlich.",
+    ctaButton: "Projekt anfragen",
+  },
+  en: {
+    metaTitle: "Process | G&A Webdesign",
+    metaDescription: "How working with us goes – from the first idea to the finished website. 7 clear steps, a transparent process.",
+    step: "Step",
+    h1: "From the first idea to the",
+    h1Accent: "finished website.",
+    lead: "You always know where things stand. Regular feedback rounds make sure we end up with exactly the result you have in mind.",
+    ctaTitle: "Ready to get started?",
+    ctaText: "Tell us a little about your project – the first call is free and there's no obligation.",
+    ctaButton: "Start your project",
+  },
+};
 
 // ─── Dot ─────────────────────────────────────────────────────────────────────
 function TimelineDot({
@@ -128,11 +207,12 @@ function ContentBlock({
   step: string; tag: string; title: string; desc: string; align?: "left" | "right";
 }) {
   const right = align === "right";
+  const t = useCopy(COPY);
   return (
     <div>
       <div className={`flex flex-wrap items-center gap-2.5 mb-3 ${right ? "justify-end" : ""}`}>
         <span className="text-brand text-[11px] 2xl:text-[12px] tracking-[0.2em] font-medium">
-          Schritt {step}
+          {t.step} {step}
         </span>
         <span
           className="rounded-full px-2.5 py-0.5 text-[11px] 2xl:text-[12px] text-brand-light"
@@ -219,6 +299,7 @@ function TimelineStep({
 // ─── Linie + Steps ────────────────────────────────────────────────────────────
 function ProcessTimeline() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const timelineSteps = useCopy(TIMELINE_STEPS);
 
   // 0 wenn erster Dot Viewport-Mitte erreicht → 1 wenn letzter Dot Viewport-Mitte erreicht
   const { scrollYProgress } = useScroll({
@@ -274,10 +355,11 @@ function ProcessTimeline() {
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
 export function Ablauf() {
+  const t = useCopy(COPY);
+  const lp = useLocalePath();
   usePageMeta({
-    title: "Ablauf | G&A Webdesign",
-    description: "So läuft die Zusammenarbeit ab – von der ersten Idee bis zur fertigen Webseite. 7 klare Schritte, transparenter Prozess.",
-    path: "/ablauf",
+    title: t.metaTitle,
+    description: t.metaDescription,
   });
   const navigate = useNavigate();
 
@@ -285,16 +367,15 @@ export function Ablauf() {
     <main id="main-content" className="mx-auto max-w-6xl xl:max-w-7xl 2xl:max-w-[1440px] px-5 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 pt-36 sm:pt-44 lg:pt-52 xl:pt-60 2xl:pt-72 pb-12 xl:pb-20 2xl:pb-28">
       <FadeIn>
         <h1 className="text-white text-[clamp(36px,6vw,84px)] tracking-tight leading-[1.05] max-w-4xl 2xl:max-w-5xl">
-          Von der ersten Idee bis zur{" "}
+          {t.h1}{" "}
           <span
             className="text-blue-400"
           >
-            fertigen Webseite.
+            {t.h1Accent}
           </span>
         </h1>
         <p className="mt-6 max-w-2xl 2xl:max-w-3xl text-[16px] xl:text-[18px] 2xl:text-[20px] text-ink-300 leading-relaxed">
-          Du weißt jederzeit, wo wir stehen. Regelmäßige Feedbackschleifen stellen sicher,
-          dass wir am Ende genau das Ergebnis haben, das du dir vorstellst.
+          {t.lead}
         </p>
       </FadeIn>
 
@@ -304,13 +385,13 @@ export function Ablauf() {
       <FadeIn>
         <div className="mt-20 2xl:mt-28 text-center">
           <h2 className="text-white text-[28px] xl:text-[34px] 2xl:text-[42px] mb-3">
-            Bereit loszulegen?
+            {t.ctaTitle}
           </h2>
           <p className="text-ink-300 text-[15px] xl:text-[16px] 2xl:text-[18px] mb-8 max-w-xl 2xl:max-w-2xl mx-auto">
-            Erzähl uns kurz von deinem Projekt – das Erstgespräch ist kostenlos und unverbindlich.
+            {t.ctaText}
           </p>
-          <PrimaryButton onClick={() => navigate("/kontakt")}>
-            Projekt anfragen
+          <PrimaryButton onClick={() => navigate(lp("/kontakt"))}>
+            {t.ctaButton}
           </PrimaryButton>
         </div>
       </FadeIn>

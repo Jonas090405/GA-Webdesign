@@ -18,18 +18,76 @@ import tileCodeClip from "../../../imports/tile-code.mp4";
 import tileCodePoster from "../../../imports/tile-code-poster.webp";
 import tileRocketClip from "../../../imports/tile-rocket.mp4";
 import tileRocketPoster from "../../../imports/tile-rocket-poster.webp";
-import { ContactForm, BERKANT_EMAIL, BERKANT_PHONE, BERKANT_TEL, BERKANT_WHATSAPP } from "../ContactForm";
+import { ContactForm, BERKANT_EMAIL, BERKANT_PHONE, BERKANT_TEL, useWhatsAppLink } from "../ContactForm";
 import { DirectContactCard } from "../DirectContactCard";
 import { WhatsAppIcon } from "../WhatsAppIcon";
 import { PROJECTS } from "../../../content/projects";
 import profilbild from "../../../imports/Jonas_Gissler.jpg";
 import berkantImg from "../../../imports/Berkant_agyar.jpeg";
+import { useCopy, useLocalePath } from "../../../i18n";
+
+const COPY = {
+  de: {
+    metaTitle: "Webdesign im Schwarzwald – Moderne Webseiten | G&A Webdesign",
+    metaDescription: "G&A Webdesign aus St. Georgen: modernes Webdesign und professionelle Webseiten für lokale Unternehmen im Schwarzwald – komplett aus einer Hand, inkl. Hosting & SEO.",
+    portfolioTitle: "Projekte, die wir umgesetzt haben.",
+    portfolioLead: "Eine Auswahl unserer aktuellen Kundenarbeiten.",
+    moreFromUs: "Mehr von uns:",
+    allProjects: "Alle Projekte",
+    personalPortfolio: "Persönliches Portfolio",
+    servicesTitle: "Alles, was du für deine Webseite brauchst.",
+    servicesLead1: "Wir übernehmen alles: Design, Entwicklung und Hosting.",
+    servicesLead2: "Du musst dich um nichts kümmern.",
+    servicesCta: "Mehr über unsere Leistungen",
+    teamTitle: "Das sind wir.",
+    teamLead: "Wir sind Jonas und Berkant und bauen von St. Georgen aus zusammen Webseiten für Unternehmen im Schwarzwald. Du weißt von Anfang an, wer an deinem Projekt arbeitet und wen du anrufst.",
+    teamCta: "Mehr über uns",
+    linkedinLabel: (name: string) => `${name} auf LinkedIn (öffnet in neuem Tab)`,
+    contactTitle: "Erzähl uns von deinem Projekt.",
+    yourContact: "Dein Ansprechpartner",
+    contactLead: "Wir melden uns innerhalb von 24 Stunden mit einer ersten Einschätzung und einem unverbindlichen Termin.",
+    emailLabel: "E-Mail",
+    whatsappValue: "Nachricht schreiben",
+    phoneLabel: "Telefon",
+    locationLabel: "Standort",
+    locationValue: "St. Georgen, Schwarzwald",
+    tabForm: "Anfrage senden",
+    tabDirect: "Direkt kontaktieren",
+  },
+  en: {
+    metaTitle: "Web Design in the Black Forest – Modern Websites | G&A Webdesign",
+    metaDescription: "G&A Webdesign from St. Georgen: modern web design and professional websites for local businesses in the Black Forest – all from one team, including hosting & SEO.",
+    portfolioTitle: "Projects we've built.",
+    portfolioLead: "A selection of our recent client work.",
+    moreFromUs: "More from us:",
+    allProjects: "All projects",
+    personalPortfolio: "Personal portfolio",
+    servicesTitle: "Everything your website needs.",
+    servicesLead1: "We handle it all: design, development and hosting.",
+    servicesLead2: "You don't have to worry about a thing.",
+    servicesCta: "More about our services",
+    teamTitle: "That's us.",
+    teamLead: "We're Jonas and Berkant, and from St. Georgen we build websites for businesses across the Black Forest. From day one, you know who's working on your project and who to call.",
+    teamCta: "More about us",
+    linkedinLabel: (name: string) => `${name} on LinkedIn (opens in a new tab)`,
+    contactTitle: "Tell us about your project.",
+    yourContact: "Your contact",
+    contactLead: "We'll get back to you within 24 hours with an initial assessment and a no-obligation appointment.",
+    emailLabel: "Email",
+    whatsappValue: "Send a message",
+    phoneLabel: "Phone",
+    locationLabel: "Location",
+    locationValue: "St. Georgen, Black Forest",
+    tabForm: "Send a request",
+    tabDirect: "Contact us directly",
+  },
+};
 
 export function Home() {
+  const t = useCopy(COPY);
   usePageMeta({
-    title: "Webdesign im Schwarzwald – Moderne Webseiten | G&A Webdesign",
-    description: "G&A Webdesign aus Triberg: modernes Webdesign und professionelle Webseiten für lokale Unternehmen im Schwarzwald – komplett aus einer Hand, inkl. Hosting & SEO.",
-    path: "/",
+    title: t.metaTitle,
+    description: t.metaDescription,
   });
   return (
     <main id="main-content">
@@ -46,12 +104,14 @@ export function Home() {
 
 function PortfolioPreview() {
   const navigate = useNavigate();
+  const t = useCopy(COPY);
+  const lp = useLocalePath();
 
   return (
     <section className="py-12 sm:py-10 lg:py-14 xl:py-18 2xl:py-24">
       <SectionHeader
-        title="Projekte, die wir umgesetzt haben."
-        lead="Eine Auswahl unserer aktuellen Kundenarbeiten."
+        title={t.portfolioTitle}
+        lead={t.portfolioLead}
         className="mb-8 sm:mb-10 xl:mb-14 2xl:mb-20"
       />
 
@@ -61,10 +121,10 @@ function PortfolioPreview() {
       {/* Weiterführend als ruhige Zeile – die Hauptaktionen stehen in der Projektkarte */}
       <FadeIn delay={0.2}>
         <p className="mt-10 sm:mt-0 flex flex-wrap items-center justify-start sm:justify-center gap-x-6 gap-y-3 text-[14px] xl:text-[15px] text-ink-400">
-          <span className="basis-full sm:basis-auto">Mehr von uns:</span>
-          <TertiaryButton onClick={() => navigate("/projekte")}>Alle Projekte</TertiaryButton>
+          <span className="basis-full sm:basis-auto">{t.moreFromUs}</span>
+          <TertiaryButton onClick={() => navigate(lp("/projekte"))}>{t.allProjects}</TertiaryButton>
           <TertiaryButton href="https://portfolio.ga-webdesign.de" external={true}>
-            Persönliches Portfolio
+            {t.personalPortfolio}
           </TertiaryButton>
         </p>
       </FadeIn>
@@ -114,47 +174,74 @@ function ServiceCard({
   );
 }
 
-const SERVICES: { poster: string; clip: string; title: string; desc: string }[] = [
-  {
-    poster: tileDesignPoster,
-    clip: tileDesignClip,
-    title: "Individuelles Design",
-    desc: "Deine Webseite sieht genau so aus, wie du es dir vorstellst. Kein vorgefertigtes Template, sondern ein eigenes Design für dich.",
-  },
-  {
-    poster: tileCodePoster,
-    clip: tileCodeClip,
-    title: "Technische Umsetzung",
-    desc: "Alle Funktionen sauber mit modernster Technik umgesetzt. Schnell geladen, für Google optimiert und auf jedem Gerät perfekt nutzbar.",
-  },
-  {
-    poster: tileRocketPoster,
-    clip: tileRocketClip,
-    title: "Fertig live, sofort nutzbar",
-    desc: "Domain, Hosting, Einrichtung. Wir kümmern uns um alles. Du bekommst eine fertige Webseite und kannst sofort loslegen.",
-  },
-];
+type Service = { poster: string; clip: string; title: string; desc: string };
+
+const SERVICES: { de: Service[]; en: Service[] } = {
+  de: [
+    {
+      poster: tileDesignPoster,
+      clip: tileDesignClip,
+      title: "Individuelles Design",
+      desc: "Deine Webseite sieht genau so aus, wie du es dir vorstellst. Kein vorgefertigtes Template, sondern ein eigenes Design für dich.",
+    },
+    {
+      poster: tileCodePoster,
+      clip: tileCodeClip,
+      title: "Technische Umsetzung",
+      desc: "Alle Funktionen sauber mit modernster Technik umgesetzt. Schnell geladen, für Google optimiert und auf jedem Gerät perfekt nutzbar.",
+    },
+    {
+      poster: tileRocketPoster,
+      clip: tileRocketClip,
+      title: "Fertig live, sofort nutzbar",
+      desc: "Domain, Hosting, Einrichtung. Wir kümmern uns um alles. Du bekommst eine fertige Webseite und kannst sofort loslegen.",
+    },
+  ],
+  en: [
+    {
+      poster: tileDesignPoster,
+      clip: tileDesignClip,
+      title: "Custom design",
+      desc: "Your website looks exactly the way you picture it. We design it just for you instead of starting from a ready-made template.",
+    },
+    {
+      poster: tileCodePoster,
+      clip: tileCodeClip,
+      title: "Clean development",
+      desc: "Every feature built cleanly with the latest technology. Fast to load, optimized for Google and easy to use on any device.",
+    },
+    {
+      poster: tileRocketPoster,
+      clip: tileRocketClip,
+      title: "Live and ready to use",
+      desc: "Domain, hosting, setup. We take care of all of it. You get a finished website and can get started right away.",
+    },
+  ],
+};
 
 function Services() {
   const navigate = useNavigate();
+  const t = useCopy(COPY);
+  const lp = useLocalePath();
+  const services = useCopy(SERVICES);
 
   return (
     <section id="leistungen" className="py-12 sm:py-10 lg:py-14 xl:py-18 2xl:py-24">
       <SectionHeader
-        title="Alles, was du für deine Webseite brauchst."
-        lead={<>Wir übernehmen alles: Design, Entwicklung und Hosting.<br />Du musst dich um nichts kümmern.</>}
+        title={t.servicesTitle}
+        lead={<>{t.servicesLead1}<br />{t.servicesLead2}</>}
       />
 
       <div className="grid gap-5 sm:gap-6 xl:gap-8 2xl:gap-10 sm:grid-cols-2 md:grid-cols-3 items-stretch">
-        {SERVICES.map(({ poster, clip, title, desc }, i) => (
+        {services.map(({ poster, clip, title, desc }, i) => (
           <ServiceCard key={title} poster={poster} clip={clip} title={title} desc={desc} i={i} />
         ))}
       </div>
 
       <FadeIn delay={0.2}>
         <div className="mt-10 xl:mt-14 2xl:mt-16">
-          <GhostButton onClick={() => navigate("/leistungen")}>
-            Mehr über unsere Leistungen
+          <GhostButton onClick={() => navigate(lp("/leistungen"))}>
+            {t.servicesCta}
           </GhostButton>
         </div>
       </FadeIn>
@@ -162,22 +249,43 @@ function Services() {
   );
 }
 
-const MEMBERS = [
-  {
-    photo: profilbild,
-    name: "Jonas Gissler",
-    role: "Design & Frontend",
-    desc: "Gestaltet deine Webseite und auf Wunsch dein Corporate Design – und setzt alles im Frontend um. Also das, was deine Kunden sehen und erleben.",
-    linkedin: "https://www.linkedin.com/in/jonas-gissler-37b1482b0/",
-  },
-  {
-    photo: berkantImg,
-    name: "Berkant Agyar",
-    role: "Backend & Kundenkontakt",
-    desc: "Dein Ansprechpartner von der Anfrage bis zum Livegang. Sorgt im Backend dafür, dass Formulare, CMS und Hosting zuverlässig laufen.",
-    linkedin: "https://www.linkedin.com/in/berkant-agyar-2334a6363",
-  },
-];
+const JONAS_LINKEDIN = "https://www.linkedin.com/in/jonas-gissler-37b1482b0/";
+const BERKANT_LINKEDIN = "https://www.linkedin.com/in/berkant-agyar-2334a6363";
+
+const MEMBERS = {
+  de: [
+    {
+      photo: profilbild,
+      name: "Jonas Gissler",
+      role: "Design & Frontend",
+      desc: "Gestaltet deine Webseite und auf Wunsch dein Corporate Design – und setzt alles im Frontend um. Also das, was deine Kunden sehen und erleben.",
+      linkedin: JONAS_LINKEDIN,
+    },
+    {
+      photo: berkantImg,
+      name: "Berkant Agyar",
+      role: "Backend & Kundenkontakt",
+      desc: "Dein Ansprechpartner von der Anfrage bis zum Livegang. Sorgt im Backend dafür, dass Formulare, CMS und Hosting zuverlässig laufen.",
+      linkedin: BERKANT_LINKEDIN,
+    },
+  ],
+  en: [
+    {
+      photo: profilbild,
+      name: "Jonas Gissler",
+      role: "Design & Frontend",
+      desc: "Designs your website and, if you want, your corporate design – then builds it all on the frontend. That's everything your customers see and experience.",
+      linkedin: JONAS_LINKEDIN,
+    },
+    {
+      photo: berkantImg,
+      name: "Berkant Agyar",
+      role: "Backend & Client Contact",
+      desc: "Your point of contact from first inquiry to launch. On the backend, he makes sure forms, CMS and hosting run reliably.",
+      linkedin: BERKANT_LINKEDIN,
+    },
+  ],
+};
 
 /**
  * Porträt-Band statt Personen-Kacheln: dasselbe runde Bild mit Lichtring wie
@@ -190,7 +298,8 @@ function Member({
   desc,
   linkedin,
   spin,
-}: (typeof MEMBERS)[number] & { spin: 1 | -1 }) {
+}: (typeof MEMBERS)["de"][number] & { spin: 1 | -1 }) {
+  const t = useCopy(COPY);
   return (
     <article>
       <PortraitRing
@@ -218,7 +327,7 @@ function Member({
         href={linkedin}
         target="_blank"
         rel="noopener noreferrer"
-        aria-label={`${name} auf LinkedIn (öffnet in neuem Tab)`}
+        aria-label={t.linkedinLabel(name)}
         className="mt-5 inline-flex items-center gap-2 text-[13px] xl:text-[14px] font-medium text-ink-400 transition-colors duration-200 hover:text-blue-400 focus-visible:text-blue-400"
       >
         <Linkedin size={14} aria-hidden="true" />
@@ -230,17 +339,20 @@ function Member({
 
 function TeamPreview() {
   const navigate = useNavigate();
+  const t = useCopy(COPY);
+  const lp = useLocalePath();
+  const members = useCopy(MEMBERS);
 
   return (
     <section className="py-12 sm:py-10 lg:py-14 xl:py-18 2xl:py-24">
       <SectionHeader
-        title="Das sind wir."
-        lead="Wir sind Jonas und Berkant – zwei aus Triberg, die zusammen Webseiten für Unternehmen im Schwarzwald bauen. Du weißt von Anfang an, wer an deinem Projekt arbeitet und wen du anrufst."
+        title={t.teamTitle}
+        lead={t.teamLead}
         className="mb-12 sm:mb-14 xl:mb-20 2xl:mb-24"
       />
 
       <div className="grid gap-12 sm:gap-8 xl:gap-16 sm:grid-cols-2">
-        {MEMBERS.map((m, i) => (
+        {members.map((m, i) => (
           <FadeIn key={m.name} delay={i * 0.1}>
             <Member {...m} spin={i === 0 ? 1 : -1} />
           </FadeIn>
@@ -249,8 +361,8 @@ function TeamPreview() {
 
       <FadeIn delay={0.2}>
         <div className="mt-12 xl:mt-16 2xl:mt-20">
-          <GhostButton onClick={() => navigate("/ueber-uns")}>
-            Mehr über uns
+          <GhostButton onClick={() => navigate(lp("/ueber-uns"))}>
+            {t.teamCta}
           </GhostButton>
         </div>
       </FadeIn>
@@ -267,13 +379,15 @@ const slideVariants = {
 function Contact() {
   const [mode, setMode] = useState<"form" | "direct">("form");
   const [direction, setDirection] = useState(0);
+  const t = useCopy(COPY);
+  const whatsAppLink = useWhatsAppLink();
 
   return (
     <section id="kontakt" className="py-12 sm:py-10 lg:py-14 xl:py-18 2xl:py-24">
       <div className="grid gap-10 md:gap-12 xl:gap-20 2xl:gap-28 md:grid-cols-2 items-start">
         <FadeIn>
           <h2 className="text-white text-[clamp(26px,4vw,64px)] tracking-tight mb-4 xl:mb-5">
-            Erzähl uns von deinem Projekt.
+            {t.contactTitle}
           </h2>
 
           {/* Ansprechpartner */}
@@ -285,7 +399,7 @@ function Contact() {
               <img src={berkantImg} alt="Berkant Agyar" loading="lazy" decoding="async" className="h-full w-full object-cover object-top" />
             </div>
             <div>
-              <div className="text-[11px] text-ink-400">Dein Ansprechpartner</div>
+              <div className="text-[11px] text-ink-400">{t.yourContact}</div>
               <div className="text-[13px] text-white font-medium leading-tight">Berkant Agyar</div>
             </div>
           </div>
@@ -293,30 +407,29 @@ function Contact() {
           <p
             className="text-[14px] sm:text-[15px] xl:text-[17px] 2xl:text-[19px] leading-relaxed mb-8 max-w-md xl:max-w-lg 2xl:max-w-xl text-ink-300"
           >
-            Wir melden uns innerhalb von 24 Stunden
-            mit einer ersten Einschätzung und einem unverbindlichen Termin.
+            {t.contactLead}
           </p>
           <div className="space-y-4">
             <ContactLine
               Icon={Mail}
-              label="E-Mail"
+              label={t.emailLabel}
               value={BERKANT_EMAIL}
               href={`mailto:${BERKANT_EMAIL}`}
             />
             <ContactLine
               Icon={WhatsAppIcon}
               label="WhatsApp"
-              value="Nachricht schreiben"
-              href={BERKANT_WHATSAPP}
+              value={t.whatsappValue}
+              href={whatsAppLink}
               external
             />
             <ContactLine
               Icon={Phone}
-              label="Telefon"
+              label={t.phoneLabel}
               value={BERKANT_PHONE}
               href={BERKANT_TEL}
             />
-            <ContactLine Icon={MapPin} label="Standort" value="Triberg, Schwarzwald" />
+            <ContactLine Icon={MapPin} label={t.locationLabel} value={t.locationValue} />
           </div>
         </FadeIn>
 
@@ -330,10 +443,10 @@ function Contact() {
             }}
           >
             <HomeTabBtn active={mode === "form"} onClick={() => { setDirection(-1); setMode("form"); }}>
-              Anfrage senden
+              {t.tabForm}
             </HomeTabBtn>
             <HomeTabBtn active={mode === "direct"} onClick={() => { setDirection(1); setMode("direct"); }}>
-              Direkt kontaktieren
+              {t.tabDirect}
             </HomeTabBtn>
           </div>
 

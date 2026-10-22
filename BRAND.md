@@ -7,7 +7,7 @@ Technische Quelle der Farben: `src/styles/globals.css` (Canvas/WebGL: `src/lib/t
 
 ## 1. Marke
 
-**G&A Webdesign GbR** – Gissler & Agyar, Triberg im Schwarzwald.
+**G&A Webdesign GbR** – Gissler & Agyar, Leopoldstraße 1, St. Georgen im Schwarzwald.
 Zwei feste Ansprechpartner, alles aus einer Hand: Design, Entwicklung, Hosting, SEO.
 
 - **Positionierung:** Zwei aus dem Schwarzwald, die Webseiten bauen, die wirken – ohne dass sich der Kunde um etwas kümmern muss.

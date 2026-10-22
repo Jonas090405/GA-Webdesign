@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "motion/react";
 import { Card } from "../Card";
 import { FadeIn } from "../FadeIn";
 import { hasConsent, revokeConsent } from "../../../lib/analytics";
+import { GermanOnlyNotice } from "../GermanOnlyNotice";
 import { usePageMeta } from "../../hooks/usePageMeta";
 
 // ─── Widerruf-Button + Bestätigungs-Popup ────────────────────────────────────
@@ -144,7 +145,7 @@ export function Datenschutz() {
     path: "/datenschutz",
   });
   return (
-    <main id="main-content" className="mx-auto max-w-3xl px-5 sm:px-6 pt-28 sm:pt-32 pb-12">
+    <main id="main-content" lang="de" className="mx-auto max-w-3xl px-5 sm:px-6 pt-28 sm:pt-32 pb-12">
       <FadeIn>
         <h1 className="text-white text-[clamp(32px,6vw,64px)] tracking-tight leading-[1.05]">
           Datenschutzerklärung
@@ -152,6 +153,7 @@ export function Datenschutz() {
         <p className="mt-4 text-ink-300 text-[14px]">
           Stand: Oktober 2026
         </p>
+        <GermanOnlyNotice />
       </FadeIn>
 
       <div className="mt-10 sm:mt-12 space-y-5 sm:space-y-6">
@@ -165,9 +167,9 @@ export function Datenschutz() {
               <br />
               Jonas Gissler &amp; Berkant Agyar
               <br />
-              Altenbergweg 12
+              Leopoldstraße 1
               <br />
-              78098 Triberg, Deutschland
+              78112 St. Georgen im Schwarzwald, Deutschland
               <br />
               E-Mail: Jonas@ga-webdesign.de
               <br />

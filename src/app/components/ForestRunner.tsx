@@ -1,5 +1,35 @@
 import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { BLUE_400, blue400 } from "../../lib/tokens";
+import { useCopy } from "../../i18n";
+
+const COPY = {
+  de: {
+    hintNextTap: "Tippen für nächste Runde",
+    hintNextKey: "Leertaste für neue Runde",
+    hintJumpTap: "Tippen zum Springen",
+    hintJumpKey: "Leertaste zum Springen",
+    ariaRunningTap: "Sprungspiel läuft. Tippen springt, länger halten springt höher.",
+    ariaRunningKey:
+      "Sprungspiel läuft. Leertaste springt, kürzer drücken springt niedriger. Escape beendet.",
+    ariaStart: "Sprungspiel starten.",
+    best: "Rekord",
+    points: "Punkte",
+    newBest: " — neuer Rekord",
+  },
+  en: {
+    hintNextTap: "Tap to play again",
+    hintNextKey: "Press space to play again",
+    hintJumpTap: "Tap to jump",
+    hintJumpKey: "Press space to jump",
+    ariaRunningTap: "Jump game running. Tap to jump, hold longer to jump higher.",
+    ariaRunningKey:
+      "Jump game running. Space jumps, a shorter press jumps lower. Escape ends the game.",
+    ariaStart: "Start jump game.",
+    best: "Best",
+    points: "points",
+    newBest: " — new best",
+  },
+};
 
 /**
  * Schwarzwald-Runner — kleines Canvas-Spiel im Footer.
@@ -274,6 +304,7 @@ export function ForestRunner({ className = "" }: ForestRunnerProps) {
   const [score, setScore] = useState(0);
   const [best, setBest] = useState(0);
   const tap = useSyncExternalStore(subscribeTapInput, prefersTapInput, () => false);
+  const t = useCopy(COPY);
 
   useEffect(() => {
     setBest(readHighscore());
@@ -602,11 +633,11 @@ export function ForestRunner({ className = "" }: ForestRunnerProps) {
   const hint =
     phase === "over"
       ? tap
-        ? "Tippen für nächste Runde"
-        : "Leertaste für neue Runde"
+        ? t.hintNextTap
+        : t.hintNextKey
       : tap
-        ? "Tippen zum Springen"
-        : "Leertaste zum Springen";
+        ? t.hintJumpTap
+        : t.hintJumpKey;
 
   return (
     <div className={className}>
@@ -618,9 +649,9 @@ export function ForestRunner({ className = "" }: ForestRunnerProps) {
           aria-label={
             phase === "running"
               ? tap
-                ? "Sprungspiel läuft. Tippen springt, länger halten springt höher."
-                : "Sprungspiel läuft. Leertaste springt, kürzer drücken springt niedriger. Escape beendet."
-              : "Sprungspiel starten."
+                ? t.ariaRunningTap
+                : t.ariaRunningKey
+              : t.ariaStart
           }
           className="block w-full cursor-pointer touch-manipulation focus:outline-none"
           style={{ height: WORLD_H }}
@@ -654,7 +685,7 @@ export function ForestRunner({ className = "" }: ForestRunnerProps) {
             className={`pointer-events-none absolute top-2.5 sm:top-3 z-10 text-[11px] sm:text-[12px] 2xl:text-[13px] tabular-nums ${HUD_LEFT}`}
             style={{ color: "var(--ink-300)" }}
           >
-            Rekord {best}
+            {t.best} {best}
           </div>
         )}
 
@@ -679,8 +710,8 @@ export function ForestRunner({ className = "" }: ForestRunnerProps) {
                 <p
                   className="text-[14px] sm:text-[16px] font-semibold mb-1 leading-snug text-balance text-ink-100"
                 >
-                  {score} Punkte
-                  {score > 0 && score >= best ? " — neuer Rekord" : ""}
+                  {score} {t.points}
+                  {score > 0 && score >= best ? t.newBest : ""}
                 </p>
               )}
               <p

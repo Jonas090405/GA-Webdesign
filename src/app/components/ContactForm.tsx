@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "motion/react";
 import { PrimaryButton } from "./Button";
 import { CheckCircle2, Loader2, ArrowLeft } from "lucide-react";
 import emailjs from "@emailjs/browser";
+import { useCopy, useLang } from "../../i18n";
 
 // ─── EmailJS-Konfiguration ────────────────────────────────────────────────────
 // IDs kommen aus .env (nie in Git pushen!):
@@ -17,9 +18,15 @@ export const BERKANT_EMAIL = "Berkant@ga-webdesign.de";
 export const BERKANT_PHONE = "+49 176 3464 9177";
 export const BERKANT_TEL = `tel:${BERKANT_PHONE.replace(/\s/g, "")}`;
 // WhatsApp Business läuft über dieselbe Nummer; Begrüßung ist vorausgefüllt.
-export const BERKANT_WHATSAPP = `https://wa.me/${BERKANT_PHONE.replace(/\D/g, "")}?text=${encodeURIComponent(
-  "Hallo Berkant, ich würde gerne über ein Webprojekt sprechen.",
-)}`;
+const waLink = (text: string) =>
+  `https://wa.me/${BERKANT_PHONE.replace(/\D/g, "")}?text=${encodeURIComponent(text)}`;
+export const BERKANT_WHATSAPP = waLink("Hallo Berkant, ich würde gerne über ein Webprojekt sprechen.");
+export const BERKANT_WHATSAPP_EN = waLink("Hi Berkant, I'd like to talk about a web project.");
+
+/** WhatsApp-Link mit Begrüßung in der Sprache der aktuellen Seite. */
+export function useWhatsAppLink() {
+  return useLang() === "en" ? BERKANT_WHATSAPP_EN : BERKANT_WHATSAPP;
+}
 
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -32,31 +39,41 @@ type FormData = {
 
 type FormErrors = Partial<Record<keyof FormData, string>>;
 
-function validateField(field: keyof FormData, value: string): string | undefined {
+type ErrorMessages = {
+  nameRequired: string;
+  nameShort: string;
+  emailRequired: string;
+  emailInvalid: string;
+  phoneInvalid: string;
+  messageRequired: string;
+  messageShort: string;
+};
+
+function validateField(field: keyof FormData, value: string, m: ErrorMessages): string | undefined {
   const v = value.trim();
   switch (field) {
     case "name":
-      if (!v) return "Name ist erforderlich.";
-      if (v.length < 2) return "Name muss mindestens 2 Zeichen haben.";
+      if (!v) return m.nameRequired;
+      if (v.length < 2) return m.nameShort;
       return;
     case "email":
-      if (!v) return "E-Mail-Adresse ist erforderlich.";
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)) return "Bitte eine gültige E-Mail-Adresse eingeben.";
+      if (!v) return m.emailRequired;
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)) return m.emailInvalid;
       return;
     case "phone":
-      if (v && !/^[\+\d\s\-\(\)\/]{6,20}$/.test(v)) return "Bitte eine gültige Telefonnummer eingeben.";
+      if (v && !/^[\+\d\s\-\(\)\/]{6,20}$/.test(v)) return m.phoneInvalid;
       return;
     case "message":
-      if (!v) return "Nachricht ist erforderlich.";
-      if (v.length < 20) return "Bitte etwas ausführlicher beschreiben (mind. 20 Zeichen).";
+      if (!v) return m.messageRequired;
+      if (v.length < 20) return m.messageShort;
       return;
   }
 }
 
-function validate(data: FormData): FormErrors {
+function validate(data: FormData, m: ErrorMessages): FormErrors {
   const e: FormErrors = {};
   (Object.keys(data) as (keyof FormData)[]).forEach(field => {
-    const err = validateField(field, data[field]);
+    const err = validateField(field, data[field], m);
     if (err) e[field] = err;
   });
   return e;
@@ -75,39 +92,126 @@ type StepDef = {
   autoComplete?: string;
 };
 
-const STEPS: StepDef[] = [
-  {
-    field: "name",
-    question: "Wie heißt du?",
-    hint: "Damit wir wissen, mit wem wir sprechen.",
-    placeholder: "Max Mustermann",
-    autoComplete: "name",
+const COPY = {
+  de: {
+    steps: [
+      {
+        field: "name",
+        question: "Wie heißt du?",
+        hint: "Damit wir wissen, mit wem wir sprechen.",
+        placeholder: "Max Mustermann",
+        autoComplete: "name",
+      },
+      {
+        field: "email",
+        question: "Wie erreichen wir dich?",
+        hint: "An diese Adresse schicken wir unsere Antwort.",
+        type: "email",
+        placeholder: "max@beispiel.de",
+        autoComplete: "email",
+      },
+      {
+        field: "phone",
+        question: "Deine Telefonnummer?",
+        hint: "Falls du lieber telefonierst – wir rufen dich gerne an.",
+        type: "tel",
+        placeholder: "+49 123 456789",
+        autoComplete: "tel",
+        optional: true,
+      },
+      {
+        field: "message",
+        question: "Erzähl uns von deinem Projekt.",
+        hint: "Branche, Ziel, Wünsche – ein paar Sätze reichen völlig.",
+        textarea: true,
+        placeholder: "Wir sind ein Café in Triberg und brauchen eine Website mit…",
+      },
+    ] as StepDef[],
+    errors: {
+      nameRequired: "Name ist erforderlich.",
+      nameShort: "Name muss mindestens 2 Zeichen haben.",
+      emailRequired: "E-Mail-Adresse ist erforderlich.",
+      emailInvalid: "Bitte eine gültige E-Mail-Adresse eingeben.",
+      phoneInvalid: "Bitte eine gültige Telefonnummer eingeben.",
+      messageRequired: "Nachricht ist erforderlich.",
+      messageShort: "Bitte etwas ausführlicher beschreiben (mind. 20 Zeichen).",
+    } as ErrorMessages,
+    progress: "Fortschritt",
+    backToStep: (n: number, q: string) => `Zurück zu Schritt ${n}: ${q}`,
+    stepLabel: (n: number, q: string) => `Schritt ${n}: ${q}`,
+    stepOf: (n: number, total: number) => `Schritt ${n} von ${total}`,
+    sendError: "Beim Senden ist ein Fehler aufgetreten. Bitte versuche es erneut oder schreib uns direkt an",
+    back: "Zurück",
+    orEnter: "oder Enter ↵",
+    sending: "Wird gesendet…",
+    submit: "Projekt anfragen",
+    next: "Weiter",
+    optional: "Optional",
+    sentLabel: "Gesendet",
+    sentTitle: "Danke für deine Nachricht!",
+    sentText: "Wir haben deine Anfrage erhalten und melden uns so schnell wie möglich bei dir.",
+    sendAnother: "Weitere Nachricht senden",
   },
-  {
-    field: "email",
-    question: "Wie erreichen wir dich?",
-    hint: "An diese Adresse schicken wir unsere Antwort.",
-    type: "email",
-    placeholder: "max@beispiel.de",
-    autoComplete: "email",
+  en: {
+    steps: [
+      {
+        field: "name",
+        question: "What's your name?",
+        hint: "So we know who we're talking to.",
+        placeholder: "Jane Smith",
+        autoComplete: "name",
+      },
+      {
+        field: "email",
+        question: "How can we reach you?",
+        hint: "This is where we'll send our reply.",
+        type: "email",
+        placeholder: "jane@example.com",
+        autoComplete: "email",
+      },
+      {
+        field: "phone",
+        question: "Your phone number?",
+        hint: "Prefer the phone? We're happy to give you a call.",
+        type: "tel",
+        placeholder: "+49 123 456789",
+        autoComplete: "tel",
+        optional: true,
+      },
+      {
+        field: "message",
+        question: "Tell us about your project.",
+        hint: "Your industry, goals, wishes – a few sentences will do.",
+        textarea: true,
+        placeholder: "We're a café in Triberg and need a website with…",
+      },
+    ] as StepDef[],
+    errors: {
+      nameRequired: "Please enter your name.",
+      nameShort: "Your name needs at least 2 characters.",
+      emailRequired: "Please enter your email address.",
+      emailInvalid: "Please enter a valid email address.",
+      phoneInvalid: "Please enter a valid phone number.",
+      messageRequired: "Please enter a message.",
+      messageShort: "Please add a bit more detail (at least 20 characters).",
+    } as ErrorMessages,
+    progress: "Progress",
+    backToStep: (n: number, q: string) => `Back to step ${n}: ${q}`,
+    stepLabel: (n: number, q: string) => `Step ${n}: ${q}`,
+    stepOf: (n: number, total: number) => `Step ${n} of ${total}`,
+    sendError: "Something went wrong while sending. Please try again or email us directly at",
+    back: "Back",
+    orEnter: "or press Enter ↵",
+    sending: "Sending…",
+    submit: "Send request",
+    next: "Next",
+    optional: "Optional",
+    sentLabel: "Sent",
+    sentTitle: "Thanks for your message!",
+    sentText: "We've received your request and will get back to you as soon as we can.",
+    sendAnother: "Send another message",
   },
-  {
-    field: "phone",
-    question: "Deine Telefonnummer?",
-    hint: "Falls du lieber telefonierst – wir rufen dich gerne an.",
-    type: "tel",
-    placeholder: "+49 123 456789",
-    autoComplete: "tel",
-    optional: true,
-  },
-  {
-    field: "message",
-    question: "Erzähl uns von deinem Projekt.",
-    hint: "Branche, Ziel, Wünsche – ein paar Sätze reichen völlig.",
-    textarea: true,
-    placeholder: "Wir sind ein Café in Triberg und brauchen eine Website mit…",
-  },
-];
+};
 
 const slideVariants = {
   enter: (d: number) => ({ x: d * 40, opacity: 0 }),
@@ -121,6 +225,9 @@ const slideVariants = {
 // verwendet – `subject` unterscheidet die Herkunft in der E-Mail.
 
 export function ContactForm({ subject }: { subject: string }) {
+  const t = useCopy(COPY);
+  const lang = useLang();
+  const STEPS = t.steps;
   const [step, setStep] = useState(0);
   const [stepDir, setStepDir] = useState(1);
   const [status, setStatus] = useState<"idle" | "loading" | "sent" | "error">("idle");
@@ -160,7 +267,7 @@ export function ContactForm({ subject }: { subject: string }) {
     e.preventDefault();
     if (status === "loading") return;
 
-    const err = validateField(current.field, formData[current.field]);
+    const err = validateField(current.field, formData[current.field], t.errors);
     if (err) {
       setErrors(prev => ({ ...prev, [current.field]: err }));
       return;
@@ -172,7 +279,7 @@ export function ContactForm({ subject }: { subject: string }) {
     }
 
     // Letzter Schritt: sicherheitshalber alles prüfen, sonst zum Fehler springen
-    const errs = validate(formData);
+    const errs = validate(formData, t.errors);
     if (Object.keys(errs).length > 0) {
       setErrors(errs);
       const firstErrorStep = STEPS.findIndex(s => errs[s.field]);
@@ -197,6 +304,7 @@ export function ContactForm({ subject }: { subject: string }) {
           phone: formData.phone.trim() || "–",
           subject,
           message: formData.message,
+          language: lang,
         },
         EMAILJS_PUBLIC_KEY,
       );
@@ -208,6 +316,7 @@ export function ContactForm({ subject }: { subject: string }) {
           name: formData.name,
           email: formData.email,
           message: formData.message,
+          language: lang,
         },
         EMAILJS_PUBLIC_KEY,
       ).catch(() => {});
@@ -240,7 +349,7 @@ export function ContactForm({ subject }: { subject: string }) {
       >
         {/* Progress: Dots + Zähler */}
         <div className="flex items-center justify-between mb-8">
-          <div className="flex items-center gap-1.5" aria-label="Fortschritt">
+          <div className="flex items-center gap-1.5" aria-label={t.progress}>
             {STEPS.map((s, i) => {
               const done = i < step;
               const active = i === step;
@@ -250,7 +359,7 @@ export function ContactForm({ subject }: { subject: string }) {
                   type="button"
                   onClick={done ? () => goTo(i) : undefined}
                   disabled={!done}
-                  aria-label={done ? `Zurück zu Schritt ${i + 1}: ${s.question}` : `Schritt ${i + 1}: ${s.question}`}
+                  aria-label={done ? t.backToStep(i + 1, s.question) : t.stepLabel(i + 1, s.question)}
                   aria-current={active ? "step" : undefined}
                   className={`h-2 rounded-full p-0 border-none transition-all duration-300 ${done ? "cursor-pointer hover:brightness-125" : "cursor-default"}`}
                   style={{
@@ -273,7 +382,7 @@ export function ContactForm({ subject }: { subject: string }) {
           </span>
         </div>
         <p className="sr-only" aria-live="polite">
-          Schritt {step + 1} von {STEPS.length}
+          {t.stepOf(step + 1, STEPS.length)}
         </p>
 
         {/* Aktuelle Frage. Padding + Negativ-Margin geben dem Focus-Ring
@@ -309,8 +418,7 @@ export function ContactForm({ subject }: { subject: string }) {
 
         {status === "error" && (
           <p className="text-red-400 text-[13px] leading-relaxed mb-5">
-            Beim Senden ist ein Fehler aufgetreten. Bitte versuche es erneut
-            oder schreib uns direkt an{" "}
+            {t.sendError}{" "}
             <a
               href={`mailto:${BERKANT_EMAIL}`}
               className="underline cursor-pointer text-red-400 hover:text-red-300 transition-colors"
@@ -331,7 +439,7 @@ export function ContactForm({ subject }: { subject: string }) {
               className="inline-flex items-center gap-1.5 cursor-pointer bg-transparent border-none p-0 text-[13px] font-medium text-ink-400 hover:text-ink-200 transition-colors"
             >
               <ArrowLeft size={15} aria-hidden />
-              Zurück
+              {t.back}
             </button>
           ) : (
             <span aria-hidden />
@@ -339,19 +447,19 @@ export function ContactForm({ subject }: { subject: string }) {
           <div className="flex items-center gap-4 ml-auto">
             {!isLast && (
               <span className="hidden sm:inline text-[12px] text-ink-400">
-                oder Enter ↵
+                {t.orEnter}
               </span>
             )}
             <PrimaryButton type="submit" disabled={status === "loading"} arrow={isLast ? "up-right" : "right"}>
               {status === "loading" ? (
                 <>
                   <Loader2 size={16} className="animate-spin" aria-hidden />
-                  Wird gesendet…
+                  {t.sending}
                 </>
               ) : isLast ? (
-                "Projekt anfragen"
+                t.submit
               ) : (
-                "Weiter"
+                t.next
               )}
             </PrimaryButton>
           </div>
@@ -364,13 +472,14 @@ export function ContactForm({ subject }: { subject: string }) {
 // ─── Unterkomponenten ─────────────────────────────────────────────────────────
 
 function SuccessState({ onReset }: { onReset?: () => void }) {
+  const t = useCopy(COPY);
   return (
     <div className="py-14 flex flex-col items-center text-center gap-4" role="status">
       <CheckCircle2 size={40} className="text-brand" />
-      <div className="text-brand text-[11px] tracking-[0.25em]">Gesendet</div>
-      <h3 className="text-white text-[22px]">Danke für deine Nachricht!</h3>
+      <div className="text-brand text-[11px] tracking-[0.25em]">{t.sentLabel}</div>
+      <h3 className="text-white text-[22px]">{t.sentTitle}</h3>
       <p className="text-ink-300 text-[14px] max-w-sm leading-relaxed">
-        Wir haben deine Anfrage erhalten und melden uns so schnell wie möglich bei dir.
+        {t.sentText}
       </p>
       {onReset && (
         <button
@@ -378,7 +487,7 @@ function SuccessState({ onReset }: { onReset?: () => void }) {
           onClick={onReset}
           className="mt-2 text-[13px] cursor-pointer bg-transparent border-none p-0 underline underline-offset-4 text-brand hover:text-brand-light transition-colors"
         >
-          Weitere Nachricht senden
+          {t.sendAnother}
         </button>
       )}
     </div>
@@ -398,6 +507,7 @@ function StepField({
   error?: string;
   inputRef: React.MutableRefObject<HTMLInputElement | HTMLTextAreaElement | null>;
 }) {
+  const t = useCopy(COPY);
   // Kein outline-none: Tastaturnutzer bekommen den globalen :focus-visible-Ring,
   // Mausnutzer den Schatten aus onFocus
   const baseCls =
@@ -443,7 +553,7 @@ function StepField({
           <span
             className="ml-2.5 align-middle text-[11px] tracking-[0.15em] text-ink-400"
           >
-            Optional
+            {t.optional}
           </span>
         )}
       </span>

@@ -9,14 +9,18 @@ import { motion, AnimatePresence } from "motion/react";
 import berkantImg from "../../imports/Berkant_agyar.jpeg";
 import { FadeIn } from "./FadeIn";
 import { WhatsAppIcon } from "./WhatsAppIcon";
-import { BERKANT_WHATSAPP } from "./ContactForm";
+import { useWhatsAppLink } from "./ContactForm";
+import { useCopy } from "../../i18n";
 import { Plus, ChevronLeft, ChevronRight, Mail, Phone } from "lucide-react";
 
 // ─── Daten ────────────────────────────────────────────────────────────────────
 const FAQ_EMAIL = "Berkant@ga-webdesign.de";
 const FAQ_PHONE = "+49 176 3464 9177";
 
-const faqs: { q: string; a: string }[] = [
+type FAQ = { q: string; a: string };
+
+const FAQS: { de: FAQ[]; en: FAQ[] } = {
+  de: [
   {
     q: "Was kostet eine Webseite bei euch?",
     a: "Das lässt sich nicht pauschal beantworten – der Preis hängt von deinen Anforderungen und dem Umfang ab. Im ersten Schritt führen wir gemeinsam eine kostenlose Anforderungsanalyse durch, erst dann erhältst du ein individuelles Angebot. Bis dahin ist alles unverbindlich und kostenlos für dich.",
@@ -77,10 +81,108 @@ const faqs: { q: string; a: string }[] = [
     q: "Arbeitet ihr auch überregional?",
     a: "Ja – wir arbeiten mit Kunden aus ganz Deutschland zusammen, vollständig remote. Für Kennenlerngespräch, Anforderungsanalyse und alle weiteren Abstimmungen nutzen wir einfach Video-Call oder Telefon. Dein Standort spielt keine Rolle.",
   },
-];
+  ],
+  en: [
+    {
+      q: "How much does a website cost?",
+      a: "There's no one-size-fits-all answer – the price depends on your requirements and the scope. First, we do a free requirements analysis together, and only then do you get a custom quote. Up to that point, everything is free and you're not committed to anything.",
+    },
+    {
+      q: "Do you charge a fixed price or by time spent?",
+      a: "We usually work with transparent fixed prices, which we put in writing after our requirements analysis together. That way you know exactly what your project will cost from the start – without hidden fees or nasty surprises.",
+    },
+    {
+      q: "Do you also do video and photo production?",
+      a: "Yes. We work with professional partners who handle video and photo production for you – from the shoot to finished post-production. Whether it's for your new website or something separate, like social media or advertising. We take care of all the planning and communication with our partners. That means no extra work for you and just one person to talk to.",
+    },
+    {
+      q: "How does payment work?",
+      a: "You don't pay everything upfront. We bill in installments as each project phase is completed – only once a phase is done and you've signed off on it do we invoice that portion. Your quote spells out clearly how many installments there are and how much each one is.",
+    },
+    {
+      q: "How long until my website is live?",
+      a: "That depends on the scope of your project. Smaller websites can be ready in 2–3 months, while bigger projects take longer. In our first conversation, you'll get an honest estimate right away.",
+    },
+    {
+      q: "Do I need a domain before I reach out?",
+      a: "No, not at all. You can contact us without any preparation. You don't need a domain, a finished concept or any technical knowledge. If you like, we'll take care of everything, including getting your domain, hosting and setup.",
+    },
+    {
+      q: "Do I need to know what I want before our intro call?",
+      a: "No. The intro call is there for exactly that: figuring out together what you need. We ask the right questions, listen and guide you every step of the way – you don't need any prior knowledge or preparation.",
+    },
+    {
+      q: "Do I have to provide my own text and images?",
+      a: "Not necessarily. If you already have text and images, we're happy to use them. If not, we'll help: we advise you on what content belongs on your site and can write the copy for you, too. If you're missing professional photos or videos, we'll arrange a shoot through our partners.",
+    },
+    {
+      q: "Do I get a preview before the site goes live?",
+      a: "Yes, absolutely. Shortly before launch, you'll get a preview link so you can look through and test the finished site at your own pace. We only go live once you're happy with everything.",
+    },
+    {
+      q: "Is my website GDPR-compliant and accessible?",
+      a: "Yes, we handle both on the technical side. We set up your website with privacy in mind – with SSL encryption, locally hosted fonts, a cookie banner and a built-in legal notice and privacy policy. We can't give legal advice, though. For a legal review of the texts, we recommend a legal-text service or a law firm, and we'll provide the technical details they need. We also design and build to WCAG 2.2 AA so everyone can use your site with ease, including with a screen reader or just a keyboard.",
+    },
+    {
+      q: "Will people find my website on Google?",
+      a: "We lay the groundwork: every website we build gets clean technical SEO – with the right page titles and descriptions, structured data, a sitemap and fast load times. Nobody can honestly guarantee a #1 ranking, because rankings also depend on your content and your competition. But we make sure Google understands your site and is happy to show it. And if you want to get visible faster, we can also handle SEA (search engine advertising) for you – that is, paid ads, e.g. on Google Ads.",
+    },
+    {
+      q: "How much does hosting cost?",
+      a: "Hosting costs €5/month and you can cancel monthly. If you don't have a domain yet, we'll get one and set it up for you – that's a one-time €60 setup fee plus the cost of the domain you pick. We regularly check that your site is up, and if it goes down, we'll get in touch within 24 hours on business days after we find out.",
+    },
+    {
+      q: "What if I want to change something after launch?",
+      a: "We're still here for you after launch. You can have a CMS set up (content management system – a tool for editing text & images yourself, no coding required), book one of our maintenance plans or just ask us directly – we'll send you a quote based on the work involved.",
+    },
+    {
+      q: "What's the difference between the maintenance plans?",
+      a: "Basic (€15/month): monitoring, alerts & advice when problems come up, security & privacy updates, technical upkeep and keeping your site accessible. Extended (€50/month): adds two content changes per month – e.g. text or images. Extended+ (€200/month): four changes and one content addition per month, e.g. a new subpage.",
+    },
+    {
+      q: "Do you work with clients outside your region?",
+      a: "Yes – we work with clients all over Germany, fully remotely. For the intro call, the requirements analysis and every check-in after that, we simply use video calls or the phone. Where you're based doesn't matter.",
+    },
+  ],
+};
+
+const COPY = {
+  de: {
+    headingStart: "Häufige",
+    headingAccent: "Fragen",
+    intro: "Antworten auf die Fragen, die uns am häufigsten gestellt werden. Etwas fehlt?",
+    whatsappLink: "Schreib Berkant auf WhatsApp.",
+    whatsappAria: "Berkant Agyar auf WhatsApp schreiben (öffnet WhatsApp)",
+    prev: "Vorherige Frage",
+    next: "Nächste Frage",
+    carousel: "FAQ-Karussell",
+    pageLabel: (n: number, active: boolean) => `FAQ-Seite ${n}${active ? " (aktiv)" : ""}`,
+    ctaText: "Noch eine andere Frage? Meld dich gerne.",
+    emailAria: "E-Mail an Berkant Agyar schreiben",
+    emailBtn: "E-Mail schreiben",
+    callAria: "Berkant Agyar anrufen",
+    callBtn: "Anrufen",
+  },
+  en: {
+    headingStart: "Common",
+    headingAccent: "questions",
+    intro: "Answers to the questions we get asked most. Something missing?",
+    whatsappLink: "Message Berkant on WhatsApp.",
+    whatsappAria: "Message Berkant Agyar on WhatsApp (opens WhatsApp)",
+    prev: "Previous question",
+    next: "Next question",
+    carousel: "FAQ carousel",
+    pageLabel: (n: number, active: boolean) => `FAQ page ${n}${active ? " (current)" : ""}`,
+    ctaText: "Got a different question? Just reach out.",
+    emailAria: "Email Berkant Agyar",
+    emailBtn: "Send an email",
+    callAria: "Call Berkant Agyar",
+    callBtn: "Call",
+  },
+};
 
 // ─── Desktop-Karte ────────────────────────────────────────────────────────────
-function DesktopFAQCard({ faq }: { faq: (typeof faqs)[0] }) {
+function DesktopFAQCard({ faq }: { faq: FAQ }) {
   const outerRef = useRef<HTMLDivElement>(null);
   const spotRef  = useRef<HTMLDivElement>(null);
   const [hovered, setHovered] = useState(false);
@@ -177,7 +279,7 @@ function DesktopFAQCard({ faq }: { faq: (typeof faqs)[0] }) {
 }
 
 // ─── Mobile-Accordion-Item ────────────────────────────────────────────────────
-function MobileAccordionItem({ faq }: { faq: (typeof faqs)[0] }) {
+function MobileAccordionItem({ faq }: { faq: FAQ }) {
   const [open, setOpen] = useState(false);
   return (
     <div
@@ -235,6 +337,9 @@ export function FAQSection({
   className?: string;
   showContactCTA?: boolean;
 }) {
+  const faqs = useCopy(FAQS);
+  const t = useCopy(COPY);
+  const whatsAppLink = useWhatsAppLink();
   const [startIdx, setStartIdx] = useState(0);
   const [dir, setDir]           = useState(1);
   const total      = faqs.length;
@@ -264,23 +369,23 @@ export function FAQSection({
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-5 mb-10 2xl:mb-14">
           <div>
             <h2 className="text-white text-[clamp(26px,4vw,52px)] tracking-tight leading-tight max-w-xl mb-3">
-              Häufige{" "}
+              {t.headingStart}{" "}
               <span
                 className="text-blue-400"
               >
-                Fragen
+                {t.headingAccent}
               </span>
             </h2>
             <p className="text-ink-300 text-[15px] xl:text-[16px] 2xl:text-[17px] leading-relaxed max-w-lg">
-              Antworten auf die Fragen, die uns am häufigsten gestellt werden. Etwas fehlt?{" "}
+              {t.intro}{" "}
               <a
-                href={BERKANT_WHATSAPP}
+                href={whatsAppLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Berkant Agyar auf WhatsApp schreiben (öffnet WhatsApp)"
+                aria-label={t.whatsappAria}
                 className="cursor-pointer transition-colors duration-200 underline-offset-2 hover:underline text-blue-400"
               >
-                Schreib Berkant auf WhatsApp.
+                {t.whatsappLink}
               </a>
             </p>
           </div>
@@ -293,7 +398,7 @@ export function FAQSection({
                   key={i}
                   onClick={action}
                   className="flex items-center justify-center w-10 h-10 xl:w-11 xl:h-11 rounded-full border border-blue-400/20 bg-blue-400/[0.07] text-blue-200 transition-colors duration-200 hover:border-blue-400/40 hover:bg-blue-400/[0.13]"
-                  aria-label={i === 0 ? "Vorherige Frage" : "Nächste Frage"}
+                  aria-label={i === 0 ? t.prev : t.next}
                 >
                   <Icon size={18} />
                 </button>
@@ -307,7 +412,7 @@ export function FAQSection({
       <div
         className="hidden xl:block overflow-hidden"
         role="region"
-        aria-label="FAQ-Karussell"
+        aria-label={t.carousel}
         onKeyDown={(e) => {
           if (e.key === "ArrowRight") { e.preventDefault(); goNext(); }
           else if (e.key === "ArrowLeft") { e.preventDefault(); goPrev(); }
@@ -340,7 +445,7 @@ export function FAQSection({
             <button
               key={i}
               onClick={() => { setDir(i > startIdx ? 1 : -1); setStartIdx(i); }}
-              aria-label={`FAQ-Seite ${i + 1}${i === startIdx ? " (aktiv)" : ""}`}
+              aria-label={t.pageLabel(i + 1, i === startIdx)}
               aria-current={i === startIdx ? "true" : undefined}
               className="rounded-full transition-all duration-300 flex items-center justify-center"
               style={{
@@ -386,7 +491,7 @@ export function FAQSection({
                 Berkant Agyar
               </div>
               <div className="text-[12px] xl:text-[13px] mt-0.5 text-ink-300">
-                Noch eine andere Frage? Meld dich gerne.
+                {t.ctaText}
               </div>
             </div>
           </div>
@@ -396,18 +501,18 @@ export function FAQSection({
             {/* E-Mail → direkt Mailprogramm öffnen */}
             <a
               href={`mailto:${FAQ_EMAIL}`}
-              aria-label="E-Mail an Berkant Agyar schreiben"
+              aria-label={t.emailAria}
               className="cursor-pointer inline-flex items-center gap-2 rounded-full border border-blue-400/20 bg-blue-400/[0.09] px-4 py-2 text-[13px] xl:text-[14px] font-medium text-blue-200 transition-colors duration-200 whitespace-nowrap hover:border-blue-400/40 hover:bg-blue-400/[0.16] focus-visible:border-blue-400/40 focus-visible:bg-blue-400/[0.16]"
             >
               <Mail size={14} aria-hidden="true" />
-              E-Mail schreiben
+              {t.emailBtn}
             </a>
             {/* WhatsApp → vor Anruf priorisiert */}
             <a
-              href={BERKANT_WHATSAPP}
+              href={whatsAppLink}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Berkant Agyar auf WhatsApp schreiben (öffnet WhatsApp)"
+              aria-label={t.whatsappAria}
               className="inline-flex items-center gap-2 rounded-full border border-blue-400/20 bg-blue-400/[0.09] px-4 py-2 text-[13px] xl:text-[14px] font-medium text-blue-200 transition-colors duration-200 whitespace-nowrap hover:border-blue-400/40 hover:bg-blue-400/[0.16] focus-visible:border-blue-400/40 focus-visible:bg-blue-400/[0.16]"
             >
               <WhatsAppIcon size={14} />
@@ -416,11 +521,11 @@ export function FAQSection({
             {/* Anrufen → direkt tel: öffnen */}
             <a
               href={`tel:${FAQ_PHONE.replace(/[\s]/g, "")}`}
-              aria-label="Berkant Agyar anrufen"
+              aria-label={t.callAria}
               className="inline-flex items-center gap-2 rounded-full border border-blue-400/20 bg-blue-400/[0.09] px-4 py-2 text-[13px] xl:text-[14px] font-medium text-blue-200 transition-colors duration-200 whitespace-nowrap hover:border-blue-400/40 hover:bg-blue-400/[0.16] focus-visible:border-blue-400/40 focus-visible:bg-blue-400/[0.16]"
             >
               <Phone size={14} aria-hidden="true" />
-              Anrufen
+              {t.callBtn}
             </a>
           </div>
         </div>

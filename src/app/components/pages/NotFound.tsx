@@ -4,15 +4,39 @@ import { FadeIn } from "../FadeIn";
 import { PrimaryButton, GhostButton } from "../Button";
 import { HeroModels } from "../HeroModels";
 import { usePageMeta } from "../../hooks/usePageMeta";
+import { useCopy, useLocalePath } from "../../../i18n";
+
+const COPY = {
+  de: {
+    metaTitle: "Seite nicht gefunden | G&A Webdesign",
+    metaDescription:
+      "Diese Seite existiert nicht oder wurde verschoben. Zurück zur Startseite von G&A Webdesign.",
+    text:
+      "Diese Seite gibt es nicht — vielleicht wurde sie verschoben oder der Link enthält einen Tippfehler. Immerhin hast du uns beide gefunden.",
+    home: "Zur Startseite",
+    contact: "Kontakt aufnehmen",
+    caption: "Hier gibt's nichts zu sehen\u00a0… außer uns.",
+  },
+  en: {
+    metaTitle: "Page not found | G&A Webdesign",
+    metaDescription:
+      "This page doesn't exist or has moved. Head back to the G&A Webdesign homepage.",
+    text:
+      "This page doesn't exist. Maybe it moved, or there's a typo in the link. At least you found the two of us.",
+    home: "Back to homepage",
+    contact: "Get in touch",
+    caption: "Nothing to see here\u00a0… except us.",
+  },
+};
 
 export function NotFound() {
   const navigate = useNavigate();
+  const t = useCopy(COPY);
+  const lp = useLocalePath();
 
   usePageMeta({
-    title: "Seite nicht gefunden | G&A Webdesign",
-    description:
-      "Diese Seite existiert nicht oder wurde verschoben. Zurück zur Startseite von G&A Webdesign.",
-    path: "/404",
+    title: t.metaTitle,
+    description: t.metaDescription,
   });
 
   // 404-Seiten sollen nicht in den Google-Index
@@ -50,19 +74,17 @@ export function NotFound() {
             <p
               className="mt-6 max-w-xl text-[16px] sm:text-[18px] leading-relaxed text-ink-200"
             >
-              Diese Seite gibt es nicht — vielleicht wurde sie verschoben oder
-              der Link enthält einen Tippfehler. Immerhin hast du uns beide
-              gefunden.
+              {t.text}
             </p>
           </FadeIn>
 
           <FadeIn delay={0.2}>
             <div className="mt-8 sm:mt-10 flex flex-wrap items-center gap-4">
-              <PrimaryButton onClick={() => navigate("/")}>
-                Zur Startseite
+              <PrimaryButton onClick={() => navigate(lp("/"))}>
+                {t.home}
               </PrimaryButton>
-              <GhostButton onClick={() => navigate("/kontakt")}>
-                Kontakt aufnehmen
+              <GhostButton onClick={() => navigate(lp("/kontakt"))}>
+                {t.contact}
               </GhostButton>
             </div>
           </FadeIn>
@@ -77,7 +99,7 @@ export function NotFound() {
               style={{ color: "rgba(170,200,225,0.6)" }}
               aria-hidden="true"
             >
-              Hier gibt&apos;s nichts zu sehen&nbsp;… außer uns.
+              {t.caption}
             </p>
           </div>
         </FadeIn>
