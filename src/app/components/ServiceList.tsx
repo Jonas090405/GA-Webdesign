@@ -139,8 +139,8 @@ function ServiceRow({
             loading="lazy"
             decoding="async"
             className={`h-full w-full object-contain transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
-              media.onBlack ? "mix-blend-screen" : ""
-            } ${open ? "scale-110" : "group-hover:scale-105"}`}
+              open ? "scale-110" : "group-hover:scale-105"
+            }`}
           />
         </span>
 

@@ -4,9 +4,9 @@
  * klappt auf der Seite zu einer genaueren Beschreibung auf.
  * `id` ist zugleich der Anker (/leistungen#seo öffnet direkt die SEO-Leistung).
  */
-import webdesignImg from "../imports/tile-design-poster.webp";
-import entwicklungImg from "../imports/tile-code-poster.webp";
-import launchImg from "../imports/tile-rocket-poster.webp";
+import webdesignImg from "../imports/services/webdesign.webp";
+import entwicklungImg from "../imports/services/entwicklung.webp";
+import launchImg from "../imports/services/launch.webp";
 import seoImg from "../imports/services/seo.svg";
 import geoImg from "../imports/services/geo.svg";
 import seaImg from "../imports/services/sea.svg";
@@ -36,13 +36,15 @@ export type ServiceId =
   | "wartung";
 
 /**
- * Die drei Webseiten-Bilder sind Standbilder der alten Kachel-Clips auf
- * schwarzem Grund (→ mix-blend-mode: screen), die übrigen transparente SVGs.
+ * Alle Bilder sind echt transparent. Die drei Webseiten-Bilder sind aus den
+ * Kachel-Postern auf Schwarz freigestellt (Helligkeit → Alpha): mit
+ * mix-blend-mode: screen blitzte der schwarze Grund auf, solange FadeIn
+ * die Liste als eigene Ebene animiert.
  */
-export const MEDIA: Record<ServiceId, { src: string; onBlack?: boolean }> = {
-  webdesign: { src: webdesignImg, onBlack: true },
-  entwicklung: { src: entwicklungImg, onBlack: true },
-  launch: { src: launchImg, onBlack: true },
+export const MEDIA: Record<ServiceId, { src: string }> = {
+  webdesign: { src: webdesignImg },
+  entwicklung: { src: entwicklungImg },
+  launch: { src: launchImg },
   seo: { src: seoImg },
   geo: { src: geoImg },
   sea: { src: seaImg },
