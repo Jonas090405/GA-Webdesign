@@ -66,6 +66,10 @@ const FAQS: { de: FAQ[]; en: FAQ[] } = {
     a: "Dafür legen wir die Grundlage: Jede Webseite bekommt von uns eine saubere technische SEO-Optimierung – mit passenden Seitentiteln und Beschreibungen, strukturierten Daten, einer Sitemap und schnellen Ladezeiten. Eine Platz-1-Garantie kann seriös niemand geben, denn das Ranking hängt auch von deinen Inhalten und deiner Konkurrenz ab. Aber wir sorgen dafür, dass Google deine Seite gut versteht und gerne anzeigt. Und wenn du darüber hinaus schneller sichtbar werden willst, übernehmen wir auf Wunsch auch SEA (Search Engine Advertising) – also bezahlte Anzeigen, z. B. bei Google Ads.",
   },
   {
+    q: "Werde ich auch in ChatGPT & Co. gefunden?",
+    a: "Dafür legen wir mit GEO (Generative Engine Optimization) die Grundlage: Jede Webseite bekommt von uns strukturierte Daten zu deinem Betrieb, Inhalte, die typische Kundenfragen direkt beantworten, und eine llms.txt, die KI-Systemen einen Überblick über deine Seite gibt. Welche Quellen ChatGPT, Perplexity oder Googles KI-Übersicht am Ende nennen, entscheiden diese Systeme selbst – garantieren kann das also niemand. Auf Wunsch prüfen wir regelmäßig, was KI-Assistenten über dich antworten, und bauen deine Inhalte gezielt aus.",
+  },
+  {
     q: "Was kostet das Hosting?",
     a: "Das Hosting kostet 5 € im Monat und ist monatlich kündbar. Hast du noch keine Domain, besorgen und richten wir sie dir ein – dafür kommen einmalig 60 € Einrichtung plus die Kosten deiner Wunschdomain dazu. Wir prüfen regelmäßig, ob deine Seite erreichbar ist, und melden uns bei einem Ausfall innerhalb von 24 Stunden an Werktagen, nachdem wir davon erfahren haben.",
   },
@@ -126,6 +130,10 @@ const FAQS: { de: FAQ[]; en: FAQ[] } = {
     {
       q: "Will people find my website on Google?",
       a: "We lay the groundwork: every website we build gets clean technical SEO – with the right page titles and descriptions, structured data, a sitemap and fast load times. Nobody can honestly guarantee a #1 ranking, because rankings also depend on your content and your competition. But we make sure Google understands your site and is happy to show it. And if you want to get visible faster, we can also handle SEA (search engine advertising) for you – that is, paid ads, e.g. on Google Ads.",
+    },
+    {
+      q: "Will ChatGPT and others find me too?",
+      a: "We lay the groundwork with GEO (generative engine optimization): every website we build gets structured data about your business, content that answers typical customer questions directly and an llms.txt that gives AI systems an overview of your site. Which sources ChatGPT, Perplexity or Google's AI Overviews end up citing is up to those systems, so nobody can guarantee it. If you like, we regularly check what AI assistants say about you and expand your content where it counts.",
     },
     {
       q: "How much does hosting cost?",

@@ -3,180 +3,16 @@ import { createPortal } from "react-dom";
 import { motion } from "motion/react";
 import { usePageMeta } from "../../hooks/usePageMeta";
 import { Card } from "../Card";
-import { PrimaryButton } from "../Button";
+import { PrimaryButton, TertiaryButton } from "../Button";
 import { FadeIn } from "../FadeIn";
-import {
-  Blocks,
-  BriefcaseBusiness,
-  CalendarCheck,
-  Camera,
-  ChartLine,
-  Check,
-  Clapperboard,
-  FilePen,
-  Languages,
-  LayoutDashboard,
-  Megaphone,
-  Minus,
-  Newspaper,
-  Palette,
-  Plus,
-  Server,
-  ShoppingCart,
-  Wrench,
-  type LucideIcon,
-} from "lucide-react";
+import { Blocks, Check, Minus, Server, Wrench } from "lucide-react";
 import { TechIcon, hasTechIcon } from "../TechIcon";
 import { useNavigate } from "react-router-dom";
 import { FAQSection } from "../FAQSection";
-import { TileMedia } from "../TileMedia";
-import tileDesignClip from "../../../imports/tile-design.mp4";
-import tileDesignPoster from "../../../imports/tile-design-poster.webp";
-import tileCodeClip from "../../../imports/tile-code.mp4";
-import tileCodePoster from "../../../imports/tile-code-poster.webp";
-import tileRocketClip from "../../../imports/tile-rocket.mp4";
-import tileRocketPoster from "../../../imports/tile-rocket-poster.webp";
+import { CheckItem } from "../CheckItem";
+import logoUrl from "../../../imports/Logo_GA_Webdesign.svg";
+import { ServiceList } from "../ServiceList";
 import { useCopy, useLocalePath } from "../../../i18n";
-
-type Block = { poster: string; clip: string; title: string; lead: string; points: string[] };
-
-const blocks: { de: Block[]; en: Block[] } = {
-  de: [
-  {
-    poster: tileDesignPoster,
-    clip: tileDesignClip,
-    title: "Design",
-    lead: "So, wie du dir das vorstellst.",
-    points: [
-      "Individuelles Design, kein Template",
-      "Gut bedienbar & schön auf allen Geräten",
-      "Auf deine Marke angepasst",
-      "Barrierefrei nach WCAG 2.2 AA",
-    ],
-  },
-  {
-    poster: tileCodePoster,
-    clip: tileCodeClip,
-    title: "Entwicklung",
-    lead: "Schnell, stabil & zukunftssicher.",
-    points: [
-      "Handgebaut mit Astro oder Next.js",
-      "Schnelle Ladezeiten",
-      "Gut bei Google auffindbar (SEO)",
-      "Funktionen, auf deine Bedürfnisse angepasst",
-    ],
-  },
-  {
-    poster: tileRocketPoster,
-    clip: tileRocketClip,
-    title: "Deployment",
-    lead: "Du musst dich um nichts kümmern.",
-    points: [
-      "Domain-Setup & Hosting",
-      "DSGVO-konform eingerichtet",
-      "Fertig live auf deiner Wunsch-Domain",
-      "Wir sind auch nach dem Launch da",
-    ],
-  },
-  ],
-  en: [
-  {
-    poster: tileDesignPoster,
-    clip: tileDesignClip,
-    title: "Design",
-    lead: "Exactly how you picture it.",
-    points: [
-      "Custom design, not a template",
-      "Easy to use & great on every device",
-      "Tailored to your brand",
-      "Accessible to WCAG 2.2 AA",
-    ],
-  },
-  {
-    poster: tileCodePoster,
-    clip: tileCodeClip,
-    title: "Development",
-    lead: "Fast, stable & future-proof.",
-    points: [
-      "Hand-built with Astro or Next.js",
-      "Fast load times",
-      "Easy to find on Google (SEO)",
-      "Features built around your needs",
-    ],
-  },
-  {
-    poster: tileRocketPoster,
-    clip: tileRocketClip,
-    title: "Deployment",
-    lead: "You don't have to worry about a thing.",
-    points: [
-      "Domain setup & hosting",
-      "GDPR-compliant setup",
-      "Live on the domain of your choice",
-      "We're still here after launch",
-    ],
-  },
-  ],
-};
-
-/**
- * Einheitlicher Listenpunkt für alle Leistungs- und Preislisten: schlichter
- * Haken ohne Kreis. Der Icon-Wrapper ist genau eine Zeile hoch (1.5em bei leading-normal), dadurch
- * sitzt der Haken bei jeder Schriftgröße mittig auf der ersten Textzeile –
- * auch wenn der Text umbricht.
- */
-function CheckItem({
-  children,
-  className = "",
-}: {
-  children: React.ReactNode;
-  className?: string;
-}) {
-  return (
-    <li className={`flex items-start gap-2.5 leading-normal ${className}`}>
-      <span className="flex shrink-0 items-center" style={{ height: "1.5em" }} aria-hidden>
-        <Check size={15} strokeWidth={2.5} className="text-brand" />
-      </span>
-      <span className="min-w-0">{children}</span>
-    </li>
-  );
-}
-
-function LeistungenCard({
-  poster, clip, title, lead, points, i,
-}: {
-  poster: string; clip: string; title: string; lead: string;
-  points: string[]; i: number;
-}) {
-  return (
-    <FadeIn delay={i * 0.08} className="h-full">
-      <div className="h-full">
-        <Card className="h-full">
-          <div className="flex flex-col h-full">
-            {/* Illustration — läuft im Viewport dauerhaft */}
-            <TileMedia
-              poster={poster}
-              src={clip}
-              label={title}
-              className="mb-4 w-full aspect-[16/9]"
-            />
-            <div className="flex flex-col flex-1">
-              <h3 className="text-white text-[22px] 2xl:text-[26px] mb-1">{title}</h3>
-              <p className="text-ink-300 text-[14px] 2xl:text-[16px] mb-5">{lead}</p>
-              <ul className="space-y-2.5">
-                {points.map((p) => (
-                  <CheckItem key={p} className="text-ink-200 text-[14px] 2xl:text-[16px]">
-                    {p}
-                  </CheckItem>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </Card>
-      </div>
-    </FadeIn>
-  );
-}
 
 // ─── Tooltip ──────────────────────────────────────────────────────────────────
 function InfoTooltip({ text, onGradient = false }: { text: string; onGradient?: boolean }) {
@@ -307,7 +143,7 @@ const websiteFeatureGroups: { de: FeatureGroup[]; en: FeatureGroup[] } = {
     label: "Technik",
     points: [
       "Schnelle Ladezeiten & modernste Technologie",
-      "SEO-Optimierung (Meta-Tags, Schema, Sitemap)",
+      "SEO- & GEO-Grundlage (Meta-Tags, Schema, Sitemap, llms.txt)",
       "DSGVO-konform, SSL, Impressum & Datenschutz",
       "Funktionen auf deine Bedürfnisse zugeschnitten",
     ],
@@ -336,7 +172,7 @@ const websiteFeatureGroups: { de: FeatureGroup[]; en: FeatureGroup[] } = {
     label: "Tech",
     points: [
       "Fast load times & the latest technology",
-      "SEO optimization (meta tags, schema, sitemap)",
+      "SEO & GEO basics (meta tags, schema, sitemap, llms.txt)",
       "GDPR-compliant, SSL, legal notice & privacy policy",
       "Features tailored to your needs",
     ],
@@ -359,6 +195,8 @@ const WEBSITE_CARD_COPY = {
     tagline: "Komplett. Fertig. Persönlich.",
     price: "auf Anfrage",
     priceNote: "Individuelles Angebot nach Erstgespräch & Anforderungsanalyse",
+    moreNote: "Das gehört bei uns zu jeder Webseite. Was du darüber hinaus brauchst, bauen wir dir dazu – von SEO und GEO über ein CMS bis zum Online-Shop.",
+    moreLink: "Alle Leistungen ansehen",
     cta: "Erstgespräch vereinbaren",
   },
   en: {
@@ -366,6 +204,8 @@ const WEBSITE_CARD_COPY = {
     tagline: "Complete. Ready. Personal.",
     price: "on request",
     priceNote: "Custom quote after an intro call & requirements analysis",
+    moreNote: "This comes with every website we build. Whatever else you need, we'll build it in – from SEO and GEO to a CMS or an online store.",
+    moreLink: "See all services",
     cta: "Book an intro call",
   },
 };
@@ -459,6 +299,20 @@ function WebseitePreisCard({ onContact }: { onContact: () => void }) {
               </div>
             ))}
           </div>
+
+          {/* Mehr als der Standard: Verweis auf die Leistungen oben */}
+          <p
+            className="mb-6 pt-5 text-ink-300 text-[13px] xl:text-[14px] leading-relaxed"
+            style={{ borderTop: "1px solid rgb(var(--blue-400-rgb) / 0.1)" }}
+          >
+            {t.moreNote}{" "}
+            <a
+              href="#webseite"
+              className="text-blue-200 underline decoration-blue-400/40 underline-offset-4 transition-colors duration-200 hover:text-blue-100 hover:decoration-blue-100"
+            >
+              {t.moreLink}
+            </a>
+          </p>
 
           {/* CTA */}
           <div className="mt-auto">
@@ -874,40 +728,6 @@ function WartungCard() {
 // ─── Konzept: individuell statt Baukasten ──────────────────────────────────────
 const STACK = ["Astro", "Next.js", "React", "TypeScript", "Tailwind CSS", "Headless CMS"];
 
-/** Zusatzleistungen mit passendem Icon („Du brauchst noch etwas anderes?“). */
-type Extra = { label: string; Icon: LucideIcon };
-
-const EXTRAS: { de: Extra[]; en: Extra[] } = {
-  de: [
-  { label: "Corporate Design (Logo, Markenfarben, Schriften)", Icon: Palette },
-  { label: "Google Analytics Tracking", Icon: ChartLine },
-  { label: "Content Management System", Icon: FilePen },
-  { label: "Admin Panel", Icon: LayoutDashboard },
-  { label: "Bewerbungsportal", Icon: BriefcaseBusiness },
-  { label: "Mehrsprachigkeit", Icon: Languages },
-  { label: "Online-Shop", Icon: ShoppingCart },
-  { label: "Buchungssystem", Icon: CalendarCheck },
-  { label: "Newsletter-Integration", Icon: Newspaper },
-  { label: "Videoproduktion", Icon: Clapperboard },
-  { label: "Fotoproduktion", Icon: Camera },
-  { label: "SEA (Google Ads)", Icon: Megaphone },
-  ],
-  en: [
-  { label: "Corporate design (logo, brand colors, fonts)", Icon: Palette },
-  { label: "Google Analytics tracking", Icon: ChartLine },
-  { label: "Content management system", Icon: FilePen },
-  { label: "Admin panel", Icon: LayoutDashboard },
-  { label: "Job application portal", Icon: BriefcaseBusiness },
-  { label: "Multilingual sites", Icon: Languages },
-  { label: "Online store", Icon: ShoppingCart },
-  { label: "Booking system", Icon: CalendarCheck },
-  { label: "Newsletter integration", Icon: Newspaper },
-  { label: "Video production", Icon: Clapperboard },
-  { label: "Photo production", Icon: Camera },
-  { label: "SEA (Google Ads)", Icon: Megaphone },
-  ],
-};
-
 type VergleichRow = { topic: string; ours: string; wp: string; wpGood?: boolean };
 
 const VERGLEICH: { de: VergleichRow[]; en: VergleichRow[] } = {
@@ -985,6 +805,7 @@ const KONZEPT_COPY = {
     titleB: "statt Baukasten.",
     body: "Wir nutzen keine fertige Vorlage aus dem Baukasten, sondern programmieren jede Webseite individuell – mit Astro oder Next.js. Das Ergebnis: schneller, sicherer und genau so, wie du es dir vorstellst.",
     stackLabel: "Unsere Technologien",
+    colOurs: "G&A Webdesign",
     colBuilder: "Baukastensysteme",
   },
   en: {
@@ -992,6 +813,7 @@ const KONZEPT_COPY = {
     titleB: "instead of a site builder.",
     body: "Instead of a ready-made site builder template, we code every website from scratch with Astro or Next.js. The result: faster, more secure and exactly how you picture it.",
     stackLabel: "Our tech stack",
+    colOurs: "G&A Webdesign",
     colBuilder: "Site builders",
   },
 };
@@ -1036,45 +858,64 @@ function KonzeptSection() {
 
         <FadeIn delay={0.1}>
           <div
-            className="rounded-2xl"
+            className="relative overflow-hidden rounded-2xl [--pad:24px] [--c1:120px] xl:[--pad:32px] xl:[--c1:140px]"
             style={{
               background: "linear-gradient(135deg, rgb(var(--ink-900-rgb) / 0.97) 0%, rgb(var(--ink-950-rgb) / 0.99) 100%)",
               border: "1px solid rgb(var(--blue-400-rgb) / 0.1)",
             }}
           >
+            {/* Leuchtband hinter unserer Spalte (ab sm). Lage aus Innenabstand,
+                erster Spalte und gap-6 (24px) berechnet, 12px Überstand je Seite. */}
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-y-0 hidden sm:block left-[calc(var(--pad)+var(--c1)+12px)] w-[calc((100%-2*var(--pad)-var(--c1)-48px)/2+24px)]"
+              style={{
+                background:
+                  "linear-gradient(180deg, rgb(var(--blue-400-rgb) / 0.13) 0%, rgb(var(--blue-400-rgb) / 0.05) 100%)",
+                borderLeft: "1px solid rgb(var(--blue-400-rgb) / 0.22)",
+                borderRight: "1px solid rgb(var(--blue-400-rgb) / 0.22)",
+              }}
+            >
+              <div className="h-0.5 w-full bg-blue-400" />
+            </div>
+
             {/* Spaltenköpfe – ab sm, mobil trägt jede Zeile ihre eigenen Labels */}
             <div
               aria-hidden
-              className="hidden sm:grid grid-cols-[120px_1fr_1fr] xl:grid-cols-[140px_1fr_1fr] gap-6 px-6 xl:px-8 pt-6 xl:pt-7 pb-4 text-[11px] xl:text-[12px] tracking-[0.18em] font-medium"
+              className="relative hidden sm:grid grid-cols-[var(--c1)_1fr_1fr] gap-6 px-[var(--pad)] pt-6 xl:pt-7 pb-4 items-end"
               style={{ borderBottom: "1px solid rgb(var(--blue-400-rgb) / 0.1)" }}
             >
               <span />
-              <span className="text-brand">Astro / Next.js</span>
-              <span className="text-ink-400">{t.colBuilder}</span>
+              <span className="inline-flex items-center gap-2.5 text-white text-[15px] xl:text-[17px] font-semibold tracking-tight">
+                <img src={logoUrl} alt="" className="h-6 w-auto shrink-0" />
+                {t.colOurs}
+              </span>
+              <span className="text-ink-400 text-[11px] xl:text-[12px] tracking-[0.18em] font-medium">{t.colBuilder}</span>
             </div>
 
-            <ul>
+            <ul className="relative">
               {rows.map((row) => (
                 <li
                   key={row.topic}
-                  className="grid gap-3 sm:gap-6 sm:grid-cols-[120px_1fr_1fr] xl:grid-cols-[140px_1fr_1fr] px-6 xl:px-8 py-5 xl:py-6 border-t first:border-t-0"
+                  className="grid gap-3 sm:gap-6 sm:grid-cols-[var(--c1)_1fr_1fr] px-[var(--pad)] py-5 xl:py-6 border-t first:border-t-0"
                   style={{ borderColor: "rgb(var(--blue-400-rgb) / 0.07)" }}
                 >
                   <h3 className="text-white text-[15px] xl:text-[16px] 2xl:text-[17px] font-medium leading-normal">
                     {row.topic}
                   </h3>
-                  <p className="flex items-start gap-2.5 text-ink-100 text-[14px] 2xl:text-[15px] leading-normal">
+                  <p className="flex items-start gap-2.5 text-white text-[14px] 2xl:text-[15px] leading-normal max-sm:rounded-xl max-sm:border max-sm:border-blue-400/20 max-sm:bg-blue-400/[0.08] max-sm:p-3">
                     <span className="flex shrink-0 items-center" style={{ height: "1.5em" }} aria-hidden>
-                      <Check size={15} strokeWidth={2.5} className="text-brand" />
+                      <Check size={16} strokeWidth={3} className="text-brand" />
                     </span>
                     <span>
-                      <span className="sm:sr-only text-brand text-[11px] tracking-[0.14em] block mb-0.5">
-                        Astro / Next.js
+                      <span className="sm:sr-only flex items-center gap-2 mb-1.5 text-brand text-[13px] font-semibold">
+                        <img src={logoUrl} alt="" className="h-6 w-auto shrink-0" />
+                        {t.colOurs}
                       </span>
                       {row.ours}
                     </span>
                   </p>
-                  <p className="flex items-start gap-2.5 text-ink-300 text-[14px] 2xl:text-[15px] leading-normal">
+                  <p className="flex items-start gap-2.5 text-ink-400 text-[14px] 2xl:text-[15px] leading-normal max-sm:px-3">
                     <span className="flex shrink-0 items-center" style={{ height: "1.5em" }} aria-hidden>
                       {row.wpGood ? (
                         <Check size={15} strokeWidth={2.5} className="text-ink-300" />
@@ -1118,7 +959,7 @@ const PREISE_COPY = {
 function PreiseSection({ onContact }: { onContact: () => void }) {
   const t = useCopy(PREISE_COPY);
   return (
-    <section className="mt-24 2xl:mt-32">
+    <section id="preise" className="mt-24 2xl:mt-32 scroll-mt-32">
       <FadeIn>
         <h2 className="text-white text-[clamp(26px,4vw,52px)] tracking-tight leading-tight max-w-2xl 2xl:max-w-3xl mb-3">
           {t.titleA}{" "}
@@ -1157,29 +998,27 @@ function PreiseSection({ onContact }: { onContact: () => void }) {
 
 const PAGE_COPY = {
   de: {
-    metaTitle: "Leistungen – Webdesign, Entwicklung & Hosting | G&A Webdesign",
-    metaDescription: "Individuelle Webseiten mit Astro oder Next.js statt Baukasten: schnelle Ladezeiten, sicher und wartungsarm. Dazu Corporate Design, Hosting & SEO aus einer Hand.",
+    metaTitle: "Leistungen – Webdesign, SEO & GEO aus dem Schwarzwald | G&A Webdesign",
+    metaDescription: "Individuelle Webseiten mit Astro oder Next.js, dazu SEO, GEO für ChatGPT & KI-Suche, Google Ads, Corporate Design, CMS, Hosting und Wartung. Alles aus einer Hand.",
     h1Accent: "Deine Webseite",
     h1Rest: "– fertig, ohne Stress.",
-    intro: "Du bekommst alles aus einer Hand: von der Gestaltung über die technische Umsetzung bis hin zur Veröffentlichung. Wir kümmern uns um den gesamten Ablauf für dich.",
+    intro: "Du bekommst alles aus einer Hand: von der Gestaltung über die Technik bis dahin, dass dich deine Kunden bei Google und in KI-Suchen finden. Öffne eine Leistung, um zu sehen, was genau dahintersteckt.",
     extrasTitle: "Du brauchst noch etwas anderes?",
     extrasBody: "Kein Problem – sag uns, was du brauchst, und wir finden gemeinsam eine Lösung.",
-    extrasLabel: "Weitere Leistungen",
-    extrasMore: "vieles mehr",
+    extrasCta: "Erzähl uns davon",
     ctaTitle: "Wie läuft die Zusammenarbeit ab?",
     ctaBody: "Von der ersten Anfrage bis zur fertigen Webseite – in 7 transparenten Schritten.",
     ctaButton: "Ablauf ansehen",
   },
   en: {
-    metaTitle: "Services – Web Design, Development & Hosting | G&A Webdesign",
-    metaDescription: "Custom websites built with Astro or Next.js instead of a site builder: fast load times, secure and low-maintenance. Plus corporate design, hosting & SEO, all from one team.",
+    metaTitle: "Services – Web Design, SEO & GEO from the Black Forest | G&A Webdesign",
+    metaDescription: "Custom websites built with Astro or Next.js, plus SEO, GEO for ChatGPT & AI search, Google Ads, corporate design, CMS, hosting and maintenance. All from one team.",
     h1Accent: "Your website",
     h1Rest: "– done, without the stress.",
-    intro: "You get everything from one team: from design and development all the way to launch. We handle the whole process for you.",
+    intro: "You get everything from one team: from design and development to making sure customers find you on Google and in AI search. Open a service to see exactly what's involved.",
     extrasTitle: "Need something else?",
     extrasBody: "No problem – tell us what you need and we'll figure it out together.",
-    extrasLabel: "More services",
-    extrasMore: "and much more",
+    extrasCta: "Tell us about it",
     ctaTitle: "What's it like to work with us?",
     ctaBody: "From your first inquiry to a finished website – in 7 transparent steps.",
     ctaButton: "See the process",
@@ -1188,8 +1027,6 @@ const PAGE_COPY = {
 
 export function Leistungen() {
   const t = useCopy(PAGE_COPY);
-  const extras = useCopy(EXTRAS);
-  const serviceBlocks = useCopy(blocks);
   const lp = useLocalePath();
   usePageMeta({
     title: t.metaTitle,
@@ -1211,42 +1048,22 @@ export function Leistungen() {
           {t.intro}</p>
       </FadeIn>
 
-      {/* Service cards */}
-      <div className="mt-16 2xl:mt-20 grid gap-6 2xl:gap-8 md:grid-cols-3 items-stretch">
-        {serviceBlocks.map(({ poster, clip, title, lead, points }, i) => (
-          <LeistungenCard key={title} poster={poster} clip={clip} title={title} lead={lead} points={points} i={i} />
-        ))}
+      {/* Alle Leistungen, aufklappbar */}
+      <div className="mt-20 2xl:mt-28">
+        <ServiceList />
       </div>
+
+      {/* Etwas anderes? */}
+      <FadeIn>
+        <div className="mt-20 2xl:mt-28">
+          <h2 className="text-white text-[clamp(22px,2.6vw,34px)] tracking-tight">{t.extrasTitle}</h2>
+          <p className="mt-2 mb-4 text-ink-300 text-[15px] xl:text-[16px] leading-relaxed max-w-xl">{t.extrasBody}</p>
+          <TertiaryButton onClick={() => navigate(lp("/kontakt"))}>{t.extrasCta}</TertiaryButton>
+        </div>
+      </FadeIn>
 
       {/* Konzept: warum individuell statt Baukasten */}
       <KonzeptSection />
-
-      {/* Extra services */}
-      <FadeIn>
-        <div className="mt-24 2xl:mt-32">
-          <h2 className="text-white text-[clamp(22px,3vw,40px)] tracking-tight max-w-xl 2xl:max-w-2xl mb-3">
-            {t.extrasTitle}
-          </h2>
-          <p className="text-ink-300 text-[15px] 2xl:text-[17px] leading-relaxed max-w-xl 2xl:max-w-2xl mb-7">
-            {t.extrasBody}
-          </p>
-          <ul className="flex flex-wrap gap-2.5" aria-label={t.extrasLabel}>
-            {extras.map(({ label, Icon }) => (
-              <li
-                key={label}
-                className="tag-pill inline-flex items-center gap-2 rounded-full border border-blue-400/[0.18] bg-blue-400/[0.07] py-1.5 pl-3 pr-4 xl:pr-5 2xl:py-2 2xl:pl-4 2xl:pr-6 text-[13px] 2xl:text-[15px] text-brand-light"
-              >
-                <Icon size={15} strokeWidth={1.75} aria-hidden className="shrink-0 text-blue-400" />
-                {label}
-              </li>
-            ))}
-            <li className="inline-flex items-center gap-2 rounded-full border border-white/[0.07] bg-white/[0.03] py-1.5 pl-3 pr-4 text-[13px] text-ink-400">
-              <Plus size={15} strokeWidth={1.75} aria-hidden className="shrink-0" />
-              {t.extrasMore}
-            </li>
-          </ul>
-        </div>
-      </FadeIn>
 
       {/* Preise */}
       <PreiseSection onContact={() => navigate(lp("/kontakt"))} />
