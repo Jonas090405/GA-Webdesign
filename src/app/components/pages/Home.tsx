@@ -380,6 +380,7 @@ function Contact() {
   const [mode, setMode] = useState<"form" | "direct">("form");
   const [direction, setDirection] = useState(0);
   const t = useCopy(COPY);
+  const lp = useLocalePath();
   const whatsAppLink = useWhatsAppLink();
 
   return (
@@ -429,7 +430,7 @@ function Contact() {
               value={BERKANT_PHONE}
               href={BERKANT_TEL}
             />
-            <ContactLine Icon={MapPin} label={t.locationLabel} value={t.locationValue} />
+            <ContactLine Icon={MapPin} label={t.locationLabel} value={t.locationValue} to={lp("/kontakt#standort")} />
           </div>
         </FadeIn>
 
@@ -490,8 +491,10 @@ function HomeTabBtn({
     <button
       type="button"
       onClick={onClick}
-      className="relative flex-1 rounded-lg px-4 py-2.5 text-[13px] font-medium tracking-wide cursor-pointer transition-colors duration-200"
-      style={{ color: active ? "#fff" : "var(--ink-400)" }}
+      aria-pressed={active}
+      className={`relative flex-1 rounded-lg px-4 py-2.5 text-[13px] font-medium tracking-wide transition-colors duration-200 ${
+        active ? "text-white cursor-default" : "text-ink-400 cursor-pointer hover:text-ink-100 hover:bg-blue-400/[0.08]"
+      }`}
     >
       {active && (
         <motion.div

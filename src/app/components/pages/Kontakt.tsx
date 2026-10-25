@@ -10,6 +10,7 @@ import { FAQSection } from "../FAQSection";
 import { ContactForm, BERKANT_EMAIL, BERKANT_PHONE, BERKANT_TEL, useWhatsAppLink } from "../ContactForm";
 import { useCopy } from "../../../i18n";
 import { ContactLine } from "../ContactLine";
+import { LocationMap, LOCATION_ANCHOR } from "../LocationMap";
 import berkantImg from "../../../imports/Berkant_agyar.jpeg";
 
 type ContactMode = "form" | "direct";
@@ -32,7 +33,7 @@ const COPY = {
     whatsappValue: "Nachricht schreiben",
     phoneLabel: "Telefon",
     locationLabel: "Standort",
-    locationValue: "St. Georgen, Schwarzwald",
+    locationValue: "Leopoldstraße 1, St. Georgen im Schwarzwald",
     tabForm: "Anfrage senden",
     tabDirect: "Direkt kontaktieren",
   },
@@ -47,7 +48,7 @@ const COPY = {
     whatsappValue: "Send a message",
     phoneLabel: "Phone",
     locationLabel: "Location",
-    locationValue: "St. Georgen, Black Forest",
+    locationValue: "Leopoldstraße 1, St. Georgen im Schwarzwald",
     tabForm: "Send a request",
     tabDirect: "Contact us directly",
   },
@@ -116,7 +117,7 @@ export function Kontakt() {
             value={BERKANT_PHONE}
             href={BERKANT_TEL}
           />
-          <ContactLine Icon={MapPin} label={t.locationLabel} value={t.locationValue} />
+          <ContactLine Icon={MapPin} label={t.locationLabel} value={t.locationValue} href={`#${LOCATION_ANCHOR}`} />
         </FadeIn>
 
         {/* Form / Direktkontakt */}
@@ -161,6 +162,8 @@ export function Kontakt() {
         </FadeIn>
       </div>
 
+      <LocationMap className="mt-20 2xl:mt-28" />
+
       <FAQSection className="mt-20 2xl:mt-28" showContactCTA={false} />
     </main>
   );
@@ -181,8 +184,10 @@ function TabBtn({
     <button
       type="button"
       onClick={onClick}
-      className="relative flex-1 rounded-lg px-4 py-2.5 text-[13px] font-medium tracking-wide cursor-pointer transition-colors duration-200"
-      style={{ color: active ? "#fff" : "var(--ink-400)" }}
+      aria-pressed={active}
+      className={`relative flex-1 rounded-lg px-4 py-2.5 text-[13px] font-medium tracking-wide transition-colors duration-200 ${
+        active ? "text-white cursor-default" : "text-ink-400 cursor-pointer hover:text-ink-100 hover:bg-blue-400/[0.08]"
+      }`}
     >
       {active && (
         <motion.div

@@ -1,4 +1,5 @@
 import { type ComponentType } from "react";
+import { Link } from "react-router-dom";
 
 /**
  * Einheitliche Kontakt-Zeile für Homepage und Kontakt-Seite:
@@ -9,6 +10,7 @@ export function ContactLine({
   label,
   value,
   href,
+  to,
   external,
   onClick,
 }: {
@@ -16,6 +18,8 @@ export function ContactLine({
   label: string;
   value: string;
   href?: string;
+  /** Interne Route (react-router), z. B. "/kontakt#standort". */
+  to?: string;
   /** Link öffnet eine externe App/Seite (z. B. WhatsApp) in neuem Tab. */
   external?: boolean;
   onClick?: () => void;
@@ -37,6 +41,10 @@ export function ContactLine({
           >
             {value}
           </button>
+        ) : to ? (
+          <Link to={to} className={interactive}>
+            {value}
+          </Link>
         ) : href ? (
           <a
             href={href}
