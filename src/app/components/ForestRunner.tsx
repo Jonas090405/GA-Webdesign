@@ -81,7 +81,7 @@ const DEER_X = 62;
 /** Eule fliegt knapp über dem Geweih: Stehenbleiben passt, Springen nicht. */
 const OWL_ALT = 58;
 const OWL_SPEED = 1.12;
-/** Alle so viele Punkte läuft ein Lichtimpuls über den Boden. */
+/** Alle so viele Punkte leuchtet der Punktestand kurz auf. */
 const MILESTONE = 100;
 /** Ab diesen Punkteständen kommen neue Hindernisse dazu. */
 const TWIN_FROM = 60;
@@ -130,8 +130,6 @@ type GameState = {
   meteor: { x: number; y: number; life: number } | null;
   nextGap: number;
   shake: number;
-  /** 0 → 1, solange der Lichtimpuls über den Boden läuft. */
-  sweep: number;
   milestone: number;
   weather: Weather;
   /** Weiche Überblendung des Wetters, 0 = klar. */
@@ -241,7 +239,6 @@ function createState(width: number): GameState {
     meteor: null,
     nextGap: 260,
     shake: 0,
-    sweep: 0,
     milestone: 0,
     weather: "clear",
     weatherMix: 0,
@@ -635,21 +632,6 @@ export function ForestRunner({ className = "" }: ForestRunnerProps) {
     ctx.lineTo(w, GROUND_Y + 0.5);
     ctx.stroke();
 
-    // Lichtimpuls bei jedem Meilenstein
-    if (st.sweep > 0) {
-      const sx = st.sweep * (w + 240) - 120;
-      const pulse = ctx.createLinearGradient(sx - 120, 0, sx + 120, 0);
-      pulse.addColorStop(0, blue400(0));
-      pulse.addColorStop(0.5, "rgba(214, 239, 252, 0.9)");
-      pulse.addColorStop(1, blue400(0));
-      ctx.strokeStyle = pulse;
-      ctx.lineWidth = 1.5;
-      ctx.beginPath();
-      ctx.moveTo(sx - 120, GROUND_Y + 0.5);
-      ctx.lineTo(sx + 120, GROUND_Y + 0.5);
-      ctx.stroke();
-    }
-
     // Bodenstriche als Tempo-Anzeige
     ctx.strokeStyle = blue400(0.2);
     ctx.lineWidth = 1;
@@ -824,13 +806,8 @@ export function ForestRunner({ className = "" }: ForestRunnerProps) {
     }
     st.dust = st.dust.filter((p) => p.life > 0);
 
-    // Meilenstein: Lichtimpuls über den Boden
-    const reached = Math.floor(score / MILESTONE);
-    if (reached > st.milestone) {
-      st.milestone = reached;
-      st.sweep = 0.001;
-    }
-    if (st.sweep > 0) st.sweep = st.sweep >= 1 ? 0 : st.sweep + 0.022;
+    // Meilenstein: der Punktestand im HUD leuchtet kurz auf
+    st.milestone = Math.max(st.milestone, Math.floor(score / MILESTONE));
 
     // Wetter wechselt in Etappen: klar → Schnee oder Nebel → klar → …
     // Das alte Wetter blendet erst ganz aus, bevor das neue übernimmt.
