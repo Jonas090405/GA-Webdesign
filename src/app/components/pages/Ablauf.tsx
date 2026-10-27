@@ -5,7 +5,7 @@ import { FadeIn } from "../FadeIn";
 import { MessageCircle, PenTool, RefreshCw, Globe, Code2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useCopy, useLocalePath } from "../../../i18n";
-import { useScroll, useTransform, motion } from "motion/react";
+import { useScroll, useSpring, useTransform, motion } from "motion/react";
 import type { MotionValue } from "motion/react";
 
 const TIMELINE_STEPS = {
@@ -162,8 +162,17 @@ function TimelineDot({
   // zwischen dem Ende der linken und dem Start der rechten Hälfte
   const leftLength = useTransform(halfPath, (v) => v <= 0.001 ? 0 : v + 0.008);
 
+  // Lichtring: läuft einmal nach außen, während der Schritt erreicht wird
+  const ringScale = useTransform(activated, [0, 1], [1, 1.7]);
+  const ringOpacity = useTransform(activated, [0, 0.35, 1], [0, 0.55, 0]);
+
   return (
     <div className="relative shrink-0 h-12 w-12 xl:h-14 xl:w-14">
+      <motion.div
+        aria-hidden
+        className="absolute inset-[3px] rounded-full border border-blue-400"
+        style={{ scale: ringScale, opacity: ringOpacity }}
+      />
 
       {/* Alles in einem SVG — rotate(-90deg) = Startpunkt bei 12 Uhr */}
       <svg viewBox="0 0 48 48" className="absolute inset-0 w-full h-full"
@@ -211,11 +220,11 @@ function ContentBlock({
   return (
     <div>
       <div className={`flex flex-wrap items-center gap-2.5 mb-3 ${right ? "justify-end" : ""}`}>
-        <span className="text-brand text-[11px] 2xl:text-[12px] tracking-[0.2em] font-medium">
+        <span className="text-brand text-[12px] xl:text-[13px] 2xl:text-[14px] tracking-[0.16em] font-medium">
           {t.step} {step}
         </span>
         <span
-          className="rounded-full px-2.5 py-0.5 text-[11px] 2xl:text-[12px] text-brand-light"
+          className="rounded-full px-3 py-1 text-[12px] xl:text-[13px] 2xl:text-[14px] text-brand-light"
           style={{ background: "rgb(var(--blue-400-rgb) / 0.08)", border: "1px solid rgb(var(--blue-400-rgb) / 0.2)" }}
         >
           {tag}
@@ -302,10 +311,15 @@ function ProcessTimeline() {
   const timelineSteps = useCopy(TIMELINE_STEPS);
 
   // 0 wenn erster Dot Viewport-Mitte erreicht → 1 wenn letzter Dot Viewport-Mitte erreicht
-  const { scrollYProgress } = useScroll({
+  const { scrollYProgress: rawProgress } = useScroll({
     target: containerRef,
     offset: ["start center", "end 75%"],
   });
+  // Feder statt 1:1-Kopplung: Mausräder scrollen in Stufen, die Linie soll
+  // trotzdem gleiten. Dots und Linie lesen denselben geglätteten Wert.
+  const scrollYProgress = useSpring(rawProgress, { stiffness: 140, damping: 30, mass: 0.5, restDelta: 0.0005 });
+  const headY = useTransform(scrollYProgress, (v) => `${v * 100}%`);
+  const headOpacity = useTransform(scrollYProgress, [0, 0.015, 0.985, 1], [0, 1, 1, 0]);
 
   return (
     <div ref={containerRef} className="relative mt-14">
@@ -315,22 +329,23 @@ function ProcessTimeline() {
       <div className="absolute top-6 w-px bg-brand/[0.12] hidden md:block"
         style={{ left: "50%", transform: "translateX(-50%)", height: "calc(100% - 48px)" }} />
 
-      {/* Animierte Fülllinie — gleicher scrollYProgress wie die Dots */}
-      <motion.div className="absolute top-6 w-px origin-top md:hidden"
-        style={{
-          left: "24px",
-          height: "calc(100% - 48px)",
-          scaleY: scrollYProgress,
-          background: "linear-gradient(to bottom, var(--blue-400), var(--blue-700))",
-        }} />
-      <motion.div className="absolute top-6 w-px origin-top hidden md:block"
-        style={{
-          left: "50%",
-          transform: "translateX(-50%)",
-          height: "calc(100% - 48px)",
-          scaleY: scrollYProgress,
-          background: "linear-gradient(to bottom, var(--blue-400), var(--blue-700))",
-        }} />
+      {/* Animierte Fülllinie — gleicher scrollYProgress wie die Dots. Hell an
+          der Spitze, nach oben hin verglimmend wie eine Lichtspur. */}
+      {(["left-6 md:hidden", "left-1/2 hidden md:block"] as const).map((pos) => (
+        <div key={pos} aria-hidden className={`pointer-events-none absolute top-6 ${pos}`}
+          style={{ height: "calc(100% - 48px)" }}>
+          <motion.div className="absolute inset-y-0 w-px -translate-x-1/2 origin-top"
+            style={{
+              scaleY: scrollYProgress,
+              background: "linear-gradient(to bottom, rgb(var(--blue-400-rgb) / 0.2), var(--blue-400))",
+            }} />
+          {/* Spitze: kurzes, etwas dickeres Linienstück, das nach oben ausläuft */}
+          <motion.div className="absolute inset-x-0 top-0 h-full" style={{ y: headY, opacity: headOpacity }}>
+            <span className="absolute left-0 top-0 h-14 w-[2px] -translate-x-1/2 -translate-y-full rounded-full"
+              style={{ background: "linear-gradient(to bottom, transparent, var(--blue-300))" }} />
+          </motion.div>
+        </div>
+      ))}
 
       {/* Steps — alle bekommen denselben scrollYProgress */}
       <div>

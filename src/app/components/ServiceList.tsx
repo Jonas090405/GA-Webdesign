@@ -246,7 +246,9 @@ const CHEVRON_UP = "M7 14 L12 9 L17 14";
  */
 function Chevron({ open }: { open: boolean }) {
   return (
-    <span aria-hidden className="relative grid shrink-0 place-items-center h-10 w-10 sm:h-12 sm:w-12">
+    // pointer-events-none: als positioniertes Element läge der Kreis sonst über
+    // der Klickfläche des Buttons (::after) und schluckte Klicks direkt darauf.
+    <span aria-hidden className="pointer-events-none relative grid shrink-0 place-items-center h-10 w-10 sm:h-12 sm:w-12">
       <span
         className={`absolute inset-0 rounded-full transition-colors duration-300 ${
           open ? "bg-blue-400/[0.12]" : "bg-transparent group-hover:bg-blue-400/[0.08]"
@@ -278,7 +280,7 @@ function Chevron({ open }: { open: boolean }) {
       <svg
         viewBox="0 0 24 24"
         fill="none"
-        className={`relative h-5 w-5 text-blue-400 transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+        className={`relative h-5 w-5 sm:h-6 sm:w-6 text-blue-400 transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] ${
           open ? "group-hover:-translate-y-0.5" : "group-hover:translate-y-0.5"
         }`}
       >

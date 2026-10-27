@@ -1,4 +1,4 @@
-import { useState, useEffect, useId } from "react";
+import { useState, useEffect } from "react";
 import { Briefcase, Layers, User, Mail, Menu, X, Route } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import { useLocation, Link } from "react-router-dom";
@@ -59,26 +59,37 @@ const LANGS: { code: Lang; short: string; name: string }[] = [
  * Sprachumschalter: zwei echte Links auf die Gegenstücke der aktuellen Seite
  * (crawlbar, mit hreflang). Die Wahl wird gemerkt und hat dann Vorrang vor
  * der automatischen Umleitung. Die Markierung gleitet beim Wechsel mit.
+ *
+ * Die Markierung ist bewusst eine einzige Fläche, die per CSS-Transform auf
+ * die aktive Hälfte rutscht – kein motion-layoutId. Die Layout-Messung hätte
+ * den Scroll-Reset beim Seitenwechsel als Bewegung gedeutet und die Pille im
+ * fixierten Header kurz nach oben springen lassen.
  */
 function LanguageToggle({ wide = false, className = "" }: { wide?: boolean; className?: string }) {
   const lang = useLang();
   const t = useCopy(COPY);
   const { pathname, search, hash } = useLocation();
-  // Eigene layoutId je Instanz: Desktop- und Mobil-Kopfzeile sind beide
-  // gemountet (eine nur per CSS versteckt). Mit geteilter ID würde motion
-  // die Markierung an die unsichtbare Kopie übergeben.
-  const pillId = `lang-pill-${useId()}`;
+  const activeIndex = Math.max(0, LANGS.findIndex(({ code }) => code === lang));
 
   return (
     <div
       role="group"
       aria-label={t.language}
-      className={`inline-flex items-center rounded-full p-1 ${className}`}
+      className={`relative isolate grid grid-cols-2 items-center rounded-full p-1 ${wide ? "" : "w-[92px]"} ${className}`}
       style={{
         border: "1px solid rgb(var(--blue-400-rgb) / 0.14)",
         background: "rgb(var(--ink-950-rgb) / 0.35)",
       }}
     >
+      <span
+        aria-hidden="true"
+        className="absolute inset-y-1 left-1 -z-10 w-[calc(50%-4px)] rounded-full transition-transform duration-500 ease-[cubic-bezier(0.34,1.36,0.64,1)]"
+        style={{
+          transform: `translateX(${activeIndex * 100}%)`,
+          background: "rgb(var(--blue-400-rgb) / 0.16)",
+          boxShadow: "inset 0 0 0 1px rgb(var(--blue-400-rgb) / 0.22)",
+        }}
+      />
       {LANGS.map(({ code, short, name }) => {
         const active = code === lang;
         return (
@@ -90,22 +101,10 @@ function LanguageToggle({ wide = false, className = "" }: { wide?: boolean; clas
             lang={code}
             aria-label={wide ? undefined : name}
             aria-current={active ? "true" : undefined}
-            className={`relative isolate flex-1 rounded-full text-center font-semibold no-underline whitespace-nowrap transition-colors duration-200 cursor-pointer ${
-              wide ? "px-4 py-2.5 text-[15px]" : "px-2.5 py-1 text-[13px] tracking-[0.06em]"
+            className={`rounded-full text-center font-semibold no-underline whitespace-nowrap transition-colors duration-200 cursor-pointer ${
+              wide ? "px-4 py-2.5 text-[15px]" : "py-1 text-[13px] tracking-[0.06em]"
             } ${active ? "text-white" : "text-ink-400 hover:text-ink-100"}`}
           >
-            {active && (
-              <motion.span
-                layoutId={pillId}
-                aria-hidden="true"
-                className="absolute inset-0 -z-10 rounded-full"
-                style={{
-                  background: "rgb(var(--blue-400-rgb) / 0.16)",
-                  boxShadow: "inset 0 0 0 1px rgb(var(--blue-400-rgb) / 0.22)",
-                }}
-                transition={{ type: "spring", stiffness: 420, damping: 34 }}
-              />
-            )}
             {wide ? name : short}
           </Link>
         );
@@ -230,35 +229,31 @@ export function Navbar() {
                     key={id}
                     to={href}
                     aria-current={active ? "page" : undefined}
-                    className="nav-item group flex items-center gap-2.5 font-medium cursor-pointer relative py-1.5 whitespace-nowrap pointer-events-auto no-underline"
-                    style={{ color: active ? "#ffffff" : "var(--ink-200)", fontSize: scrolled ? "15px" : "17px", transition: "color 0.2s, font-size 0.35s ease", textDecoration: "none" }}
-                    onMouseEnter={(e) => {
-                      (e.currentTarget as HTMLAnchorElement).style.color = "#ffffff";
-                      const bar = e.currentTarget.querySelector(".underline-bar") as HTMLElement | null;
-                      if (bar) bar.style.width = "100%";
-                    }}
-                    onMouseLeave={(e) => {
-                      if (!active) {
-                        (e.currentTarget as HTMLAnchorElement).style.color = "var(--ink-200)";
-                        const bar = e.currentTarget.querySelector(".underline-bar") as HTMLElement | null;
-                        if (bar) bar.style.width = "0%";
-                      }
-                    }}
+                    className={`group flex items-center gap-2.5 font-medium cursor-pointer relative py-2 whitespace-nowrap pointer-events-auto no-underline transition-colors duration-200 ${
+                      active ? "text-white" : "text-ink-200 hover:text-white"
+                    }`}
+                    style={{ fontSize: scrolled ? "15px" : "17px", transition: "color 0.2s, font-size 0.35s ease" }}
                   >
                     <Icon
                       size={16}
-                      style={{ color: active ? "var(--blue-400)" : "inherit", transition: "color 0.2s" }}
+                      className={`transition-colors duration-200 ${active ? "text-blue-400" : "group-hover:text-blue-300"}`}
                     />
-                    <span className="relative">
-                      {t.nav[id]}
-                      <span
-                        className="absolute -bottom-0.5 left-0 h-[1.5px] rounded-full transition-all duration-200 underline-bar"
-                        style={{
-                          width: active ? "100%" : "0%",
-                          background: "var(--blue-400)",
-                        }}
-                      />
-                    </span>
+                    {t.nav[id]}
+                    {/* Lichtlinie wie bei den Leistungs-Zeilen: zeichnet sich von
+                        links nach rechts und fadet zum Ende hin aus. Tailwind v4
+                        skaliert über die Eigenschaft `scale`, nicht `transform`. */}
+                    <span
+                      aria-hidden="true"
+                      className={`pointer-events-none absolute -bottom-0.5 left-0 h-[1.5px] w-[calc(100%+12px)] origin-left ${
+                        active
+                          ? "scale-x-100 opacity-100 [transition:scale_380ms_cubic-bezier(0.4,0,0.2,1),opacity_150ms_ease-out]"
+                          : "scale-x-0 opacity-0 [transition:scale_220ms_cubic-bezier(0.4,0,0.2,1),opacity_220ms_ease-out] group-hover:scale-x-100 group-hover:opacity-100 group-hover:[transition:scale_380ms_cubic-bezier(0.4,0,0.2,1),opacity_150ms_ease-out]"
+                      }`}
+                      style={{
+                        background:
+                          "linear-gradient(90deg, var(--blue-400) 0%, rgb(var(--blue-400-rgb) / 0.35) 55%, transparent 100%)",
+                      }}
+                    />
                   </Link>
                 );
               })}

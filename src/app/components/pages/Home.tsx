@@ -30,20 +30,24 @@ const COPY = {
   de: {
     metaTitle: "Webdesign im Schwarzwald – Moderne Webseiten | G&A Webdesign",
     metaDescription: "G&A Webdesign aus St. Georgen: modernes Webdesign und professionelle Webseiten für lokale Unternehmen im Schwarzwald – komplett aus einer Hand, inkl. Hosting & SEO.",
-    portfolioTitle: "Projekte, die wir umgesetzt haben.",
+    portfolioTitle: "Projekte, die wir",
+    portfolioAccent: "umgesetzt haben.",
     portfolioLead: "Eine Auswahl unserer aktuellen Kundenarbeiten.",
     moreFromUs: "Mehr von uns:",
     allProjects: "Alle Projekte",
     personalPortfolio: "Persönliches Portfolio",
-    servicesTitle: "Alles, was du für deine Webseite brauchst.",
+    servicesTitle: "Alles, was du für deine",
+    servicesAccent: "Webseite brauchst.",
     servicesLead1: "Wir übernehmen alles: Design, Entwicklung und Hosting.",
     servicesLead2: "Du musst dich um nichts kümmern.",
     servicesCta: "Mehr über unsere Leistungen",
-    teamTitle: "Das sind wir.",
+    teamTitle: "Das sind",
+    teamAccent: "wir.",
     teamLead: "Wir sind Jonas und Berkant und bauen von St. Georgen aus zusammen Webseiten für Unternehmen im Schwarzwald. Du weißt von Anfang an, wer an deinem Projekt arbeitet und wen du anrufst.",
     teamCta: "Mehr über uns",
     linkedinLabel: (name: string) => `${name} auf LinkedIn (öffnet in neuem Tab)`,
-    contactTitle: "Erzähl uns von deinem Projekt.",
+    contactTitle: "Erzähl uns von deinem",
+    contactAccent: "Projekt.",
     yourContact: "Dein Ansprechpartner",
     contactLead: "Wir melden uns innerhalb von 24 Stunden mit einer ersten Einschätzung und einem unverbindlichen Termin.",
     emailLabel: "E-Mail",
@@ -57,20 +61,24 @@ const COPY = {
   en: {
     metaTitle: "Web Design in the Black Forest – Modern Websites | G&A Webdesign",
     metaDescription: "G&A Webdesign from St. Georgen: modern web design and professional websites for local businesses in the Black Forest – all from one team, including hosting & SEO.",
-    portfolioTitle: "Projects we've built.",
+    portfolioTitle: "Projects we've",
+    portfolioAccent: "built.",
     portfolioLead: "A selection of our recent client work.",
     moreFromUs: "More from us:",
     allProjects: "All projects",
     personalPortfolio: "Personal portfolio",
-    servicesTitle: "Everything your website needs.",
+    servicesTitle: "Everything your",
+    servicesAccent: "website needs.",
     servicesLead1: "We handle it all: design, development and hosting.",
     servicesLead2: "You don't have to worry about a thing.",
     servicesCta: "More about our services",
-    teamTitle: "That's us.",
+    teamTitle: "That's",
+    teamAccent: "us.",
     teamLead: "We're Jonas and Berkant, and from St. Georgen we build websites for businesses across the Black Forest. From day one, you know who's working on your project and who to call.",
     teamCta: "More about us",
     linkedinLabel: (name: string) => `${name} on LinkedIn (opens in a new tab)`,
-    contactTitle: "Tell us about your project.",
+    contactTitle: "Tell us about your",
+    contactAccent: "project.",
     yourContact: "Your contact",
     contactLead: "We'll get back to you within 24 hours with an initial assessment and a no-obligation appointment.",
     emailLabel: "Email",
@@ -111,6 +119,7 @@ function PortfolioPreview() {
     <section className="py-12 sm:py-10 lg:py-14 xl:py-18 2xl:py-24">
       <SectionHeader
         title={t.portfolioTitle}
+        accent={t.portfolioAccent}
         lead={t.portfolioLead}
         className="mb-8 sm:mb-10 xl:mb-14 2xl:mb-20"
       />
@@ -229,6 +238,7 @@ function Services() {
     <section id="leistungen" className="py-12 sm:py-10 lg:py-14 xl:py-18 2xl:py-24">
       <SectionHeader
         title={t.servicesTitle}
+        accent={t.servicesAccent}
         lead={<>{t.servicesLead1}<br />{t.servicesLead2}</>}
       />
 
@@ -347,6 +357,7 @@ function TeamPreview() {
     <section className="py-12 sm:py-10 lg:py-14 xl:py-18 2xl:py-24">
       <SectionHeader
         title={t.teamTitle}
+        accent={t.teamAccent}
         lead={t.teamLead}
         className="mb-12 sm:mb-14 xl:mb-20 2xl:mb-24"
       />
@@ -388,7 +399,8 @@ function Contact() {
       <div className="grid gap-10 md:gap-12 xl:gap-20 2xl:gap-28 md:grid-cols-2 items-start">
         <FadeIn>
           <h2 className="text-white text-[clamp(26px,4vw,64px)] tracking-tight mb-4 xl:mb-5">
-            {t.contactTitle}
+            {t.contactTitle}{" "}
+            <span className="text-blue-400">{t.contactAccent}</span>
           </h2>
 
           {/* Ansprechpartner */}
