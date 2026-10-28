@@ -19,7 +19,7 @@ const APPLE_MAPS_ROUTE = `https://maps.apple.com/?daddr=${DESTINATION}`;
  * → Google Maps (öffnet auf Android direkt die Google-Maps-App). Startwert ist
  * Google, damit das vorgerenderte HTML einen gültigen Link hat.
  */
-function useRouteUrl() {
+export function useRouteUrl() {
   const [url, setUrl] = useState(GOOGLE_MAPS_ROUTE);
   useEffect(() => {
     const ua = navigator.userAgent;

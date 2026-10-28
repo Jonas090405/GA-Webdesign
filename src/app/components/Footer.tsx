@@ -1,19 +1,26 @@
-import { Linkedin, Mail, MapPin } from "lucide-react";
+import { ArrowUpRight, Linkedin, Mail, MapPin, Navigation, Star } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import logoUrl from "../../imports/Logo_GA_Webdesign.svg";
 import { ForestRunner } from "./ForestRunner";
 import { WhatsAppIcon } from "./WhatsAppIcon";
 import { useWhatsAppLink } from "./ContactForm";
+import { useRouteUrl } from "./LocationMap";
 import { useCopy, useLocalePath } from "../../i18n";
 
 const BERKANT_EMAIL = "Berkant@ga-webdesign.de";
+const GOOGLE_REVIEW_URL = "https://share.google/gTMIiZR4JHAzGJFPJ";
 
 const COPY = {
   de: {
     logoAlt: "G&A Webdesign Logo",
     tagline: "Modernes Webdesign & Entwicklung für lokale Unternehmen.",
     location: "Standort",
-    place: "St. Georgen, Schwarzwald",
+    city: "78112 St. Georgen im\u00A0Schwarzwald",
+    route: "Route planen",
+    routeLabel: "Route zu G&A Webdesign planen (öffnet deine Karten-App)",
+    reviewLead: "Zufrieden mit uns?",
+    review: "Bewerte uns auf Google",
+    reviewLabel: "G&A Webdesign auf Google bewerten (öffnet Google)",
     contact: "Kontakt",
     mailLabel: (email: string) => `E-Mail an ${email} schreiben`,
     whatsappLabel: "Berkant Agyar auf WhatsApp schreiben (öffnet WhatsApp)",
@@ -37,7 +44,12 @@ const COPY = {
     logoAlt: "G&A Webdesign logo",
     tagline: "Modern web design & development for local businesses.",
     location: "Location",
-    place: "St. Georgen, Black Forest",
+    city: "78112 St. Georgen im\u00A0Schwarzwald, Germany",
+    route: "Get directions",
+    routeLabel: "Get directions to G&A Webdesign (opens your maps app)",
+    reviewLead: "Happy with our work?",
+    review: "Review us on Google",
+    reviewLabel: "Review G&A Webdesign on Google (opens Google)",
     contact: "Contact",
     mailLabel: (email: string) => `Send an email to ${email}`,
     whatsappLabel: "Message Berkant Agyar on WhatsApp (opens WhatsApp)",
@@ -64,6 +76,7 @@ export function Footer() {
   const t = useCopy(COPY);
   const lp = useLocalePath();
   const whatsappLink = useWhatsAppLink();
+  const routeUrl = useRouteUrl();
 
   return (
     <footer
@@ -109,12 +122,26 @@ export function Footer() {
             >
               {t.location}
             </div>
-            <p
-              className="flex items-center gap-2 text-[14px] 2xl:text-[16px] text-ink-200"
+            <address className="flex items-start gap-2 not-italic text-[14px] 2xl:text-[16px] leading-relaxed text-ink-200">
+              <MapPin size={14} className="mt-[5px] 2xl:mt-[6px] shrink-0" style={{ color: "rgb(var(--blue-400-rgb) / 0.7)" }} />
+              <span>
+                G&amp;A Webdesign GbR
+                <br />
+                Leopoldstraße 1
+                <br />
+                {t.city}
+              </span>
+            </address>
+            <a
+              href={routeUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={t.routeLabel}
+              className="mt-3 inline-flex items-center gap-2 text-[14px] 2xl:text-[16px] font-medium text-blue-400 underline decoration-blue-400/35 underline-offset-4 transition-colors duration-200 hover:text-blue-300 hover:decoration-blue-300 focus-visible:text-blue-300"
             >
-              <MapPin size={14} className="shrink-0" style={{ color: "rgb(var(--blue-400-rgb) / 0.7)" }} />
-              {t.place}
-            </p>
+              <Navigation size={13} className="shrink-0" aria-hidden />
+              {t.route}
+            </a>
           </div>
 
           <div>
@@ -198,6 +225,28 @@ export function Footer() {
           className="mt-12 sm:mt-16 2xl:mt-20 flex flex-col items-center gap-2 pt-8 text-center"
           style={{ borderTop: "1px solid rgb(var(--blue-400-rgb) / 0.06)" }}
         >
+          <a
+            href={GOOGLE_REVIEW_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={t.reviewLabel}
+            className="tag-pill group mb-6 inline-flex flex-wrap items-center justify-center gap-x-2.5 gap-y-1 rounded-full px-5 py-2.5 text-[14px] 2xl:text-[15px] text-ink-200 transition-colors duration-200 hover:text-white"
+            style={{
+              border: "1px solid rgb(var(--blue-400-rgb) / 0.18)",
+              background: "rgb(var(--blue-400-rgb) / 0.06)",
+            }}
+          >
+            <Star size={14} className="shrink-0 fill-current text-blue-400" aria-hidden />
+            <span className="hidden sm:inline text-ink-400">{t.reviewLead}</span>
+            <span className="inline-flex items-center gap-1 font-medium">
+              {t.review}
+              <ArrowUpRight
+                size={14}
+                className="transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                aria-hidden
+              />
+            </span>
+          </a>
           <p className="text-[13px] 2xl:text-[15px] text-ink-300">
             {t.rights}
           </p>

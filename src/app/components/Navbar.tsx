@@ -240,14 +240,17 @@ export function Navbar() {
                     />
                     {t.nav[id]}
                     {/* Lichtlinie wie bei den Leistungs-Zeilen: zeichnet sich von
-                        links nach rechts und fadet zum Ende hin aus. Tailwind v4
-                        skaliert über die Eigenschaft `scale`, nicht `transform`. */}
+                        links nach rechts und fadet zum Ende hin aus. Beim
+                        Verlassen fährt sie im selben Tempo zurück. Aufgedeckt
+                        per clip-path statt scale: eine Scale-Animation hebt die
+                        Linie auf eine eigene GPU-Ebene, und wenn die am Ende
+                        wegfällt, rastert die 1,5px-Linie spürbar dunkler. */}
                     <span
                       aria-hidden="true"
-                      className={`pointer-events-none absolute -bottom-0.5 left-0 h-[1.5px] w-[calc(100%+12px)] origin-left ${
+                      className={`pointer-events-none absolute -bottom-0.5 left-0 h-[1.5px] w-[calc(100%+12px)] [transition:clip-path_380ms_cubic-bezier(0.4,0,0.2,1)] motion-reduce:transition-none ${
                         active
-                          ? "scale-x-100 opacity-100 [transition:scale_380ms_cubic-bezier(0.4,0,0.2,1),opacity_150ms_ease-out]"
-                          : "scale-x-0 opacity-0 [transition:scale_220ms_cubic-bezier(0.4,0,0.2,1),opacity_220ms_ease-out] group-hover:scale-x-100 group-hover:opacity-100 group-hover:[transition:scale_380ms_cubic-bezier(0.4,0,0.2,1),opacity_150ms_ease-out]"
+                          ? "[clip-path:inset(0_0_0_0)]"
+                          : "[clip-path:inset(0_100%_0_0)] group-hover:[clip-path:inset(0_0_0_0)]"
                       }`}
                       style={{
                         background:
