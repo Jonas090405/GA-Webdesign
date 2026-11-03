@@ -8,7 +8,8 @@ import { useRouteUrl } from "./LocationMap";
 import { useCopy, useLocalePath } from "../../i18n";
 
 const BERKANT_EMAIL = "Berkant@ga-webdesign.de";
-const GOOGLE_REVIEW_URL = "https://share.google/gTMIiZR4JHAzGJFPJ";
+// Öffnet direkt das Bewertungsfenster (Place-ID aus dem Google-Unternehmensprofil, /g/11zb7hzm_0)
+const GOOGLE_REVIEW_URL = "https://search.google.com/local/writereview?placeid=ChIJVSRWoPM3pysRFMvC1UT4xhM";
 
 const COPY = {
   de: {
