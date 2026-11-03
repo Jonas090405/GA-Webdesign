@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import { FadeIn } from "../FadeIn";
 import { PrimaryButton, GhostButton } from "../Button";
 import { HeroModels } from "../HeroModels";
@@ -30,7 +29,6 @@ const COPY = {
 };
 
 export function NotFound() {
-  const navigate = useNavigate();
   const t = useCopy(COPY);
   const lp = useLocalePath();
 
@@ -80,10 +78,10 @@ export function NotFound() {
 
           <FadeIn delay={0.2}>
             <div className="mt-8 sm:mt-10 flex flex-wrap items-center gap-4">
-              <PrimaryButton onClick={() => navigate(lp("/"))}>
+              <PrimaryButton to={lp("/")}>
                 {t.home}
               </PrimaryButton>
-              <GhostButton onClick={() => navigate(lp("/kontakt"))}>
+              <GhostButton to={lp("/kontakt")}>
                 {t.contact}
               </GhostButton>
             </div>

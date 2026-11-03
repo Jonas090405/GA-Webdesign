@@ -11,7 +11,7 @@
  */
 import { useEffect, useState } from "react";
 import { motion, type Variants } from "motion/react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { FadeIn } from "./FadeIn";
 import { CheckItem } from "./CheckItem";
 import { TertiaryButton } from "./Button";
@@ -108,7 +108,6 @@ function ServiceRow({
   onToggle: () => void;
 }) {
   const t = useCopy(COPY);
-  const navigate = useNavigate();
   const lp = useLocalePath();
   const media = MEDIA[service.id];
   const btnId = `${service.id}-toggle`;
@@ -220,11 +219,16 @@ function ServiceRow({
             </motion.p>
           )}
 
-          <motion.div variants={panelItem} className="mt-6">
+          <motion.div variants={panelItem} className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3">
             {service.linkToPrices ? (
               <TertiaryButton href="#preise">{t.prices}</TertiaryButton>
             ) : (
-              <TertiaryButton onClick={() => navigate(lp("/kontakt"))}>{t.ask}</TertiaryButton>
+              <TertiaryButton to={lp("/kontakt")}>{t.ask}</TertiaryButton>
+            )}
+            {service.caseStudy && (
+              <TertiaryButton to={lp(`/projekte/${service.caseStudy.slug}`)}>
+                {service.caseStudy.label}
+              </TertiaryButton>
             )}
           </motion.div>
         </motion.div>

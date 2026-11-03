@@ -8,9 +8,15 @@ import { useEffect, useRef } from "react";
 export function LazyVideo({
   src,
   className,
+  poster,
+  paused = false,
 }: {
   src: string;
   className?: string;
+  /** Standbild, bis das Video läuft – verhindert eine schwarze Fläche beim Einblenden. */
+  poster?: string;
+  /** true hält das Video an, z. B. wenn es in einem Slider gerade nicht zu sehen ist. */
+  paused?: boolean;
 }) {
   const ref = useRef<HTMLVideoElement>(null);
 
@@ -19,22 +25,24 @@ export function LazyVideo({
     if (!video) return;
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
+        if (entry.isIntersecting && !paused) {
           video.play().catch(() => {});
         } else {
           video.pause();
         }
       },
-      { rootMargin: "200px" },
+      // Großzügiger Vorlauf: Das Video lädt und startet, bevor es ins Bild kommt – kein Standbild-Moment
+      { rootMargin: "600px 0px" },
     );
     observer.observe(video);
     return () => observer.disconnect();
-  }, []);
+  }, [paused]);
 
   return (
     <video
       ref={ref}
       src={src}
+      poster={poster}
       muted
       loop
       playsInline

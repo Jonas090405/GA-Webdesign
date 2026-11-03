@@ -7,7 +7,7 @@ import { PrimaryButton, TertiaryButton } from "../Button";
 import { FadeIn } from "../FadeIn";
 import { Blocks, Check, Minus, Server, Wrench } from "lucide-react";
 import { TechIcon, hasTechIcon } from "../TechIcon";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { FAQSection } from "../FAQSection";
 import { CheckItem } from "../CheckItem";
 import logoUrl from "../../../imports/Logo_GA_Webdesign.svg";
@@ -210,7 +210,7 @@ const WEBSITE_CARD_COPY = {
   },
 };
 
-function WebseitePreisCard({ onContact }: { onContact: () => void }) {
+function WebseitePreisCard({ contactTo }: { contactTo: string }) {
   const t = useCopy(WEBSITE_CARD_COPY);
   const featureGroups = useCopy(websiteFeatureGroups);
   const outerRef = useRef<HTMLDivElement>(null);
@@ -317,7 +317,7 @@ function WebseitePreisCard({ onContact }: { onContact: () => void }) {
           {/* CTA */}
           <div className="mt-auto">
             <PrimaryButton
-              onClick={onContact}
+              to={contactTo}
               className="w-full justify-center !rounded-xl py-3.5 text-[14px] xl:text-[15px] font-semibold"
             >
               {t.cta}
@@ -956,7 +956,7 @@ const PREISE_COPY = {
   },
 };
 
-function PreiseSection({ onContact }: { onContact: () => void }) {
+function PreiseSection({ contactTo }: { contactTo: string }) {
   const t = useCopy(PREISE_COPY);
   return (
     <section id="preise" className="mt-24 2xl:mt-32 scroll-mt-32">
@@ -978,7 +978,7 @@ function PreiseSection({ onContact }: { onContact: () => void }) {
       <div className="mt-10 2xl:mt-14 grid grid-cols-1 lg:grid-cols-2 gap-6 2xl:gap-8 items-start">
         {/* Webseite Card (links, groß) */}
         <FadeIn delay={0} className="h-full">
-          <WebseitePreisCard onContact={onContact} />
+          <WebseitePreisCard contactTo={contactTo} />
         </FadeIn>
 
         {/* Rechte Spalte: Hosting + Wartung */}
@@ -1003,6 +1003,8 @@ const PAGE_COPY = {
     h1Accent: "Deine Webseite",
     h1Rest: "– fertig, ohne Stress.",
     intro: "Du bekommst alles aus einer Hand: von der Gestaltung über die Technik bis dahin, dass dich deine Kunden bei Google und in KI-Suchen finden. Öffne eine Leistung, um zu sehen, was genau dahintersteckt.",
+    introProjects: "Wie das in der Praxis aussieht, zeigen",
+    introProjectsLink: "unsere Projekte",
     extrasTitle: "Du brauchst noch etwas anderes?",
     extrasBody: "Kein Problem – sag uns, was du brauchst, und wir finden gemeinsam eine Lösung.",
     extrasCta: "Erzähl uns davon",
@@ -1016,6 +1018,8 @@ const PAGE_COPY = {
     h1Accent: "Your website",
     h1Rest: "– done, without the stress.",
     intro: "You get everything from one team: from design and development to making sure customers find you on Google and in AI search. Open a service to see exactly what's involved.",
+    introProjects: "You can see what that looks like in practice in",
+    introProjectsLink: "our projects",
     extrasTitle: "Need something else?",
     extrasBody: "No problem – tell us what you need and we'll figure it out together.",
     extrasCta: "Tell us about it",
@@ -1032,7 +1036,6 @@ export function Leistungen() {
     title: t.metaTitle,
     description: t.metaDescription,
   });
-  const navigate = useNavigate();
   return (
     <main id="main-content" className="mx-auto max-w-6xl xl:max-w-7xl 2xl:max-w-[1440px] px-5 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 pt-36 sm:pt-44 lg:pt-52 xl:pt-60 2xl:pt-72 pb-12 xl:pb-20 2xl:pb-28">
       <FadeIn>
@@ -1045,7 +1048,16 @@ export function Leistungen() {
           {t.h1Rest}
         </h1>
         <p className="mt-6 max-w-2xl 2xl:max-w-3xl text-[16px] xl:text-[18px] 2xl:text-[20px] text-ink-300 leading-relaxed">
-          {t.intro}</p>
+          {t.intro}{" "}
+          {t.introProjects}{" "}
+          <Link
+            to={lp("/projekte")}
+            className="text-blue-200 underline decoration-blue-400/40 underline-offset-4 transition-colors duration-200 hover:text-blue-100 hover:decoration-blue-100"
+          >
+            {t.introProjectsLink}
+          </Link>
+          .
+        </p>
       </FadeIn>
 
       {/* Alle Leistungen, aufklappbar */}
@@ -1058,7 +1070,7 @@ export function Leistungen() {
         <div className="mt-20 2xl:mt-28">
           <h2 className="text-white text-[clamp(22px,2.6vw,34px)] tracking-tight">{t.extrasTitle}</h2>
           <p className="mt-2 mb-4 text-ink-300 text-[15px] xl:text-[16px] leading-relaxed max-w-xl">{t.extrasBody}</p>
-          <TertiaryButton onClick={() => navigate(lp("/kontakt"))}>{t.extrasCta}</TertiaryButton>
+          <TertiaryButton to={lp("/kontakt")}>{t.extrasCta}</TertiaryButton>
         </div>
       </FadeIn>
 
@@ -1066,7 +1078,7 @@ export function Leistungen() {
       <KonzeptSection />
 
       {/* Preise */}
-      <PreiseSection onContact={() => navigate(lp("/kontakt"))} />
+      <PreiseSection contactTo={lp("/kontakt")} />
 
       {/* FAQ */}
       <FAQSection />
@@ -1080,7 +1092,7 @@ export function Leistungen() {
           <p className="text-ink-300 text-[15px] xl:text-[16px] 2xl:text-[18px] mb-8 max-w-xl 2xl:max-w-2xl mx-auto">
             {t.ctaBody}
           </p>
-          <PrimaryButton onClick={() => navigate(lp("/ablauf"))}>
+          <PrimaryButton to={lp("/ablauf")}>
             {t.ctaButton}
           </PrimaryButton>
         </div>

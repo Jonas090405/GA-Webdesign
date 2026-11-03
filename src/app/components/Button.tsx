@@ -1,9 +1,10 @@
-import { useRef } from "react";
+import { Link } from "react-router-dom";
 import { ArrowUpRight, ArrowRight } from "lucide-react";
 
 export function PrimaryButton({
   children,
   onClick,
+  to,
   type = "button",
   disabled = false,
   className = "",
@@ -11,33 +12,25 @@ export function PrimaryButton({
 }: {
   children: React.ReactNode;
   onClick?: () => void;
+  /** Interner Pfad (bereits lokalisiert, z. B. lp("/kontakt")): rendert einen echten <a href> statt eines Buttons. */
+  to?: string;
   type?: "button" | "submit";
   disabled?: boolean;
   className?: string;
   arrow?: "up-right" | "right";
 }) {
-  const ref = useRef<HTMLButtonElement>(null);
-
-  function handleMove(e: React.MouseEvent<HTMLButtonElement>) {
-    const el = ref.current;
-    if (!el || disabled) return;
+  function handleMove(e: React.MouseEvent<HTMLElement>) {
+    const el = e.currentTarget;
+    if (disabled) return;
     const rect = el.getBoundingClientRect();
     el.style.setProperty("--mx", `${e.clientX - rect.left}px`);
     el.style.setProperty("--my", `${e.clientY - rect.top}px`);
   }
 
-  return (
-    <button
-      ref={ref}
-      type={type}
-      onClick={onClick}
-      disabled={disabled}
-      onMouseMove={handleMove}
-      className={`group/btn relative inline-flex cursor-pointer items-center gap-2 overflow-hidden rounded-full px-6 py-3 xl:px-7 xl:py-3.5 2xl:px-9 2xl:py-4 text-[15px] 2xl:text-[17px] text-white font-medium disabled:opacity-50 disabled:cursor-not-allowed ${className}`}
-      style={{
-        background: "var(--gradient-cta)",
-      }}
-    >
+  const cls = `group/btn relative inline-flex cursor-pointer items-center gap-2 overflow-hidden rounded-full px-6 py-3 xl:px-7 xl:py-3.5 2xl:px-9 2xl:py-4 text-[15px] 2xl:text-[17px] text-white font-medium disabled:opacity-50 disabled:cursor-not-allowed ${className}`;
+  const style = { background: "var(--gradient-cta)" };
+  const inner = (
+    <>
       {/* Cursor-Spotlight */}
       <span
         aria-hidden
@@ -66,6 +59,27 @@ export function PrimaryButton({
           />
         )}
       </span>
+    </>
+  );
+
+  if (to) {
+    return (
+      <Link to={to} onClick={onClick} onMouseMove={handleMove} className={cls} style={style}>
+        {inner}
+      </Link>
+    );
+  }
+
+  return (
+    <button
+      type={type}
+      onClick={onClick}
+      disabled={disabled}
+      onMouseMove={handleMove}
+      className={cls}
+      style={style}
+    >
+      {inner}
     </button>
   );
 }
@@ -73,11 +87,14 @@ export function PrimaryButton({
 export function TertiaryButton({
   children,
   onClick,
+  to,
   href,
   external = false,
 }: {
   children: React.ReactNode;
   onClick?: () => void;
+  /** Interner Pfad (bereits lokalisiert): rendert einen react-router <Link> mit echtem href. */
+  to?: string;
   href?: string;
   external?: boolean;
 }) {
@@ -90,6 +107,15 @@ export function TertiaryButton({
       aria-hidden
     />
   );
+
+  if (to) {
+    return (
+      <Link to={to} onClick={onClick} className={cls}>
+        {children}
+        {icon}
+      </Link>
+    );
+  }
 
   if (href) {
     return (
@@ -116,23 +142,37 @@ export function TertiaryButton({
 export function GhostButton({
   children,
   onClick,
+  to,
 }: {
   children: React.ReactNode;
   onClick?: () => void;
+  /** Interner Pfad (bereits lokalisiert): rendert einen react-router <Link> mit echtem href. */
+  to?: string;
 }) {
+  const cls =
+    "group/btn inline-flex cursor-pointer items-center gap-2 rounded-full border border-blue-400/20 bg-blue-400/[0.07] px-6 py-3 xl:px-7 xl:py-3.5 2xl:px-9 2xl:py-4 text-[15px] 2xl:text-[17px] font-medium text-ink-100 whitespace-nowrap transition-colors duration-300 hover:border-blue-400/40 hover:bg-blue-400/[0.13] focus-visible:border-blue-400/40 focus-visible:bg-blue-400/[0.13]";
+  const inner = (
+    <span className="relative z-10 inline-flex items-center gap-2">
+      {children}
+      <ArrowUpRight
+        size={16}
+        className="transition-transform duration-300 ease-out group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5"
+        aria-hidden
+      />
+    </span>
+  );
+
+  if (to) {
+    return (
+      <Link to={to} onClick={onClick} className={cls}>
+        {inner}
+      </Link>
+    );
+  }
+
   return (
-    <button
-      onClick={onClick}
-      className="group/btn inline-flex cursor-pointer items-center gap-2 rounded-full border border-blue-400/20 bg-blue-400/[0.07] px-6 py-3 xl:px-7 xl:py-3.5 2xl:px-9 2xl:py-4 text-[15px] 2xl:text-[17px] font-medium text-ink-100 whitespace-nowrap transition-colors duration-300 hover:border-blue-400/40 hover:bg-blue-400/[0.13] focus-visible:border-blue-400/40 focus-visible:bg-blue-400/[0.13]"
-    >
-      <span className="relative z-10 inline-flex items-center gap-2">
-        {children}
-        <ArrowUpRight
-          size={16}
-          className="transition-transform duration-300 ease-out group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5"
-          aria-hidden
-        />
-      </span>
+    <button onClick={onClick} className={cls}>
+      {inner}
     </button>
   );
 }

@@ -7,7 +7,7 @@ import { Card } from "../Card";
 import { FadeIn } from "../FadeIn";
 import { PortfolioScrollSection } from "../PortfolioScrollSection";
 import { HeroFlight } from "../HeroFlight";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Phone, Linkedin, Mail, MapPin } from "lucide-react";
 import { ContactLine } from "../ContactLine";
 import { PortraitRing } from "../PortraitRing";
@@ -18,6 +18,16 @@ import tileCodeClip from "../../../imports/tile-code.mp4";
 import tileCodePoster from "../../../imports/tile-code-poster.webp";
 import tileRocketClip from "../../../imports/tile-rocket.mp4";
 import tileRocketPoster from "../../../imports/tile-rocket-poster.webp";
+import tileSeoClip from "../../../imports/tile-seo.mp4";
+import tileSeoPoster from "../../../imports/tile-seo-poster.webp";
+import tileShopClip from "../../../imports/tile-shop.mp4";
+import tileShopPoster from "../../../imports/tile-shop-poster.webp";
+import tileCmsClip from "../../../imports/tile-cms.mp4";
+import tileCmsPoster from "../../../imports/tile-cms-poster.webp";
+import tileCorporateClip from "../../../imports/tile-corporate.mp4";
+import tileCorporatePoster from "../../../imports/tile-corporate-poster.webp";
+import tileWartungClip from "../../../imports/tile-wartung.mp4";
+import tileWartungPoster from "../../../imports/tile-wartung-poster.webp";
 import { ContactForm, BERKANT_EMAIL, BERKANT_PHONE, BERKANT_TEL, useWhatsAppLink } from "../ContactForm";
 import { DirectContactCard } from "../DirectContactCard";
 import { WhatsAppIcon } from "../WhatsAppIcon";
@@ -25,6 +35,8 @@ import { PROJECTS } from "../../../content/projects";
 import profilbild from "../../../imports/Jonas_Gissler.jpg";
 import berkantImg from "../../../imports/Berkant_agyar.jpeg";
 import { useCopy, useLocalePath } from "../../../i18n";
+import { ProjectServicePills } from "../ProjectServices";
+import type { ServiceId } from "../../../content/services";
 
 const COPY = {
   de: {
@@ -40,7 +52,8 @@ const COPY = {
     servicesAccent: "Webseite brauchst.",
     servicesLead1: "Wir übernehmen alles: Design, Entwicklung und Hosting.",
     servicesLead2: "Du musst dich um nichts kümmern.",
-    servicesCta: "Mehr über unsere Leistungen",
+    servicesCta: "Alle Leistungen ansehen",
+    servicesMore: "Und vieles mehr:",
     teamTitle: "Das sind",
     teamAccent: "wir.",
     teamLead: "Wir sind Jonas und Berkant und bauen von St. Georgen aus zusammen Webseiten für Unternehmen im Schwarzwald. Du weißt von Anfang an, wer an deinem Projekt arbeitet und wen du anrufst.",
@@ -50,6 +63,9 @@ const COPY = {
     contactAccent: "Projekt.",
     yourContact: "Dein Ansprechpartner",
     contactLead: "Wir melden uns innerhalb von 24 Stunden mit einer ersten Einschätzung und einem unverbindlichen Termin.",
+    contactProcessBefore: " Wie es danach weitergeht, zeigt dir ",
+    contactProcessLink: "unser Ablauf",
+    contactProcessAfter: ".",
     emailLabel: "E-Mail",
     whatsappValue: "Nachricht schreiben",
     phoneLabel: "Telefon",
@@ -71,7 +87,8 @@ const COPY = {
     servicesAccent: "website needs.",
     servicesLead1: "We handle it all: design, development and hosting.",
     servicesLead2: "You don't have to worry about a thing.",
-    servicesCta: "More about our services",
+    servicesCta: "See all services",
+    servicesMore: "And much more:",
     teamTitle: "That's",
     teamAccent: "us.",
     teamLead: "We're Jonas and Berkant, and from St. Georgen we build websites for businesses across the Black Forest. From day one, you know who's working on your project and who to call.",
@@ -81,6 +98,9 @@ const COPY = {
     contactAccent: "project.",
     yourContact: "Your contact",
     contactLead: "We'll get back to you within 24 hours with an initial assessment and a no-obligation appointment.",
+    contactProcessBefore: " ",
+    contactProcessLink: "Our process",
+    contactProcessAfter: " shows you what happens next.",
     emailLabel: "Email",
     whatsappValue: "Send a message",
     phoneLabel: "Phone",
@@ -111,7 +131,6 @@ export function Home() {
 }
 
 function PortfolioPreview() {
-  const navigate = useNavigate();
   const t = useCopy(COPY);
   const lp = useLocalePath();
 
@@ -124,14 +143,14 @@ function PortfolioPreview() {
         className="mb-8 sm:mb-10 xl:mb-14 2xl:mb-20"
       />
 
-      {/* Identisch zur Portfolio-Seite, nur Featured-Projekt */}
-      <PortfolioScrollSection projects={PROJECTS.slice(0, 1)} hideTag />
+      {/* Identisch zur Portfolio-Seite, die zwei neuesten Projekte */}
+      <PortfolioScrollSection projects={PROJECTS.slice(0, 2)} hideTag />
 
       {/* Weiterführend als ruhige Zeile – die Hauptaktionen stehen in der Projektkarte */}
       <FadeIn delay={0.2}>
-        <p className="mt-10 sm:mt-0 flex flex-wrap items-center justify-start sm:justify-center gap-x-6 gap-y-3 text-[14px] xl:text-[15px] text-ink-400">
+        <p className="mt-16 sm:mt-0 flex flex-wrap items-center justify-start sm:justify-center gap-x-6 gap-y-3 text-[14px] xl:text-[15px] text-ink-400">
           <span className="basis-full sm:basis-auto">{t.moreFromUs}</span>
-          <TertiaryButton onClick={() => navigate(lp("/projekte"))}>{t.allProjects}</TertiaryButton>
+          <TertiaryButton to={lp("/projekte")}>{t.allProjects}</TertiaryButton>
           <TertiaryButton href="https://portfolio.ga-webdesign.de" external={true}>
             {t.personalPortfolio}
           </TertiaryButton>
@@ -142,40 +161,66 @@ function PortfolioPreview() {
 }
 
 
-function ServiceCard({
-  poster,
-  clip,
-  title,
-  desc,
-  i,
-}: {
-  poster: string;
-  clip: string;
-  title: string;
-  desc: string;
-  i: number;
-}) {
-  return (
-    <FadeIn delay={i * 0.08} className="h-full">
-      <div className="h-full">
-        <Card className="h-full">
-          <div className="flex flex-col h-full">
-            {/* Illustration — läuft im Viewport dauerhaft */}
-            <TileMedia
-              poster={poster}
-              src={clip}
-              label={title}
-              className="mb-4 xl:mb-6 w-full aspect-[16/9]"
-            />
+/**
+ * Bento-Kachel. `size` bestimmt das Layout:
+ * - big: 2×2 ab lg, Clip groß oben
+ * - wide: 2 Spalten breit, Clip links, Text rechts
+ * - small: 1×1, Clip oben, kompakter Text
+ * Mobil (2 Spalten): big und wide über die volle Breite, small halb.
+ */
+function ServiceCard({ service, i }: { service: Service; i: number }) {
+  const lp = useLocalePath();
+  const { poster, clip, title, desc, to, size } = service;
+  const span =
+    size === "big"
+      ? "col-span-2 lg:row-span-2"
+      : size === "wide"
+        ? "col-span-2"
+        : "col-span-1";
+  const layout = size === "wide" ? "flex flex-row items-center gap-4 sm:gap-6 xl:gap-8" : "flex flex-col";
+  // Die Clips haben viel schwarzen Rand: innen vergrößert (Schwarz ist per screen-Blend unsichtbar),
+  // damit die Illustration die Fläche füllt. Große Kacheln: Clip füllt den Raum, Text unten bündig.
+  // Kein overflow/mask hier: beides würde den screen-Blend isolieren (schwarzer Kasten). Der Rand
+  // der Clips ist stattdessen in der Datei selbst weich auf Schwarz ausgeblendet.
+  const media =
+    size === "big"
+      ? "mb-4 xl:mb-5 w-full aspect-[16/9] lg:aspect-auto lg:flex-1 lg:min-h-[180px] [&>*]:scale-[1.45]"
+      : size === "wide"
+        ? "w-[34%] shrink-0 aspect-square max-h-32 xl:max-h-40 [&>*]:scale-[1.3]"
+        : "mb-2 xl:mb-3 w-full aspect-[16/9] [&>*]:scale-[1.35]";
+  const titleSize =
+    size === "small"
+      ? "text-[16px] sm:text-[17px] xl:text-[19px] 2xl:text-[21px] mb-1"
+      : "text-[19px] sm:text-[21px] xl:text-[23px] 2xl:text-[26px] mb-1.5 xl:mb-2";
+  const descSize =
+    size === "small"
+      ? "text-[13px] xl:text-[15px] 2xl:text-[16px]"
+      : "text-[14px] xl:text-[16px] 2xl:text-[18px]";
 
-            <h3 className="text-white text-[18px] sm:text-[20px] xl:text-[22px] 2xl:text-[25px] mb-2 xl:mb-3">
-              {title}
-            </h3>
-            <p
-              className="text-[14px] xl:text-[16px] 2xl:text-[18px] leading-relaxed flex-1 text-ink-300"
-            >
-              {desc}
-            </p>
+  return (
+    <FadeIn delay={(i % 4) * 0.06} className={`h-full ${span}`}>
+      <div className="relative h-full">
+        <Card className="h-full" innerClassName={size === "small" ? "p-4 sm:p-5 xl:p-6" : "p-5 sm:p-6 xl:p-7"}>
+          <div className={`h-full ${layout}`}>
+            {/* Illustration — läuft im Viewport dauerhaft */}
+            <TileMedia poster={poster} src={clip} label={title} className={media} />
+
+            <div className={size === "wide" ? "min-w-0 flex-1" : ""}>
+              <h3 className={`text-white ${titleSize}`}>
+                <Link
+                  to={lp(to)}
+                  // Overlay über die ganze Kachel: negative Insets = Innenabstand der Karte
+                  className={`after:absolute after:content-[''] ${
+                    size === "small"
+                      ? "after:-inset-4 sm:after:-inset-5 xl:after:-inset-6"
+                      : "after:-inset-5 sm:after:-inset-6 xl:after:-inset-7"
+                  } rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-400`}
+                >
+                  {title}
+                </Link>
+              </h3>
+              <p className={`${descSize} leading-relaxed text-ink-300`}>{desc}</p>
+            </div>
           </div>
         </Card>
       </div>
@@ -183,53 +228,64 @@ function ServiceCard({
   );
 }
 
-type Service = { poster: string; clip: string; title: string; desc: string };
-
-const SERVICES: { de: Service[]; en: Service[] } = {
-  de: [
-    {
-      poster: tileDesignPoster,
-      clip: tileDesignClip,
-      title: "Individuelles Design",
-      desc: "Deine Webseite sieht genau so aus, wie du es dir vorstellst. Kein vorgefertigtes Template, sondern ein eigenes Design für dich.",
-    },
-    {
-      poster: tileCodePoster,
-      clip: tileCodeClip,
-      title: "Technische Umsetzung",
-      desc: "Alle Funktionen sauber mit modernster Technik umgesetzt. Schnell geladen, für Google optimiert und auf jedem Gerät perfekt nutzbar.",
-    },
-    {
-      poster: tileRocketPoster,
-      clip: tileRocketClip,
-      title: "Fertig live, sofort nutzbar",
-      desc: "Domain, Hosting, Einrichtung. Wir kümmern uns um alles. Du bekommst eine fertige Webseite und kannst sofort loslegen.",
-    },
-  ],
-  en: [
-    {
-      poster: tileDesignPoster,
-      clip: tileDesignClip,
-      title: "Custom design",
-      desc: "Your website looks exactly the way you picture it. We design it just for you instead of starting from a ready-made template.",
-    },
-    {
-      poster: tileCodePoster,
-      clip: tileCodeClip,
-      title: "Clean development",
-      desc: "Every feature built cleanly with the latest technology. Fast to load, optimized for Google and easy to use on any device.",
-    },
-    {
-      poster: tileRocketPoster,
-      clip: tileRocketClip,
-      title: "Live and ready to use",
-      desc: "Domain, hosting, setup. We take care of all of it. You get a finished website and can get started right away.",
-    },
-  ],
+type Service = {
+  poster: string;
+  clip: string;
+  title: string;
+  desc: string;
+  to: string;
+  size: "big" | "wide" | "small";
 };
 
+/**
+ * Reihenfolge = Priorität und zugleich Bento-Fluss:
+ * Desktop (4 Spalten): Webdesign 2×2 | Entwicklung breit | Launch, SEO
+ *                      Shop 2×2      | CMS, Corporate   | Wartung breit
+ * Mobil (2 Spalten):   voll, voll, halb+halb, voll, halb+halb, voll
+ */
+const MEDIA_ORDER = [
+  { poster: tileDesignPoster, clip: tileDesignClip, to: "/leistungen#webdesign", size: "big" },
+  { poster: tileCodePoster, clip: tileCodeClip, to: "/leistungen#entwicklung", size: "wide" },
+  { poster: tileRocketPoster, clip: tileRocketClip, to: "/leistungen#launch", size: "small" },
+  { poster: tileSeoPoster, clip: tileSeoClip, to: "/leistungen#seo", size: "small" },
+  { poster: tileShopPoster, clip: tileShopClip, to: "/leistungen#shop-buchung", size: "big" },
+  { poster: tileCmsPoster, clip: tileCmsClip, to: "/leistungen#cms", size: "small" },
+  { poster: tileCorporatePoster, clip: tileCorporateClip, to: "/leistungen#corporate-design", size: "small" },
+  { poster: tileWartungPoster, clip: tileWartungClip, to: "/leistungen#wartung", size: "wide" },
+] as const;
+
+const TEXTS = {
+  de: [
+    ["Individuelles Design", "Deine Webseite sieht genau so aus, wie du es dir vorstellst. Kein vorgefertigtes Template, sondern ein eigenes Design für dich."],
+    ["Technische Umsetzung", "Alle Funktionen sauber mit modernster Technik umgesetzt. Schnell geladen, für Google optimiert und auf jedem Gerät perfekt nutzbar."],
+    ["Fertig live", "Domain, Hosting, Einrichtung: Wir kümmern uns um alles."],
+    ["Bei Google gefunden", "Saubere Technik und Texte, die zu deinen Suchbegriffen passen."],
+    ["Online-Shop & Buchung", "Verkaufen oder Termine vergeben, direkt auf deiner Seite und im Look deiner Marke. Warenkorb, Bezahlung und Bestätigungsmails inklusive."],
+    ["Inhalte selbst pflegen", "Texte und Bilder änderst du selbst, ohne Programmierkenntnisse."],
+    ["Corporate Design", "Logo, Farben und Schriften, die überall gleich auftreten."],
+    ["Wartung & Support", "Wir halten deine Seite sicher und aktuell und sind da, wenn du etwas brauchst."],
+  ],
+  en: [
+    ["Custom design", "Your website looks exactly the way you picture it. We design it just for you instead of starting from a ready-made template."],
+    ["Clean development", "Every feature built cleanly with the latest technology. Fast to load, optimized for Google and easy to use on any device."],
+    ["Live and ready", "Domain, hosting, setup: we take care of all of it."],
+    ["Found on Google", "Clean code and copy that matches what people search for."],
+    ["Online shop & booking", "Sell products or take bookings right on your site, in your brand's look. Cart, payment and confirmation emails included."],
+    ["Edit content yourself", "Change texts and images yourself, no coding skills needed."],
+    ["Corporate design", "Logo, colors and fonts that look the same everywhere."],
+    ["Maintenance & support", "We keep your site secure and up to date and are there when you need us."],
+  ],
+} as const;
+
+const SERVICES: { de: Service[]; en: Service[] } = {
+  de: MEDIA_ORDER.map((m, i) => ({ ...m, title: TEXTS.de[i][0], desc: TEXTS.de[i][1] })),
+  en: MEDIA_ORDER.map((m, i) => ({ ...m, title: TEXTS.en[i][0], desc: TEXTS.en[i][1] })),
+};
+
+/** Leistungen, die nicht im Grid stehen (Reihenfolge = Relevanz). */
+const MORE_SERVICES: ServiceId[] = ["geo", "sea", "analytics", "mehrsprachigkeit", "portale", "email", "foto-video"];
+
 function Services() {
-  const navigate = useNavigate();
   const t = useCopy(COPY);
   const lp = useLocalePath();
   const services = useCopy(SERVICES);
@@ -242,15 +298,23 @@ function Services() {
         lead={<>{t.servicesLead1}<br />{t.servicesLead2}</>}
       />
 
-      <div className="grid gap-5 sm:gap-6 xl:gap-8 2xl:gap-10 sm:grid-cols-2 md:grid-cols-3 items-stretch">
-        {services.map(({ poster, clip, title, desc }, i) => (
-          <ServiceCard key={title} poster={poster} clip={clip} title={title} desc={desc} i={i} />
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5 xl:gap-6 2xl:gap-8">
+        {services.map((service, i) => (
+          <ServiceCard key={service.to} service={service} i={i} />
         ))}
       </div>
 
+      {/* Das Grid zeigt nur eine Auswahl – die übrigen Leistungen als Links darunter */}
+      <FadeIn delay={0.15}>
+        <div className="mt-6 xl:mt-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
+          <span className="shrink-0 text-[14px] xl:text-[15px] text-ink-400">{t.servicesMore}</span>
+          <ProjectServicePills ids={MORE_SERVICES} label={t.servicesMore} />
+        </div>
+      </FadeIn>
+
       <FadeIn delay={0.2}>
-        <div className="mt-10 xl:mt-14 2xl:mt-16">
-          <GhostButton onClick={() => navigate(lp("/leistungen"))}>
+        <div className="mt-10 xl:mt-12 2xl:mt-14">
+          <GhostButton to={lp("/leistungen")}>
             {t.servicesCta}
           </GhostButton>
         </div>
@@ -348,7 +412,6 @@ function Member({
 }
 
 function TeamPreview() {
-  const navigate = useNavigate();
   const t = useCopy(COPY);
   const lp = useLocalePath();
   const members = useCopy(MEMBERS);
@@ -372,7 +435,7 @@ function TeamPreview() {
 
       <FadeIn delay={0.2}>
         <div className="mt-12 xl:mt-16 2xl:mt-20">
-          <GhostButton onClick={() => navigate(lp("/ueber-uns"))}>
+          <GhostButton to={lp("/ueber-uns")}>
             {t.teamCta}
           </GhostButton>
         </div>
@@ -421,6 +484,14 @@ function Contact() {
             className="text-[14px] sm:text-[15px] xl:text-[17px] 2xl:text-[19px] leading-relaxed mb-8 max-w-md xl:max-w-lg 2xl:max-w-xl text-ink-300"
           >
             {t.contactLead}
+            {t.contactProcessBefore}
+            <Link
+              to={lp("/ablauf")}
+              className="text-blue-200 underline decoration-blue-400/40 underline-offset-4 transition-colors duration-200 hover:text-blue-100 hover:decoration-blue-100"
+            >
+              {t.contactProcessLink}
+            </Link>
+            {t.contactProcessAfter}
           </p>
           <div className="space-y-4">
             <ContactLine

@@ -1,3 +1,4 @@
+import { LazyVideo } from "./LazyVideo";
 import { useCopy } from "../../i18n";
 
 /** Platzhalter in der Adressleiste, wenn ein Projekt keine URL hat. */
@@ -64,7 +65,7 @@ export function BrowserFrame({
 /**
  * Smartphone-Rahmen für Mobile-Screenshots (Hochformat, 390 × 844).
  */
-export function PhoneFrame({ src, alt }: { src: string; alt: string }) {
+export function PhoneFrame({ src, alt, video }: { src: string; alt: string; video?: string }) {
   return (
     <div
       className="overflow-hidden rounded-[28px] p-1.5"
@@ -73,15 +74,22 @@ export function PhoneFrame({ src, alt }: { src: string; alt: string }) {
         boxShadow: "0 24px 56px rgba(0,0,0,0.5), inset 0 0 0 1px rgba(255,255,255,0.08)",
       }}
     >
-      <img
-        src={src}
-        alt={alt}
-        loading="lazy"
-        decoding="async"
-        width={390}
-        height={844}
-        className="block w-full h-auto rounded-[22px]"
-      />
+      {video ? (
+        <div className="relative aspect-[390/844] overflow-hidden rounded-[22px]">
+          <LazyVideo src={video} poster={src} className="absolute inset-0 block h-full w-full object-cover" />
+          <span className="sr-only">{alt}</span>
+        </div>
+      ) : (
+        <img
+          src={src}
+          alt={alt}
+          loading="lazy"
+          decoding="async"
+          width={390}
+          height={844}
+          className="block w-full h-auto rounded-[22px]"
+        />
+      )}
     </div>
   );
 }

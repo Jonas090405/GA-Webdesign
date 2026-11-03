@@ -7,7 +7,6 @@ import {
   useReducedMotion,
   type MotionValue,
 } from "motion/react";
-import { useNavigate } from "react-router-dom";
 import { TeamBadge } from "./TeamBadge";
 import { PrimaryButton } from "./Button";
 import { FadeIn } from "./FadeIn";
@@ -415,16 +414,12 @@ const LEAD_COLOR = "var(--ink-100)";
  * angefragt.
  */
 export function HeroFlight() {
-  const navigate = useNavigate();
-  const lp = useLocalePath();
-  return <VideoHero onCta={() => navigate(lp("/kontakt"))} />;
+  return <VideoHero />;
 }
 
 /* ─────────────────────── GEPARKT: Scroll-Fahrt ───────────────────────────── */
 
 function ScrollFlightHero() {
-  const navigate = useNavigate();
-  const lp = useLocalePath();
   const t = useCopy(COPY);
   const reduce = useReducedMotion();
   const flight = useFlightCapable();
@@ -454,8 +449,8 @@ function ScrollFlightHero() {
   const landing = useRange(scrollYProgress, [0.92, 1], [0, 0.12]);
   const cueOpacity = useRange(scrollYProgress, [0.02, 0.1], [1, 0]);
 
-  if (reduce) return <StaticHero navigate={navigate} />;
-  if (!flight) return <VideoHero onCta={() => navigate(lp("/kontakt"))} />;
+  if (reduce) return <StaticHero />;
+  if (!flight) return <VideoHero />;
 
   return (
     <section
@@ -546,7 +541,7 @@ function ScrollFlightHero() {
                   Als einziger im Textfluss gibt er außerdem die Höhe vor —
                   die kürzeren Blöcke zentrieren sich darin. */}
               <Beat progress={scrollYProgress} index={HEADLINE_BEAT} flow>
-                <HeadlineCopy onCta={() => navigate(lp("/kontakt"))} />
+                <HeadlineCopy />
               </Beat>
 
               {t.beats.map((b, i) => (
@@ -597,8 +592,9 @@ function ScrollFlightHero() {
 }
 
 /** Headline, Lead und CTA — in Fahrt und Video-Hero identisch. */
-function HeadlineCopy({ onCta }: { onCta: () => void }) {
+function HeadlineCopy() {
   const t = useCopy(COPY);
+  const lp = useLocalePath();
   return (
     <>
       <TeamBadge />
@@ -614,7 +610,7 @@ function HeadlineCopy({ onCta }: { onCta: () => void }) {
         {t.lead}
       </p>
       <div className="mt-8 sm:mt-10">
-        <PrimaryButton onClick={onCta}>{t.cta}</PrimaryButton>
+        <PrimaryButton to={lp("/kontakt")}>{t.cta}</PrimaryButton>
       </div>
     </>
   );
@@ -631,7 +627,7 @@ function HeadlineCopy({ onCta }: { onCta: () => void }) {
  * `hero-schwarzwald-mobile.mp4` ist derselbe Clip, nur stärker komprimiert
  * (x264 CRF 26, ~1,4 MB statt ~10,8 MB).
  */
-function VideoHero({ onCta }: { onCta: () => void }) {
+function VideoHero() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [videoOn, setVideoOn] = useState(false);
   const [ready, setReady] = useState(false);
@@ -721,7 +717,7 @@ function VideoHero({ onCta }: { onCta: () => void }) {
       <div className={`${CONTAINER} relative w-full`}>
         <div className="max-w-3xl">
           <FadeIn>
-            <HeadlineCopy onCta={onCta} />
+            <HeadlineCopy />
           </FadeIn>
         </div>
       </div>
@@ -731,7 +727,7 @@ function VideoHero({ onCta }: { onCta: () => void }) {
 
 /* ───────────────────── Variante ohne Bewegung (reduced motion) ───────────── */
 
-function StaticHero({ navigate }: { navigate: (to: string) => void }) {
+function StaticHero() {
   const t = useCopy(COPY);
   const lp = useLocalePath();
   return (
@@ -782,7 +778,7 @@ function StaticHero({ navigate }: { navigate: (to: string) => void }) {
 
           <FadeIn delay={0.2}>
             <div className="mt-10">
-              <PrimaryButton onClick={() => navigate(lp("/kontakt"))}>
+              <PrimaryButton to={lp("/kontakt")}>
                 {t.cta}
               </PrimaryButton>
             </div>

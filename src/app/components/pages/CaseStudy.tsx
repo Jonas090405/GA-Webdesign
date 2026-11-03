@@ -1,10 +1,12 @@
-import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
+import { useEffect } from "react";
+import { Link, Navigate, useParams } from "react-router-dom";
 import { ArrowLeft, ArrowRight, ExternalLink } from "lucide-react";
 import { usePageMeta } from "../../hooks/usePageMeta";
 import { FadeIn } from "../FadeIn";
 import { PrimaryButton } from "../Button";
 import { BrowserFrame, PhoneFrame } from "../BrowserFrame";
 import { LazyVideo } from "../LazyVideo";
+import { ProjectServiceGrid } from "../ProjectServices";
 import {
   PROJECTS,
   type Project,
@@ -14,12 +16,14 @@ import {
   localizeProject,
   projectPath,
 } from "../../../content/projects";
-import { useCopy, useLang, useLocalePath } from "../../../i18n";
+import { localizePath, useCopy, useLang, useLocalePath } from "../../../i18n";
 
 const COPY = {
   de: {
     metaTitleSuffix: " – Case Study | G&A Webdesign",
     metaFallbackTitle: "Projekte | G&A Webdesign",
+    crumbHome: "Startseite",
+    crumbProjects: "Projekte",
     client: "Kunde",
     industry: "Branche",
     location: "Standort",
@@ -35,6 +39,7 @@ const COPY = {
     mobileText: "Jede Ansicht ist für kleine Bildschirme eigens gestaltet, nicht nur verkleinert.",
     result: "Ergebnis",
     resultPending: "Was hat sich für den Kunden verändert?",
+    testimonialPending: "Kundenstimme (Zitat, Name, Rolle)",
     pendingPrefix: "Text folgt: ",
     pendingNote: "Nur lokal sichtbar · einzutragen in src/content/projects.ts",
     quoteOpen: "„",
@@ -48,6 +53,8 @@ const COPY = {
   en: {
     metaTitleSuffix: " – Case study | G&A Webdesign",
     metaFallbackTitle: "Projects | G&A Webdesign",
+    crumbHome: "Home",
+    crumbProjects: "Projects",
     client: "Client",
     industry: "Industry",
     location: "Location",
@@ -63,6 +70,7 @@ const COPY = {
     mobileText: "Every view is designed specifically for small screens, not just scaled down.",
     result: "Result",
     resultPending: "What changed for the client?",
+    testimonialPending: "Client testimonial (quote, name, role)",
     pendingPrefix: "Text to come: ",
     pendingNote: "Only visible locally · add it in src/content/projects.ts",
     quoteOpen: "“",
@@ -98,6 +106,29 @@ export function CaseStudy() {
     description: project?.summary ?? "",
   });
 
+  // Breadcrumb für Google: Startseite › Projekte › Projekt (Prerender übernimmt das Script im <head>)
+  useEffect(() => {
+    if (!project || !visible) return;
+    const base = "https://ga-webdesign.de";
+    const url = (p: string) => `${base}${p === "/" ? "/" : p}`;
+    const el = document.createElement("script");
+    el.type = "application/ld+json";
+    el.id = "breadcrumb-ld";
+    el.textContent = JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: t.crumbHome, item: url(localizePath("/", lang)) },
+        { "@type": "ListItem", position: 2, name: t.crumbProjects, item: url(localizePath("/projekte", lang)) },
+        { "@type": "ListItem", position: 3, name: project.title, item: url(projectPath(project, lang)) },
+      ],
+    });
+    document.getElementById("breadcrumb-ld")?.remove();
+    document.head.appendChild(el);
+    return () => el.remove();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [project?.slug, lang, visible]);
+
   if (!project || !visible) return <Navigate to={lp("/projekte")} replace />;
 
   const { caseStudy: cs } = project;
@@ -111,7 +142,7 @@ export function CaseStudy() {
         <FadeIn className={`${CONTAINER} mt-14 sm:mt-20 mb-16 sm:mb-24`}>
           <BrowserFrame url={project.url}>
             {project.video ? (
-              <LazyVideo src={project.video} className="block w-full" />
+              <LazyVideo src={project.video} poster={project.cover.src} className="block w-full" />
             ) : (
               <img
                 src={project.cover.src}
@@ -134,16 +165,9 @@ export function CaseStudy() {
             <h2 id="loesung" className="text-white text-[clamp(28px,4.5vw,64px)] leading-[1.08] tracking-tight">
               {t.solution}
             </h2>
-            <ul className="mt-6 flex flex-wrap gap-2" aria-label={t.servicesLabel}>
-              {project.services.map((s) => (
-                <li
-                  key={s}
-                  className="rounded-full border border-blue-400/15 bg-blue-400/[0.06] px-3 py-1 text-[12px] xl:text-[13px] text-ink-200"
-                >
-                  {s}
-                </li>
-              ))}
-            </ul>
+            <div className="mt-8 sm:mt-10">
+              <ProjectServiceGrid ids={project.services} label={t.servicesLabel} />
+            </div>
           </FadeIn>
 
           <div className="mt-14 sm:mt-20 space-y-20 sm:space-y-28">
@@ -164,7 +188,7 @@ export function CaseStudy() {
               <div className="mt-8 -mx-5 px-5 sm:mx-0 sm:px-0 flex sm:grid sm:grid-cols-3 gap-5 sm:gap-6 xl:gap-10 overflow-x-auto sm:overflow-visible snap-x snap-mandatory pb-2">
                 {cs.mobile.map((m) => (
                   <div key={m.src} className="w-[62%] shrink-0 sm:w-auto snap-center">
-                    <PhoneFrame src={m.src} alt={m.alt} />
+                    <PhoneFrame src={m.src} alt={m.alt} video={m.video} />
                   </div>
                 ))}
               </div>
@@ -180,6 +204,15 @@ export function CaseStudy() {
           {next ? <NextProject project={next} /> : <ClosingCta />}
           </div>
         </section>
+
+        {/* Auch mit Folgeprojekt bleibt der Weg zum Erstgespräch auf der Seite */}
+        {next && (
+          <section className={CONTAINER}>
+            <div className="border-t border-line py-16 sm:py-24 xl:py-32">
+              <ClosingCta />
+            </div>
+          </section>
+        )}
       </article>
     </main>
   );
@@ -327,15 +360,22 @@ function Solution({ block, index, url }: { block: SolutionBlock; index: number; 
       <div className={`lg:col-span-7 space-y-6 ${flip ? "lg:order-1" : ""}`}>
         {screens.map((s) => (
           <BrowserFrame key={s.src} url={url}>
-            <img
-              src={s.src}
-              alt={s.alt}
-              loading="lazy"
-              decoding="async"
-              width={1440}
-              height={900}
-              className="block w-full h-auto"
-            />
+            {s.video ? (
+              <div className="relative aspect-[1440/900]">
+                <LazyVideo src={s.video} poster={s.src} className="absolute inset-0 block h-full w-full object-cover" />
+                <span className="sr-only">{s.alt}</span>
+              </div>
+            ) : (
+              <img
+                src={s.src}
+                alt={s.alt}
+                loading="lazy"
+                decoding="async"
+                width={1440}
+                height={900}
+                className="block w-full h-auto"
+              />
+            )}
           </BrowserFrame>
         ))}
       </div>
@@ -359,10 +399,29 @@ function Result({ project }: { project: Project }) {
         <div className="lg:col-span-8">
           {result ? <Paragraphs text={result} /> : import.meta.env.DEV && <Pending hint={copy.resultPending} />}
 
+          {!t && import.meta.env.DEV && (
+            <div className="mt-14 sm:mt-16">
+              <Pending hint={copy.testimonialPending} />
+            </div>
+          )}
+
           {t && (
             <figure className={result || import.meta.env.DEV ? "mt-14 sm:mt-16" : ""}>
-              <blockquote className="font-[family-name:var(--font-display)] text-white text-[clamp(20px,2.2vw,30px)] leading-[1.3] tracking-tight max-w-3xl">
-                {copy.quoteOpen}{t.quote}{copy.quoteClose}
+              <blockquote
+                className={`font-[family-name:var(--font-display)] text-white tracking-tight max-w-3xl space-y-5 ${
+                  // Lange Kundenstimmen etwas kleiner, damit sie nicht wie eine Headline-Wand wirken
+                  t.quote.length > 320
+                    ? "text-[clamp(18px,1.6vw,23px)] leading-[1.45]"
+                    : "text-[clamp(20px,2.2vw,30px)] leading-[1.3]"
+                }`}
+              >
+                {t.quote.split(/\n\s*\n/).map((para, i, all) => (
+                  <p key={i}>
+                    {i === 0 && copy.quoteOpen}
+                    {para}
+                    {i === all.length - 1 && copy.quoteClose}
+                  </p>
+                ))}
               </blockquote>
               <figcaption className="mt-8 flex items-center gap-3">
                 {t.avatar && (
@@ -426,7 +485,6 @@ function NextProject({ project: raw }: { project: Project }) {
 }
 
 function ClosingCta() {
-  const navigate = useNavigate();
   const t = useCopy(COPY);
   const lp = useLocalePath();
   return (
@@ -437,7 +495,7 @@ function ClosingCta() {
       <p className="text-ink-300 text-[15px] xl:text-[16px] 2xl:text-[18px] mb-8 max-w-xl 2xl:max-w-2xl mx-auto">
         {t.ctaText}
       </p>
-      <PrimaryButton onClick={() => navigate(lp("/kontakt"))}>{t.ctaButton}</PrimaryButton>
+      <PrimaryButton to={lp("/kontakt")}>{t.ctaButton}</PrimaryButton>
     </FadeIn>
   );
 }

@@ -4,7 +4,7 @@
  * Desktop (xl+): 3-Karten-Karussell mit Hover-Reveal.
  * Mobile/Tablet: Accordion mit Plus→×-Animation.
  */
-import { useState, useRef } from "react";
+import { useState, useRef, useId } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import berkantImg from "../../imports/Berkant_agyar.jpeg";
 import { FadeIn } from "./FadeIn";
@@ -289,6 +289,9 @@ function DesktopFAQCard({ faq }: { faq: FAQ }) {
 // ─── Mobile-Accordion-Item ────────────────────────────────────────────────────
 function MobileAccordionItem({ faq }: { faq: FAQ }) {
   const [open, setOpen] = useState(false);
+  const id = useId();
+  const btnId = `${id}-q`;
+  const panelId = `${id}-a`;
   return (
     <div
       className="rounded-xl overflow-hidden"
@@ -299,8 +302,10 @@ function MobileAccordionItem({ faq }: { faq: FAQ }) {
       }}
     >
       <button
+        id={btnId}
         onClick={() => setOpen(!open)}
         aria-expanded={open}
+        aria-controls={panelId}
         className="w-full flex items-center justify-between gap-4 px-5 py-4 text-left"
       >
         <span
@@ -318,21 +323,22 @@ function MobileAccordionItem({ faq }: { faq: FAQ }) {
           <Plus size={18} />
         </motion.span>
       </button>
-      <AnimatePresence initial={false}>
-        {open && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
-            className="overflow-hidden"
-          >
-            <p className="px-5 pb-5 text-ink-300 text-[13px] sm:text-[14px] leading-relaxed">
-              {faq.a}
-            </p>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* Antwort bleibt zugeklappt im DOM (Höhe 0 + inert), damit Prerender und
+          Suchmaschinen den vollen Text sehen */}
+      <motion.div
+        id={panelId}
+        role="region"
+        aria-labelledby={btnId}
+        initial={false}
+        animate={{ height: open ? "auto" : 0, opacity: open ? 1 : 0 }}
+        transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+        className="overflow-hidden"
+        {...({ inert: open ? undefined : "" } as object)}
+      >
+        <p className="px-5 pb-5 text-ink-300 text-[13px] sm:text-[14px] leading-relaxed">
+          {faq.a}
+        </p>
+      </motion.div>
     </div>
   );
 }

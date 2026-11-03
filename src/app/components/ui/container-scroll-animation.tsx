@@ -1,12 +1,25 @@
 import React, { useRef } from "react";
 import { useScroll, useTransform, motion, MotionValue } from "motion/react";
+import { useFrameTrack } from "./use-frame-track";
 
 export const ContainerScroll = ({
   titleComponent,
   children,
+  aside,
+  slides,
+  slideIndex = 0,
+  slideDirection = 0,
 }: {
   titleComponent: string | React.ReactNode;
-  children: React.ReactNode;
+  /** Inhalt eines einzelnen Rahmens (ohne Slider). */
+  children?: React.ReactNode;
+  /** Elemente neben dem Screen (z. B. Slider-Pfeile), vertikal an der Karte ausgerichtet. */
+  aside?: React.ReactNode;
+  /** Slider: Inhalt je Rahmen. Alle bleiben gerendert, die Schiene fährt sie ein und aus. */
+  slides?: React.ReactNode[];
+  slideIndex?: number;
+  /** 1 = nächster (kommt von rechts), -1 = vorheriger. */
+  slideDirection?: number;
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
@@ -20,6 +33,8 @@ export const ContainerScroll = ({
   const scale = useTransform(scrollYProgress, [0, 1], [0.85, 1.0]);
   const translate = useTransform(scrollYProgress, [0, 1], [0, -70]);
 
+  const track = useFrameTrack(slides?.length ?? 1, slideIndex, slideDirection);
+
   return (
     <div
       className="h-[40rem] sm:h-[50rem] md:h-[56rem] lg:h-[62rem] flex items-center justify-center relative p-2 md:p-10"
@@ -30,9 +45,32 @@ export const ContainerScroll = ({
         style={{ perspective: "1200px" }}
       >
         <Header translate={translate} titleComponent={titleComponent} />
-        <Card rotate={rotate} translate={translate} scale={scale}>
-          {children}
-        </Card>
+        <div className="relative max-w-5xl mx-auto">
+          {slides ? (
+            <div className="grid">
+              {slides.map((slide, i) => (
+                <div
+                  key={i}
+                  ref={track.setRef(i)}
+                  className="[grid-area:1/1] w-full will-change-transform"
+                  // Eigene Perspektive je Rahmen: Die Schiene verschiebt diese Hülle per Transform,
+                  // ohne sie würde das Aufklappen (rotateX der Karte) flach gedrückt
+                  style={{ ...track.initialStyle(i), perspective: "1200px" }}
+                  aria-hidden={i !== slideIndex}
+                >
+                  <Card rotate={rotate} translate={translate} scale={scale}>
+                    {slide}
+                  </Card>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <Card rotate={rotate} translate={translate} scale={scale}>
+              {children}
+            </Card>
+          )}
+          {aside}
+        </div>
       </div>
     </div>
   );

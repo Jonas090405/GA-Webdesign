@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { ExternalLink } from "lucide-react";
 import { usePageMeta } from "../../hooks/usePageMeta";
 import { FadeIn } from "../FadeIn";
@@ -13,6 +13,7 @@ import {
   projectPath,
 } from "../../../content/projects";
 import { useCopy, useLang, useLocalePath } from "../../../i18n";
+import { ProjectServicePills } from "../ProjectServices";
 
 const COPY = {
   de: {
@@ -52,7 +53,6 @@ const COPY = {
 };
 
 export function Portfolio() {
-  const navigate = useNavigate();
   const t = useCopy(COPY);
   const lang = useLang();
   const lp = useLocalePath();
@@ -126,7 +126,7 @@ export function Portfolio() {
           <p className="text-ink-300 text-[15px] xl:text-[16px] 2xl:text-[18px] mb-8 max-w-xl 2xl:max-w-2xl mx-auto">
             {t.ctaText}
           </p>
-          <PrimaryButton onClick={() => navigate(lp("/kontakt"))}>{t.ctaButton}</PrimaryButton>
+          <PrimaryButton to={lp("/kontakt")}>{t.ctaButton}</PrimaryButton>
         </div>
       </FadeIn>
     </main>
@@ -180,7 +180,13 @@ function ProjectTeaser({
 
         <div className={`lg:col-span-5 ${flip ? "lg:order-1" : ""}`}>
           <h2 className="text-white text-[clamp(28px,3.6vw,52px)] leading-[1.05] tracking-tight">
-            {project.title}
+            {href && internal ? (
+              <Link to={href} className="transition-colors duration-200 hover:text-blue-200">
+                {project.title}
+              </Link>
+            ) : (
+              project.title
+            )}
           </h2>
           <p className="mt-3 text-[13px] xl:text-[14px] text-ink-400">
             {project.industry} · {project.location} · {project.year}
@@ -188,16 +194,9 @@ function ProjectTeaser({
           <p className="mt-5 text-[15px] xl:text-[17px] 2xl:text-[18px] leading-relaxed text-ink-300">
             {project.summary}
           </p>
-          <ul className="mt-6 flex flex-wrap gap-2" aria-label={servicesLabel}>
-            {project.services.map((s) => (
-              <li
-                key={s}
-                className="rounded-full border border-blue-400/15 bg-blue-400/[0.06] px-3 py-1 text-[12px] xl:text-[13px] text-ink-200"
-              >
-                {s}
-              </li>
-            ))}
-          </ul>
+          <div className="mt-6">
+            <ProjectServicePills ids={project.services} label={servicesLabel} />
+          </div>
           <div className="mt-8">
             <ProjectActions project={project} noMargin align="start" />
           </div>

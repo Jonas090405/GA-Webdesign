@@ -1,5 +1,5 @@
 import { ArrowUpRight, Linkedin, Mail, MapPin, Navigation, Star } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import logoUrl from "../../imports/Logo_GA_Webdesign.svg";
 import { ForestRunner } from "./ForestRunner";
 import { WhatsAppIcon } from "./WhatsAppIcon";
@@ -30,6 +30,7 @@ const COPY = {
       ["/", "Startseite"],
       ["/projekte", "Projekte"],
       ["/leistungen", "Leistungen"],
+      ["/ablauf", "Ablauf"],
       ["/ueber-uns", "Über uns"],
       ["/kontakt", "Kontakt"],
       ["/impressum", "Impressum"],
@@ -59,6 +60,7 @@ const COPY = {
       ["/", "Home"],
       ["/projekte", "Projects"],
       ["/leistungen", "Services"],
+      ["/ablauf", "Process"],
       ["/ueber-uns", "About us"],
       ["/kontakt", "Contact"],
       ["/impressum", "Legal notice"],
@@ -72,7 +74,6 @@ const COPY = {
 };
 
 export function Footer() {
-  const navigate = useNavigate();
   const t = useCopy(COPY);
   const lp = useLocalePath();
   const whatsappLink = useWhatsAppLink();
@@ -97,15 +98,8 @@ export function Footer() {
                 decoding="async"
                 className="h-8 2xl:h-9 w-auto opacity-80"
               />
-              <div
-                className="text-[18px] sm:text-[20px] 2xl:text-[22px] font-semibold"
-                style={{
-                  background: "linear-gradient(135deg, var(--blue-400), var(--blue-700))",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                }}
-              >
+              {/* Wortmarke laut BRAND.md: Bricolage Grotesque, Blau 400 auf Dunkel */}
+              <div className="font-[family-name:var(--font-display)] text-[19px] sm:text-[21px] 2xl:text-[23px] font-semibold tracking-tight text-blue-400">
                 G&amp;A Webdesign
               </div>
             </div>
@@ -192,19 +186,12 @@ export function Footer() {
             <ul className="space-y-2 2xl:space-y-3 text-[14px] 2xl:text-[16px]">
               {t.nav.map(([id, label]) => (
                 <li key={id}>
-                  <button
-                    onClick={() => navigate(lp(id))}
-                    className="transition-colors duration-200 cursor-pointer text-ink-200"
-                    onMouseEnter={(e) =>
-                      ((e.currentTarget as HTMLButtonElement).style.color = "var(--blue-400)")
-                    }
-                    onMouseLeave={(e) =>
-                      ((e.currentTarget as HTMLButtonElement).style.color =
-                        "var(--ink-200)")
-                    }
+                  <Link
+                    to={lp(id)}
+                    className="cursor-pointer text-ink-200 transition-colors duration-200 hover:text-blue-400 focus-visible:text-blue-400"
                   >
                     {label}
-                  </button>
+                  </Link>
                 </li>
               ))}
             </ul>

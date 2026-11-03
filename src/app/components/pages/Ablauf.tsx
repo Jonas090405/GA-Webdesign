@@ -1,14 +1,24 @@
 import { useRef } from "react";
 import { usePageMeta } from "../../hooks/usePageMeta";
-import { PrimaryButton } from "../Button";
+import { PrimaryButton, TertiaryButton } from "../Button";
 import { FadeIn } from "../FadeIn";
 import { MessageCircle, PenTool, RefreshCw, Globe, Code2 } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useCopy, useLocalePath } from "../../../i18n";
 import { useScroll, useSpring, useTransform, motion } from "motion/react";
 import type { MotionValue } from "motion/react";
 
-const TIMELINE_STEPS = {
+type TimelineStep = {
+  icon: React.ElementType;
+  step: string;
+  title: string;
+  desc: string;
+  tag: string;
+  /** Optionaler Verweis auf eine Leistung (unlokalisierter Pfad, läuft durch `lp`). */
+  link?: { to: string; label: string };
+};
+
+const TIMELINE_STEPS: { de: TimelineStep[]; en: TimelineStep[] } = {
   de: [
     {
       icon: MessageCircle,
@@ -23,6 +33,7 @@ const TIMELINE_STEPS = {
       title: "Design & Konzept",
       desc: "Nachdem alle vertraglichen Details geklärt sind, entwickeln wir auf Basis der Anforderungen ein individuelles Designkonzept. In diesem Schritt liegt die visuelle Gestaltung im Vordergrund – wir definieren, wie dein Unternehmen nach außen wirkt.",
       tag: "individuelles Design",
+      link: { to: "/leistungen#webdesign", label: "Mehr zu unserem Webdesign" },
     },
     {
       icon: MessageCircle,
@@ -58,6 +69,7 @@ const TIMELINE_STEPS = {
       title: "Fertig – deine Webseite ist live",
       desc: "Deine Webseite geht online – fertig eingerichtet, auf deiner Domain, direkt nutzbar. Wir kümmern uns um Hosting, Domain und alles Technische. Du bekommst ein fertiges Ergebnis.",
       tag: "komplett fertig & gehostet",
+      link: { to: "/leistungen#launch", label: "Domain & Hosting im Detail" },
     },
   ],
   en: [
@@ -74,6 +86,7 @@ const TIMELINE_STEPS = {
       title: "Design & concept",
       desc: "Once all the contract details are settled, we create a custom design concept based on your requirements. This step is all about the look – we define how your business comes across to the outside world.",
       tag: "custom design",
+      link: { to: "/leistungen#webdesign", label: "More about our web design" },
     },
     {
       icon: MessageCircle,
@@ -109,6 +122,7 @@ const TIMELINE_STEPS = {
       title: "Done – your website is live",
       desc: "Your website goes online: fully set up, on your domain and ready to use. We take care of hosting, the domain and all the technical stuff. You get a finished result.",
       tag: "fully done & hosted",
+      link: { to: "/leistungen#launch", label: "Domain & hosting in detail" },
     },
   ],
 };
@@ -123,6 +137,7 @@ const COPY = {
     h1: "Von der ersten Idee bis zur",
     h1Accent: "fertigen Webseite.",
     lead: "Du weißt jederzeit, wo wir stehen. Regelmäßige Feedbackschleifen stellen sicher, dass wir am Ende genau das Ergebnis haben, das du dir vorstellst.",
+    leadProjects: { before: "Wie das Ergebnis aussehen kann, siehst du in ", link: "unseren Projekten", after: "." },
     ctaTitle: "Bereit loszulegen?",
     ctaText: "Erzähl uns kurz von deinem Projekt – das Erstgespräch ist kostenlos und unverbindlich.",
     ctaButton: "Projekt anfragen",
@@ -134,6 +149,7 @@ const COPY = {
     h1: "From the first idea to the",
     h1Accent: "finished website.",
     lead: "You always know where things stand. Regular feedback rounds make sure we end up with exactly the result you have in mind.",
+    leadProjects: { before: "See what the result can look like in ", link: "our projects", after: "." },
     ctaTitle: "Ready to get started?",
     ctaText: "Tell us a little about your project – the first call is free and there's no obligation.",
     ctaButton: "Start your project",
@@ -211,12 +227,13 @@ function TimelineDot({
 
 // ─── ContentBlock ─────────────────────────────────────────────────────────────
 function ContentBlock({
-  step, tag, title, desc, align = "left",
+  step, tag, title, desc, link, align = "left",
 }: {
-  step: string; tag: string; title: string; desc: string; align?: "left" | "right";
+  step: string; tag: string; title: string; desc: string; link?: TimelineStep["link"]; align?: "left" | "right";
 }) {
   const right = align === "right";
   const t = useCopy(COPY);
+  const lp = useLocalePath();
   return (
     <div>
       <div className={`flex flex-wrap items-center gap-2.5 mb-3 ${right ? "justify-end" : ""}`}>
@@ -236,6 +253,11 @@ function ContentBlock({
       <p className={`text-ink-300 text-[14px] sm:text-[15px] 2xl:text-[16px] leading-relaxed text-pretty ${right ? "text-right" : ""}`}>
         {desc}
       </p>
+      {link && (
+        <div className={`mt-4 ${right ? "flex justify-end" : ""}`}>
+          <TertiaryButton to={lp(link.to)}>{link.label}</TertiaryButton>
+        </div>
+      )}
     </div>
   );
 }
@@ -250,10 +272,10 @@ const slideIn = (fromX: number) => ({
 
 // ─── Step — empfängt den geteilten scrollYProgress + seinen threshold ─────────
 function TimelineStep({
-  icon: Icon, step, title, desc, tag, index, isLast, scrollYProgress, threshold,
+  icon: Icon, step, title, desc, tag, link, index, isLast, scrollYProgress, threshold,
 }: {
   icon: React.ElementType; step: string; title: string; desc: string;
-  tag: string; index: number; isLast: boolean;
+  tag: string; link?: TimelineStep["link"]; index: number; isLast: boolean;
   scrollYProgress: MotionValue<number>; threshold: number;
 }) {
   // strokeEnd = genau wenn die Linie den Dot erreicht (= threshold)
@@ -277,7 +299,7 @@ function TimelineStep({
       <div className="md:hidden flex items-start gap-6">
         <TimelineDot Icon={Icon} pathLength={pathLength} activated={activated} />
         <motion.div className="pt-1" {...slideIn(28)}>
-          <ContentBlock step={step} tag={tag} title={title} desc={desc} />
+          <ContentBlock step={step} tag={tag} title={title} desc={desc} link={link} />
         </motion.div>
       </div>
 
@@ -286,7 +308,7 @@ function TimelineStep({
         <div className="pt-1">
           {index % 2 === 0 && (
             <motion.div {...slideIn(-72)}>
-              <ContentBlock step={step} tag={tag} title={title} desc={desc} align="right" />
+              <ContentBlock step={step} tag={tag} title={title} desc={desc} link={link} align="right" />
             </motion.div>
           )}
         </div>
@@ -296,7 +318,7 @@ function TimelineStep({
         <div className="pt-1">
           {index % 2 === 1 && (
             <motion.div {...slideIn(72)}>
-              <ContentBlock step={step} tag={tag} title={title} desc={desc} />
+              <ContentBlock step={step} tag={tag} title={title} desc={desc} link={link} />
             </motion.div>
           )}
         </div>
@@ -349,7 +371,7 @@ function ProcessTimeline() {
 
       {/* Steps — alle bekommen denselben scrollYProgress */}
       <div>
-        {timelineSteps.map(({ icon, step, title, desc, tag }, i) => (
+        {timelineSteps.map(({ icon, step, title, desc, tag, link }, i) => (
           <TimelineStep
             key={step}
             icon={icon}
@@ -357,6 +379,7 @@ function ProcessTimeline() {
             title={title}
             desc={desc}
             tag={tag}
+            link={link}
             index={i}
             isLast={i === TOTAL - 1}
             scrollYProgress={scrollYProgress}
@@ -376,7 +399,6 @@ export function Ablauf() {
     title: t.metaTitle,
     description: t.metaDescription,
   });
-  const navigate = useNavigate();
 
   return (
     <main id="main-content" className="mx-auto max-w-6xl xl:max-w-7xl 2xl:max-w-[1440px] px-5 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 pt-36 sm:pt-44 lg:pt-52 xl:pt-60 2xl:pt-72 pb-12 xl:pb-20 2xl:pb-28">
@@ -390,7 +412,15 @@ export function Ablauf() {
           </span>
         </h1>
         <p className="mt-6 max-w-2xl 2xl:max-w-3xl text-[16px] xl:text-[18px] 2xl:text-[20px] text-ink-300 leading-relaxed">
-          {t.lead}
+          {t.lead}{" "}
+          {t.leadProjects.before}
+          <Link
+            to={lp("/projekte")}
+            className="text-blue-200 underline decoration-blue-400/40 underline-offset-4 transition-colors duration-200 hover:text-blue-100 hover:decoration-blue-100"
+          >
+            {t.leadProjects.link}
+          </Link>
+          {t.leadProjects.after}
         </p>
       </FadeIn>
 
@@ -405,7 +435,7 @@ export function Ablauf() {
           <p className="text-ink-300 text-[15px] xl:text-[16px] 2xl:text-[18px] mb-8 max-w-xl 2xl:max-w-2xl mx-auto">
             {t.ctaText}
           </p>
-          <PrimaryButton onClick={() => navigate(lp("/kontakt"))}>
+          <PrimaryButton to={lp("/kontakt")}>
             {t.ctaButton}
           </PrimaryButton>
         </div>

@@ -42,7 +42,7 @@ export function Card({
       style={{ background: "rgb(var(--blue-400-rgb) / 0.1)", padding: "1px" }}
     >
       <div
-        className={twMerge("group relative overflow-hidden flex-1 p-6 xl:p-8 2xl:p-10", innerClassName)}
+        className={twMerge("group relative overflow-hidden flex-1 flex flex-col p-6 xl:p-8 2xl:p-10", innerClassName)}
         style={{
           background: "linear-gradient(135deg, rgb(var(--ink-900-rgb) / 0.97) 0%, rgb(var(--ink-950-rgb) / 0.99) 100%)",
           borderRadius: "inherit",
@@ -54,7 +54,7 @@ export function Card({
           className="pointer-events-none absolute inset-0"
           style={{ opacity: 0, transition: "opacity 0.3s" }}
         />
-        <div className="relative">{children}</div>
+        <div className="relative flex-1">{children}</div>
       </div>
     </div>
   );

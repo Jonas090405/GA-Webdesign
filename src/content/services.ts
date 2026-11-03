@@ -17,6 +17,7 @@ import cmsImg from "../imports/services/cms.svg";
 import shopImg from "../imports/services/shop.svg";
 import languagesImg from "../imports/services/languages.svg";
 import portalsImg from "../imports/services/portals.svg";
+import emailImg from "../imports/services/email.svg";
 import maintenanceImg from "../imports/services/maintenance.svg";
 
 export type ServiceId =
@@ -33,6 +34,7 @@ export type ServiceId =
   | "shop-buchung"
   | "mehrsprachigkeit"
   | "portale"
+  | "email"
   | "wartung";
 
 /**
@@ -55,6 +57,7 @@ export const MEDIA: Record<ServiceId, { src: string }> = {
   "shop-buchung": { src: shopImg },
   mehrsprachigkeit: { src: languagesImg },
   portale: { src: portalsImg },
+  email: { src: emailImg },
   wartung: { src: maintenanceImg },
 };
 
@@ -70,6 +73,8 @@ export type Service = {
   note?: string;
   /** Interner Anker statt Kontakt-Link, z. B. zu den Wartungspreisen. */
   linkToPrices?: boolean;
+  /** Passende Case Study als interner Link, z. B. { slug: "your-mask", label: "…" }. */
+  caseStudy?: { slug: string; label: string };
 };
 
 export type ServiceGroup = { id: string; title: string; lead: string; items: Service[] };
@@ -138,6 +143,7 @@ export const SERVICE_GROUPS: { de: ServiceGroup[]; en: ServiceGroup[] } = {
       items: [
         {
           id: "seo",
+          caseStudy: { slug: "your-mask", label: "So haben wir SEO für Your Mask umgesetzt" },
           title: "SEO",
           lead: "Damit Google deine Seite versteht und gerne zeigt.",
           body: "Suchmaschinenoptimierung sorgt dafür, dass deine Seite bei Google auftaucht, wenn jemand nach deinen Leistungen sucht. Die technische Grundlage bekommt jede Webseite von uns. Willst du für bestimmte Suchbegriffe in deiner Region weiter nach oben, kümmern wir uns auch laufend darum.",
@@ -191,6 +197,7 @@ export const SERVICE_GROUPS: { de: ServiceGroup[]; en: ServiceGroup[] } = {
         },
         {
           id: "sea",
+          caseStudy: { slug: "your-mask", label: "Google-Ads-Kampagne für Your Mask" },
           title: "SEA (Google Ads)",
           lead: "Sofort oben in den Suchergebnissen.",
           body: "Mit bezahlten Anzeigen erscheinst du bei Google ganz oben, auch wenn deine Seite noch neu ist. Wir richten deine Kampagnen ein, legen Suchbegriffe und Budget mit dir fest und behalten die Kosten im Blick.",
@@ -229,6 +236,7 @@ export const SERVICE_GROUPS: { de: ServiceGroup[]; en: ServiceGroup[] } = {
       items: [
         {
           id: "corporate-design",
+          caseStudy: { slug: "gcn-fahrzeughandel", label: "Corporate Design für GCN-Fahrzeughandel" },
           title: "Corporate Design",
           lead: "Logo, Farben und Schriften aus einem Guss.",
           body: "Jonas entwickelt mit dir das Erscheinungsbild deines Unternehmens. Am Ende hast du ein Logo und klare Regeln für Farben und Schriften, damit Webseite, Visitenkarte und Social Media zusammenpassen.",
@@ -282,6 +290,7 @@ export const SERVICE_GROUPS: { de: ServiceGroup[]; en: ServiceGroup[] } = {
         },
         {
           id: "shop-buchung",
+          caseStudy: { slug: "your-mask", label: "Case Study: Online-Shop für Your Mask" },
           title: "Online-Shop & Buchungssystem",
           lead: "Verkaufen und Termine vergeben, direkt auf deiner Seite.",
           body: "Ob Produkte, Gutscheine oder Termine: Wir binden einen Shop oder ein Buchungssystem ein, das zu deinem Betrieb passt, und gestalten es im Look deiner Webseite.",
@@ -297,6 +306,7 @@ export const SERVICE_GROUPS: { de: ServiceGroup[]; en: ServiceGroup[] } = {
         },
         {
           id: "mehrsprachigkeit",
+          caseStudy: { slug: "your-mask", label: "Zweisprachiger Shop für Your Mask" },
           title: "Mehrsprachigkeit",
           lead: "Deine Seite auch auf Englisch oder in weiteren Sprachen.",
           body: "Wir bauen deine Seite in mehreren Sprachen, mit eigener Adresse je Sprache, damit Google jede Fassung richtig zuordnet. Diese Webseite ist selbst so gebaut.",
@@ -312,16 +322,34 @@ export const SERVICE_GROUPS: { de: ServiceGroup[]; en: ServiceGroup[] } = {
         },
         {
           id: "portale",
+          caseStudy: { slug: "gcn-fahrzeughandel", label: "Admin-Dashboard für GCN-Fahrzeughandel" },
           title: "Portale & Admin-Panels",
           lead: "Eigene Werkzeuge für dich und deine Kunden.",
-          body: "Wenn eine Webseite allein nicht reicht, bauen wir dazu, was dein Ablauf braucht: ein Bewerbungsportal, ein Buchungsportal für deine Kunden, einen Verwaltungsbereich für deine Daten oder die Anbindung an deinen Newsletter.",
+          body: "Wenn eine Webseite allein nicht reicht, bauen wir dazu, was dein Ablauf braucht: ein Bewerbungsportal, ein Buchungsportal für deine Kunden, ein E-Learning-Portal für Schulungen oder einen Verwaltungsbereich für deine Daten.",
           lists: [
             {
               points: [
                 "Bewerbungsportal mit Datei-Upload",
                 "Buchungsportal, z. B. für Termine, Räume oder Kurse",
+                "E-Learning-Portal mit Kursen, Lektionen und Lernfortschritt",
                 "Admin-Panel für deine Inhalte und Daten",
-                "Newsletter-Integration",
+              ],
+            },
+          ],
+        },
+        {
+          id: "email",
+          caseStudy: { slug: "your-mask", label: "Mailverkehr für Your Mask" },
+          title: "E-Mail & Newsletter",
+          lead: "Mails, die ankommen und nach dir aussehen.",
+          body: "Wir richten deine Postfächer auf deiner eigenen Domain ein und sorgen mit SPF, DKIM und DMARC dafür, dass deine Mails im Posteingang landen und nicht im Spam. Formulare und Bestellungen verschicken automatische Bestätigungen, und auf Wunsch bauen wir dir einen Newsletter, alles im Design deiner Marke.",
+          lists: [
+            {
+              points: [
+                "Postfächer und Weiterleitungen auf deiner Domain",
+                "SPF, DKIM und DMARC sauber eingerichtet",
+                "Bestätigungsmails für Formulare und Bestellungen",
+                "Newsletter mit Double-Opt-in, DSGVO-konform",
               ],
             },
           ],
@@ -416,6 +444,7 @@ export const SERVICE_GROUPS: { de: ServiceGroup[]; en: ServiceGroup[] } = {
       items: [
         {
           id: "seo",
+          caseStudy: { slug: "your-mask", label: "How we handled SEO for Your Mask" },
           title: "SEO",
           lead: "So Google understands your site and is happy to show it.",
           body: "Search engine optimization makes sure your site shows up on Google when people look for what you offer. Every website we build gets the technical groundwork. If you want to climb higher for specific search terms in your area, we take care of that on an ongoing basis too.",
@@ -469,6 +498,7 @@ export const SERVICE_GROUPS: { de: ServiceGroup[]; en: ServiceGroup[] } = {
         },
         {
           id: "sea",
+          caseStudy: { slug: "your-mask", label: "Google Ads campaign for Your Mask" },
           title: "SEA (Google Ads)",
           lead: "Straight to the top of the search results.",
           body: "With paid ads, you appear at the very top of Google, even while your site is still new. We set up your campaigns, agree on search terms and budget with you and keep an eye on costs.",
@@ -507,6 +537,7 @@ export const SERVICE_GROUPS: { de: ServiceGroup[]; en: ServiceGroup[] } = {
       items: [
         {
           id: "corporate-design",
+          caseStudy: { slug: "gcn-fahrzeughandel", label: "Corporate design for GCN-Fahrzeughandel" },
           title: "Corporate design",
           lead: "Logo, colors and fonts that belong together.",
           body: "Jonas works with you on your company's visual identity. You end up with a logo and clear rules for colors and fonts, so your website, business cards and social media all fit together.",
@@ -560,6 +591,7 @@ export const SERVICE_GROUPS: { de: ServiceGroup[]; en: ServiceGroup[] } = {
         },
         {
           id: "shop-buchung",
+          caseStudy: { slug: "your-mask", label: "Case study: online shop for Your Mask" },
           title: "Online store & booking system",
           lead: "Sell and take bookings right on your site.",
           body: "Whether it's products, gift cards or appointments: we add a store or booking system that fits your business and design it to match your website.",
@@ -575,6 +607,7 @@ export const SERVICE_GROUPS: { de: ServiceGroup[]; en: ServiceGroup[] } = {
         },
         {
           id: "mehrsprachigkeit",
+          caseStudy: { slug: "your-mask", label: "Bilingual shop for Your Mask" },
           title: "Multilingual sites",
           lead: "Your site in English or other languages too.",
           body: "We build your site in several languages, with its own address for each one, so Google files every version correctly. This website is built exactly that way.",
@@ -590,16 +623,34 @@ export const SERVICE_GROUPS: { de: ServiceGroup[]; en: ServiceGroup[] } = {
         },
         {
           id: "portale",
+          caseStudy: { slug: "gcn-fahrzeughandel", label: "Admin dashboard for GCN-Fahrzeughandel" },
           title: "Portals & admin panels",
           lead: "Your own tools for you and your customers.",
-          body: "When a website alone isn't enough, we build what your workflow needs: a job application portal, a booking portal for your customers, an admin area for your data or a connection to your newsletter.",
+          body: "When a website alone isn't enough, we build what your workflow needs: a job application portal, a booking portal for your customers, an e-learning portal for training or an admin area for your data.",
           lists: [
             {
               points: [
                 "Job application portal with file upload",
                 "Booking portal, e.g. for appointments, rooms or classes",
+                "E-learning portal with courses, lessons and progress tracking",
                 "Admin panel for your content and data",
-                "Newsletter integration",
+              ],
+            },
+          ],
+        },
+        {
+          id: "email",
+          caseStudy: { slug: "your-mask", label: "Email setup for Your Mask" },
+          title: "Email & newsletter",
+          lead: "Emails that arrive and look like you.",
+          body: "We set up your mailboxes on your own domain and use SPF, DKIM and DMARC to make sure your emails land in the inbox, not in spam. Forms and orders send automatic confirmations, and if you like, we build you a newsletter, all in your brand's design.",
+          lists: [
+            {
+              points: [
+                "Mailboxes and forwarding on your domain",
+                "SPF, DKIM and DMARC set up properly",
+                "Confirmation emails for forms and orders",
+                "Newsletter with double opt-in, GDPR-compliant",
               ],
             },
           ],

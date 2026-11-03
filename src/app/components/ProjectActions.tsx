@@ -41,6 +41,7 @@ export function ProjectActions({
           style={{ background: "var(--gradient-cta)" }}
         >
           {t.caseStudy}
+          <span className="sr-only">: {project.title}</span>
           <ArrowRight size={14} className="transition-transform duration-200 group-hover/btn:translate-x-0.5" aria-hidden />
         </Link>
       )}
