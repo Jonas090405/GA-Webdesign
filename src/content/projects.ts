@@ -20,6 +20,7 @@ import type { ServiceId } from "./services";
 
 import gcnVideo from "../imports/GCN-Projekt.mp4";
 import gcnAvatar from "../imports/gcn-avatar.jpeg";
+import doganAvatar from "../imports/dogan-avatar.jpeg";
 import gcnHero from "../imports/projects/gcn/home-hero.webp";
 // GCN: Loops echter Interaktionen; Standbild = erstes Videobild
 import gcnAuftraege from "../imports/projects/gcn/loop-auftraege-poster.webp";
@@ -177,6 +178,7 @@ export const PROJECTS: Project[] = [
       name: "Dogan Yüksel",
       role: "Geschäftsführung",
       company: "YOUR MASK",
+      avatar: doganAvatar,
     },
     caseStudy: {
       challenge:
