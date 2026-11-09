@@ -12,13 +12,12 @@ dnf install -y --skip-broken \
 npm install
 
 # npm führt den Postinstall-Download von Puppeteer nicht mehr automatisch aus
-# (allowScripts). Chrome daher ausdrücklich laden – Zielordner: .puppeteerrc.cjs
-# Vercel setzt evtl. PUPPETEER_SKIP_*-Variablen, die den Download stumm überspringen.
-echo "Puppeteer-Variablen im Build: $(env | grep -o '^PUPPETEER[A-Z_]*' | tr '\n' ' ')"
+# (allowScripts). Chrome daher direkt über @puppeteer/browsers laden, in genau
+# der Version, die Puppeteer erwartet, und in den Ordner aus .puppeteerrc.cjs.
+CHROME_VERSION=$(node -e "import('puppeteer-core/lib/esm/puppeteer/revisions.js').then(m => console.log(m.PUPPETEER_REVISIONS.chrome))")
 rm -rf .cache/puppeteer
-env -u PUPPETEER_SKIP_DOWNLOAD -u PUPPETEER_SKIP_CHROME_DOWNLOAD \
-  -u PUPPETEER_SKIP_CHROMIUM_DOWNLOAD -u PUPPETEER_SKIP_CHROME_HEADLESS_SHELL_DOWNLOAD \
-  npx puppeteer browsers install chrome
+npx browsers install "chrome@$CHROME_VERSION" --path "$PWD/.cache/puppeteer"
+
 CHROME=$(node -e "import('puppeteer').then(p => console.log(p.default.executablePath()))")
 echo "Chrome für Prerendering: $CHROME"
 test -x "$CHROME"
