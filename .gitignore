@@ -29,3 +29,6 @@ dist
 
 # Roh-Videomaterial (zu groß fürs Repo)
 media-quellen
+
+# Vercel
+.vercel

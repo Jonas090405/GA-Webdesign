@@ -38,13 +38,18 @@ export function NotFound() {
   });
 
   // 404-Seiten sollen nicht in den Google-Index
+  // (vorhandenes Tag umschreiben statt ein zweites, widersprüchliches anzuhängen)
   useEffect(() => {
-    const meta = document.createElement("meta");
-    meta.name = "robots";
+    let meta = document.head.querySelector<HTMLMetaElement>('meta[name="robots"]');
+    if (!meta) {
+      meta = document.createElement("meta");
+      meta.name = "robots";
+      document.head.appendChild(meta);
+    }
+    const previous = meta.content;
     meta.content = "noindex";
-    document.head.appendChild(meta);
     return () => {
-      document.head.removeChild(meta);
+      meta.content = previous || "index, follow";
     };
   }, []);
 

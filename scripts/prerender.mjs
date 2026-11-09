@@ -26,7 +26,11 @@ const EN_PATHS = {
 const toEnglish = (route) =>
   EN_PATHS[route] ?? route.replace(/^\/projekte\//, '/en/projects/');
 
-const ROUTES = [...DE_ROUTES, ...DE_ROUTES.map(toEnglish)];
+// '/404' gibt es nicht als Route → React rendert die NotFound-Seite.
+// Sie landet als dist/404.html, die Vercel für unbekannte URLs mit Status 404 ausliefert.
+const NOT_FOUND_ROUTE = '/404';
+
+const ROUTES = [...DE_ROUTES, ...DE_ROUTES.map(toEnglish), NOT_FOUND_ROUTE];
 const PORT = 3033;
 const distDir = join(process.cwd(), 'dist');
 
@@ -90,6 +94,8 @@ for (const route of ROUTES) {
 
   if (route === '/') {
     writeFileSync(join(distDir, 'index.html'), html, 'utf-8');
+  } else if (route === NOT_FOUND_ROUTE) {
+    writeFileSync(join(distDir, '404.html'), html, 'utf-8');
   } else {
     const dir = join(distDir, route.slice(1));
     mkdirSync(dir, { recursive: true });
