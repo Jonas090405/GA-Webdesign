@@ -11,6 +11,8 @@ dnf install -y --skip-broken \
 
 npm install
 
-# node_modules kommt auf Vercel oft aus dem Build-Cache – dann läuft der
-# Postinstall-Download von Puppeteer nicht. Chrome daher ausdrücklich holen.
+# npm führt den Postinstall-Download von Puppeteer nicht mehr automatisch aus
+# (allowScripts), und Vercels Cache kann einen halbfertigen Chrome-Ordner
+# enthalten. Daher sauber neu laden.
+rm -rf "$HOME/.cache/puppeteer"
 npx puppeteer browsers install chrome
