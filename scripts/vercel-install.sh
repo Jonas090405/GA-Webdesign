@@ -12,7 +12,7 @@ dnf install -y --skip-broken \
 npm install
 
 # npm führt den Postinstall-Download von Puppeteer nicht mehr automatisch aus
-# (allowScripts), und Vercels Cache kann einen halbfertigen Chrome-Ordner
-# enthalten. Daher sauber neu laden.
-rm -rf "$HOME/.cache/puppeteer"
+# (allowScripts). Chrome daher ausdrücklich laden – Zielordner: .puppeteerrc.cjs
+rm -rf .cache/puppeteer
 npx puppeteer browsers install chrome
+echo "Chrome für Prerendering: $(node -e "import('puppeteer').then(p => console.log(p.default.executablePath()))")"

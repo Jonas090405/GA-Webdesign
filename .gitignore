@@ -32,3 +32,6 @@ media-quellen
 
 # Vercel
 .vercel
+
+# Puppeteer-Chrome auf Vercel (siehe .puppeteerrc.cjs)
+.cache
