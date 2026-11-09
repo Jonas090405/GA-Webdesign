@@ -10,3 +10,7 @@ dnf install -y --skip-broken \
   mesa-libgbm alsa-lib pango cairo >/dev/null
 
 npm install
+
+# node_modules kommt auf Vercel oft aus dem Build-Cache – dann läuft der
+# Postinstall-Download von Puppeteer nicht. Chrome daher ausdrücklich holen.
+npx puppeteer browsers install chrome
