@@ -1,101 +1,44 @@
-# Hosting Setup — Gissler Webdesign
+# Hosting – ga-webdesign.de
 
-## Übersicht: 2 separate GitHub Repos
+Die Seite läuft auf **Vercel** (Team „GA Webdesign“, Projekt `ga-webdesign`),
+verbunden mit dem GitHub-Repo `Jonas090405/GA-Webdesign`.
 
-| Repo | Inhalt | Domain |
-|---|---|---|
-| `jonas090405/gissler-webdesign` | Dieser Ordner (Hauptseite) | `gissler-webdesign.de` |
-| `jonas090405/portfolio` | Nur der `Portfolio/` Ordner | `portfolio.gissler-webdesign.de` |
+- Push auf `main` → Production-Deployment auf ga-webdesign.de
+- Push auf jeden anderen Branch → Preview-Deployment (eigene URL, Vercel-Login nötig)
 
----
+## Build
 
-## Schritt 1 — Strato DNS einrichten
+Konfiguration steht in `vercel.json`:
 
-Im Strato-Kundenbereich → Domain → DNS-Einstellungen:
-
-### A-Records (Apex-Domain → GitHub Pages)
-| Typ | Name | Wert |
-|---|---|---|
-| A | @ | 185.199.108.153 |
-| A | @ | 185.199.109.153 |
-| A | @ | 185.199.110.153 |
-| A | @ | 185.199.111.153 |
-
-### CNAME-Records
-| Typ | Name | Wert |
-|---|---|---|
-| CNAME | www | jonas090405.github.io. |
-| CNAME | portfolio | jonas090405.github.io. |
-
-> ⚠️ Den Punkt am Ende bei den CNAME-Werten mitschreiben, falls Strato ihn verlangt.
-
----
-
-## Schritt 2 — Haupt-Repo (gissler-webdesign.de)
-
-### 2a — GitHub Repo einrichten
-1. Neues Repo auf GitHub: `jonas090405/gissler-webdesign`
-2. Diesen Ordner pushen (ohne `Portfolio/` – der ist separat)
-
-### 2b — GitHub Pages aktivieren
-1. Repo → Settings → Pages
-2. Source: **GitHub Actions** (nicht "Deploy from branch")
-
-### 2c — Secrets setzen
-Repo → Settings → Secrets and variables → Actions → New repository secret:
-
-| Name | Wert |
+| Schritt | Befehl |
 |---|---|
-| `VITE_EMAILJS_SERVICE_ID` | aus deiner `.env` |
-| `VITE_EMAILJS_TEMPLATE_ID` | aus deiner `.env` |
-| `VITE_EMAILJS_PUBLIC_KEY` | aus deiner `.env` |
-| `VITE_GA_MEASUREMENT_ID` | aus deiner `.env` |
+| Install | `sh scripts/vercel-install.sh` – installiert Chrome-Systembibliotheken (dnf), npm-Pakete und Chrome für Puppeteer |
+| Build | `npm run build` – Vite-Build, danach `scripts/prerender.mjs` (alle DE/EN-Seiten + `404.html`) |
+| Output | `dist` |
 
-### 2d — Custom Domain
-1. Repo → Settings → Pages → Custom domain: `gissler-webdesign.de`
-2. "Enforce HTTPS" aktivieren (nach DNS-Propagation)
+- Node-Version ist über `engines` in `package.json` auf **22.x** festgelegt. Mit Node 26 bricht der Chrome-Download ab.
+- `.puppeteerrc.cjs` legt Chrome auf Vercel in `.cache/puppeteer` im Projekt ab.
+- URLs ohne Slash am Ende (`/kontakt`), `/kontakt/` leitet mit 308 weiter.
+- Unbekannte URLs liefern die vorgerenderte NotFound-Seite mit Status 404.
 
----
+## Umgebungsvariablen
 
-## Schritt 3 — Portfolio-Repo (portfolio.gissler-webdesign.de)
+In Vercel → Project Settings → Environment Variables (Production + Preview):
 
-### 3a — Neues Repo erstellen
-1. Neues Repo: `jonas090405/portfolio`
-2. Navigiere in den `Portfolio/` Ordner
-3. Git init & push:
-```
-cd Portfolio
-git init
-git add .
-git commit -m "Initial portfolio deploy"
-git remote add origin https://github.com/jonas090405/portfolio.git
-git push -u origin main
-```
+`VITE_EMAILJS_SERVICE_ID`, `VITE_EMAILJS_TEMPLATE_ID`, `VITE_EMAILJS_AUTOREPLY_TEMPLATE_ID`,
+`VITE_EMAILJS_PUBLIC_KEY`, `VITE_GA_MEASUREMENT_ID`
 
-### 3b — GitHub Pages aktivieren
-1. Repo → Settings → Pages
-2. Source: **GitHub Actions**
+Lokal stehen dieselben Werte in `.env.local` (nicht im Repo).
 
-### 3c — Custom Domain
-1. Repo → Settings → Pages → Custom domain: `portfolio.gissler-webdesign.de`
-2. "Enforce HTTPS" aktivieren
+## Domain & DNS (Strato)
 
-> Der Workflow in `.github/workflows/static.yml` baut TradeRepublicXshisha und Forged automatisch neu und deployed dann alles.
+DNS bleibt bei Strato. Nur diese Einträge zeigen auf Vercel:
 
----
+| Typ | Name | Wert |
+|---|---|---|
+| A | @ | 216.150.1.1 |
+| A | @ | 216.150.16.1 |
+| CNAME | www | a5ffb6f7ca5e88c6.vercel-dns-016.com. |
 
-## Was automatisch passiert (nach Setup)
-
-- Jeder Push auf `main` im Haupt-Repo → Hauptseite wird automatisch gebaut & deployed
-- Jeder Push auf `main` im Portfolio-Repo → Portfolio wird automatisch deployed
-- HTTPS wird von GitHub Pages automatisch bereitgestellt
-
----
-
-## DNS-Propagation
-
-Kann 15 Minuten bis 48 Stunden dauern. Testen mit:
-```
-nslookup gissler-webdesign.de
-nslookup portfolio.gissler-webdesign.de
-```
+`www.ga-webdesign.de` leitet in Vercel per 308 auf `ga-webdesign.de` um.
+MX- und TXT-Einträge (Strato-Mail, SPF, Google-/Anthropic-Verifizierung) bleiben unverändert.
