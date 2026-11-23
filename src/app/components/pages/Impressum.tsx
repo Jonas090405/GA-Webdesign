@@ -101,8 +101,6 @@ export function Impressum() {
               Steuer
             </div>
             <div className="text-ink-100 text-[15px] leading-[1.9]">
-              Steuernummer: 22191 / 13770
-              <br />
               Umsatzsteuer-ID: DE462788107
             </div>
           </Card>
