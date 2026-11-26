@@ -2,8 +2,9 @@
  * Fotos aus dem Team-Shooting (November 2026), zentral an einer Stelle.
  *
  * Zuschnitte liegen als WebP ohne EXIF/GPS unter `src/imports/team/`
- * (Dateiname = Motiv + Breite in Pixeln). Kommen gegradete Versionen,
- * werden nur die Dateien gleichen Namens ersetzt – der Code bleibt.
+ * (Dateiname = Motiv + Breite in Pixeln), exportiert aus den gegradeten
+ * Finals („G&A Colorgraded (N).jpg“). Neue Versionen ersetzen nur die
+ * Dateien gleichen Namens – der Code bleibt.
  */
 import jonasPortrait from "../imports/team/jonas-portrait-800.webp";
 import berkantPortrait from "../imports/team/berkant-portrait-800.webp";

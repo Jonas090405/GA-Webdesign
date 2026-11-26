@@ -15,7 +15,7 @@ const ANSATZ: { de: AnsatzItem[]; en: AnsatzItem[] } = {
   de: [
     {
       photo: PHOTO.arbeitWhiteboard,
-      alt: "Berkant Agyar und Jonas Gissler planen am Whiteboard den Aufbau einer Webseite",
+      alt: "Jonas Gissler skizziert am Whiteboard den Aufbau einer Webseite, Berkant Agyar schaut mit",
       t: "Individuell & klar",
       d: "Deine Webseite hebt sich von der Masse ab, statt nach Baukasten auszusehen. Und deine Kunden verstehen trotzdem sofort, was du anbietest.",
     },
@@ -35,7 +35,7 @@ const ANSATZ: { de: AnsatzItem[]; en: AnsatzItem[] } = {
   en: [
     {
       photo: PHOTO.arbeitWhiteboard,
-      alt: "Berkant Agyar and Jonas Gissler planning the structure of a website on a whiteboard",
+      alt: "Jonas Gissler sketching the structure of a website on a whiteboard while Berkant Agyar looks on",
       t: "Unique & clear",
       d: "Your website stands out from the crowd instead of looking like a template. And your customers still see right away what you offer.",
     },
