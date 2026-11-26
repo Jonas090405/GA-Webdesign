@@ -32,8 +32,7 @@ import { ContactForm, BERKANT_EMAIL, BERKANT_PHONE, BERKANT_TEL, useWhatsAppLink
 import { DirectContactCard } from "../DirectContactCard";
 import { WhatsAppIcon } from "../WhatsAppIcon";
 import { PROJECTS } from "../../../content/projects";
-import profilbild from "../../../imports/Jonas_Gissler.jpg";
-import berkantImg from "../../../imports/Berkant_agyar.jpeg";
+import { AVATAR, PORTRAIT } from "../../teamPhotos";
 import { useCopy, useLocalePath } from "../../../i18n";
 import { ProjectServicePills } from "../ProjectServices";
 import type { ServiceId } from "../../../content/services";
@@ -329,14 +328,14 @@ const BERKANT_LINKEDIN = "https://www.linkedin.com/in/berkant-agyar-2334a6363";
 const MEMBERS = {
   de: [
     {
-      photo: profilbild,
+      photo: PORTRAIT.jonas,
       name: "Jonas Gissler",
       role: "Design & Frontend",
       desc: "Gestaltet deine Webseite und auf Wunsch dein Corporate Design – und setzt alles im Frontend um. Also das, was deine Kunden sehen und erleben.",
       linkedin: JONAS_LINKEDIN,
     },
     {
-      photo: berkantImg,
+      photo: PORTRAIT.berkant,
       name: "Berkant Agyar",
       role: "Backend & Kundenkontakt",
       desc: "Dein Ansprechpartner von der Anfrage bis zum Livegang. Sorgt im Backend dafür, dass Formulare, CMS und Hosting zuverlässig laufen.",
@@ -345,14 +344,14 @@ const MEMBERS = {
   ],
   en: [
     {
-      photo: profilbild,
+      photo: PORTRAIT.jonas,
       name: "Jonas Gissler",
       role: "Design & Frontend",
       desc: "Designs your website and, if you want, your corporate design – then builds it all on the frontend. That's everything your customers see and experience.",
       linkedin: JONAS_LINKEDIN,
     },
     {
-      photo: berkantImg,
+      photo: PORTRAIT.berkant,
       name: "Berkant Agyar",
       role: "Backend & Client Contact",
       desc: "Your point of contact from first inquiry to launch. On the backend, he makes sure forms, CMS and hosting run reliably.",
@@ -378,7 +377,7 @@ function Member({
     <article>
       <PortraitRing
         photo={photo}
-        alt={name}
+        alt={`${name}, ${role}`}
         spin={spin}
         duration={spin === 1 ? 18 : 22}
         className="h-52 w-52 sm:h-56 sm:w-56 xl:h-64 xl:w-64 2xl:h-72 2xl:w-72"
@@ -467,16 +466,16 @@ function Contact() {
           </h2>
 
           {/* Ansprechpartner */}
-          <div className="flex items-center gap-3 mb-5 xl:mb-6">
+          <div className="flex items-center gap-4 xl:gap-5 mb-6 xl:mb-8">
             <div
-              className="shrink-0 h-9 w-9 rounded-full overflow-hidden"
+              className="shrink-0 h-14 w-14 xl:h-16 xl:w-16 rounded-full overflow-hidden"
               style={{ border: "1.5px solid rgb(var(--blue-400-rgb) / 0.4)" }}
             >
-              <img src={berkantImg} alt="Berkant Agyar" loading="lazy" decoding="async" className="h-full w-full object-cover object-top" />
+              <img src={AVATAR.berkant} alt="Berkant Agyar" width={192} height={192} loading="lazy" decoding="async" className="h-full w-full object-cover" />
             </div>
             <div>
-              <div className="text-[11px] text-ink-400">{t.yourContact}</div>
-              <div className="text-[13px] text-white font-medium leading-tight">Berkant Agyar</div>
+              <div className="text-[13px] xl:text-[14px] text-ink-400">{t.yourContact}</div>
+              <div className="mt-0.5 text-[16px] xl:text-[18px] text-white font-medium leading-tight">Berkant Agyar</div>
             </div>
           </div>
 

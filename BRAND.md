@@ -127,7 +127,10 @@ Zahlen und Fakten nur, wenn sie belegbar sind.
 
 **Bild**
 - Schwarzwald bei Nacht oder Dämmerung, Nebel, Tannen. Darüber feine Lichtlinien (Netzwerk) in Blau 400.
-- Personenfotos: natürlich, kein Studio-Look, rund im `PortraitRing`.
+- Personenfotos: natürlich, kein Studio-Look. Porträts rund im `PortraitRing`.
+- Arbeits- und Duo-Fotos eckig über `Photo` (`Photo.tsx`): Radius `--radius-lg` (16 px), in Karten `--radius-md` (12 px), 1 px Rand `blue-400/12`, keine weiteren Effekte. Formate 3:2, 4:3, 4:5, 21:9.
+- Alle Team-Fotos stehen zentral in `src/app/teamPhotos.ts`, die Dateien unter `src/imports/team/` (WebP, ohne EXIF/GPS, Name = Motiv + Breite). Gegradete Versionen ersetzen nur die Dateien gleichen Namens.
+- Whiteboards und Bildschirme mit Kundendaten vor der Veröffentlichung unkenntlich machen.
 - KI-Clips (Higgsfield) auf **pechschwarzem Grund** generieren und mit `mix-blend-mode: screen` einbinden – so verschwindet der Hintergrund ohne Alpha-Video.
 - Illustrationen groß und freigestellt auf der Kachel, keine kleinen Icons in Boxen.
 

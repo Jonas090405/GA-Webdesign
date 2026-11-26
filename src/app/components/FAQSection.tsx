@@ -6,7 +6,7 @@
  */
 import { useState, useRef, useId } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import berkantImg from "../../imports/Berkant_agyar.jpeg";
+import { AVATAR } from "../teamPhotos";
 import { FadeIn } from "./FadeIn";
 import { WhatsAppIcon } from "./WhatsAppIcon";
 import { useWhatsAppLink } from "./ContactForm";
@@ -31,7 +31,7 @@ const FAQS: { de: FAQ[]; en: FAQ[] } = {
   },
   {
     q: "Macht ihr auch Video- und Fotoproduktionen?",
-    a: "Ja. Dafür arbeiten wir mit professionellen Partnern zusammen, die Video- und Fotoproduktionen für dich umsetzen – vom Dreh bzw. Shooting bis zur fertigen Post-Production. Ob für deine neue Webseite oder ganz unabhängig davon, z. B. für Social Media oder Werbung. Die komplette Planung und Kommunikation mit unseren Partnern übernehmen wir – du hast damit keinen zusätzlichen Aufwand und nur einen Ansprechpartner.",
+    a: "Ja, gemeinsam mit professionellen Partnern – vom Dreh bzw. Shooting bis zur fertigen Post-Production. Ob für deine Webseite, Social Media oder Werbung: Planung und Abstimmung übernehmen wir, du hast nur einen Ansprechpartner.",
   },
   {
     q: "Wie läuft die Bezahlung ab?",
@@ -97,7 +97,7 @@ const FAQS: { de: FAQ[]; en: FAQ[] } = {
     },
     {
       q: "Do you also do video and photo production?",
-      a: "Yes. We work with professional partners who handle video and photo production for you – from the shoot to finished post-production. Whether it's for your new website or something separate, like social media or advertising. We take care of all the planning and communication with our partners. That means no extra work for you and just one person to talk to.",
+      a: "Yes, together with professional partners – from the shoot to finished post-production. Whether for your website, social media or advertising: we handle the planning and coordination, so you only have one person to talk to.",
     },
     {
       q: "How does payment work?",
@@ -493,18 +493,18 @@ export function FAQSection({
       {showContactCTA && (
         <div className="mt-14 xl:mt-16 flex flex-col sm:flex-row sm:items-center justify-between gap-5">
           {/* Ansprechpartner */}
-          <div className="flex items-center gap-3.5">
+          <div className="flex items-center gap-4 xl:gap-5">
             <div
-              className="shrink-0 h-10 w-10 rounded-full overflow-hidden"
+              className="shrink-0 h-14 w-14 xl:h-16 xl:w-16 rounded-full overflow-hidden"
               style={{ border: "1.5px solid rgb(var(--blue-400-rgb) / 0.38)" }}
             >
-              <img src={berkantImg} alt="Berkant Agyar" loading="lazy" decoding="async" className="h-full w-full object-cover object-top" />
+              <img src={AVATAR.berkant} alt="Berkant Agyar" width={192} height={192} loading="lazy" decoding="async" className="h-full w-full object-cover" />
             </div>
             <div>
-              <div className="text-white font-semibold text-[14px] xl:text-[15px] leading-tight">
+              <div className="text-white font-semibold text-[16px] xl:text-[18px] leading-tight">
                 Berkant Agyar
               </div>
-              <div className="text-[12px] xl:text-[13px] mt-0.5 text-ink-300">
+              <div className="text-[13px] xl:text-[15px] mt-1 text-ink-300">
                 {t.ctaText}
               </div>
             </div>

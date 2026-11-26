@@ -7,6 +7,8 @@ import { Link } from "react-router-dom";
 import { useCopy, useLocalePath } from "../../../i18n";
 import { useScroll, useSpring, useTransform, motion } from "motion/react";
 import type { MotionValue } from "motion/react";
+import { Photo } from "../Photo";
+import { PHOTO } from "../../teamPhotos";
 
 type TimelineStep = {
   icon: React.ElementType;
@@ -137,6 +139,7 @@ const COPY = {
     h1: "Von der ersten Idee bis zur",
     h1Accent: "fertigen Webseite.",
     lead: "Du weißt jederzeit, wo wir stehen. Regelmäßige Feedbackschleifen stellen sicher, dass wir am Ende genau das Ergebnis haben, das du dir vorstellst.",
+    photoAlt: "Jonas Gissler und Berkant Agyar planen am Whiteboard die Schritte eines Webprojekts",
     leadProjects: { before: "Wie das Ergebnis aussehen kann, siehst du in ", link: "unseren Projekten", after: "." },
     ctaTitle: "Bereit loszulegen?",
     ctaText: "Erzähl uns kurz von deinem Projekt – das Erstgespräch ist kostenlos und unverbindlich.",
@@ -149,6 +152,7 @@ const COPY = {
     h1: "From the first idea to the",
     h1Accent: "finished website.",
     lead: "You always know where things stand. Regular feedback rounds make sure we end up with exactly the result you have in mind.",
+    photoAlt: "Jonas Gissler and Berkant Agyar planning the steps of a web project on a whiteboard",
     leadProjects: { before: "See what the result can look like in ", link: "our projects", after: "." },
     ctaTitle: "Ready to get started?",
     ctaText: "Tell us a little about your project – the first call is free and there's no obligation.",
@@ -422,6 +426,14 @@ export function Ablauf() {
           </Link>
           {t.leadProjects.after}
         </p>
+      </FadeIn>
+
+      <FadeIn delay={0.1} className="mt-14 xl:mt-20 2xl:mt-24">
+        <Photo
+          photo={PHOTO.ablaufPlanung}
+          alt={t.photoAlt}
+          sizes="(min-width: 1536px) 1300px, 92vw"
+        />
       </FadeIn>
 
       <ProcessTimeline />

@@ -715,7 +715,7 @@ function VideoHero() {
       </div>
 
       <div className={`${CONTAINER} relative w-full`}>
-        <div className="max-w-3xl">
+        <div className="max-w-3xl 2xl:max-w-4xl">
           <FadeIn>
             <HeadlineCopy />
           </FadeIn>

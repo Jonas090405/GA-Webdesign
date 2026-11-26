@@ -11,7 +11,8 @@ import { ContactForm, BERKANT_EMAIL, BERKANT_PHONE, BERKANT_TEL, useWhatsAppLink
 import { useCopy } from "../../../i18n";
 import { ContactLine } from "../ContactLine";
 import { LocationMap, LOCATION_ANCHOR } from "../LocationMap";
-import berkantImg from "../../../imports/Berkant_agyar.jpeg";
+import { Photo } from "../Photo";
+import { AVATAR, PHOTO } from "../../teamPhotos";
 
 type ContactMode = "form" | "direct";
 
@@ -28,6 +29,7 @@ const COPY = {
     h1Start: "Erzähl uns von",
     h1Accent: "deinem Projekt.",
     contactPerson: "Dein Ansprechpartner",
+    photoAlt: "Porträt von Berkant Agyar, deinem Ansprechpartner bei G&A Webdesign",
     intro: "Wir melden uns innerhalb von 24 Stunden mit einer ersten Einschätzung und einem unverbindlichen Termin.",
     emailLabel: "E-Mail",
     whatsappValue: "Nachricht schreiben",
@@ -43,6 +45,7 @@ const COPY = {
     h1Start: "Tell us about",
     h1Accent: "your project.",
     contactPerson: "Your contact",
+    photoAlt: "Portrait of Berkant Agyar, your contact at G&A Webdesign",
     intro: "We'll get back to you within 24 hours with an initial assessment and a no-obligation meeting.",
     emailLabel: "Email",
     whatsappValue: "Send a message",
@@ -77,16 +80,17 @@ export function Kontakt() {
         </h1>
 
         {/* Ansprechpartner */}
-        <div className="flex items-center gap-3 mb-6 2xl:mb-8">
+        {/* Ab md zeigt die Info-Spalte das große Foto – hier nur auf dem Handy. */}
+        <div className="flex md:hidden items-center gap-4 mb-7">
           <div
-            className="shrink-0 h-9 w-9 rounded-full overflow-hidden"
+            className="shrink-0 h-14 w-14 rounded-full overflow-hidden"
             style={{ border: "1.5px solid rgb(var(--blue-400-rgb) / 0.4)" }}
           >
-            <img src={berkantImg} alt="Berkant Agyar" className="h-full w-full object-cover object-top" />
+            <img src={AVATAR.berkant} alt="Berkant Agyar" width={192} height={192} className="h-full w-full object-cover" />
           </div>
           <div>
-            <div className="text-[11px] text-ink-400">{t.contactPerson}</div>
-            <div className="text-[13px] text-white font-medium leading-tight">Berkant Agyar</div>
+            <div className="text-[13px] text-ink-400">{t.contactPerson}</div>
+            <div className="mt-0.5 text-[16px] text-white font-medium leading-tight">Berkant Agyar</div>
           </div>
         </div>
 
@@ -98,6 +102,16 @@ export function Kontakt() {
       <div className="grid gap-10 md:gap-14 2xl:gap-20 md:grid-cols-5 items-start">
         {/* Info-Spalte */}
         <FadeIn className="md:col-span-2 space-y-4">
+          <figure className="hidden md:block !mb-8 2xl:!mb-10">
+            <Photo
+              photo={PHOTO.berkantKontakt}
+              alt={t.photoAlt}
+              sizes="(min-width: 1536px) 500px, 36vw"
+            />
+            <figcaption className="mt-4 text-[14px] 2xl:text-[15px] text-ink-400">
+              <span className="text-white text-[16px] 2xl:text-[17px] font-medium">Berkant Agyar</span> · {t.contactPerson}
+            </figcaption>
+          </figure>
           <ContactLine
             Icon={Mail}
             label={t.emailLabel}
