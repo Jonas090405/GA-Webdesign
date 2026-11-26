@@ -12,7 +12,7 @@
 import { useEffect, useState } from "react";
 import { motion, type Variants } from "motion/react";
 import { useLocation } from "react-router-dom";
-import { FadeIn } from "./FadeIn";
+import { FadeIn, FadeInGroup } from "./FadeIn";
 import { CheckItem } from "./CheckItem";
 import { TertiaryButton } from "./Button";
 import { MEDIA, SERVICE_GROUPS, type Service, type ServiceId } from "../../content/services";
@@ -50,7 +50,8 @@ export function ServiceList() {
   return (
     <div className="space-y-20 xl:space-y-28">
       {groups.map((group) => (
-        <section
+        <FadeInGroup
+          as="section"
           key={group.id}
           id={group.id}
           aria-labelledby={`${group.id}-heading`}
@@ -80,7 +81,7 @@ export function ServiceList() {
               ))}
             </ul>
           </FadeIn>
-        </section>
+        </FadeInGroup>
       ))}
     </div>
   );

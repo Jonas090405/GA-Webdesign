@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "motion/react";
 import { SectionHeader } from "../SectionHeader";
 import { GhostButton, TertiaryButton } from "../Button";
 import { Card } from "../Card";
-import { FadeIn } from "../FadeIn";
+import { FadeIn, FadeInGroup } from "../FadeIn";
 import { PortfolioScrollSection } from "../PortfolioScrollSection";
 import { HeroFlight } from "../HeroFlight";
 import { Link } from "react-router-dom";
@@ -458,7 +458,7 @@ function Contact() {
 
   return (
     <section id="kontakt" className="py-12 sm:py-10 lg:py-14 xl:py-18 2xl:py-24">
-      <div className="grid gap-10 md:gap-12 xl:gap-20 2xl:gap-28 md:grid-cols-2 items-start">
+      <FadeInGroup className="grid gap-10 md:gap-12 xl:gap-20 2xl:gap-28 md:grid-cols-2 items-start">
         <FadeIn>
           <h2 className="text-white text-[clamp(26px,4vw,64px)] tracking-tight mb-4 xl:mb-5">
             {t.contactTitle}{" "}
@@ -555,7 +555,7 @@ function Contact() {
           </AnimatePresence>
           </div>
         </FadeIn>
-      </div>
+      </FadeInGroup>
     </section>
   );
 }

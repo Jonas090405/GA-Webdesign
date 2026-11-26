@@ -2,7 +2,7 @@ import { useState } from "react";
 import { usePageMeta } from "../../hooks/usePageMeta";
 import { motion, AnimatePresence } from "motion/react";
 import { Card } from "../Card";
-import { FadeIn } from "../FadeIn";
+import { FadeIn, FadeInGroup } from "../FadeIn";
 import { Mail, MapPin, Phone } from "lucide-react";
 import { WhatsAppIcon } from "../WhatsAppIcon";
 import { DirectContactCard } from "../DirectContactCard";
@@ -99,7 +99,7 @@ export function Kontakt() {
         </p>
       </FadeIn>
 
-      <div className="grid gap-10 md:gap-14 2xl:gap-20 md:grid-cols-5 items-start">
+      <FadeInGroup className="grid gap-10 md:gap-14 2xl:gap-20 md:grid-cols-5 items-start">
         {/* Info-Spalte */}
         <FadeIn className="md:col-span-2 space-y-4">
           <figure className="hidden md:block !mb-8 2xl:!mb-10">
@@ -174,7 +174,7 @@ export function Kontakt() {
             </AnimatePresence>
           </div>
         </FadeIn>
-      </div>
+      </FadeInGroup>
 
       <LocationMap className="mt-20 2xl:mt-28" />
 

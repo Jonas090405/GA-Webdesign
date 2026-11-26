@@ -1,7 +1,7 @@
 import { usePageMeta } from "../../hooks/usePageMeta";
 import { motion } from "motion/react";
 import { PrimaryButton } from "../Button";
-import { FadeIn } from "../FadeIn";
+import { FadeIn, FadeInGroup } from "../FadeIn";
 import { Link } from "react-router-dom";
 import { useCopy, useLocalePath } from "../../../i18n";
 import { Linkedin } from "lucide-react";
@@ -164,7 +164,7 @@ export function About() {
     <main id="main-content" className="mx-auto max-w-6xl xl:max-w-7xl 2xl:max-w-[1440px] px-5 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 pt-36 sm:pt-44 lg:pt-52 xl:pt-60 2xl:pt-72 pb-12 xl:pb-20 2xl:pb-28">
 
       {/* ── Jonas ── */}
-      <div className="mt-4 grid gap-10 md:gap-16 2xl:gap-24 md:grid-cols-5 items-center">
+      <FadeInGroup className="mt-4 grid gap-10 md:gap-16 2xl:gap-24 md:grid-cols-5 items-center">
         <FadeIn className="md:col-span-3">
           <h1 className="text-white text-[clamp(36px,6vw,80px)] tracking-tight leading-[1.05]">
             {t.hi}{" "}
@@ -213,10 +213,10 @@ export function About() {
         <FadeIn delay={0.15} className="md:col-span-2 flex justify-center md:justify-end">
           <PortraitRing photo={PORTRAIT.jonas} alt={t.jonasAlt} spin={1} duration={18} eager />
         </FadeIn>
-      </div>
+      </FadeInGroup>
 
       {/* ── Berkant ── */}
-      <div className="mt-24 sm:mt-28 xl:mt-32 2xl:mt-40 grid gap-10 md:gap-16 2xl:gap-24 md:grid-cols-5 items-center">
+      <FadeInGroup className="mt-24 sm:mt-28 xl:mt-32 2xl:mt-40 grid gap-10 md:gap-16 2xl:gap-24 md:grid-cols-5 items-center">
         <FadeIn className="md:col-span-3">
           <h2 className="text-white text-[clamp(36px,6vw,80px)] tracking-tight leading-[1.05]">
             {t.hi}{" "}
@@ -265,10 +265,10 @@ export function About() {
         <FadeIn delay={0.15} className="md:col-span-2 flex justify-center md:justify-end">
           <PortraitRing photo={PORTRAIT.berkant} alt={t.berkantAlt} spin={-1} duration={22} />
         </FadeIn>
-      </div>
+      </FadeInGroup>
 
       {/* ── Zu zweit ── */}
-      <div className="mt-24 sm:mt-28 xl:mt-32 2xl:mt-40 grid gap-8 lg:gap-12 xl:gap-16 2xl:gap-20 lg:grid-cols-5 items-center">
+      <FadeInGroup className="mt-24 sm:mt-28 xl:mt-32 2xl:mt-40 grid gap-8 lg:gap-12 xl:gap-16 2xl:gap-20 lg:grid-cols-5 items-center">
         <FadeIn className="lg:col-span-3">
           <Photo
             photo={PHOTO.duoTablet}
@@ -284,7 +284,7 @@ export function About() {
             {t.duoText}
           </p>
         </FadeIn>
-      </div>
+      </FadeInGroup>
 
       {/* ── Unser Ansatz ── */}
       <div className="mt-24 sm:mt-28 xl:mt-32 2xl:mt-40">
@@ -301,7 +301,7 @@ export function About() {
       </div>
 
       {/* ── CTA ── */}
-      <div className="mt-24 sm:mt-28 xl:mt-32 2xl:mt-40 grid gap-8 lg:gap-12 xl:gap-16 2xl:gap-20 lg:grid-cols-5 items-center">
+      <FadeInGroup className="mt-24 sm:mt-28 xl:mt-32 2xl:mt-40 grid gap-8 lg:gap-12 xl:gap-16 2xl:gap-20 lg:grid-cols-5 items-center">
         <FadeIn className="lg:col-span-2">
           <h2 className="text-white text-[28px] xl:text-[34px] 2xl:text-[42px] tracking-tight leading-[1.1] mb-3">
             {t.ctaTitle}
@@ -322,7 +322,7 @@ export function About() {
             sizes="(min-width: 1536px) 820px, (min-width: 1024px) 58vw, 92vw"
           />
         </FadeIn>
-      </div>
+      </FadeInGroup>
     </main>
   );
 }

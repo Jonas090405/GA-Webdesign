@@ -4,7 +4,7 @@ import { motion } from "motion/react";
 import { usePageMeta } from "../../hooks/usePageMeta";
 import { Card } from "../Card";
 import { PrimaryButton, TertiaryButton } from "../Button";
-import { FadeIn } from "../FadeIn";
+import { FadeIn, FadeInGroup } from "../FadeIn";
 import { Blocks, Check, Minus, Server, Wrench } from "lucide-react";
 import { TechIcon, hasTechIcon } from "../TechIcon";
 import { Link } from "react-router-dom";
@@ -823,7 +823,7 @@ function KonzeptSection() {
   const rows = useCopy(VERGLEICH);
   return (
     <section aria-labelledby="konzept-heading" className="mt-24 2xl:mt-32">
-      <div className="grid gap-12 lg:gap-16 2xl:gap-24 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] items-start">
+      <FadeInGroup className="grid gap-12 lg:gap-16 2xl:gap-24 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] items-start">
         <FadeIn className="lg:sticky lg:top-32">
           <h2
             id="konzept-heading"
@@ -935,7 +935,7 @@ function KonzeptSection() {
             </ul>
           </div>
         </FadeIn>
-      </div>
+      </FadeInGroup>
     </section>
   );
 }
