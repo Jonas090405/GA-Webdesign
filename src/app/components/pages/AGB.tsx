@@ -16,7 +16,7 @@ export function AGB() {
           Allgemeine Geschäftsbedingungen
         </h1>
         <p className="mt-4 text-ink-300 text-[14px]">
-          G&amp;A Webdesign GbR · Stand: Oktober 2026
+          G&amp;A Webdesign GbR · Stand: November 2026
         </p>
         <GermanOnlyNotice />
       </FadeIn>
@@ -741,7 +741,7 @@ export function AGB() {
               jeweiligen Projekt genutzt werden:
             </p>
             <ul className="text-ink-200 text-[14px] leading-relaxed space-y-1.5 pl-4 list-disc marker:text-brand mt-3">
-              <li>GitHub (USA) – Code-Verwaltung, Backups, Hosting über GitHub Pages</li>
+              <li>GitHub (USA) – Code-Verwaltung und Backups</li>
               <li>Vercel (USA) – Hosting und Auslieferung von Webseiten</li>
               <li>Strato (Deutschland) – Domains, DNS und E-Mail</li>
               <li>Resend (USA) – Versand von E-Mails, z. B. aus Kontaktformularen</li>
