@@ -370,10 +370,42 @@ export function Datenschutz() {
           </Card>
         </FadeIn>
 
+        <FadeIn delay={0.28}>
+          <Card>
+            <div className="text-brand text-[12px] tracking-[0.25em] mb-4">
+              9. YouTube-Videos
+            </div>
+            <p className="text-ink-200 text-[14px] leading-relaxed">
+              In einzelnen Projektbeschreibungen zeigen wir Videos, die bei{" "}
+              <strong className="text-ink-100">YouTube</strong> liegen, einem
+              Dienst der Google Ireland Limited, Gordon House, Barrow Street,
+              Dublin 4, Irland. Beim Aufruf der Seite wird dafür nichts von
+              YouTube geladen, sondern nur ein Vorschaubild von unserem eigenen
+              Server. Erst wenn du ein Video anklickst, wird es über{" "}
+              <code className="text-ink-100">youtube-nocookie.com</code> (erweiterter
+              Datenschutzmodus) eingebunden. Dabei werden insbesondere deine
+              IP-Adresse, Geräte- und Browserdaten und die aufgerufene Seite an
+              YouTube übertragen, und YouTube kann Daten in deinem Browser
+              speichern.
+            </p>
+            <p className="text-ink-200 text-[14px] leading-relaxed mt-3">
+              Dabei kann eine Übermittlung an die Google LLC in den USA
+              erfolgen. Google ist unter dem EU-US Data Privacy Framework
+              zertifiziert (Angemessenheitsbeschluss nach Art. 45 DSGVO).
+              Weitere Informationen:{" "}
+              <ExtLink href="https://policies.google.com/privacy">
+                Datenschutzerklärung von Google
+              </ExtLink>
+              . Rechtsgrundlage: Art. 6 Abs. 1 lit. a DSGVO und § 25 Abs. 1
+              TDDDG (Einwilligung durch den Klick auf das Video).
+            </p>
+          </Card>
+        </FadeIn>
+
         <FadeIn delay={0.29}>
           <Card>
             <div className="text-brand text-[12px] tracking-[0.25em] mb-4">
-              9. Google Search Console
+              10. Google Search Console
             </div>
             <p className="text-ink-200 text-[14px] leading-relaxed">
               Diese Webseite ist in der{" "}
@@ -396,7 +428,7 @@ export function Datenschutz() {
         <FadeIn delay={0.32}>
           <Card>
             <div className="text-brand text-[12px] tracking-[0.25em] mb-4">
-              10. Kunden und Geschäftspartner
+              11. Kunden und Geschäftspartner
             </div>
             <p className="text-ink-200 text-[14px] leading-relaxed">
               Wenn du uns beauftragst oder mit uns zusammenarbeitest, verarbeiten
@@ -421,7 +453,7 @@ export function Datenschutz() {
         <FadeIn delay={0.35}>
           <Card>
             <div className="text-brand text-[12px] tracking-[0.25em] mb-4">
-              11. Übermittlung in Drittländer
+              12. Übermittlung in Drittländer
             </div>
             <p className="text-ink-200 text-[14px] leading-relaxed">
               Einige der genannten Dienstleister haben ihren Sitz außerhalb der
@@ -437,7 +469,7 @@ export function Datenschutz() {
         <FadeIn delay={0.38}>
           <Card>
             <div className="text-brand text-[12px] tracking-[0.25em] mb-4">
-              12. Speicherdauer
+              13. Speicherdauer
             </div>
             <p className="text-ink-200 text-[14px] leading-relaxed">
               Personenbezogene Daten werden nur so lange gespeichert, wie es
@@ -455,7 +487,7 @@ export function Datenschutz() {
         <FadeIn delay={0.41}>
           <Card>
             <div className="text-brand text-[12px] tracking-[0.25em] mb-4">
-              13. Deine Rechte
+              14. Deine Rechte
             </div>
             <p className="text-ink-200 text-[14px] leading-relaxed">
               Du hast jederzeit das Recht auf Auskunft (Art. 15 DSGVO),
@@ -483,7 +515,7 @@ export function Datenschutz() {
         <FadeIn delay={0.44}>
           <Card>
             <div className="text-brand text-[12px] tracking-[0.25em] mb-4">
-              14. Widerspruchsrecht nach Art. 21 DSGVO
+              15. Widerspruchsrecht nach Art. 21 DSGVO
             </div>
             <p className="text-ink-100 text-[14px] leading-relaxed font-medium">
               Soweit wir deine Daten auf Grundlage berechtigter Interessen

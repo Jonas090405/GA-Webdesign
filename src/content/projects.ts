@@ -60,6 +60,76 @@ import ymLoopMobileProduktion from "../imports/projects/your-mask/loop-mprodukti
 import ymMobileGrosskunden from "../imports/projects/your-mask/loop-mgrosskunden-poster.webp";
 import ymLoopMobileGrosskunden from "../imports/projects/your-mask/loop-mgrosskunden.mp4";
 
+// Imperio: Loops echter Interaktionen auf imperio-fulfillment.de; Standbild = erstes Videobild
+import impHero from "../imports/projects/imperio/loop-hero-poster.webp";
+import impLoopHero from "../imports/projects/imperio/loop-hero.mp4";
+import impZusagen from "../imports/projects/imperio/loop-zusagen-poster.webp";
+import impLoopZusagen from "../imports/projects/imperio/loop-zusagen.mp4";
+import impProzess from "../imports/projects/imperio/loop-prozess-poster.webp";
+import impLoopProzess from "../imports/projects/imperio/loop-prozess.mp4";
+import impPakete from "../imports/projects/imperio/loop-pakete-poster.webp";
+import impLoopPakete from "../imports/projects/imperio/loop-pakete.mp4";
+import impUeber from "../imports/projects/imperio/loop-ueber-poster.webp";
+import impLoopUeber from "../imports/projects/imperio/loop-ueber.mp4";
+import impMobileHome from "../imports/projects/imperio/loop-mhome-poster.webp";
+import impLoopMobileHome from "../imports/projects/imperio/loop-mhome.mp4";
+import impMobileProzess from "../imports/projects/imperio/loop-mprozess-poster.webp";
+import impLoopMobileProzess from "../imports/projects/imperio/loop-mprozess.mp4";
+import impMobileKarriere from "../imports/projects/imperio/loop-mkarriere-poster.webp";
+import impLoopMobileKarriere from "../imports/projects/imperio/loop-mkarriere.mp4";
+// Imperio: Foto- und Videoproduktion – dieselben Fotos und Film-Vorschaubilder wie auf imperio-fulfillment.de
+import impFilmImage from "../imports/projects/imperio/film-imagefilm-1600.webp";
+import impFilmProzess from "../imports/projects/imperio/film-prozess-1600.webp";
+import impBesprechung640 from "../imports/projects/imperio/web-team-besprechung-640.webp";
+import impBesprechung1600 from "../imports/projects/imperio/web-team-besprechung-1600.webp";
+import impImLager640 from "../imports/projects/imperio/web-team-im-lager-640.webp";
+import impImLager1600 from "../imports/projects/imperio/web-team-im-lager-1600.webp";
+import impScannen640 from "../imports/projects/imperio/web-mitarbeiter-scannen-640.webp";
+import impScannen1600 from "../imports/projects/imperio/web-mitarbeiter-scannen-1600.webp";
+import impRegale640 from "../imports/projects/imperio/web-lager-regale-640.webp";
+import impRegale1600 from "../imports/projects/imperio/web-lager-regale-1600.webp";
+import impPackplatz640 from "../imports/projects/imperio/web-team-packplatz-640.webp";
+import impPackplatz1600 from "../imports/projects/imperio/web-team-packplatz-1600.webp";
+import impTablet640 from "../imports/projects/imperio/web-kollegen-tablet-640.webp";
+import impTablet1600 from "../imports/projects/imperio/web-kollegen-tablet-1600.webp";
+import sergejAvatar from "../imports/projects/imperio/sergej-avatar-192.webp";
+
+// City Kebap: Loops echter Interaktionen auf citykebapfurtwangen.de
+import ckHero from "../imports/projects/city-kebap/loop-hero-poster.webp";
+import ckLoopHero from "../imports/projects/city-kebap/loop-hero.mp4";
+import ckTeller from "../imports/projects/city-kebap/loop-teller-poster.webp";
+import ckLoopTeller from "../imports/projects/city-kebap/loop-teller.mp4";
+import ckKarte from "../imports/projects/city-kebap/loop-karte-poster.webp";
+import ckLoopKarte from "../imports/projects/city-kebap/loop-karte.mp4";
+import ckLiefergebiet from "../imports/projects/city-kebap/loop-liefergebiet-poster.webp";
+import ckLoopLiefergebiet from "../imports/projects/city-kebap/loop-liefergebiet.mp4";
+import ckBewertungen from "../imports/projects/city-kebap/loop-bewertungen-poster.webp";
+import ckLoopBewertungen from "../imports/projects/city-kebap/loop-bewertungen.mp4";
+import ckAblauf from "../imports/projects/city-kebap/loop-ablauf-poster.webp";
+import ckLoopAblauf from "../imports/projects/city-kebap/loop-ablauf.mp4";
+import ckMobileHome from "../imports/projects/city-kebap/loop-mhome-poster.webp";
+import ckLoopMobileHome from "../imports/projects/city-kebap/loop-mhome.mp4";
+import ckMobileKarte from "../imports/projects/city-kebap/loop-mkarte-poster.webp";
+import ckLoopMobileKarte from "../imports/projects/city-kebap/loop-mkarte.mp4";
+import ckMobileStandort from "../imports/projects/city-kebap/loop-mstandort-poster.webp";
+import ckLoopMobileStandort from "../imports/projects/city-kebap/loop-mstandort.mp4";
+// City Kebap: Foto- und Videoproduktion – Schnitt aus dem Küchenfilm (ohne Ton),
+// Fotos wie auf citykebapfurtwangen.de
+import ckFilm from "../imports/projects/city-kebap/film-loop-poster.webp";
+import ckLoopFilm from "../imports/projects/city-kebap/film-loop.mp4";
+import ckGaeste640 from "../imports/projects/city-kebap/web-gaeste-fensterplatz-640.webp";
+import ckGaeste1400 from "../imports/projects/city-kebap/web-gaeste-fensterplatz-1400.webp";
+import ckTeamKueche640 from "../imports/projects/city-kebap/web-team-kueche-640.webp";
+import ckTeamKueche1400 from "../imports/projects/city-kebap/web-team-kueche-1400.webp";
+import ckEingang640 from "../imports/projects/city-kebap/web-eingang-marktplatz-15-640.webp";
+import ckEingang1400 from "../imports/projects/city-kebap/web-eingang-marktplatz-15-1400.webp";
+import ckDoener640 from "../imports/projects/city-kebap/web-doener-schneiden-640.webp";
+import ckDoener1400 from "../imports/projects/city-kebap/web-doener-schneiden-1400.webp";
+import ckLadenfront640 from "../imports/projects/city-kebap/web-ladenfront-strasse-640.webp";
+import ckLadenfront1400 from "../imports/projects/city-kebap/web-ladenfront-strasse-1400.webp";
+import ckPizzaTeilen640 from "../imports/projects/city-kebap/web-pizza-teilen-640.webp";
+import ckPizzaTeilen1400 from "../imports/projects/city-kebap/web-pizza-teilen-1400.webp";
+
 export type Screen = {
   /** Standbild (auch Poster des Videos). */
   src: string;
@@ -79,12 +149,51 @@ export type Testimonial = {
   avatar?: string;
 };
 
+/**
+ * Platz eines Fotos im Raster der Foto-&-Video-Sektion: Spalten × Zeilen.
+ * `base` gilt im 2er-Raster (Smartphone/Tablet), `lg` im 12er-Raster ab 1024 px.
+ * Die Zeilenhöhe ist fest, Fotos füllen ihre Fläche (object-cover).
+ */
+export type PhotoSpan = {
+  base: "1x1" | "1x2" | "2x1" | "2x2";
+  lg: "4x1" | "4x2" | "8x1" | "8x2";
+};
+
+export type ProductionPhoto = {
+  src: string;
+  alt: string;
+  /** Weitere Breiten desselben Fotos für srcset. */
+  sources?: { src: string; width: number }[];
+  span: PhotoSpan;
+  /** Bildausschnitt, z. B. "50% 30%" (Standard: Mitte). */
+  focus?: string;
+};
+
+/** Fertiger Film auf YouTube: eingebettet, lädt erst nach Klick, Link darunter. */
+export type ProductionFilm = {
+  youtubeId: string;
+  title: string;
+  /** Selbst gehostetes Vorschaubild (16:9) – vor dem Klick lädt nichts von YouTube. */
+  poster: string;
+};
+
+/** Fotos und Filme, die wir für den Kunden produziert haben. */
+export type Production = {
+  text: string;
+  films?: ProductionFilm[];
+  /** Stummer Ausschnitt aus dem Dreh, wenn es keinen veröffentlichten Film gibt. */
+  loop?: { src: string; video: string; alt: string };
+  photos: ProductionPhoto[];
+};
+
 export type SolutionBlock = {
   title: string;
   text: string;
   /** Desktop-Screenshots neben dem Text, optional (ohne = reiner Textblock). */
   screens?: Screen[];
 };
+
+export type ProductionText = { text: string; filmTitles?: string[]; loopAlt?: string; photoAlts?: string[] };
 
 /**
  * Englische Texte eines Projekts. Bilder, Kunde, Jahr und URL bleiben gleich;
@@ -104,6 +213,8 @@ export type ProjectText = {
     solution: { title: string; text: string; screenAlts?: string[] }[];
     result: string;
     mobileAlts?: string[];
+    /** Filmtitel, Alt-Text des Ausschnitts und der Fotos in derselben Reihenfolge. */
+    production?: ProductionText;
   };
 };
 
@@ -126,7 +237,8 @@ export type Project = {
   cover: Screen;
   /** Loop-Video für Startseite und Case-Study-Kopf. */
   video?: string;
-  testimonial?: Testimonial;
+  /** null = bewusst keine Kundenstimme (dann auch lokal kein Platzhalter). */
+  testimonial?: Testimonial | null;
   caseStudy: {
     /** Ausgangslage: Was war das Problem? */
     challenge: string;
@@ -138,12 +250,232 @@ export type Project = {
     result: string;
     /** Smartphone-Ansichten, 2–3 Stück. */
     mobile?: Screen[];
+    /** Fotos und Videos, die wir für den Kunden produziert haben. */
+    production?: Production;
   };
   /** Englische Fassung der Texte (siehe ProjectText). */
   en?: ProjectText;
 };
 
 export const PROJECTS: Project[] = [
+  {
+    slug: "imperio-fulfillment",
+    published: true,
+    title: "Imperio Fulfillment",
+    client: "Imperio Fulfillment GmbH",
+    industry: "Fulfillment für Onlinehändler",
+    location: "Mönchweiler",
+    year: "2026",
+    url: "https://imperio-fulfillment.de/",
+    summary:
+      "Der komplette Markenauftritt für einen Fulfillment-Dienstleister aus dem Schwarzwald: Logo und Markenguideline, eine Website in drei Sprachen, Imagefilm, Prozessvideo und Fotoshooting im Lager, dazu digitale NFC-Visitenkarten.",
+    services: [
+      "corporate-design",
+      "foto-video",
+      "webdesign",
+      "entwicklung",
+      "mehrsprachigkeit",
+      "seo",
+      "geo",
+      "email",
+      "launch",
+    ],
+    cover: { src: impHero, alt: "Startseite von imperio-fulfillment.de mit dem Leitsatz „Ihr Lager. Unser Job.“ und einem gezeichneten Lager" },
+    video: impLoopHero,
+    testimonial: {
+      quote:
+        "Wir haben mit G&A Webdesign unseren kompletten Markenauftritt für Imperio Fulfillment umgesetzt – vom Logo über die Website bis hin zu Image- und Prozessvideo und unseren digitalen NFC-Visitenkarten. Besonders beim Logo hat uns überzeugt, wie gut die Idee hinter unserem Geschäft eingefangen wurde: Die Regale als Krone bringen genau auf den Punkt, wofür wir stehen.\n\nJonas und Berkant haben schnell verstanden, was wir brauchen, Vorschläge kamen zügig und Änderungswünsche wurden unkompliziert umgesetzt. Man merkt, dass hier mitgedacht wird und nicht nur abgearbeitet. Alles aus einer Hand, persönlich und regional – genau so stellt man sich die Zusammenarbeit mit einer Agentur vor.\n\nKlare Empfehlung für alle, die einen professionellen Auftritt suchen!",
+      short:
+        "Man merkt, dass hier mitgedacht wird und nicht nur abgearbeitet. Alles aus einer Hand, persönlich und regional – genau so stellt man sich die Zusammenarbeit mit einer Agentur vor.",
+      name: "Sergej Miller",
+      role: "Geschäftsführer",
+      company: "Imperio Fulfillment GmbH",
+      avatar: sergejAvatar,
+    },
+    caseStudy: {
+      challenge:
+        "Imperio Fulfillment lagert, kommissioniert, verpackt und versendet Ware für Onlinehändler, von Mönchweiler bei Villingen-Schwenningen aus. Hinter dem Unternehmen steht Fulfillment-Erfahrung seit 2017.\n\nNach außen war davon nichts zu sehen. Es gab kein Logo und keine Bilder, unter der eigenen Domain lag eine leere WordPress-Seite mit Impressum und Datenschutz. Wer online nach Imperio suchte, landete eher bei einer Kosmetikmarke gleichen Namens.",
+      goal:
+        "Ein Auftritt, der Onlinehändlern auf den ersten Blick zeigt, dass ihre Ware hier in guten Händen ist: eine eigene Marke, echte Bilder aus dem Lager und ein kurzer Weg zum Angebot.",
+      solution: [
+        {
+          title: "Ein Logo, das das Geschäft erzählt",
+          text: "Am Anfang stand die Marke. Die Bildmarke setzt drei Regale zu einer Krone zusammen, darunter liegt ein oranger Balken. In einer Markenguideline haben wir Farben, Schrift und Bildsprache festgelegt: Marine als Grundton, Signalorange als einziger Akzent, abgeleitet von Warnwesten, Staplern und Bodenmarkierungen im Lager. Im selben Look sind die digitalen NFC-Visitenkarten entstanden, die Kontaktdaten mit einem Antippen weitergeben.",
+        },
+        {
+          title: "Was Händler wissen wollen, ganz oben",
+          text: "Die Startseite sagt in einem Satz, worum es geht, daneben arbeitet ein gezeichnetes Lager im Kleinen. Darunter folgen die fünf Leistungen von der Lagerung bis zur Retoure, jede mit eigener Line-Art-Animation, und die Zusagen, auf die sich Händler verlassen können: Bestellannahme bis 14 Uhr, Versand am selben Tag, 2.500 Palettenplätze.",
+          screens: [{ src: impZusagen, video: impLoopZusagen, alt: "Zusagen von Imperio mit Kennzahlen, die beim Einblenden hochzählen" }],
+        },
+        {
+          title: "Der Weg eines Pakets in sechs Stationen",
+          text: "Auf der Prozessseite zeichnet sich beim Scrollen eine Linie durch sechs Stationen, von der Bestellung bis zur Verladung in den Lkw. In jeder Station läuft ein echter Ausschnitt aus dem Lager, gedreht für genau diese Stelle. Am Ende steht das ganze Prozessvideo.",
+          screens: [{ src: impProzess, video: impLoopProzess, alt: "Prozessseite mit einer Linie durch sechs runde Stationen mit gefilmten Szenen aus dem Lager" }],
+        },
+        {
+          title: "Pakete statt Preisliste",
+          text: "Drei Pakete bauen aufeinander auf, von Basic bis Enterprise, und zeigen, was jeweils dazukommt. Preise macht Imperio individuell, deshalb führt jedes Paket direkt ins Kontaktformular, in dem Betreff und Paket schon ausgewählt sind.",
+          screens: [{ src: impPakete, video: impLoopPakete, alt: "Drei Leistungspakete Basic, Professional und Enterprise nebeneinander" }],
+        },
+        {
+          title: "Menschen statt Stockfotos",
+          text: "Über uns beginnt mit einem Gang durchs Lager in 4K, gleich danach läuft der Imagefilm. Darunter stehen Geschichte, Werte und der Standort auf einer eigenen Karte, die ohne Google-Dienste auskommt.",
+          screens: [{ src: impUeber, video: impLoopUeber, alt: "Über-uns-Seite mit Video aus dem Lager, Imagefilm und Werten" }],
+        },
+        {
+          title: "Bewerben in vier Schritten",
+          text: "Für die Karriereseite haben wir ein geführtes Bewerbungsformular gebaut: vier Schritte mit Fortschrittsanzeige, Fragen passend zur Stelle und Lebenslauf als PDF. Es funktioniert auch ohne JavaScript. Bewerbungen und Anfragen landen im jeweils zuständigen Postfach, und wer schreibt, bekommt eine gestaltete Bestätigung in seiner Sprache.",
+        },
+        {
+          title: "Auf Deutsch, Englisch und Russisch gefunden werden",
+          text: "Die Website gibt es in drei Sprachen, jede Seite mit eigener Adresse. Strukturierte Daten beschreiben Unternehmen, Leistungen, Fragen und offene Stellen, eine llms.txt hilft KI-Suchen. Filme laden erst nach einem Klick und die Schriften liegen auf dem eigenen Server, deshalb kommt die Seite ohne Cookie-Banner aus.",
+        },
+      ],
+      result:
+        "Seit dem 26. November 2026 ist der neue Auftritt live. Zum ersten Mal hat Imperio eine Marke, an der man das Unternehmen wiedererkennt, vom Logo auf dem Shirt bis zur Visitenkarte.\n\nHändler sehen auf der Website, wie im Lager gearbeitet wird, bevor sie zum ersten Mal anrufen, und Bewerber sehen, mit wem sie arbeiten würden.",
+      mobile: [
+        { src: impMobileHome, video: impLoopMobileHome, alt: "Startseite mit Leistungen am Smartphone" },
+        { src: impMobileProzess, video: impLoopMobileProzess, alt: "Weg eines Pakets in sechs Stationen am Smartphone" },
+        { src: impMobileKarriere, video: impLoopMobileKarriere, alt: "Karriereseite mit Teamfotos und offener Stelle am Smartphone" },
+      ],
+      production: {
+        text: "Für die Filme haben wir zuerst ein Konzept geschrieben: ein Dreh, drei Verwertungen. Daraus sind ein Imagefilm mit Sergej Miller als Gesicht des Unternehmens entstanden, ein Prozessvideo, das den Weg einer Bestellung in sechs Stationen zeigt, und kurze Loops derselben Stationen für die Website.\n\nDazu kommt ein Fotoshooting im Lager, mit Team, Regalen und Packplatz. Die Bilder tragen jetzt Startseite, Über uns und Karriere.",
+        films: [
+          { youtubeId: "SUwAr23X4Cg", title: "Imagefilm", poster: impFilmImage },
+          { youtubeId: "HGRWNRgPwTo", title: "Prozessvideo: Der Weg Ihres Pakets", poster: impFilmProzess },
+        ],
+        photos: [
+          {
+            src: impBesprechung1600,
+            sources: [
+              { src: impBesprechung640, width: 640 },
+              { src: impBesprechung1600, width: 1600 },
+            ],
+            alt: "Sergej Miller zeigt zwei Kollegen etwas im Lager, von unten fotografiert",
+            span: { base: "2x2", lg: "8x2" },
+          },
+          {
+            src: impImLager1600,
+            sources: [
+              { src: impImLager640, width: 640 },
+              { src: impImLager1600, width: 1600 },
+            ],
+            alt: "Sergej Miller mit Tablet im Regalgang, ein Mitarbeiter sortiert Kartons ein",
+            span: { base: "1x1", lg: "4x1" },
+          },
+          {
+            src: impScannen1600,
+            sources: [
+              { src: impScannen640, width: 640 },
+              { src: impScannen1600, width: 1600 },
+            ],
+            alt: "Mitarbeiter scannt ein Paket am Packplatz",
+            span: { base: "1x1", lg: "4x1" },
+          },
+          {
+            src: impRegale1600,
+            sources: [
+              { src: impRegale640, width: 640 },
+              { src: impRegale1600, width: 1600 },
+            ],
+            alt: "Mitarbeiter mit Imperio-Logo auf dem Shirt am Regal, daneben Sergej Miller",
+            span: { base: "1x1", lg: "4x1" },
+          },
+          {
+            src: impPackplatz1600,
+            sources: [
+              { src: impPackplatz640, width: 640 },
+              { src: impPackplatz1600, width: 1600 },
+            ],
+            alt: "Drei Kollegen am Packplatz",
+            span: { base: "1x1", lg: "4x1" },
+          },
+          {
+            src: impTablet1600,
+            sources: [
+              { src: impTablet640, width: 640 },
+              { src: impTablet1600, width: 1600 },
+            ],
+            alt: "Sergej Miller und ein Mitarbeiter am Tablet vor den Regalen",
+            span: { base: "2x1", lg: "4x1" },
+          },
+        ],
+      },
+    },
+    en: {
+      industry: "Fulfillment for online retailers",
+      location: "Mönchweiler",
+      summary:
+        "The complete brand for a fulfillment provider from the Black Forest: logo and brand guideline, a website in three languages, an image film, a process video and a photo shoot in the warehouse, plus digital NFC business cards.",
+      coverAlt: "Homepage of imperio-fulfillment.de with the line “Your warehouse. Our job.” and an illustrated warehouse",
+      testimonial: {
+        quote:
+          "We worked with G&A Webdesign on our entire brand for Imperio Fulfillment – from the logo and the website to an image film, a process video and our digital NFC business cards. The logo convinced us most: it captures the idea behind our business so well. The shelves forming a crown sum up exactly what we stand for.\n\nJonas and Berkant quickly understood what we needed, suggestions came fast and change requests were handled without any fuss. You can tell they think along instead of just ticking boxes. Everything from one source, personal and local – that is exactly how working with an agency should be.\n\nA clear recommendation for anyone looking for a professional presence!",
+        short:
+          "You can tell they think along instead of just ticking boxes. Everything from one source, personal and local – that is exactly how working with an agency should be.",
+        role: "Managing Director",
+      },
+      caseStudy: {
+        challenge:
+          "Imperio Fulfillment stores, picks, packs and ships goods for online retailers from Mönchweiler near Villingen-Schwenningen. Behind the company is fulfillment experience going back to 2017.\n\nNone of that showed. There was no logo and no imagery, and the company's own domain held an empty WordPress site with nothing but the legal pages. Anyone searching for Imperio online was more likely to end up at a cosmetics brand of the same name.",
+        goal:
+          "A presence that shows online retailers at first glance that their goods are in good hands: a brand of its own, real images from the warehouse and a short path to a quote.",
+        solution: [
+          {
+            title: "A logo that tells the business",
+            text: "It started with the brand. The logo mark turns three shelving units into a crown, resting on an orange bar. A brand guideline sets out colours, type and imagery: navy as the base, signal orange as the only accent, taken from the high-vis vests, forklifts and floor markings in the warehouse. The digital NFC business cards share the same look and pass on contact details with a single tap.",
+          },
+          {
+            title: "What retailers want to know, right at the top",
+            text: "The homepage says in one sentence what it is about, next to an illustrated warehouse at work. Below come the five services from storage to returns, each with its own line-art animation, and the promises retailers can rely on: orders accepted until 2 pm, shipped the same day, 2,500 pallet spaces.",
+            screenAlts: ["Imperio's promises with figures that count up as they appear"],
+          },
+          {
+            title: "A parcel's journey in six stations",
+            text: "On the process page, a line draws itself through six stations as you scroll, from the order to loading onto the truck. Each station plays a real clip from the warehouse, filmed for exactly that spot. The full process video closes the page.",
+            screenAlts: ["Process page with a line through six round stations showing filmed warehouse scenes"],
+          },
+          {
+            title: "Packages instead of a price list",
+            text: "Three packages build on each other, from Basic to Enterprise, and show what each one adds. Imperio prices every client individually, so each package leads straight to the contact form with the subject and package already selected.",
+            screenAlts: ["Three service packages Basic, Professional and Enterprise side by side"],
+          },
+          {
+            title: "People instead of stock photos",
+            text: "The about page opens with a walk through the warehouse in 4K, followed right away by the image film. Below sit the story, the values and the location on a custom map that works without any Google services.",
+            screenAlts: ["About page with warehouse video, image film and values"],
+          },
+          {
+            title: "Applying in four steps",
+            text: "For the careers page we built a guided application form: four steps with a progress indicator, questions tailored to the role and a CV upload as PDF, and it even works without JavaScript. Applications and inquiries go to the right inbox, and everyone who writes in gets a designed confirmation in their own language.",
+          },
+          {
+            title: "Found in German, English and Russian",
+            text: "The website comes in three languages, each page with its own address. Structured data describes the company, services, FAQs and open positions, and an llms.txt helps AI search. Films only load after a click and the fonts are self-hosted, so the site needs no cookie banner.",
+          },
+        ],
+        result:
+          "The new presence has been live since 26 November 2026. For the first time, Imperio has a brand that makes the company recognizable, from the logo on the shirt to the business card.\n\nRetailers can see how the warehouse works before they ever pick up the phone, and applicants can see who they would be working with.",
+        mobileAlts: [
+          "Homepage with services on a smartphone",
+          "A parcel's journey in six stations on a smartphone",
+          "Careers page with team photos and an open position on a smartphone",
+        ],
+        production: {
+          text: "For the films we started with a concept: one shoot, three uses. It produced an image film with Sergej Miller as the face of the company, a process video that follows an order through six stations, and short loops of the same stations for the website.\n\nOn top of that came a photo shoot in the warehouse, covering the team, the shelving and the packing stations. These images now carry the homepage, the about page and the careers page.",
+          filmTitles: ["Image film", "Process video: Your parcel's journey"],
+          photoAlts: [
+            "Sergej Miller pointing something out to two colleagues in the warehouse, shot from below",
+            "Sergej Miller with a tablet in the shelving aisle while an employee stacks boxes",
+            "Employee scanning a parcel at the packing station",
+            "Employee with the Imperio logo on his shirt at the shelves, next to Sergej Miller",
+            "Three colleagues at the packing station",
+            "Sergej Miller and an employee at a tablet in front of the shelves",
+          ],
+        },
+      },
+    },
+  },
   {
     slug: "your-mask",
     published: true,
@@ -298,6 +630,203 @@ export const PROJECTS: Project[] = [
           "Production in eight steps on a smartphone",
           "Page for large customers with references on a smartphone",
         ],
+      },
+    },
+  },
+  {
+    slug: "city-kebap",
+    published: true,
+    title: "City Kebap",
+    client: "City Kebap Furtwangen",
+    industry: "Imbiss & Lieferdienst",
+    location: "Furtwangen im Schwarzwald",
+    year: "2026",
+    url: "https://citykebapfurtwangen.de/",
+    summary:
+      "Relaunch für den Imbiss am Marktplatz in Furtwangen: eine Website mit Speisekarte zum Durchtippen, Live-Öffnungszeiten und Liefergebiet, dazu Fotos und Videos aus der eigenen Küche statt Stockbildern.",
+    services: ["webdesign", "entwicklung", "foto-video", "seo", "geo", "email", "launch"],
+    cover: { src: ckHero, alt: "Startseite von citykebapfurtwangen.de mit Küchenvideo und der Frage „Heute Lust auf Döner?“" },
+    video: ckLoopHero,
+    testimonial: null,
+    caseStudy: {
+      challenge:
+        "City Kebap gehört zum Marktplatz in Furtwangen: Döner, Pizza, Pide und Lahmacun, frisch zubereitet und halal, zum Mitnehmen, vor Ort oder geliefert.\n\nDie alte Website war ein WordPress-Baukasten mit grellen Icon-Kacheln, Stock- und KI-Bildern und einer Werbesprache, die nicht zum Laden passte. Selbst der Name stand mal mit p, mal mit b im Netz, und in Verzeichnissen fanden sich falsche Adressen.",
+      goal:
+        "Eine Seite, auf der Gäste in Sekunden sehen, was es gibt, ob gerade offen ist und ob geliefert wird, und die so herzlich klingt wie der Laden selbst.",
+      solution: [
+        {
+          title: "Hunger auf den ersten Blick",
+          text: "Der Einstieg zeigt echte Aufnahmen aus der Küche, die Überschrift wechselt zwischen Döner, Pide, Lahmacun und Pizza, und der Teller daneben wechselt mit. Darunter liegen die Kategorien als Teller auf der roten Scheibe aus dem Logo und drehen sich beim Scrollen. Ob gerade geöffnet ist, kommt direkt aus dem Google-Profil.",
+          screens: [{ src: ckTeller, video: ckLoopTeller, alt: "Kategorien als Teller auf roten Scheiben, die sich beim Scrollen drehen" }],
+        },
+        {
+          title: "Die ganze Karte, ein Tipp entfernt",
+          text: "119 Gerichte in zehn Kategorien, von Döner bis Getränke. Jede Kategorie ist einen Tipp entfernt, beim Weiterscrollen bleibt eine kompakte Leiste stehen. Wer lieber alles auf einem Blatt hat, lädt die Karte als PDF. Bestellt wird über den Bestellknopf, auf dem Smartphone steht er immer am unteren Rand.",
+          screens: [{ src: ckKarte, video: ckLoopKarte, alt: "Speisekarte mit Kategorien als Teller, beim Antippen wechselt die Kategorie" }],
+        },
+        {
+          title: "Liefern oder abholen",
+          text: "Drei Lieferzonen mit Mindestbestellwert und Liefergebühr stehen in einer Tabelle, daneben eine gezeichnete Karte. Fährt man über eine Zeile, leuchtet die passende Zone auf. Anfahrt, Öffnungszeiten und die häufigsten Fragen stehen auf derselben Seite.",
+          screens: [{ src: ckLiefergebiet, video: ckLoopLiefergebiet, alt: "Liefergebiet mit drei Zonen, die beim Überfahren der Tabelle aufleuchten" }],
+        },
+        {
+          title: "Stimmen vom Marktplatz",
+          text: "18 Google-Bewertungen stehen wörtlich auf der Startseite, zum Durchblättern und mit einem direkten Weg zur eigenen Bewertung.",
+          screens: [{ src: ckBewertungen, video: ckLoopBewertungen, alt: "Slider mit Google-Bewertungen von Gästen" }],
+        },
+        {
+          title: "So kommt dein Essen zu dir",
+          text: "Auf Über uns fährt ein Roller beim Scrollen die Stationen ab, von der Bestellung bis zum Genießen. Jede Station ist ein gezeichneter Sticker, der sich kurz bewegt.",
+          screens: [{ src: ckAblauf, video: ckLoopAblauf, alt: "Ablauf als Straße, auf der ein Roller vier Stationen abfährt" }],
+        },
+        {
+          title: "Gefunden werden in Furtwangen",
+          text: "Strukturierte Daten beschreiben Restaurant, Speisekarte, Liefergebiet und Fragen. Eine llms.txt und die Karte als Markdown geben KI-Suchen saubere Antworten, alte Adressen leiten auf die neuen Seiten weiter. Für das Google-Profil haben wir ein fertiges Paket mit Fotos, Video und Anleitung zusammengestellt.",
+        },
+        {
+          title: "Anfragen ohne Umweg",
+          text: "Catering, Großbestellung oder Feedback laufen über ein Kontaktformular mit Spamschutz. Das Restaurant bekommt eine Benachrichtigung, der Gast eine Bestätigung im Design der Seite.",
+        },
+      ],
+      result:
+        "Seit dem 23. November 2026 ist die neue Seite live. City Kebap tritt jetzt überall mit einem Namen auf, mit Bildern aus der eigenen Küche und mit Texten, die klingen wie der Laden.\n\nGäste sehen auf dem Smartphone in Sekunden, was es gibt, ob offen ist und ob geliefert wird, und bestellen mit einem Tipp.",
+      mobile: [
+        { src: ckMobileHome, video: ckLoopMobileHome, alt: "Startseite mit Küchenvideo und Kategorien am Smartphone" },
+        { src: ckMobileKarte, video: ckLoopMobileKarte, alt: "Speisekarte mit Preisen am Smartphone" },
+        { src: ckMobileStandort, video: ckLoopMobileStandort, alt: "Standort und Liefergebiet am Smartphone" },
+      ],
+      production: {
+        text: "Statt Stockbildern zeigt die Seite jetzt den echten Laden. Bei einem Shooting vor Ort sind Fotos von Küche, Team, Gerichten und Ladenfront entstanden, dazu Videoaufnahmen aus der Küche.\n\nDaraus haben wir den Loop für den Einstieg geschnitten, vom Dönerspieß über die Pizza bis zur Fritteuse, und einen längeren Küchenfilm.",
+        loop: {
+          src: ckFilm,
+          video: ckLoopFilm,
+          alt: "Ausschnitte aus dem Küchenfilm: Pizza belegen, Pizza aus dem Ofen, Döner füllen, Köfte grillen, Pizza schneiden und servieren",
+        },
+        photos: [
+          {
+            src: ckGaeste1400,
+            sources: [
+              { src: ckGaeste640, width: 640 },
+              { src: ckGaeste1400, width: 1400 },
+            ],
+            alt: "Gäste am Fensterplatz mit Familienpizza und Blick auf den Marktplatz",
+            span: { base: "2x1", lg: "8x2" },
+          },
+          {
+            src: ckTeamKueche1400,
+            sources: [
+              { src: ckTeamKueche640, width: 640 },
+              { src: ckTeamKueche1400, width: 1400 },
+            ],
+            alt: "Zwei Köche belegen Lahmacun an der Theke",
+            span: { base: "2x2", lg: "4x1" },
+            focus: "50% 35%",
+          },
+          {
+            src: ckEingang1400,
+            sources: [
+              { src: ckEingang640, width: 640 },
+              { src: ckEingang1400, width: 1400 },
+            ],
+            alt: "Eingang von City Kebap am Marktplatz 15",
+            span: { base: "2x1", lg: "4x1" },
+          },
+          {
+            src: ckDoener1400,
+            sources: [
+              { src: ckDoener640, width: 640 },
+              { src: ckDoener1400, width: 1200 },
+            ],
+            alt: "Der Dönerspieß wird frisch geschnitten",
+            span: { base: "1x2", lg: "4x2" },
+          },
+          {
+            src: ckLadenfront1400,
+            sources: [
+              { src: ckLadenfront640, width: 640 },
+              { src: ckLadenfront1400, width: 1200 },
+            ],
+            alt: "Ladenfront mit Efeu von der Straße aus",
+            span: { base: "1x2", lg: "4x2" },
+          },
+          {
+            src: ckPizzaTeilen1400,
+            sources: [
+              { src: ckPizzaTeilen640, width: 640 },
+              { src: ckPizzaTeilen1400, width: 1200 },
+            ],
+            alt: "Gäste teilen sich eine Pizza",
+            span: { base: "2x2", lg: "4x2" },
+            focus: "50% 40%",
+          },
+        ],
+      },
+    },
+    en: {
+      industry: "Takeaway & delivery",
+      location: "Furtwangen, Black Forest",
+      summary:
+        "A relaunch for the takeaway on the market square in Furtwangen: a website with a tap-through menu, live opening hours and delivery area, plus photos and videos from their own kitchen instead of stock images.",
+      coverAlt: "Homepage of citykebapfurtwangen.de with a kitchen video and the question “Craving döner today?”",
+      caseStudy: {
+        challenge:
+          "City Kebap is part of the market square in Furtwangen: döner, pizza, pide and lahmacun, freshly made and halal, to take away, eat in or delivered.\n\nThe old website was a WordPress builder site with garish icon tiles, stock and AI images and advertising copy that did not fit the place. Even the name appeared online with a p in some places and a b in others, and directories listed wrong addresses.",
+        goal:
+          "A site where guests see within seconds what is on offer, whether it is open and whether they deliver, and that sounds as warm as the place itself.",
+        solution: [
+          {
+            title: "Hungry at first glance",
+            text: "The opening shows real footage from the kitchen, the headline switches between döner, pide, lahmacun and pizza, and the plate next to it changes along. Below, the categories sit as plates on the red disc from the logo and turn as you scroll. Whether it is open right now comes straight from the Google profile.",
+            screenAlts: ["Categories as plates on red discs that turn as you scroll"],
+          },
+          {
+            title: "The whole menu, one tap away",
+            text: "119 dishes in ten categories, from döner to drinks. Every category is one tap away, and a compact bar stays in place as you scroll. Anyone who prefers everything on one sheet can download the menu as a PDF. Ordering works through the order button, which always sits at the bottom of the screen on a smartphone.",
+            screenAlts: ["Menu with categories as plates, tapping switches the category"],
+          },
+          {
+            title: "Delivery or pick-up",
+            text: "Three delivery zones with minimum order and delivery fee are listed in a table next to an illustrated map. Hovering over a row lights up the matching zone. Directions, opening hours and the most common questions sit on the same page.",
+            screenAlts: ["Delivery area with three zones that light up when hovering over the table"],
+          },
+          {
+            title: "Voices from the market square",
+            text: "18 Google reviews appear word for word on the homepage, to browse through and with a direct path to leaving your own review.",
+            screenAlts: ["Slider with Google reviews from guests"],
+          },
+          {
+            title: "How your food gets to you",
+            text: "On the about page, a scooter rides past the stations as you scroll, from ordering to enjoying. Each station is an illustrated sticker that moves briefly.",
+            screenAlts: ["The process as a road along which a scooter passes four stations"],
+          },
+          {
+            title: "Found in Furtwangen",
+            text: "Structured data describes the restaurant, menu, delivery area and FAQs. An llms.txt and the menu as Markdown give AI search clean answers, and old addresses redirect to the new pages. For the Google profile we put together a ready-made package with photos, video and instructions.",
+          },
+          {
+            title: "Inquiries without detours",
+            text: "Catering, large orders or feedback go through a contact form with spam protection. The restaurant gets a notification, the guest a confirmation in the site's design.",
+          },
+        ],
+        result:
+          "The new site has been live since 23 November 2026. City Kebap now appears everywhere under one name, with images from its own kitchen and copy that sounds like the place.\n\nOn a smartphone, guests see within seconds what is on offer, whether it is open and whether they deliver, and order with a single tap.",
+        mobileAlts: [
+          "Homepage with kitchen video and categories on a smartphone",
+          "Menu with prices on a smartphone",
+          "Location and delivery area on a smartphone",
+        ],
+        production: {
+          text: "Instead of stock images, the site now shows the real place. A shoot on location produced photos of the kitchen, the team, the dishes and the shop front, along with video footage from the kitchen.\n\nFrom that we cut the loop for the opening, from the döner spit to the pizza to the fryer, and a longer kitchen film.",
+          loopAlt: "Clips from the kitchen film: topping a pizza, pizza from the oven, filling a döner, grilling köfte, cutting and serving pizza",
+          photoAlts: [
+            "Guests at the window table with a family pizza and a view of the market square",
+            "Two cooks topping lahmacun at the counter",
+            "Entrance of City Kebap at Marktplatz 15",
+            "The döner spit being freshly carved",
+            "Shop front with ivy seen from the street",
+            "Guests sharing a pizza",
+          ],
+        },
       },
     },
   },
@@ -468,7 +997,19 @@ export function localizeProject(p: Project, lang: Lang): Project {
       }),
       result: en.caseStudy.result,
       mobile: p.caseStudy.mobile?.map((m, i) => ({ ...m, alt: en.caseStudy.mobileAlts?.[i] ?? m.alt })),
+      production: p.caseStudy.production && localizeProduction(p.caseStudy.production, en.caseStudy.production),
     },
+  };
+}
+
+function localizeProduction(p: Production, en?: ProductionText): Production {
+  if (!en) return p;
+  return {
+    ...p,
+    text: en.text,
+    films: p.films?.map((f, i) => ({ ...f, title: en.filmTitles?.[i] ?? f.title })),
+    loop: p.loop && { ...p.loop, alt: en.loopAlt ?? p.loop.alt },
+    photos: p.photos.map((ph, i) => ({ ...ph, alt: en.photoAlts?.[i] ?? ph.alt })),
   };
 }
 

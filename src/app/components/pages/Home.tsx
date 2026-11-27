@@ -31,7 +31,7 @@ import tileWartungPoster from "../../../imports/tile-wartung-poster.webp";
 import { ContactForm, BERKANT_EMAIL, BERKANT_PHONE, BERKANT_TEL, useWhatsAppLink } from "../ContactForm";
 import { DirectContactCard } from "../DirectContactCard";
 import { WhatsAppIcon } from "../WhatsAppIcon";
-import { PROJECTS } from "../../../content/projects";
+import { VISIBLE_PROJECTS } from "../../../content/projects";
 import { AVATAR, PORTRAIT } from "../../teamPhotos";
 import { useCopy, useLocalePath } from "../../../i18n";
 import { ProjectServicePills } from "../ProjectServices";
@@ -142,8 +142,8 @@ function PortfolioPreview() {
         className="mb-8 sm:mb-10 xl:mb-14 2xl:mb-20"
       />
 
-      {/* Identisch zur Portfolio-Seite, die zwei neuesten Projekte */}
-      <PortfolioScrollSection projects={PROJECTS.slice(0, 2)} hideTag />
+      {/* Identisch zur Portfolio-Seite, alle veröffentlichten Projekte */}
+      <PortfolioScrollSection projects={VISIBLE_PROJECTS} hideTag />
 
       {/* Weiterführend als ruhige Zeile – die Hauptaktionen stehen in der Projektkarte */}
       <FadeIn delay={0.2}>

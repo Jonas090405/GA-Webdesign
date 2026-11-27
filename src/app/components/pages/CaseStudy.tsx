@@ -1,6 +1,6 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link, Navigate, useParams } from "react-router-dom";
-import { ArrowLeft, ArrowRight, ExternalLink } from "lucide-react";
+import { ArrowLeft, ArrowRight, ExternalLink, Play } from "lucide-react";
 import { usePageMeta } from "../../hooks/usePageMeta";
 import { FadeIn } from "../FadeIn";
 import { PrimaryButton } from "../Button";
@@ -9,6 +9,10 @@ import { LazyVideo } from "../LazyVideo";
 import { ProjectServiceGrid } from "../ProjectServices";
 import {
   PROJECTS,
+  type PhotoSpan,
+  type Production,
+  type ProductionFilm,
+  type ProductionPhoto,
   type Project,
   type SolutionBlock,
   findProject,
@@ -37,6 +41,11 @@ const COPY = {
     servicesLabel: "Leistungen in diesem Projekt",
     mobileTitle: "Auf dem Smartphone",
     mobileText: "Jede Ansicht ist für kleine Bildschirme eigens gestaltet, nicht nur verkleinert.",
+    production: "Foto & Video",
+    playFilm: "Film abspielen",
+    watchOnYoutube: "Auf YouTube ansehen",
+    youtubeNote: "Beim Abspielen lädt der Film von YouTube, dein Browser überträgt dabei Daten an Google.",
+    youtubePrivacy: "Mehr in der Datenschutzerklärung",
     result: "Ergebnis",
     resultPending: "Was hat sich für den Kunden verändert?",
     testimonialPending: "Kundenstimme (Zitat, Name, Rolle)",
@@ -68,6 +77,11 @@ const COPY = {
     servicesLabel: "Services in this project",
     mobileTitle: "On mobile",
     mobileText: "Every view is designed specifically for small screens, not just scaled down.",
+    production: "Photo & video",
+    playFilm: "Play film",
+    watchOnYoutube: "Watch on YouTube",
+    youtubeNote: "When you press play, the film loads from YouTube and your browser sends data to Google.",
+    youtubePrivacy: "More in the privacy policy",
     result: "Result",
     resultPending: "What changed for the client?",
     testimonialPending: "Client testimonial (quote, name, role)",
@@ -196,6 +210,8 @@ export function CaseStudy() {
           )}
           </div>
         </section>
+
+        {cs.production && <ProductionSection production={cs.production} />}
 
         <Result project={project} />
 
@@ -383,6 +399,168 @@ function Solution({ block, index, url }: { block: SolutionBlock; index: number; 
   );
 }
 
+/** Raster-Flächen der Fotos (feste Klassen, damit Tailwind sie findet). */
+const SPAN_BASE: Record<PhotoSpan["base"], string> = {
+  "1x1": "",
+  "1x2": "row-span-2",
+  "2x1": "col-span-2",
+  "2x2": "col-span-2 row-span-2",
+};
+const SPAN_LG: Record<PhotoSpan["lg"], string> = {
+  "4x1": "lg:col-span-4 lg:row-span-1",
+  "4x2": "lg:col-span-4 lg:row-span-2",
+  "8x1": "lg:col-span-8 lg:row-span-1",
+  "8x2": "lg:col-span-8 lg:row-span-2",
+};
+
+const TILE = "relative overflow-hidden rounded-[var(--radius-lg)] border border-blue-400/12 bg-ink-900";
+
+/**
+ * Foto- und Videoproduktion: Text wie bei Ausgangslage, darunter die fertigen
+ * Filme (eingebettet, Link darunter) oder ein stummer Ausschnitt aus dem Dreh,
+ * dann die Fotos in einem Raster mit fester Zeilenhöhe. Jedes Foto gibt in
+ * projects.ts an, wie viele Spalten und Zeilen es belegt.
+ */
+function ProductionSection({ production: p }: { production: Production }) {
+  const t = useCopy(COPY);
+  const lp = useLocalePath();
+  const films = p.films ?? [];
+
+  return (
+    <section aria-labelledby="foto-video" className={CONTAINER}>
+      <div className="border-t border-line py-16 sm:py-24 xl:py-32">
+        <FadeIn className="grid gap-6 lg:grid-cols-12 lg:gap-12">
+          <h2 id="foto-video" className="lg:col-span-4 text-white text-[clamp(28px,3.6vw,52px)] leading-[1.08] tracking-tight">
+            {t.production}
+          </h2>
+          <div className="lg:col-span-8">
+            <Paragraphs text={p.text} />
+          </div>
+        </FadeIn>
+
+        {films.length > 0 && (
+          <FadeIn className="mt-12 sm:mt-16">
+            <div className={`grid gap-8 sm:gap-6 xl:gap-8 ${films.length > 1 ? "lg:grid-cols-2" : ""}`}>
+              {films.map((f) => (
+                <YouTubeFilm key={f.youtubeId} film={f} />
+              ))}
+            </div>
+            <p className="mt-6 max-w-2xl text-[13px] leading-relaxed text-ink-400">
+              {t.youtubeNote}{" "}
+              <Link to={lp("/datenschutz")} className="text-ink-300 underline underline-offset-4 decoration-ink-600 hover:text-blue-200">
+                {t.youtubePrivacy}
+              </Link>
+            </p>
+          </FadeIn>
+        )}
+
+        {p.loop && (
+          <FadeIn className={`${TILE} mt-12 sm:mt-16 aspect-video`}>
+            <LazyVideo src={p.loop.video} poster={p.loop.src} className="absolute inset-0 block h-full w-full object-cover" />
+            <span className="sr-only">{p.loop.alt}</span>
+          </FadeIn>
+        )}
+
+        <FadeIn
+          className={`grid grid-flow-dense grid-cols-2 lg:grid-cols-12 gap-3 sm:gap-4 xl:gap-5 auto-rows-[44vw] sm:auto-rows-[38vw] lg:auto-rows-[clamp(200px,21vw,340px)] ${
+            // Direkt unter dem Ausschnitt wie ein Raster, unter den Filmen mit Luft
+            p.loop ? "mt-3 sm:mt-4 xl:mt-5" : "mt-12 sm:mt-16"
+          }`}
+        >
+          {p.photos.map((ph) => (
+            <ProductionPhotoTile key={ph.src} photo={ph} />
+          ))}
+        </FadeIn>
+      </div>
+    </section>
+  );
+}
+
+function ProductionPhotoTile({ photo }: { photo: ProductionPhoto }) {
+  const sources = photo.sources ?? [];
+  const wide = photo.span.lg.startsWith("8");
+  const full = photo.span.base.startsWith("2");
+  return (
+    <figure className={`${TILE} ${SPAN_BASE[photo.span.base]} ${SPAN_LG[photo.span.lg]}`}>
+      <img
+        src={photo.src}
+        srcSet={sources.length ? sources.map((s) => `${s.src} ${s.width}w`).join(", ") : undefined}
+        sizes={`(min-width: 1024px) ${wide ? "66vw" : "33vw"}, ${full ? "100vw" : "50vw"}`}
+        alt={photo.alt}
+        loading="lazy"
+        decoding="async"
+        className="absolute inset-0 h-full w-full object-cover"
+        style={photo.focus ? { objectPosition: photo.focus } : undefined}
+      />
+    </figure>
+  );
+}
+
+/**
+ * YouTube-Film ohne Vorab-Verbindung: Bis zum Klick steht nur das eigene
+ * Vorschaubild da, erst dann wird der Player (youtube-nocookie) geladen.
+ */
+function YouTubeFilm({ film }: { film: ProductionFilm }) {
+  const t = useCopy(COPY);
+  const [playing, setPlaying] = useState(false);
+  const watchUrl = `https://www.youtube.com/watch?v=${film.youtubeId}`;
+
+  return (
+    <figure>
+      <div className={`${TILE} aspect-video`}>
+        {playing ? (
+          <iframe
+            src={`https://www.youtube-nocookie.com/embed/${film.youtubeId}?autoplay=1&rel=0&playsinline=1`}
+            title={film.title}
+            allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
+            allowFullScreen
+            referrerPolicy="strict-origin-when-cross-origin"
+            className="absolute inset-0 h-full w-full"
+          />
+        ) : (
+          <button
+            type="button"
+            onClick={() => setPlaying(true)}
+            className="group absolute inset-0 block h-full w-full cursor-pointer focus-visible:outline-none"
+            aria-label={`${t.playFilm}: ${film.title}`}
+          >
+            <img
+              src={film.poster}
+              alt=""
+              loading="lazy"
+              decoding="async"
+              className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.02]"
+            />
+            <span aria-hidden className="absolute inset-0 bg-gradient-to-t from-ink-950/55 via-transparent to-transparent" />
+            <span
+              aria-hidden
+              className="absolute left-1/2 top-1/2 flex h-16 w-16 sm:h-20 sm:w-20 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-blue-800 text-white shadow-[0_12px_32px_rgba(0,0,0,0.45)] transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-105 group-focus-visible:ring-2 group-focus-visible:ring-blue-400 group-focus-visible:ring-offset-2 group-focus-visible:ring-offset-ink-950"
+            >
+              <Play size={24} className="ml-1 fill-current" />
+            </span>
+          </button>
+        )}
+      </div>
+      <figcaption className="mt-4 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
+        <span className="text-[16px] xl:text-[18px] text-white">{film.title}</span>
+        <a
+          href={watchUrl}
+          target="_blank"
+          rel="noreferrer"
+          className="group/link inline-flex items-center gap-1.5 text-[14px] font-medium text-blue-200 transition-colors duration-200 hover:text-blue-100"
+        >
+          {t.watchOnYoutube}
+          <ExternalLink
+            size={13}
+            aria-hidden
+            className="transition-transform duration-200 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5"
+          />
+        </a>
+      </figcaption>
+    </figure>
+  );
+}
+
 function Result({ project }: { project: Project }) {
   const copy = useCopy(COPY);
   const { result } = project.caseStudy;
@@ -399,7 +577,7 @@ function Result({ project }: { project: Project }) {
         <div className="lg:col-span-8">
           {result ? <Paragraphs text={result} /> : import.meta.env.DEV && <Pending hint={copy.resultPending} />}
 
-          {!t && import.meta.env.DEV && (
+          {t === undefined && import.meta.env.DEV && (
             <div className="mt-14 sm:mt-16">
               <Pending hint={copy.testimonialPending} />
             </div>
