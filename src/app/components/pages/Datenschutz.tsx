@@ -151,7 +151,7 @@ export function Datenschutz() {
           Datenschutzerklärung
         </h1>
         <p className="mt-4 text-ink-300 text-[14px]">
-          Stand: Oktober 2026
+          Stand: November 2026
         </p>
         <GermanOnlyNotice />
       </FadeIn>
@@ -224,25 +224,26 @@ export function Datenschutz() {
         <FadeIn delay={0.14}>
           <Card>
             <div className="text-brand text-[12px] tracking-[0.25em] mb-4">
-              4. Hosting und Server-Logfiles – GitHub Pages
+              4. Hosting und Server-Logfiles – Vercel
             </div>
             <p className="text-ink-200 text-[14px] leading-relaxed">
-              Diese Webseite wird über <strong className="text-ink-100">GitHub Pages</strong> gehostet,
-              einem Dienst der GitHub, Inc., 88 Colin P Kelly Jr St, San Francisco,
-              CA 94107, USA. Beim Aufruf der Webseite verarbeitet GitHub
+              Diese Webseite wird bei <strong className="text-ink-100">Vercel</strong> gehostet,
+              einem Dienst der Vercel Inc., 440 N Barranca Ave #4133, Covina,
+              CA 91723, USA. Beim Aufruf der Webseite verarbeitet Vercel
               automatisch technisch notwendige Daten in Server-Logfiles,
               insbesondere IP-Adresse, Datum und Uhrzeit des Abrufs, aufgerufene
               Seite, Browsertyp, Betriebssystem und Referrer-URL. Dies dient der
-              Auslieferung der Webseite sowie der Sicherheit und Stabilität des
-              Betriebs. Wir selbst haben keinen Zugriff auf diese Logfiles; die
-              Speicherdauer richtet sich nach den Vorgaben von GitHub.
+              Auslieferung der Webseite über das Netzwerk von Vercel sowie der
+              Sicherheit und Stabilität des Betriebs. Die Speicherdauer richtet
+              sich nach den Vorgaben von Vercel.
             </p>
             <p className="text-ink-200 text-[14px] leading-relaxed mt-3">
-              GitHub ist unter dem EU-US Data Privacy Framework zertifiziert
-              (Angemessenheitsbeschluss nach Art. 45 DSGVO). Weitere
+              Mit Vercel besteht ein Vertrag zur Auftragsverarbeitung nach
+              Art. 28 DSGVO. Vercel ist unter dem EU-US Data Privacy Framework
+              zertifiziert (Angemessenheitsbeschluss nach Art. 45 DSGVO). Weitere
               Informationen findest du in der{" "}
-              <ExtLink href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">
-                Datenschutzerklärung von GitHub
+              <ExtLink href="https://vercel.com/legal/privacy-policy">
+                Datenschutzerklärung von Vercel
               </ExtLink>
               . Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO; unser berechtigtes
               Interesse liegt in einer sicheren und zuverlässigen Bereitstellung
